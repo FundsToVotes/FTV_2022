@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/bills', billsRouter);
-app.use('/bills', toptenRouter);
+app.use('/v1/bills', billsRouter);
+app.use('/v1/topten', toptenRouter);
 
 export default app;
