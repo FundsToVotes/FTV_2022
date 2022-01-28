@@ -13,6 +13,13 @@ var fileloc ="../../dummy_data/v1/topten.json"
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  let pool = req.app.get("mysql")
+  pool.query('SELECT * FROM topten', (err, data, fields) => {
+    if(err){
+      console.log(err)
+    }
+    console.log(data)
+  })
   res.send('topten');
 });
 

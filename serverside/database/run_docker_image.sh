@@ -3,7 +3,7 @@
 docker stop mysqldb
 
 export ENV_LOCATION="../.env"
-bash ../export_env_variables.sh
+source ../export_env_variables.sh
 
 docker run -d \
 -p 3308:3306 \

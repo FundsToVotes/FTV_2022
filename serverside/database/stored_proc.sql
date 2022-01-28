@@ -1,3 +1,4 @@
+USE ftvBackEnd;
 DELIMITER //
 CREATE PROCEDURE insertTopTen(
 	cand_name varchar(255),
