@@ -12,6 +12,7 @@ var fileloc ="../../dummy_data/v1/bills.json"
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  // propublica does this, we don't need to upload to database.
   res.send('bills');
 });
 

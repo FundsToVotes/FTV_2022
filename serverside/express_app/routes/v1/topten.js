@@ -6,6 +6,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// this will connect to our database that has openSecrets data...
 
 var router = express.Router();
 var fileloc ="../../dummy_data/v1/topten.json"
