@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 220px; 
+  background-color: #dcedc8b2 !important;
+
+}
+/*header stuff styled in the components for now */
+
+Footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 100px;
+  background-color: #9e9e9e;
+}
+
+/* a[target="_blank"] {
+  background: url(images/external-link.png) center right no-repeat;
+  padding-right: 13px;
+}
+
+a[target="_blank"]:after {
+  content: "(opens in new tab)";
+  position: absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;  
+} */
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+  border-color: #638f3b;
+  box-shadow: 0 1px 1px #638f3b inset, 0 0 8px #638f3b;
+  outline: 0 none;
+}
+
