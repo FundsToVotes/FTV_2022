@@ -1,71 +1,36 @@
 CREATE DATABASE IF NOT EXISTS ftvBackEnd;
 USE ftvBackEnd;
 
-CREATE TABLE IF NOT EXISTS topten(
-		id int not null auto_increment primary key,
-		cand_name varchar(255) not null,
-		cid varchar(64) not null unique,
-		cycle varchar(64) not null,
-		last_updated varchar(255) not null,
-		last_updated_ftv_db datetime default CURRENT_TIMESTAMP,
+-- watch for 1062 warnings when using insert ignore into 
+CREATE TABLE IF NOT EXISTS candidate (
+	id int NOT NULL auto_increment PRIMARY KEY,
+	`name` varchar(252) NOT NULL, 
+    party varchar(5) NOT NULL,
+    cid varchar(10) NOT NULL,
+    FECCandID varchar(20) NOT NULL,
+    distIDRunFor varchar(20) NOT NULL,
+    cycle int NOT NULL
+);
+CREATE UNIQUE INDEX candidate_year_unique_cid on candidate (cid, cycle);
 
-		industry_code0 varchar(255) not null,
-		industry_name0 varchar(255) not null,
-		indivs0 int not null,
-		pacs0 int not null,
-		total0 int not null,
-	
-		industry_code1 varchar(255) not null,
-		industry_name1 varchar(255) not null,
-		indivs1 int not null,
-		pacs1 int not null,
-		total1 int not null,
-		
-		industry_code2 varchar(255) not null,
-		industry_name2 varchar(255) not null,
-		indivs2 int not null,
-		pacs2 int not null,
-		total2 int not null,
-		
-		industry_code3 varchar(255) not null,
-		industry_name3 varchar(255) not null,
-		indivs3 int not null,
-		pacs3 int not null,
-		total3 int not null,
+CREATE TABLE IF NOT EXISTS industry (
+	id int NOT NULL auto_increment PRIMARY KEY,
+	`code` varchar(252) NOT NULL,
+    `name` varchar(252) NOT NULL
+);
+CREATE UNIQUE INDEX industry_unique_code on industry (`code`);
 
-		industry_code4 varchar(255) not null,
-		industry_name4 varchar(255) not null,
-		indivs4 int not null,
-		pacs4 int not null,
-		total4 int not null,
-
-		industry_code5 varchar(255) not null,
-		industry_name5 varchar(255) not null,
-		indivs5 int not null,
-		pacs5 int not null,
-		total5 int not null,
-
-		industry_code6 varchar(255) not null,
-		industry_name6 varchar(255) not null,
-		indivs6 int not null,
-		pacs6 int not null,
-		total6 int not null,
-
-		industry_code7 varchar(255) not null,
-		industry_name7 varchar(255) not null,
-		indivs7 int not null,
-		pacs7 int not null,
-		total7 int not null,
-
-		industry_code8 varchar(255) not null,
-		industry_name8 varchar(255) not null,
-		indivs8 int not null,
-		pacs8 int not null,
-		total8 int not null,
-
-		industry_code9 varchar(255) not null,
-		industry_name9 varchar(255) not null,
-		indivs9 int not null,
-		pacs9 int not null,
-		total9 int not null);
-CREATE UNIQUE INDEX cand_crp on topten (cid);
+CREATE TABLE IF NOT EXISTS `candidate-industry`(
+	candidate_id int NOT NULL,
+    industry_id int NOT NULL,
+    indivs int NOT NULL,
+    pacs int NOT NULL,
+    total int NOT NULL,
+    last_updated varchar(252) NOT NULL,
+    last_updated_ftv_db datetime DEFAULT current_timestamp,
+    FOREIGN KEY (candidate_id)
+		REFERENCES candidate(id),
+    FOREIGN KEY (industry_id)
+		REFERENCES industry(id),
+	PRIMARY KEY(candidate_id, industry_id)
+);
