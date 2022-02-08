@@ -7,6 +7,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // this will connect to our database that has openSecrets data...
+// TODO: USING A MAIN KEY: IF NOT FOUND IN DB, QUERY OPEN SECRETS DIRECTLY
+// TO SEE IF THAT CANDIDATE EXISTS...
 
 var router = express.Router();
 var fileloc ="../../dummy_data/v1/topten.json"
