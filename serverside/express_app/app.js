@@ -32,7 +32,7 @@ var con = mysql.createPool({
     user:"root",
     password:"secret",
     database:"ftvBackEnd",
-    port:"3308"
+    port:"3309"
 })
 
 let houseSenateMap = new Map()

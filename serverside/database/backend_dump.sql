@@ -94,7 +94,7 @@ CREATE TABLE `candidate_civicinfo` (
   `party` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `candidate_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,6 +103,7 @@ CREATE TABLE `candidate_civicinfo` (
 
 LOCK TABLES `candidate_civicinfo` WRITE;
 /*!40000 ALTER TABLE `candidate_civicinfo` DISABLE KEYS */;
+INSERT INTO `candidate_civicinfo` VALUES (1,'Dan Newhouse','{\"zip\": \"20515\", \"city\": \"Washington\", \"line1\": \"504 Cannon House Office Building\", \"state\": \"DC\"}','http://bioguide.congress.gov/bioguide/photo/N/N000189.jpg','Republican Party'),(2,'Patty Murray','{\"zip\": \"20510\", \"city\": \"Washington\", \"line1\": \"154 Russell Senate Office Building\", \"state\": \"DC\"}','http://bioguide.congress.gov/bioguide/photo/M/M001111.jpg','Democratic Party'),(3,'Maria Cantwell','{\"zip\": \"20510\", \"city\": \"Washington\", \"line1\": \"511 Hart Senate Office Building\", \"state\": \"DC\"}','http://bioguide.congress.gov/bioguide/photo/C/C000127.jpg','Democratic Party');
 /*!40000 ALTER TABLE `candidate_civicinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,6 +131,7 @@ CREATE TABLE `candidate_civicinfo-channel` (
 
 LOCK TABLES `candidate_civicinfo-channel` WRITE;
 /*!40000 ALTER TABLE `candidate_civicinfo-channel` DISABLE KEYS */;
+INSERT INTO `candidate_civicinfo-channel` VALUES (1,1,'RepNewhouse'),(1,2,'pattymurray'),(1,3,'senatorcantwell'),(3,1,'RepNewhouse'),(3,2,'PattyMurray'),(3,3,'SenatorCantwell'),(6,1,'UCllbsv_aoIaPS6W3aSonZlw'),(6,2,'SenatorPattyMurray'),(6,3,'SenatorCantwell');
 /*!40000 ALTER TABLE `candidate_civicinfo-channel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,13 +144,10 @@ DROP TABLE IF EXISTS `channel`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `channel` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `candidate_civicinfo_id` int NOT NULL,
   `platform` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`,`candidate_civicinfo_id`),
-  UNIQUE KEY `unique_channel` (`platform`),
-  KEY `candidate_civicinfo_id` (`candidate_civicinfo_id`),
-  CONSTRAINT `channel_ibfk_1` FOREIGN KEY (`candidate_civicinfo_id`) REFERENCES `candidate_civicinfo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_channel` (`platform`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,6 +156,7 @@ CREATE TABLE `channel` (
 
 LOCK TABLES `channel` WRITE;
 /*!40000 ALTER TABLE `channel` DISABLE KEYS */;
+INSERT INTO `channel` VALUES (1,'Facebook'),(3,'Twitter'),(6,'YouTube');
 /*!40000 ALTER TABLE `channel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,7 +201,7 @@ CREATE TABLE `phone_number` (
   UNIQUE KEY `unique_phone_number` (`phone`),
   KEY `candidate_civicinfo_id` (`candidate_civicinfo_id`),
   CONSTRAINT `phone_number_ibfk_1` FOREIGN KEY (`candidate_civicinfo_id`) REFERENCES `candidate_civicinfo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,6 +210,7 @@ CREATE TABLE `phone_number` (
 
 LOCK TABLES `phone_number` WRITE;
 /*!40000 ALTER TABLE `phone_number` DISABLE KEYS */;
+INSERT INTO `phone_number` VALUES (2,2,'(202) 224-2621'),(3,3,'(202) 224-3441'),(1,1,'(202) 225-5816');
 /*!40000 ALTER TABLE `phone_number` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +229,7 @@ CREATE TABLE `url` (
   UNIQUE KEY `unique_url` (`url`),
   KEY `candidate_civicinfo_id` (`candidate_civicinfo_id`),
   CONSTRAINT `url_ibfk_1` FOREIGN KEY (`candidate_civicinfo_id`) REFERENCES `candidate_civicinfo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,6 +238,7 @@ CREATE TABLE `url` (
 
 LOCK TABLES `url` WRITE;
 /*!40000 ALTER TABLE `url` DISABLE KEYS */;
+INSERT INTO `url` VALUES (4,1,'https://en.wikipedia.org/wiki/Dan_Newhouse'),(6,3,'https://en.wikipedia.org/wiki/Maria_Cantwell'),(5,2,'https://en.wikipedia.org/wiki/Patty_Murray'),(1,1,'https://newhouse.house.gov/'),(3,3,'https://www.cantwell.senate.gov/'),(2,2,'https://www.murray.senate.gov/public/');
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -249,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-07 23:46:04
+-- Dump completed on 2022-02-08  1:21:59

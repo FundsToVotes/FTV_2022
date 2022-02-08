@@ -1,1 +1,1 @@
-docker build -t serrat/ftv-mysql .
+docker build -t serrat/ftv-mysql-1.0 .
