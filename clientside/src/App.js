@@ -5,7 +5,7 @@
 
 *****************************************************/
 
-import React from 'react';
+import React from "react";
 import { Router } from "@reach/router";
 
 import About from "./Components/StaticPages/About";
@@ -17,32 +17,30 @@ import NotFound from "./Components/StaticPages/NotFound";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import RepresentativeDetails from "./Components/RepresentativeDetails";
-import LandingPage from "./LandingPage";
+import LandingPage from "./Components/LandingPage";
 
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-    return (
-        <div>
-            <Header />
+  return (
+    <div>
+      <Header />
 
-            <Router>
-                <LandingPage exact path="/" />
-                <Finance101 path="/finance-101" />
-                <TakeAction path="/take-action" />
-                <OurData path="/our-data" />
-                <About path="/about" />
-                <RepresentativeDetails path="/representative-details" />
-                <PrivacyPolicy path="/privacy-policy" />
-                <NotFound default />
-            </Router>
+      <Router>
+        <LandingPage exact path="/" />
+        <Finance101 path="/finance-101" />
+        <TakeAction path="/take-action" />
+        <OurData path="/our-data" />
+        <About path="/about" />
+        <RepresentativeDetails path="/representative-details" />
+        <PrivacyPolicy path="/privacy-policy" />
+        <NotFound default />
+      </Router>
 
-            <Footer />
-        </div>
-
-    );
+      {/* <Footer /> */}
+    </div>
+  );
 }
 
 export default App;
