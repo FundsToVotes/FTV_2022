@@ -4,8 +4,10 @@
 
 *****************************************************/
 
-import React from 'react';
+import React from "react";
 
-const NotFound = () => <h2 style={{ fontFamily: "Comfortaa, sans-serif" }} >Not found</h2>
+const NotFound = () => (
+  <h2 style={{ fontFamily: "Comfortaa, sans-serif" }}>Not found</h2>
+);
 
 export default NotFound;
