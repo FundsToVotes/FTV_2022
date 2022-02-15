@@ -117,26 +117,27 @@ function parseAndStoreRepresentatives(response, pool) {
 function storeGoogleApiData(officialData, pool) {
   pool.getConnection(function(err, connection) {
     try {
+      console.log(officialData)
       connection.query(
         insertCandidateCivicInfo,
         [officialData.name, JSON.stringify(officialData.address[0]), officialData.party, officialData.photoUrl],
         (queryErr, result) => {
-          if (queryErr) console.log("Error inserting candidate civicinfo")
+          if (queryErr) console.log("Error inserting candidate civicinfo"+queryErr.toString())
       })
       batchInsertForCandidate(insertCandidatePhoneNumber, officialData.phones, officialData.name, connection)
       batchInsertForCandidate(insertCandidateUrl, officialData.urls, officialData.name, connection)
       officialData.channels.forEach(function (channel) {
         console.log(channel)
         connection.query(insertChannel, [channel.type], (queryErr, result) => {
-          if (queryErr) console.log("Error inserting channel info")
+          if (queryErr) console.log("Error inserting channel info"+ queryErr.toString())
         })
         connection.query(insertCandidateCivicInfoChannel, [officialData.name, channel.type, channel.id], (queryErr, result) => {
-          if (queryErr) console.log("Error inserting channel-candidate info")
+          if (queryErr) console.log("Error inserting channel-candidate info"+ queryErr.toString())
         })
       })
-      connection.release();
-    } catch (err) {
       connection.release()
+    } catch (err) {
+      console.log(err)
     }
   })
 }
@@ -144,7 +145,7 @@ function storeGoogleApiData(officialData, pool) {
 function batchInsertForCandidate(query, array, candidate, connection) {
   array.forEach(item => {
     connection.query(query, [candidate, item], (queryErr, result) => {
-      if (queryErr) console.log("Error inserting batch candidate info")
+      if (queryErr) console.log("Error inserting batch candidate info" + queryErr.toString())
     })
   })
 }

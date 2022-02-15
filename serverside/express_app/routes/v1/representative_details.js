@@ -75,21 +75,30 @@ router.get('/', async function(req, res, next) {
   //TODO query the representative's information from our database.
   let candidateFirstName = req.query.firstName
   let candidateLastName = req.query.lastName
-  if (!candidateLastName || ! candidateFirstName)  {
+  let candidateFullName = req.query.fullName
+   if ((!candidateLastName || ! candidateFirstName) || !candidateFullName)  {
     res.status(400)
-    res.send("Please supply a first AND last name!")
+    res.send("Please supply a first AND last name OR the full candidate name")
+    return next()
+  } else if (candidateFirstName && candidateLastName) {
+    candidateFullName = `${candidateFirstName} ${candidateLastName}`
+  } else if (!candidateFullName) {
+    res.status(400)
+    res.send("Please supply a first AND last name OR the full candidate name")
     return next()
   }
-  let fullName = `${candidateFirstName} ${candidateLastName}`
   let pool = req.app.get("mysql")
 
-  let _ = pool.query(selectRepresentativeDetailsQuery, [fullName], (err, data, fields) => {
+  let _ = pool.query(selectRepresentativeDetailsQuery, [candidateFullName], (err, data, fields) => {
     if(err){
       res.status(500)
       res.send({
         "error": err,
         "msg": "Internal Server error"
       })
+    }
+    if (data.length == 0) {
+      res.send([])
     }
     res.send({
       name: data[0].name,
