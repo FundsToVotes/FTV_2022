@@ -3,7 +3,6 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mysql from 'mysql2'
-import axios from 'axios';
 import 'dotenv/config'
 
 import indexRouter from './routes/hello.js';
@@ -14,6 +13,9 @@ import representativeDetails from './routes/v1/representative_details.js';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+
+import { setupHouseSenateMap, setupRepresentativeMap } from './utils/setup_representative_details.js';
+import { getActiveBills } from './utils/retrieve_bills.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,44 +37,23 @@ var con = mysql.createPool({
     port:"3309"
 })
 
-let houseSenateMap = new Map()
-axios
-    .get("https://api.propublica.org/congress/v1/117/house/members.json", {
-        headers: {
-            "X-API-Key": process.env.PROPUBLICA_API_KEY
-        }
-    })
-    .then(response => {
-        response.statusText
-        if (response.statusText == "OK") {
-            response = response.data.results[0].members
-            response.forEach(member => {
-                houseSenateMap.set(`${member.first_name} ${member.last_name}`, member)
-            })
-        } else {
-            throw Error("HOUSE MEMBERS WERE NOT ABLE TO LOAD!!!")
-        }
-    })
-axios
-    .get("https://api.propublica.org/congress/v1/117/senate/members.json", {
-        headers: {
-            "X-API-Key": process.env.PROPUBLICA_API_KEY
-        }
-    })
-    .then(response => {
-        response.statusText
-        if (response.statusText == "OK") {
-            response = response.data.results[0].members
-            response.forEach(member => {
-                houseSenateMap.set(`${member.first_name} ${member.last_name}`, member)
-            })
-        } else {
-            throw Error("SENATE MEMBERS WERE NOT ABLE TO LOAD!!!")
-        }
-    })
+// todo: this is left here before I rework representative bills details
+let houseSenateMap = setupHouseSenateMap(117)
+let houseMemberMap = new Map()
+setupRepresentativeMap(houseMemberMap, 117, "house")
+let senateMemberMap = new Map()
+setupRepresentativeMap(senateMemberMap, 117, "senate")
+let activeHouseBills = []
+getActiveBills(activeHouseBills, 117, "house")
+let activeSenateBills = []
+getActiveBills(activeSenateBills, 117, "senate")
 
 app.set("mysql", con)
 app.set("propublicaOfficialsData", houseSenateMap)
+app.set("houseMemberMap", houseMemberMap)
+app.set("senateMemberMap", senateMemberMap)
+app.set("senateBillData", activeSenateBills)
+app.set("houseBillData", activeSenateBills)
 app.use('/', indexRouter);
 app.use('/v1/bills', billsRouter);
 app.use('/v1/topten', toptenRouter);

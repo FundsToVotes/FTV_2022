@@ -35,20 +35,26 @@ router.get('/', async function(req, res, next) {
       
     })
     .catch(error => {
-      res.status(500)
-      res.send(error)
+      if (error.response) {
+        res.status(error.response.status)
+        res.send(error.response.statusText)
+      } else {
+        res.status(500)
+        res.send(error)
+      }
     })
 });
 
 let insertCandidateCivicInfo = `
   INSERT INTO
-    candidate_civicinfo (\`name\`, address, party, photoUrl)
+    candidate_civicinfo (\`name\`, address, party, photoUrl, office)
   VALUES  
-    (?, ?, ?, ?)
+    (?, ?, ?, ?, ?)
   ON DUPLICATE KEY UPDATE
     address=VALUES(address), 
     party=VALUES(party),
-    photoUrl=VALUES(photoUrl)
+    photoUrl=VALUES(photoUrl),
+    office=VALUES(office)
 `
 let insertCandidatePhoneNumber = `
   INSERT IGNORE INTO
@@ -93,6 +99,7 @@ let insertCandidateCivicInfoChannel = `
 // a senator gets looked up ONCE in the workflow, we gucci.
 function parseAndStoreRepresentatives(response, pool) {
   response = response.data
+  console.log(response)
   let payload = {}
   payload["found_address"] = response.normalized_input
   payload["officials"] = []
@@ -102,6 +109,7 @@ function parseAndStoreRepresentatives(response, pool) {
     for (let j = 0; j < officialIndicies.length; j++) {
       let officialIndex = officialIndicies[j]
       let rawOfficialData = response.officials[officialIndex]
+      rawOfficialData["office"] = office
       let official = {}
       official["office"] = office
       official["party"] = rawOfficialData.party
@@ -117,10 +125,9 @@ function parseAndStoreRepresentatives(response, pool) {
 function storeGoogleApiData(officialData, pool) {
   pool.getConnection(function(err, connection) {
     try {
-      console.log(officialData)
       connection.query(
         insertCandidateCivicInfo,
-        [officialData.name, JSON.stringify(officialData.address[0]), officialData.party, officialData.photoUrl],
+        [officialData.name, JSON.stringify(officialData.address[0]), officialData.party, officialData.photoUrl, officialData.office],
         (queryErr, result) => {
           if (queryErr) console.log("Error inserting candidate civicinfo"+queryErr.toString())
       })

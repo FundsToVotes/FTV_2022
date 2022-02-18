@@ -76,7 +76,7 @@ router.get('/', async function(req, res, next) {
   let candidateFirstName = req.query.firstName
   let candidateLastName = req.query.lastName
   let candidateFullName = req.query.fullName
-   if ((!candidateLastName || ! candidateFirstName) || !candidateFullName)  {
+   if ((!candidateLastName || ! candidateFirstName) && !candidateFullName)  {
     res.status(400)
     res.send("Please supply a first AND last name OR the full candidate name")
     return next()
