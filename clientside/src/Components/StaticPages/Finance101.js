@@ -5,9 +5,9 @@
 
 *****************************************************/
 
-import React from "react";
+import React, { Component } from "react";
 
-class Finance101 extends React.Component {
+export class Finance101 extends Component {
   render() {
     return (
       <div className="static-container">

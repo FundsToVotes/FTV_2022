@@ -5,25 +5,50 @@
     search bar that when submitted renders the Representative List on GoogleAPI.js
 
 *****************************************************/
-
+import React, { Component } from "react";
 import { GoogleAPI } from "../GoogleAPI";
 import { useState } from "react";
 import { Link } from "@reach/router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineSearch } from "react-icons/ai";
+import imgLanding from "../images/landing-page-main-img.png";
 
 // Renders the Landing Page
-export function LandingPage() {
-  return (
-    <div className="landing-title-container">
-      <Title />
-      <AddressInput />
-      <p className="landing-text pt-2">
-        We don't save your information. See our{" "}
-        <Link to="/privacy-policy">Privacy Policy</Link>.
-      </p>
-    </div>
-  );
+export class LandingPage extends Component {
+  render() {
+    return (
+      <div>
+        <div className="landing-title-container">
+          <Title />
+          <AddressInput />
+          <p className="landing-text pt-2">
+            We don't save your information. See our{" "}
+            <Link to="/privacy-policy" className="privacy-link">
+              Privacy Policy
+            </Link>
+            .
+          </p>
+        </div>
+        <div className="landing-bottom">
+          <div className="p-5">
+            <p className="landing-paragraph">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
+              accumsan eros nec vulputate fermentum. Etiam aliquet vel justo a
+              tincidunt. Suspendisse dapibus feugiat augue. Nullam pulvinar nisl
+              sed magna efficitur posuere.
+            </p>
+            <a href="/" className="btn landing-button learn-more">
+              Learn More
+            </a>
+          </div>
+          <img
+            className="landing-img"
+            alt="cartoon people standing on a voting box"
+            src={imgLanding}
+          />
+        </div>
+      </div>
+    );
+  }
 }
 
 // Creates the Title for the landing page
@@ -53,31 +78,34 @@ function AddressInput() {
     return <GoogleAPI address={address} />;
   } else {
     return (
-      <div style={{ textAlign: "center" }} className="landing-form">
-        <span className="form-container">
-          <FontAwesomeIcon icon={faSearch} size="2x" />
-          <form onSubmit={(e) => onSubmit(e)}>
-            <label>
-              <input
-                style={{
-                  width: "450px",
-                  display: "inline-block",
-                  marginRight: "5px",
-                }}
-                className="form-control"
-                type="text"
-                placeholder="Insert Address Here"
-                address="address"
-                onChange={(e) => setAddress(e.target.value)}
-              />
-              <input
-                type="submit"
-                value="Search"
-                className="btn btn-dark search-button"
-              />
-            </label>
+      <div className="form-background">
+        <div className="form-container">
+          <AiOutlineSearch className="search-icon" />
+          <form className="form-contents" onSubmit={(e) => onSubmit(e)}>
+            <input
+              className="form-control search-bar"
+              type="text"
+              placeholder="Type address here..."
+              address="address"
+              onChange={(e) => setAddress(e.target.value)}
+            />
+
+            <select
+              defaultValue="representatives"
+              className="custom-select landing-dropdown"
+            >
+              <option value="representatives">Representatives</option>
+              <option value="senators">Senators</option>
+              <option value="candidates">Candidates</option>
+            </select>
+
+            <input
+              type="submit"
+              value="Search"
+              className="btn landing-button search"
+            />
           </form>
-        </span>
+        </div>
       </div>
     );
   }

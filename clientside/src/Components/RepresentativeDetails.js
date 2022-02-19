@@ -15,6 +15,8 @@ import externalLink from "@iconify-icons/feather/external-link";
 
 // Renders the Representative Page with the three visualizations
 export default function RepresentativePage(props) {
+  //NEEDS TO BE MADE INTO A COMPONENT WTF
+
   const [industries, setIndustries] = useState({
     industry: [],
     "@attributes": { cid: "" },
@@ -143,7 +145,7 @@ export default function RepresentativePage(props) {
           Top 10 Industries Funding This Representative
         </h3>
         <p>
-          These industries are top contributors to {offName}'s campaign by
+          These industries are top contributors to {offName}&apos;s campaign by
           individuals who work in those industries or Political Action
           Committees (PACs) in that industry.
         </p>
@@ -171,7 +173,7 @@ export default function RepresentativePage(props) {
         <ExpendituresPie exp={expenditures} />
       </div>
       <div style={{ marginTop: "20px" }}>
-        <h3>Find Out More About {offName}'s Funding</h3>
+        <h3>Find Out More About {offName}&apos;s Funding</h3>
         <ExtendedInfoOnRep
           cid={industries["@attributes"]["cid"]}
           name={offName}
@@ -261,7 +263,7 @@ function IndustryItem(props) {
     A: "British American Tobacco, American Crystal Sugar",
     E: "Chevron Corp, American Petroleum Institute",
     W: "University of California, Marcus Foundation",
-    C: "Microsoft Corp, Amazon.com",
+    B: "Microsoft Corp, Amazon.com",
     Y: "Unknown",
     N: "Walmart Inc, Las Vegas Sands",
     F: "Bloomberg Lp, Fahr LLC/Tom Steyer",
@@ -311,7 +313,7 @@ function BillsList(props) {
                 padding: "8px",
               }}
             >
-              Representative's Position
+              Representative&apos;s Position
             </th>
             <th
               style={{
@@ -480,10 +482,10 @@ function ExpendituresPie(props) {
     committeesO.push("No Committees Found");
   }
   const listOfS = comitteesS.map((item) => {
-    return <ExpenditureListItem committee={item} />;
+    return ExpenditureListItem(item);
   });
   const listOfO = committeesO.map((item) => {
-    return <ExpenditureListItem committee={item} />;
+    return ExpenditureListItem(item);
   });
   return (
     <div
