@@ -5,7 +5,7 @@ import logger from 'morgan';
 import mysql from 'mysql2'
 import 'dotenv/config'
 
-import indexRouter from './routes/hello.js';
+import helloRouter from './routes/hello.js';
 import billsRouter from './routes/v1/representative_bills_details.js';
 import toptenRouter from './routes/v1/candidate_top_ten_industries.js';
 import addressRepresentativeRouter from './routes/v1/address_to_representatives.js';
@@ -54,7 +54,7 @@ app.set("houseMemberMap", houseMemberMap)
 app.set("senateMemberMap", senateMemberMap)
 app.set("senateBillData", activeSenateBills)
 app.set("houseBillData", activeSenateBills)
-app.use('/', indexRouter);
+app.use('/hello', helloRouter);
 app.use('/v1/bills', billsRouter);
 app.use('/v1/topten', toptenRouter);
 app.use('/v1/addressRepresentative', addressRepresentativeRouter);
