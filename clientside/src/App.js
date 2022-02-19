@@ -5,42 +5,41 @@
 
 *****************************************************/
 
-import React from "react";
-import { Router } from "@reach/router";
+import React, { Component } from "react";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import About from "./Components/StaticPages/About";
 import Finance101 from "./Components/StaticPages/Finance101";
 import OurData from "./Components/StaticPages/OurData";
 import TakeAction from "./Components/StaticPages/TakeAction";
 import PrivacyPolicy from "./Components/StaticPages/PrivacyPolicy";
-import NotFound from "./Components/StaticPages/NotFound";
 import Header from "./Components/Header";
-import Footer from "./Components/Footer";
-import RepresentativeDetails from "./Components/RepresentativeDetails";
+// import RepresentativeDetails from "./Components/RepresentativeDetails";
 import LandingPage from "./Components/LandingPage";
 
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-function App() {
-  return (
-    <div>
-      <Header />
-
-      <Router>
-        <LandingPage exact path="/" />
-        <Finance101 path="/finance-101" />
-        <TakeAction path="/take-action" />
-        <OurData path="/our-data" />
-        <About path="/about" />
-        <RepresentativeDetails path="/representative-details" />
-        <PrivacyPolicy path="/privacy-policy" />
-        <NotFound default />
-      </Router>
-
-      {/* <Footer /> */}
-    </div>
-  );
+export class App extends Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<LandingPage />} />
+          <Route path="/finance-101" element={<Finance101 />} />
+          <Route path="/take-action" element={<TakeAction />} />
+          <Route path="/our-data" element={<OurData />} />
+          <Route path="/about" element={<About />} />
+          {/* <Route
+            path="/representative-details"
+            component={RepresentativeDetails}
+          /> */}
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          {/* <Redirect to="/" /> */}
+        </Routes>
+      </div>
+    );
+  }
 }
 
 export default App;

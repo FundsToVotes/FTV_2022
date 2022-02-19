@@ -61,7 +61,7 @@ export function GoogleAPI(props) {
           window.location.reload();
         }
       })
-      .catch(function (err) {
+      .catch(function () {
         alert(
           "Oops, we can't find the representatives for that location! Please try again using a full street address and ZIP code."
         );

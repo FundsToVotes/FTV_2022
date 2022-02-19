@@ -4,7 +4,7 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-bottom: 220px;
+  /* padding-bottom: 220px; */
   background-color: white !important;
   color: black;
 }
@@ -40,14 +40,13 @@ h3 {
   font-weight: 700;
 }
 
+/* Navigation */
 .nav-title {
   color: #8fbe5a;
 }
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.nav-title-link:hover {
+  text-decoration: none;
 }
 
 .nav-bar {
@@ -59,6 +58,110 @@ h3 {
   z-index: 10000;
 }
 
+.icon-container {
+  color: #8fbe5a;
+  display: flex;
+  align-items: center;
+}
+
+/* Top of landing page */
+
+.landing-title-container {
+  background-color: #8fbe5a;
+  text-align: center;
+  display: block;
+  width: 100%;
+  padding-top: 5em;
+  padding-left: 5em;
+  padding-right: 5em;
+  padding-bottom: 2em;
+}
+
+.landing-title {
+  font-size: 3rem;
+  color: white;
+}
+
+.landing-text {
+  color: white;
+}
+
+.form-background {
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 90%;
+  margin: auto;
+  padding: 0.25em;
+}
+
+.form-container {
+  display: flex !important;
+  align-items: center;
+}
+
+.form-contents {
+  display: flex;
+}
+
+.search-bar {
+  margin-right: 1rem;
+  margin-left: 0.5rem;
+  border-radius: 10px;
+  background-color: #f2f4f8;
+}
+
+.search-icon {
+  margin-left: 0.5rem;
+  font-size: 2rem;
+}
+.landing-dropdown {
+  margin-right: 1rem;
+  width: 20rem;
+}
+
+.privacy-link {
+  color: white;
+  text-decoration: none;
+}
+.privacy-link:hover {
+  color: darkgreen;
+  text-decoration: none;
+}
+
+/* Bottom of the landing page */
+.landing-paragraph {
+  color: #2f2e41;
+}
+
+.landing-button {
+  background-color: #8fbe5a;
+  color: white;
+}
+
+.landing-button:hover {
+  background-color: #79a745;
+  color: white;
+}
+
+.learn-more {
+  justify-content: flex-end;
+}
+
+.landing-img {
+  padding-top: 3em;
+  height: 25em;
+  width: auto;
+  padding-right: 2em;
+}
+
+.landing-bottom {
+  display: flex;
+}
+.nav-link {
+  color: black;
+}
+
+/* Static Pages */
 .static-container {
   display: flex;
   flex-direction: column;
@@ -68,46 +171,4 @@ h3 {
   background-color: white;
   padding: 30px;
   margin-top: 30px;
-}
-
-.landing-title-container {
-  background-color: #8fbe5a;
-  text-align: center;
-  display: block;
-  width: 100%;
-  padding: 110px;
-}
-
-.landing-title {
-  font-size: 3rem;
-  color: white;
-}
-
-.icon-container {
-  color: #8fbe5a;
-  display: flex;
-  align-items: center;
-}
-
-.landing-text {
-  color: white;
-}
-
-.landing-form {
-  background-color: #ffffff;
-  border-radius: 20px;
-  padding: 0;
-  margin: 0;
-}
-
-.form-container {
-  display: flex;
-}
-
-.search-container {
-  display: inline-block;
-}
-
-.search-button {
-  background-color: #8fbe5a;
 }
