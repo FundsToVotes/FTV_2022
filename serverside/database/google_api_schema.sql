@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS candidate_civicinfo (
     `name` varchar(252) NOT NULL,
     address JSON NOT NULL,
     photoUrl varchar(252) NOT NULL,
-    party varchar(100) NOT NULL
+    party varchar(100) NOT NULL,
+    office varchar(20) NOT NULL,
+    state varchar(10) NOT NULL
 );
 CREATE UNIQUE INDEX candidate_name on candidate_civicinfo (`name`);
 

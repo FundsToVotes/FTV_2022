@@ -15,6 +15,7 @@ router.get('/', async function(req, res, next) {
   let representativeLastName = req.query.lastName
   let representativeFullName = req.query.fullName
 
+  // todo: i think that middle names may nae nae our stuff.
   if ((!representativeFirstName && !representativeLastName) && !representativeFullName) {
     res.status(400)
     res.send("Please supply a first AND last name or a full name!!")

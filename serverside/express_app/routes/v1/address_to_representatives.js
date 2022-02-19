@@ -47,14 +47,15 @@ router.get('/', async function(req, res, next) {
 
 let insertCandidateCivicInfo = `
   INSERT INTO
-    candidate_civicinfo (\`name\`, address, party, photoUrl, office)
+    candidate_civicinfo (\`name\`, address, party, photoUrl, office, state)
   VALUES  
-    (?, ?, ?, ?, ?)
+    (?, ?, ?, ?, ?, ?)
   ON DUPLICATE KEY UPDATE
     address=VALUES(address), 
     party=VALUES(party),
     photoUrl=VALUES(photoUrl),
-    office=VALUES(office)
+    office=VALUES(office),
+    state=VALUES(state)
 `
 let insertCandidatePhoneNumber = `
   INSERT IGNORE INTO
@@ -101,7 +102,7 @@ function parseAndStoreRepresentatives(response, pool) {
   response = response.data
   console.log(response)
   let payload = {}
-  payload["found_address"] = response.normalized_input
+  payload["found_address"] = response.normalizedInput
   payload["officials"] = []
   for (let i = 0; i < response.offices.length; i++) {
     let office = response.offices[i].name
@@ -110,6 +111,7 @@ function parseAndStoreRepresentatives(response, pool) {
       let officialIndex = officialIndicies[j]
       let rawOfficialData = response.officials[officialIndex]
       rawOfficialData["office"] = office
+      rawOfficialData["state"] = response.normalizedInput.state
       let official = {}
       official["office"] = office
       official["party"] = rawOfficialData.party
@@ -127,7 +129,7 @@ function storeGoogleApiData(officialData, pool) {
     try {
       connection.query(
         insertCandidateCivicInfo,
-        [officialData.name, JSON.stringify(officialData.address[0]), officialData.party, officialData.photoUrl, officialData.office],
+        [officialData.name, JSON.stringify(officialData.address[0]), officialData.party, officialData.photoUrl, officialData.office, officialData.state],
         (queryErr, result) => {
           if (queryErr) console.log("Error inserting candidate civicinfo"+queryErr.toString())
       })
