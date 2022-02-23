@@ -2,7 +2,8 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import mysql from 'mysql2'
+import mysql from 'mysql2';
+import cors from "cors";
 import 'dotenv/config'
 
 import helloRouter from './routes/hello.js';
@@ -24,9 +25,11 @@ var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(cors())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.options("*", cors())
 
 var con = mysql.createPool({
     connectionLimit: 5,
