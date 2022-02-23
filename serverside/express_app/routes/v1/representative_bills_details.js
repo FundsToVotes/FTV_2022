@@ -16,14 +16,16 @@ router.get('/', async function(req, res, next) {
   let representativeFullName = req.query.fullName
 
   // todo: i think that middle names may nae nae our stuff.
-  if ((!representativeFirstName && !representativeLastName) && !representativeFullName) {
+  if (
+    (!representativeFirstName || !representativeLastName) &&
+    !representativeFullName
+  ) {
     res.status(400)
     res.send("Please supply a first AND last name or a full name!!")
     return next()
   } else if (representativeFirstName && representativeLastName) {
     representativeFullName = `${representativeFirstName} ${representativeLastName}`
   }
-  // let houseSenateMap = req.app.get("propublicaOfficialsData")
   let senateMemberMap = req.app.get("senateMemberMap")
   let houseMemberMap = req.app.get("houseMemberMap")
   let representativeMemberFound = senateMemberMap.has(representativeFullName) ? 1 : houseMemberMap.has(representativeFullName) ? 2 : 0
@@ -31,7 +33,7 @@ router.get('/', async function(req, res, next) {
   let voteData;
   switch (representativeMemberFound) {
     case 0: 
-      res.status(400)
+      res.status(404)
       res.send(`Representative: ${representativeFullName} not found in our data...`)
       return next()
     case 1:

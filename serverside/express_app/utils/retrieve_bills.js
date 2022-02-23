@@ -3,46 +3,54 @@ import axios from 'axios';
 // this is the new house/senate setup-er
 export async function getActiveBills(billArray, congressNumber, chamber) {
     // chamber can either be house or senate
-    await axios
-      .get(`https://api.propublica.org/congress/v1/${congressNumber}/${chamber}/bills/active.json`, {
-          headers: {
-              "X-API-Key": process.env.PROPUBLICA_API_KEY
-          }
-      })
-      .then(async function(response) {
-          // response.status is the axios status, response.data.status is how the api responded
-          if (response.status == 200 && response.data.status == 'OK') {
-              let bills = response.data.results[0].bills;
-              for (const bill of bills) {
-                  // look at representative_bills_details and see what I need from each bill to add
-                  // to the map...
-                  let billData = {}
-                  let voteInformation = await findVoteInformation(bill.bill_slug, congressNumber)
-                  billData.voteInformation = voteInformation
-                  if (voteInformation != "null") {
-                          
-                      billData.billSlug = bill.bill_slug
-                      billData.billId = bill.bill_id
-                      billData.billNumber = voteInformation.rawResponse.bill.number
-                      billData.sponsorId = bill.sponsor_id
-                      billData.sponsorUri = bill.sponsor_uri
-                      billData.billUri = bill.bill_uri
-                      billData.title = bill.title
-                      billData.latestAction = voteInformation.rawResponse.bill.latest_action
-                      billData.shortTitle = bill.short_title
-                      billData.primarySubject = bill.primary_subject
+    let getAxios = async (offset) => {
+      await axios
+        .get(`https://api.propublica.org/congress/v1/${congressNumber}/${chamber}/bills/active.json?offset=${offset}`, {
+            headers: {
+                "X-API-Key": process.env.PROPUBLICA_API_KEY
+            }
+        })
+        .then(async function(response) {
+            // response.status is the axios status, response.data.status is how the api responded
+            if (response.status == 200 && response.data.status == 'OK') {
+                let bills = response.data.results[0].bills;
+                for (const bill of bills) {
+                    // look at representative_bills_details and see what I need from each bill to add
+                    // to the map...
+                    let billData = {}
+                    let voteInformation = await findVoteInformation(bill.bill_slug, congressNumber)
+                    billData.voteInformation = voteInformation
+                    if (voteInformation != "null") {
+                            
+                        billData.billSlug = bill.bill_slug
+                        billData.billId = bill.bill_id
+                        billData.billNumber = voteInformation.rawResponse.bill.number
+                        billData.sponsorId = bill.sponsor_id
+                        billData.sponsorUri = bill.sponsor_uri
+                        billData.billUri = bill.bill_uri
+                        billData.title = bill.title
+                        billData.latestAction = voteInformation.rawResponse.bill.latest_action
+                        billData.shortTitle = bill.short_title
+                        billData.primarySubject = bill.primary_subject
 
-                      
-                      billData.openSecretsSectorData = assignOpensecretsData(bill.primary_subject)
-                      
-                      billArray.push(billData)
-                  }
-                  
-              }
-              // get bill uri's data.
-          }
-          response.statusText
+                        
+                        billData.openSecretsSectorData = assignOpensecretsData(bill.primary_subject)
+                        
+                        billArray.push(billData)
+                    }
+                    
+                }
+                // get bill uri's data.
+            }
       })
+    }
+
+    let offset = 0
+    while (billArray.length < 5 && offset < 200) {
+      console.log("searching at offset: " + offset)
+      await getAxios(offset)
+      offset += 20
+    }
     console.log(chamber + " bills loaded")
 
 }
