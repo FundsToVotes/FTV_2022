@@ -5,13 +5,23 @@
  */
 
 import express from 'express';
-import { fileURLToPath } from 'url';
 import axios from 'axios';
-
-const __filename = fileURLToPath(import.meta.url);
+import { abbrToState } from '../../utils/state_abbr_to_long.js';
 
 var router = express.Router();
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
+
+let selectAllState=`
+SELECT
+	name,
+  party, 
+  photoUrl,
+	office
+FROM
+	candidate_civicinfo 
+WHERE
+	state= ?
+`
 
 router.get('/', async function(req, res, next) {
   let address = req.query.address
@@ -20,24 +30,50 @@ router.get('/', async function(req, res, next) {
     res.status(400)
     res.send("please supply an address")
     return next()
+  } 
+  if (address.length == 2) {
+    address = abbrToState(address)
+    if (!address) {
+      res.status(404)
+      res.send(`Address ${address} not found!`)
+      return next()
+    }
   }
   let requestUrl = `https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=${address}&key=${GOOGLE_API_KEY}&levels=country&roles=legislatorUpperBody&roles=legislatorLowerBody`
   axios
     .get(requestUrl)
     .then(response => {
       if (response.statusText == 'OK') {
+        // update reps if we need to update hte reps...
         let payload = parseAndStoreRepresentatives(response, pool)
-        res.send(payload)
+        if (payload.found_address.line1 == "" &&
+            payload.found_address.city == "" &&
+            payload.found_address.zip == ""
+        ) {
+          pool.query(selectAllState, [payload.found_address.state], (err, data, fields) => {
+            if(err){
+              res.status(500)
+              res.send({
+                "error": err,
+                "msg": "Internal Server error"
+              })
+            }
+            payload.officials = data
+            res.send(payload)
+          });
+        } else {
+          res.send(payload)
+        }
       } else {
-        res.status(400)
-        res.send(response)
+        res.status(404)
+        res.send(`Address ${address} not found!`)
       }
       
     })
     .catch(error => {
       if (error.response) {
-        res.status(error.response.status)
-        res.send(error.response.statusText)
+        res.status(404)
+        res.send(`Address ${address} not found!`)
       } else {
         res.status(500)
         res.send(error)

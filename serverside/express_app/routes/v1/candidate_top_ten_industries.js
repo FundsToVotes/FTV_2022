@@ -63,7 +63,7 @@ let selectCandidateViaNameTopTenQuery = `
       FROM
         candidate 
       WHERE 
-        \`name\` = ?
+        \`name\` LIKE ?
       AND 
         cycle = ?
       )
@@ -83,7 +83,7 @@ router.get('/', function(req, res, next) {
     identifier = `%${candidateName}%`
   } else {
     res.status(400)
-    res.send("No candidate ID supplied")
+    res.send("No candidate information supplied")
     return next()
   }
   
@@ -107,12 +107,13 @@ router.get('/', function(req, res, next) {
         "msg": "Internal Server error"
       })
     }
-    res.send(data);
+    if (data.length > 0) {
+      res.send(data)
+    } else {
+      res.status(404)
+      res.send("No results found for" + (candidateId || candidateName))
+    }
   });
-});
-
-router.get('/dummy', function(req, res, next) {
-  res.sendFile(path.join(__dirname, fileloc));
 });
 
 export default router;

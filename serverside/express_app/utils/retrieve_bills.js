@@ -47,7 +47,7 @@ export async function getActiveBills(billArray, congressNumber, chamber) {
 
     let offset = 0
     while (billArray.length < 5 && offset < 200) {
-      console.log("searching at offset: " + offset)
+      console.log(chamber + " searching at offset: " + offset)
       await getAxios(offset)
       offset += 20
     }
