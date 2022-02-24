@@ -4,9 +4,6 @@
  */
 
 import express from 'express';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
 
 var router = express.Router();
 
@@ -101,8 +98,7 @@ router.get('/', async function(req, res, next) {
     return next()
   } 
   let pool = req.app.get("mysql")
-
-  let _ = pool.query(selectRepresentativeDetailsQuery, [candidateFullName], (err, data, fields) => {
+  pool.query(selectRepresentativeDetailsQuery, [formattedCandidateName], (err, data, fields) => {
     if(err){
       res.status(500)
       res.send({
@@ -126,6 +122,5 @@ router.get('/', async function(req, res, next) {
     }
   });
 });
-
 
 export default router;

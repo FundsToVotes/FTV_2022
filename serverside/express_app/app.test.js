@@ -178,7 +178,7 @@ describe("Application Endpoint Tests", () => {
             await supertest(app).get('/v1/addressRepresentative?address=xd')
                 .expect(404)
                 .then((response) => {
-                    expect(response.text).toBe(`Address null not found!`)
+                    expect(response.text).toBe(`Address xd not found!`)
                 })
         })
         test("Endpoint should return 3 officials when Pasco, WA is supplied", async () => {

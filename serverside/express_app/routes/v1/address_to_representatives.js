@@ -32,19 +32,19 @@ router.get('/', async function(req, res, next) {
     return next()
   } 
   if (address.length == 2) {
-    address = abbrToState(address)
+    let abbr = address
+    address = abbrToState(abbr)
     if (!address) {
       res.status(404)
-      res.send(`Address ${address} not found!`)
+      res.send(`Address ${abbr} not found!`)
       return next()
     }
   }
   let requestUrl = `https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=${address}&key=${GOOGLE_API_KEY}&levels=country&roles=legislatorUpperBody&roles=legislatorLowerBody`
   axios
     .get(requestUrl)
-    .then(response => {
+    .then(async (response) => {
       if (response.statusText == 'OK') {
-        // update reps if we need to update hte reps...
         let payload = parseAndStoreRepresentatives(response, pool)
         if (payload.found_address.line1 == "" &&
             payload.found_address.city == "" &&
@@ -68,7 +68,6 @@ router.get('/', async function(req, res, next) {
         res.status(404)
         res.send(`Address ${address} not found!`)
       }
-      
     })
     .catch(error => {
       if (error.response) {

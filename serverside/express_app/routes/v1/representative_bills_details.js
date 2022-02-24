@@ -1,12 +1,8 @@
 /* This file will contain all the details about a given representative
- * This also queries propublica to get their bill 
- * voting data. 
+ * This also queries propublica to get their bill voting data. 
  */
 
 import express from 'express';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
 
 var router = express.Router();
 
@@ -15,7 +11,6 @@ router.get('/', async function(req, res, next) {
   let representativeLastName = req.query.lastName
   let representativeFullName = req.query.fullName
 
-  // todo: i think that middle names may nae nae our stuff.
   if (
     (!representativeFirstName || !representativeLastName) &&
     !representativeFullName
