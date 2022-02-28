@@ -1,17 +1,10 @@
+/* This file contains a route that will query a candidate's top
+ * ten industries for a given cycle
+ */
+
 import express from 'express';
-import path from 'path'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// this will connect to our database that has openSecrets data...
-// TODO: USING A MAIN KEY: IF NOT FOUND IN DB, QUERY OPEN SECRETS DIRECTLY
-// TO SEE IF THAT CANDIDATE EXISTS...
 
 var router = express.Router();
-var fileloc ="../../dummy_data/v1/topten.json"
 
 let selectCandidateViaCIDTopTenQuery = `
   SELECT 
@@ -63,14 +56,14 @@ let selectCandidateViaNameTopTenQuery = `
       FROM
         candidate 
       WHERE 
-        \`name\` = ?
+        \`name\` LIKE ?
       AND 
         cycle = ?
       )
     ORDER BY
       total DESC;
   `
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
   let candidateId = req.query.cid
   let candidateName = req.query.name
@@ -83,23 +76,21 @@ router.get('/', function(req, res, next) {
     identifier = `%${candidateName}%`
   } else {
     res.status(400)
-    res.send("No candidate ID supplied")
+    res.send("No candidate information supplied")
     return next()
   }
-  
   let cycle = req.query.cycle
   if (!cycle) {
     let currentDate = new Date()
     cycle = currentDate.getFullYear()
+    if (cycle%2 != 0) {
+      cycle -= 1
+    }
   }
-  if (cycle%2 != 0) {
-    cycle -= 1
-  }
-  let pool = req.app.get("mysql")
-  // 3 paths -> Invalid ID | Valid ID and data | Valid ID and no data |
   // test with N00012192
   // and year 2020
-  let _ = pool.query(chosenQuery, [identifier, cycle], (err, data, fields) => {
+  let pool = req.app.get("mysql")
+  pool.query(chosenQuery, [identifier, cycle], (err, data, fields) => {
     if(err){
       res.status(500)
       res.send({
@@ -107,12 +98,13 @@ router.get('/', function(req, res, next) {
         "msg": "Internal Server error"
       })
     }
-    res.send(data);
+    if (data.length > 0) {
+      res.send(data)
+    } else {
+      res.status(404)
+      res.send("No results found for" + (candidateId || candidateName))
+    }
   });
-});
-
-router.get('/dummy', function(req, res, next) {
-  res.sendFile(path.join(__dirname, fileloc));
 });
 
 export default router;

@@ -4,10 +4,6 @@
  */
 
 import express from 'express';
-import { fileURLToPath } from 'url';
-import axios from 'axios';
-
-const __filename = fileURLToPath(import.meta.url);
 
 var router = express.Router();
 
@@ -19,11 +15,11 @@ let selectRepresentativeDetailsQuery = `
 SELECT 
 	civicinfo.\`name\` as "name",
 	civicinfo.address as address,
-    civicinfo.photoUrl as photoUrl,
-    civicinfo.party as party,
-    grouped_phone.phones as phones,
-    grouped_url.urls as urls,
-    CONCAT("[", grouped_channels.socials, "]") as channels
+  civicinfo.photoUrl as photoUrl,
+  civicinfo.party as party,
+  grouped_phone.phones as phones,
+  grouped_url.urls as urls,
+  CONCAT("[", grouped_channels.socials, "]") as channels
 FROM 
 	candidate_civicinfo as civicinfo
 LEFT JOIN 
@@ -67,29 +63,42 @@ LEFT JOIN
 ON 
 	grouped_channels.candidate_civicinfo_id = civicinfo.id
 where 
-	civicinfo.\`name\` = ?
+	civicinfo.\`name\` like ?
 `
 
 router.get('/', async function(req, res, next) {
-
-  //TODO query the representative's information from our database.
   let candidateFirstName = req.query.firstName
   let candidateLastName = req.query.lastName
   let candidateFullName = req.query.fullName
-   if ((!candidateLastName || ! candidateFirstName) && !candidateFullName)  {
+  let formattedCandidateName
+  if ((candidateFirstName && candidateLastName) || candidateFullName) {
+    if (!candidateFullName) {
+      formattedCandidateName = `%${candidateFirstName}% %${candidateLastName}%`
+      candidateFullName = `${candidateFirstName} ${candidateLastName}`
+    } else {
+      let splitCandidateFullName = candidateFullName.split(' ')
+      if (splitCandidateFullName.length > 1) {
+        try {
+          formattedCandidateName = `%${splitCandidateFullName[0]}% %${splitCandidateFullName[splitCandidateFullName.length - 1]}%`
+        } catch (err) {
+          res.status(400)
+          res.send("Bad full name supplied. Are there actually two names being supplied?")
+          return next()
+        }
+      } else {
+        res.status(400)
+        res.send("Bad full name supplied. Are there actually two names being supplied?")
+        return next()
+      }
+      
+    }
+  } else {
     res.status(400)
     res.send("Please supply a first AND last name OR the full candidate name")
     return next()
-  } else if (candidateFirstName && candidateLastName) {
-    candidateFullName = `${candidateFirstName} ${candidateLastName}`
-  } else if (!candidateFullName) {
-    res.status(400)
-    res.send("Please supply a first AND last name OR the full candidate name")
-    return next()
-  }
+  } 
   let pool = req.app.get("mysql")
-
-  let _ = pool.query(selectRepresentativeDetailsQuery, [candidateFullName], (err, data, fields) => {
+  pool.query(selectRepresentativeDetailsQuery, [formattedCandidateName], (err, data, fields) => {
     if(err){
       res.status(500)
       res.send({
@@ -98,20 +107,20 @@ router.get('/', async function(req, res, next) {
       })
     }
     if (data.length == 0) {
-      res.send([])
+      res.status(404)
+      res.send(`Representative ${candidateFullName} not found!`)
+    } else {
+      res.send({
+        name: data[0].name,
+        address: data[0].address, 
+        party: data[0].party,
+        phones: JSON.parse(data[0].phones),
+        photoUrl: data[0].photoUrl,
+        urls: JSON.parse(data[0].urls),
+        socials: JSON.parse(data[0].channels)
+      });
     }
-    res.send({
-      name: data[0].name,
-      address: data[0].address, 
-      party: data[0].party,
-      phones: JSON.parse(data[0].phones),
-      photoUrl: data[0].photoUrl,
-      urls: JSON.parse(data[0].urls),
-      socials: JSON.parse(data[0].channels)
-
-    });
   });
 });
-
 
 export default router;
