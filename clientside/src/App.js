@@ -16,7 +16,8 @@ import OurData from "./Components/StaticPages/OurData";
 import TakeAction from "./Components/StaticPages/TakeAction";
 import PrivacyPolicy from "./Components/StaticPages/PrivacyPolicy";
 import Header from "./Components/Header";
-// import RepresentativeDetails from "./Components/RepresentativeDetails";
+import DetailedSearch from "./Components/Search";
+import PersonDetails from "./Components/PersonDetails";
 import LandingPage from "./Components/LandingPage";
 
 export class App extends Component {
@@ -30,12 +31,9 @@ export class App extends Component {
           <Route path="/take-action" element={<TakeAction />} />
           <Route path="/our-data" element={<OurData />} />
           <Route path="/about" element={<About />} />
-          {/* <Route
-            path="/representative-details"
-            component={RepresentativeDetails}
-          /> */}
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          {/* <Redirect to="/" /> */}
+          <Route path="/detailed-search" element={<DetailedSearch />} />
+          <Route path="/details" element={<PersonDetails />} />
         </Routes>
       </div>
     );
