@@ -17,6 +17,7 @@ export class Header extends Component {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav style={{ width: "100%" }}>
+            {/* Remove this link when search is fixed */}
             <Link className="pr-3 nav-link" to="/detailed-search">
               Temp search
             </Link>

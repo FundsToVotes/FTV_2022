@@ -8,7 +8,6 @@ export class SearchBar extends Component {
     //   e.preventDefault();
     //   // setSubmitted(true);
     // };
-
     return (
       <div className="form-background">
         <div className="form-container">
