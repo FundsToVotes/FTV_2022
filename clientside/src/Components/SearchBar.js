@@ -3,11 +3,10 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 // Creates the Search bar where users will input their Address, GoogleAPI.js is called when submitted
 export class SearchBar extends Component {
+  handleClick() {
+    console.log("clicky clicky")
+  }
   render() {
-    // let onSubmit = (e) => {
-    //   e.preventDefault();
-    //   // setSubmitted(true);
-    // };
     return (
       <div className="form-background">
         <div className="form-container">
@@ -34,9 +33,7 @@ export class SearchBar extends Component {
               type="submit"
               value="Search"
               className="btn landing-button search"
-              onClick={() => {
-                this.nextPath("/search");
-              }}
+              onClick={this.handleClick}
             />
           </form>
         </div>
