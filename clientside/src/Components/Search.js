@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useParams } from "react-router-dom";
 // import tempPerson from "../images/temp-person.jpg";
@@ -7,12 +7,12 @@ import { Link, useParams } from "react-router-dom";
 
 function DetailedSearch(props) {
   console.log(props)
-  // as a component
-  // constructor 
   const urlParams = useParams();
 
   const [users, setUsers] = useState([])
 
+  // somehow, there is a weird "calling fetch reps hella times" issue with my solution. 
+  // it is a workaround at best. 
   const fetchRepresentatives = () => {
     fetch(`http://localhost:3000/v1/addressRepresentative?address=${urlParams.address}`)
       .then(response => {return response.json()})
@@ -20,16 +20,13 @@ function DetailedSearch(props) {
         console.log(data)
         return setUsers(data.officials)
       })
-    }
-
-  useEffect(() => {
-    fetchRepresentatives()
-  }, [])
+  }
 
   return (
     <div className="detailed-search-page">
       <div className="search-side-panel">
         <h4 className="pt-3">
+            {fetchRepresentatives()}
           <strong>Filters</strong>
         </h4>
         <form>
@@ -87,9 +84,9 @@ function DetailedSearch(props) {
           <SearchBar />
         </div>
         <div className="search-results">
-          <div className="results">{
-            users.length > 0 && (users.map(user => CandidateCard(user)))
-          }</div>
+          <div className="results">
+            {users.length > 0 && (users.map(user => CandidateCard(user)))}
+          </div>
         </div>
       </div>
     </div>
@@ -100,7 +97,6 @@ export default DetailedSearch;
 
 export function CandidateCard(props) {
   let candidate = props;
-  console.log(candidate)
   return (
     <div className="card candidate-card m-2 p-1">
       <img
