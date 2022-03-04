@@ -7,16 +7,18 @@ import { Link, useParams } from "react-router-dom";
 
 function DetailedSearch(props) {
   console.log(props)
+  // as a component
+  // constructor 
   const urlParams = useParams();
 
-  const [representatives, setRepresentatives] = useState([])
+  const [users, setUsers] = useState([])
 
   const fetchRepresentatives = () => {
     fetch(`http://localhost:3000/v1/addressRepresentative?address=${urlParams.address}`)
       .then(response => {return response.json()})
       .then(data => {
         console.log(data)
-        return setRepresentatives(data.officials)
+        return setUsers(data.officials)
       })
     }
 
@@ -86,7 +88,7 @@ function DetailedSearch(props) {
         </div>
         <div className="search-results">
           <div className="results">{
-            representatives.length > 0 && (representatives.map(user => CandidateCard(user)))
+            users.length > 0 && (users.map(user => CandidateCard(user)))
           }</div>
         </div>
       </div>
@@ -98,6 +100,7 @@ export default DetailedSearch;
 
 export function CandidateCard(props) {
   let candidate = props;
+  console.log(candidate)
   return (
     <div className="card candidate-card m-2 p-1">
       <img

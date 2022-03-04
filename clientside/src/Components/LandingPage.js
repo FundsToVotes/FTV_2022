@@ -14,12 +14,13 @@ import SearchBar from "./SearchBar";
 
 // Renders the Landing Page
 export class LandingPage extends Component {
+
   render() {
     return (
       <div>
         <div className="landing-title-container">
           <div>
-            <h2 className="landing-title">Who Funds Your *Representatives*?</h2>
+            <h2 className="landing-title">Who Funds Your Representatives?</h2>
             <p className="landing-text">
               Search to see what industries are donating to your representatives
               and how they voted on relvant issues.
@@ -37,10 +38,7 @@ export class LandingPage extends Component {
         <div className="landing-bottom">
           <div className="p-5">
             <p className="landing-paragraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-              accumsan eros nec vulputate fermentum. Etiam aliquet vel justo a
-              tincidunt. Suspendisse dapibus feugiat augue. Nullam pulvinar nisl
-              sed magna efficitur posuere.
+            Anyone 18 over over and who is a U.S. Citizen or permanent resident may donate to the campaigns of federal candidates. Political action committees (PACs), often ran by organizations or companies, can also donate.
             </p>
             <a href="/" className="btn landing-button learn-more">
               Learn More
