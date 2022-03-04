@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useParams } from "react-router-dom";
 // import tempPerson from "../images/temp-person.jpg";
 // import { test } from "../api.js"
 
-function DetailedSearch(props) {
-  console.log(props)
+function DetailedSearch() {
   const urlParams = useParams();
 
   const [users, setUsers] = useState([])
@@ -22,11 +21,14 @@ function DetailedSearch(props) {
       })
   }
 
+  useEffect(() => {
+    fetchRepresentatives()
+  }, [])
+
   return (
     <div className="detailed-search-page">
       <div className="search-side-panel">
         <h4 className="pt-3">
-            {fetchRepresentatives()}
           <strong>Filters</strong>
         </h4>
         <form>
@@ -85,7 +87,8 @@ function DetailedSearch(props) {
         </div>
         <div className="search-results">
           <div className="results">
-            {users.length > 0 && (users.map(user => CandidateCard(user)))}
+            {/* idk how to make it refresh when it get's here with a new url... */}
+            {urlParams.address && users.length > 0 && (users.map(user => CandidateCard(user)))}
           </div>
         </div>
       </div>
@@ -99,11 +102,13 @@ export function CandidateCard(props) {
   let candidate = props;
   return (
     <div className="card candidate-card m-2 p-1">
-      <img
-        src={candidate.photoUrl}
-        alt="candidate headshot"
-        className="headshot"
-      />
+      <div className="image-cropper">
+        <img
+          src={candidate.photoUrl}
+          alt="candidate headshot"
+          className="headshot"
+        />
+      </div>
       <p>
         {candidate.name} - {candidate.party}
       </p>
