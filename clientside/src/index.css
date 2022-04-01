@@ -311,13 +311,17 @@ h3 {
 .headshot {
   display: inline;
   margin: 0 auto;
-  /* margin-left: -25%; */
   height: auto;
   width: 100%;
 }
 
 .filter-label {
   padding-left: 0.5rem;
+}
+
+.details-button {
+  position: absolute;
+  bottom: 2.5em;
 }
 
 /* Candidate Details Page */
@@ -345,4 +349,18 @@ h3 {
   float: right;
   width: 75%;
   background-color: #f6f6f6;
+}
+
+.image-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-details-cropper {
+  border-radius: 5px;
+}
+
+.details-side-header {
+  text-align: center;
 }

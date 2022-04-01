@@ -8,22 +8,26 @@ import { Link, useParams } from "react-router-dom";
 function DetailedSearch() {
   const urlParams = useParams();
 
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
 
-  // somehow, there is a weird "calling fetch reps hella times" issue with my solution. 
-  // it is a workaround at best. 
+  // somehow, there is a weird "calling fetch reps hella times" issue with my solution.
+  // it is a workaround at best.
   const fetchRepresentatives = () => {
-    fetch(`http://localhost:3000/v1/addressRepresentative?address=${urlParams.address}`)
-      .then(response => {return response.json()})
-      .then(data => {
-        console.log(data)
-        return setUsers(data.officials)
+    fetch(
+      `http://localhost:3000/v1/addressRepresentative?address=${urlParams.address}`
+    )
+      .then((response) => {
+        return response.json();
       })
-  }
+      .then((data) => {
+        console.log(data);
+        return setUsers(data.officials);
+      });
+  };
 
   useEffect(() => {
-    fetchRepresentatives()
-  }, [])
+    fetchRepresentatives();
+  }, [urlParams]);
 
   return (
     <div className="detailed-search-page">
@@ -33,11 +37,6 @@ function DetailedSearch() {
         </h4>
         <form>
           <h5 className="pt-3">Position</h5>
-          <input type="checkbox" id="president" name="president"></input>
-          <label className="filter-label" htmlFor="president">
-            President
-          </label>
-          <br></br>
           <input type="checkbox" id="senator" name="senator"></input>
           <label className="filter-label" htmlFor="senator">
             Senator
@@ -51,11 +50,6 @@ function DetailedSearch() {
           <label className="filter-label" htmlFor="representative">
             Representative
           </label>
-          <br></br>
-          <input type="checkbox" id="mayor" name="mayor"></input>
-          <label className="filter-label" htmlFor="mayor">
-            Mayor
-          </label>
 
           <h5 className="pt-3">Party</h5>
           <input type="checkbox" id="republican" name="republican"></input>
@@ -67,11 +61,7 @@ function DetailedSearch() {
           <label className="filter-label" htmlFor="democrat">
             Democrat
           </label>
-          <br></br>
-          <input type="checkbox" id="libratarian" name="libratarian"></input>
-          <label className="filter-label" htmlFor="libratarian">
-            Libratarian
-          </label>
+
           <br></br>
           <input type="checkbox" id="other" name="other"></input>
           <label className="filter-label" htmlFor="other">
@@ -88,7 +78,9 @@ function DetailedSearch() {
         <div className="search-results">
           <div className="results">
             {/* idk how to make it refresh when it get's here with a new url... */}
-            {urlParams.address && users.length > 0 && (users.map(user => CandidateCard(user)))}
+            {urlParams.address &&
+              users.length > 0 &&
+              users.map((user) => CandidateCard(user))}
           </div>
         </div>
       </div>
@@ -102,21 +94,23 @@ export function CandidateCard(props) {
   let candidate = props;
   return (
     <div className="card candidate-card m-2 p-1">
-      <div className="image-cropper">
+      <div className="image-cropper mt-3">
         <img
           src={candidate.photoUrl}
           alt="candidate headshot"
           className="headshot"
         />
       </div>
-      <p>
+      <p className="mt-4">
         {candidate.name} - {candidate.party}
       </p>
       <p>{candidate.position}</p>
-      <Link to={`/details/${candidate.name}`} className="btn landing-button search">
+      <Link
+        to={`/details/${candidate.name}`}
+        className="btn landing-button search details-button"
+      >
         Learn More
       </Link>
     </div>
   );
-
 }
