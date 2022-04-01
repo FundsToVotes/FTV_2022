@@ -25,9 +25,25 @@ function DetailedSearch() {
       });
   };
 
+  // const filterPosition = (e, people) => {
+  //   let value = e.target.name;
+  //   console.log(value);
+  //   let result = people.filter((person) => person.office === value);
+  //   console.log(result);
+  // };
+
+  // const filterParty = (e, people) => {
+  //   let value = e.target.name;
+  //   console.log(value);
+  //   console.log(e);
+  //   people.filter();
+  // };
+
   useEffect(() => {
     fetchRepresentatives();
   }, [urlParams]);
+
+  console.log(users);
 
   return (
     <div className="detailed-search-page">
@@ -35,9 +51,10 @@ function DetailedSearch() {
         <h4 className="pt-3">
           <strong>Filters</strong>
         </h4>
+
         <form>
           <h5 className="pt-3">Position</h5>
-          <input type="checkbox" id="senator" name="senator"></input>
+          <input type="checkbox" id="senator" name="U.S. Senator"></input>
           <label className="filter-label" htmlFor="senator">
             Senator
           </label>
@@ -45,7 +62,7 @@ function DetailedSearch() {
           <input
             type="checkbox"
             id="representative"
-            name="representative"
+            name="U.S. Representative"
           ></input>
           <label className="filter-label" htmlFor="representative">
             Representative

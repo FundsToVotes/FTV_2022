@@ -107,7 +107,7 @@ export default function PersonDetails() {
       {/* Header */}
       <div className="details-header">
         <h1 className="details-header-text">
-          {"U.S. Representative - " + details.name}
+          {details.office + " - " + details.name}
         </h1>
       </div>
 

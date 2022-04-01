@@ -1,19 +1,17 @@
 import { AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react'
+import { useState } from "react";
 
 // Creates the Search bar where users will input their Address, GoogleAPI.js is called when submitted
 export function SearchBar() {
-  const [address, setAddress] = useState(''); // '' is the initial state value
+  const [address, setAddress] = useState(""); // '' is the initial state value
 
-  let navigate = useNavigate(); 
-  const routeChange = () => {
-  }
+  let navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    let path = `/detailed-search/${address}`
-    navigate(path, {replace: true});
-  }
+    let path = `/detailed-search/${address}`;
+    navigate(path, { replace: true });
+  };
 
   return (
     <div className="form-background">
@@ -41,13 +39,11 @@ export function SearchBar() {
             type="submit"
             value="Search"
             className="btn landing-button search"
-            onClick={() => routeChange()}
           />
         </form>
       </div>
     </div>
   );
-
 }
 
 export default SearchBar;

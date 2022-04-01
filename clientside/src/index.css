@@ -89,7 +89,7 @@ h3 {
 
 .form-background {
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: 15px;
   width: 90%;
   margin: auto;
   padding: 0.25em;
@@ -98,17 +98,22 @@ h3 {
 .form-container {
   display: flex !important;
   align-items: center;
+  color: black;
 }
 
 .form-contents {
   display: flex;
+  width: 100%;
+  padding: .25rem;
+  padding-right: .5rem;
 }
 
 .search-bar {
   margin-right: 1rem;
   margin-left: 0.5rem;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #f2f4f8;
+  flex-grow: 2;
 }
 
 .search-icon {
