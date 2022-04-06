@@ -9,9 +9,10 @@ import queryString from 'query-string'
 function DetailedSearch() {
   const { search } = useLocation();
   const { address } = queryString.parse(search)
-  console.log(search)
 
-  const [users, setUsers] = useState([]);
+  const [officials, setOfficials] = useState([]);
+  const [branchFilter, setBranchFilter] = useState(new Set());
+  const [partyFilter, setPartyFilter] = useState(new Set());
 
   const fetchRepresentatives = () => {
     fetch(
@@ -22,30 +23,37 @@ function DetailedSearch() {
       })
       .then((data) => {
         console.log(data);
-        return setUsers(data.officials);
+        return setOfficials(data.officials);
       });
   };
 
-  // const filterPosition = (e, people) => {
-  //   let value = e.target.name;
-  //   console.log(value);
-  //   let result = people.filter((person) => person.office === value);
-  //   console.log(result);
-  // };
+  const updateBranchFilter = (e) => {
+    if (e.target.checked) {
+      branchFilter.add(e.target.name)
+    } else {
+      branchFilter.delete(e.target.name)
+    }
+    console.log(e)
+    setBranchFilter(new Set(branchFilter))
+  };
 
-  // const filterParty = (e, people) => {
-  //   let value = e.target.name;
-  //   console.log(value);
-  //   console.log(e);
-  //   people.filter();
-  // };
+  const updatePartyFilter = (e) => {
+    if (e.target.checked) {
+      partyFilter.add(e.target.name)
+    } else {
+      partyFilter.delete(e.target.name)
+    }
+    console.log(e)
+    setPartyFilter(new Set(partyFilter))
+  };
+
 
   useEffect(() => {
     fetchRepresentatives();
   }, [address]);
 
-  console.log(users);
-
+  console.log(officials)
+  console.log(partyFilter)
   return (
     <div className="detailed-search-page">
       <div className="search-side-panel">
@@ -55,7 +63,12 @@ function DetailedSearch() {
 
         <form>
           <h5 className="pt-3">Position</h5>
-          <input type="checkbox" id="senator" name="U.S. Senator"></input>
+          <input 
+            type="checkbox"
+            id="senator"
+            name="U.S. Senator"
+            onClick={e => updateBranchFilter(e)}
+          ></input>
           <label className="filter-label" htmlFor="senator">
             Senator
           </label>
@@ -64,24 +77,25 @@ function DetailedSearch() {
             type="checkbox"
             id="representative"
             name="U.S. Representative"
+            onClick={e => updateBranchFilter(e)}
           ></input>
           <label className="filter-label" htmlFor="representative">
             Representative
           </label>
 
           <h5 className="pt-3">Party</h5>
-          <input type="checkbox" id="republican" name="republican"></input>
+          <input type="checkbox" id="republican" name="Republican Party" onClick={e => updatePartyFilter(e)}></input>
           <label className="filter-label" htmlFor="republican">
             Republican
           </label>
           <br></br>
-          <input type="checkbox" id="democrat" name="democrat"></input>
+          <input type="checkbox" id="democrat" name="Democratic Party" onClick={e => updatePartyFilter(e)}></input>
           <label className="filter-label" htmlFor="democrat">
             Democrat
           </label>
 
           <br></br>
-          <input type="checkbox" id="other" name="other"></input>
+          <input type="checkbox" id="other" name="Other" onClick={e => updatePartyFilter(e)}></input>
           <label className="filter-label" htmlFor="other">
             Other
           </label>
@@ -97,8 +111,11 @@ function DetailedSearch() {
           <div className="results">
             {/* idk how to make it refresh when it get's here with a new url... */}
             {address &&
-              users.length > 0 &&
-              users.map((user) => CandidateCard(user))}
+              officials.length > 0 &&
+              officials
+                .filter((official) => branchFilter.size == 0 ? true : branchFilter.has(official.office))
+                .filter((official) => partyFilter.size == 0 ? true: partyFilter.has(official.party))
+                .map((official) => CandidateCard(official))}
           </div>
         </div>
       </div>
