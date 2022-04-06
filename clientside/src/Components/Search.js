@@ -1,20 +1,21 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import queryString from 'query-string'
 // import tempPerson from "../images/temp-person.jpg";
 // import { test } from "../api.js"
 
 function DetailedSearch() {
-  const urlParams = useParams();
+  const { search } = useLocation();
+  const { address } = queryString.parse(search)
+  console.log(search)
 
   const [users, setUsers] = useState([]);
 
-  // somehow, there is a weird "calling fetch reps hella times" issue with my solution.
-  // it is a workaround at best.
   const fetchRepresentatives = () => {
     fetch(
-      `http://localhost:3000/v1/addressRepresentative?address=${urlParams.address}`
+      `http://localhost:3000/v1/addressRepresentative?address=${address}`
     )
       .then((response) => {
         return response.json();
@@ -41,7 +42,7 @@ function DetailedSearch() {
 
   useEffect(() => {
     fetchRepresentatives();
-  }, [urlParams]);
+  }, [address]);
 
   console.log(users);
 
@@ -89,13 +90,13 @@ function DetailedSearch() {
       <div className="results-panel">
         <div className="results-header">
           <h1>Representatives for</h1>
-          <h2>{urlParams.address || "No address specified"}</h2>
+          <h2>{address || "No address specified"}</h2>
           <SearchBar />
         </div>
         <div className="search-results">
           <div className="results">
             {/* idk how to make it refresh when it get's here with a new url... */}
-            {urlParams.address &&
+            {address &&
               users.length > 0 &&
               users.map((user) => CandidateCard(user))}
           </div>
@@ -123,7 +124,7 @@ export function CandidateCard(props) {
       </p>
       <p>{candidate.position}</p>
       <Link
-        to={`/details/${candidate.name}`}
+        to={`/details?representative=${candidate.name}`}
         className="btn landing-button search details-button"
       >
         Learn More
