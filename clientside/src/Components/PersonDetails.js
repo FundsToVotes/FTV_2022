@@ -8,7 +8,8 @@
 *****************************************************/
 
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import queryString from 'query-string'
 
 import twitterIcon from "../images/twitter.svg";
 import instagramIcon from "../images/instagram.svg";
@@ -18,8 +19,9 @@ import dummyContributions from "../images/dummy_contributions.png";
 import dummyIndustries from "../images/dummy_industries.png";
 
 export default function PersonDetails() {
-  const urlParams = useParams();
-  const [firstName, lastName] = urlParams.representative.split(" ");
+  const { search } = useLocation();
+  const { representative } = queryString.parse(search)
+  const [firstName, lastName] = representative.split(" ");
   const [details, setDetails] = useState([]);
   // const [urls, setUrls] = useState([]);
 

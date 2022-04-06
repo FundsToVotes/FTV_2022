@@ -9,7 +9,7 @@ export function SearchBar() {
   let navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    let path = `/detailed-search/${address}`;
+    let path = `/detailed-search?address=${address}`;
     navigate(path, { replace: true });
   };
 

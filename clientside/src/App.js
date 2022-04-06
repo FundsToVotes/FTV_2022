@@ -33,9 +33,7 @@ export class App extends Component {
           <Route path="/about" element={<About />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/detailed-search" element={<DetailedSearch />} />
-          <Route path="/detailed-search/:address" element={<DetailedSearch />} />
-          <Route path="/details/" element={<PersonDetails />} />
-          <Route path="/details/:representative" element={<PersonDetails />} />
+          <Route path="/details" element={<PersonDetails />} />
         </Routes>
       </div>
     );
