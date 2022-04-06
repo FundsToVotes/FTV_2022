@@ -15,6 +15,7 @@ let selectRepresentativeDetailsQuery = `
 SELECT 
 	civicinfo.\`name\` as "name",
 	civicinfo.address as address,
+  civicinfo.office as office,
   civicinfo.photoUrl as photoUrl,
   civicinfo.party as party,
   grouped_phone.phones as phones,
@@ -114,6 +115,7 @@ router.get('/', async function(req, res, next) {
         name: data[0].name,
         address: data[0].address, 
         party: data[0].party,
+        office: data[0].office,
         phones: JSON.parse(data[0].phones),
         photoUrl: data[0].photoUrl,
         urls: JSON.parse(data[0].urls),
