@@ -16,7 +16,6 @@ export class PrivacyPolicy extends Component {
           margin: "auto",
           width: "75%",
           padding: "110px",
-          fontFamily: "Comfortaa, sans-serif",
         }}
       >
         <h2>Privacy Policy</h2>

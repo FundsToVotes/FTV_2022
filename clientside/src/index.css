@@ -84,11 +84,12 @@ h3 {
 
 .landing-text {
   color: white;
+  font-size: 1.25rem;
 }
 
 .form-background {
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: 15px;
   width: 90%;
   margin: auto;
   padding: 0.25em;
@@ -97,17 +98,22 @@ h3 {
 .form-container {
   display: flex !important;
   align-items: center;
+  color: black;
 }
 
 .form-contents {
   display: flex;
+  width: 100%;
+  padding: .25rem;
+  padding-right: .5rem;
 }
 
 .search-bar {
   margin-right: 1rem;
   margin-left: 0.5rem;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #f2f4f8;
+  flex-grow: 2;
 }
 
 .search-icon {
@@ -162,13 +168,204 @@ h3 {
 }
 
 /* Static Pages */
+.static-page {
+  background-color: #f4f7fd;
+}
+
 .static-container {
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 75%;
-  padding-top: 20px;
-  background-color: white;
-  padding: 30px;
+  width: 90%;
   margin-top: 30px;
+}
+
+.static-header {
+  background-color: #8fbe5a;
+  width: 100%;
+  text-align: left;
+  color: white;
+  padding: 3em;
+}
+
+.info-card {
+  padding: 1rem;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  color: #a1adc3;
+}
+.info-card > h3 {
+  color: #8fbe5a;
+}
+.card-info > h3 {
+  color: #8fbe5a;
+}
+
+.action-card {
+  display: flex;
+  flex-direction: row;
+}
+.number-icon {
+  background-color: #8fbe5a;
+  color: white;
+  border-radius: 50%;
+  width: 3.75em;
+  height: 3rem;
+  margin-right: 1rem;
+  text-align: center;
+}
+.two {
+  width: 7.25em;
+}
+.three {
+  width: 6.4rem;
+}
+.number-icon > p {
+  font-size: 2em;
+  font-weight: 700;
+  align-self: center;
+}
+
+.header-text {
+  font-size: 1.25rem;
+  width: 75%;
+}
+
+.inner-card-data {
+  display: flex;
+}
+
+.data-card {
+  width: 35rem;
+  margin: 2rem;
+}
+
+.data-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.project-info {
+  display: flex;
+}
+.second-header {
+  color: #8fbe5a;
+}
+
+.about-photos {
+  height: 13rem;
+  width: 13rem;
+}
+
+/* Search Page */
+
+.detailed-search-page {
+  display: inline;
+}
+
+.results-header {
+  background-color: #8fbe5a;
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.search-side-panel {
+  padding: 1em;
+  height: 30rem;
+  width: 20%;
+  float: left;
+}
+
+.results-panel {
+  width: 80%;
+  float: right;
+  outline: 2px solid #8fbe5a;
+}
+
+.candidate-card {
+  width: 18rem;
+  height: 20rem;
+  text-align: center;
+  align-items: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+
+.results-header > div {
+  font-size: 1rem;
+}
+
+.results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-cropper {
+  height: 8rem;
+  width: 8rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.headshot {
+  display: inline;
+  margin: 0 auto;
+  height: auto;
+  width: 100%;
+}
+
+.filter-label {
+  padding-left: 0.5rem;
+}
+
+.details-button {
+  position: absolute;
+  bottom: 2.5em;
+}
+
+/* Candidate Details Page */
+
+.details-header {
+  background-color: #8fbe5a;
+  color: white;
+  text-align: center;
+  padding: 0.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.details-header-text {
+  padding-top: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.details-side-panel {
+  float: left;
+  width: 25%;
+  padding: 1rem;
+}
+
+.breakdown-panel {
+  float: right;
+  width: 75%;
+  background-color: #f6f6f6;
+}
+
+.image-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-details-cropper {
+  border-radius: 5px;
+}
+
+.details-side-header {
+  text-align: center;
 }
