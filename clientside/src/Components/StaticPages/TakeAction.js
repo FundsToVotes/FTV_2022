@@ -10,7 +10,7 @@ import React, { Component } from "react";
 export class OurData extends Component {
   render() {
     return (
-      <div className="static-page">
+      <div className="static-page page-container">
         <div className="static-header">
           <h1>Take Action</h1>
           <p className="header-text">

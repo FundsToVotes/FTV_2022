@@ -10,7 +10,7 @@ import React, { Component } from "react";
 export class Finance101 extends Component {
   render() {
     return (
-      <div className="static-page">
+      <div className="static-page page-container">
         <div className="static-header">
           <h1>Campaign Finance 101</h1>
           <p className="header-text">

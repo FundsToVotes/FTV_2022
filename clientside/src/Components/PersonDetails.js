@@ -9,7 +9,7 @@
 
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import queryString from 'query-string'
+import queryString from "query-string";
 
 import twitterIcon from "../images/twitter.svg";
 import instagramIcon from "../images/instagram.svg";
@@ -20,7 +20,7 @@ import dummyIndustries from "../images/dummy_industries.png";
 
 export default function PersonDetails() {
   const { search } = useLocation();
-  const { representative } = queryString.parse(search)
+  const { representative } = queryString.parse(search);
   const [firstName, lastName] = representative.split(" ");
   const [details, setDetails] = useState([]);
   // const [urls, setUrls] = useState([]);
@@ -105,58 +105,81 @@ export default function PersonDetails() {
   console.log(details);
 
   return (
-    <div>
+    <div className="page-container">
       {/* Header */}
       <div className="details-header">
         <h1 className="details-header-text">
-          {details.office + " - " + details.name}
+          {details.name + " - " + details.office}
         </h1>
       </div>
 
-      {/* Side Panel */}
-      <div className="details-side-panel">
-        <div className="details-side-header">
-          <h2 className="mb-3">{details.name}</h2>
-          <div className="image-box">
+      <div className="details-container">
+        {/* Side Panel */}
+        <div className="details-side-panel">
+          <div className="details-side-header">
+            <h2>{details.name}</h2>
+            <h3 className="position-text mb-3">{details.office}</h3>
+            <div className="image-box">
+              <div>
+                <img
+                  src={details.photoUrl}
+                  alt="candidate headshot"
+                  className="headshot image-details-cropper"
+                />
+              </div>
+            </div>
+
+            <h4 className="mt-3">{details.party}</h4>
+          </div>
+
+          <h5 className="mt-4">DC Office Number:</h5>
+          <a href={`tel:${phoneToString(details.phones)}`}>{details.phones}</a>
+
+          {details.urls}
+
+          <h5 className="mt-3">Office Mailing Address:</h5>
+          {details.address}
+
+          <h5 className="mt-3">Socials:</h5>
+          <p className="m-1">{details.socials}</p>
+
+          <a href="/take-action" className="btn landing-button learn-more mt-3">
+            Take Action
+          </a>
+        </div>
+
+        {/* Right side of web page */}
+        <div className="breakdown-panel">
+          <div className="card datavis-card mt-5 p-3">
+            <h5 className="mt-3">Funding at a glance:</h5>
             <div>
-              <img
-                src={details.photoUrl}
-                alt="candidate headshot"
-                className="headshot image-details-cropper"
-              />
+              <img src={dummyIndustries} />
+              <img src={dummyContributions} />
             </div>
           </div>
-
-          <h4 className="mt-3">{details.party}</h4>
-        </div>
-
-        <h5 className="mt-4">DC Office Number:</h5>
-        <a href={`tel:${phoneToString(details.phones)}`}>{details.phones}</a>
-
-        {details.urls}
-
-        <h5 className="mt-3">Office Mailing Address:</h5>
-        {details.address}
-
-        <h5 className="mt-3">Socials:</h5>
-        <p className="m-1">{details.socials}</p>
-
-        <a href="/take-action" className="btn landing-button learn-more mt-3">
-          Take Action
-        </a>
-      </div>
-
-      {/* Right side of web page */}
-      <div className="breakdown-panel">
-        <div className="card datavis-card mt-5 p-3">
-          <h5 className="mt-3">Funding at a glance:</h5>
-          <div>
-            <img src={dummyIndustries} />
-            <img src={dummyContributions} />
+          <div className="card text-card mt-5 mb-5 p-3">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in
+            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
           </div>
-        </div>
-        <div className="card text-card mt-5 mb-5 p-3">
-          Text heavy info goes here
         </div>
       </div>
     </div>

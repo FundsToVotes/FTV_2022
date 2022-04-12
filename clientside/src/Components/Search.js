@@ -2,22 +2,19 @@
 import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useLocation } from "react-router-dom";
-import queryString from 'query-string'
-// import tempPerson from "../images/temp-person.jpg";
+import queryString from "query-string";
 // import { test } from "../api.js"
 
 function DetailedSearch() {
   const { search } = useLocation();
-  const { address } = queryString.parse(search)
+  const { address } = queryString.parse(search);
 
   const [officials, setOfficials] = useState([]);
   const [branchFilter, setBranchFilter] = useState(new Set());
   const [partyFilter, setPartyFilter] = useState(new Set());
 
   const fetchRepresentatives = () => {
-    fetch(
-      `http://localhost:3000/v1/addressRepresentative?address=${address}`
-    )
+    fetch(`http://localhost:3000/v1/addressRepresentative?address=${address}`)
       .then((response) => {
         return response.json();
       })
@@ -29,33 +26,32 @@ function DetailedSearch() {
 
   const updateBranchFilter = (e) => {
     if (e.target.checked) {
-      branchFilter.add(e.target.name)
+      branchFilter.add(e.target.name);
     } else {
-      branchFilter.delete(e.target.name)
+      branchFilter.delete(e.target.name);
     }
-    console.log(e)
-    setBranchFilter(new Set(branchFilter))
+    console.log(e);
+    setBranchFilter(new Set(branchFilter));
   };
 
   const updatePartyFilter = (e) => {
     if (e.target.checked) {
-      partyFilter.add(e.target.name)
+      partyFilter.add(e.target.name);
     } else {
-      partyFilter.delete(e.target.name)
+      partyFilter.delete(e.target.name);
     }
-    console.log(e)
-    setPartyFilter(new Set(partyFilter))
+    console.log(e);
+    setPartyFilter(new Set(partyFilter));
   };
-
 
   useEffect(() => {
     fetchRepresentatives();
   }, [address]);
 
-  console.log(officials)
-  console.log(partyFilter)
+  console.log(officials);
+  console.log(partyFilter);
   return (
-    <div className="detailed-search-page">
+    <div className="detailed-search-page page-container">
       <div className="search-side-panel">
         <h4 className="pt-3">
           <strong>Filters</strong>
@@ -63,11 +59,11 @@ function DetailedSearch() {
 
         <form>
           <h5 className="pt-3">Position</h5>
-          <input 
+          <input
             type="checkbox"
             id="senator"
             name="U.S. Senator"
-            onClick={e => updateBranchFilter(e)}
+            onClick={(e) => updateBranchFilter(e)}
           ></input>
           <label className="filter-label" htmlFor="senator">
             Senator
@@ -77,25 +73,40 @@ function DetailedSearch() {
             type="checkbox"
             id="representative"
             name="U.S. Representative"
-            onClick={e => updateBranchFilter(e)}
+            onClick={(e) => updateBranchFilter(e)}
           ></input>
           <label className="filter-label" htmlFor="representative">
             Representative
           </label>
 
           <h5 className="pt-3">Party</h5>
-          <input type="checkbox" id="republican" name="Republican Party" onClick={e => updatePartyFilter(e)}></input>
+          <input
+            type="checkbox"
+            id="republican"
+            name="Republican Party"
+            onClick={(e) => updatePartyFilter(e)}
+          ></input>
           <label className="filter-label" htmlFor="republican">
             Republican
           </label>
           <br></br>
-          <input type="checkbox" id="democrat" name="Democratic Party" onClick={e => updatePartyFilter(e)}></input>
+          <input
+            type="checkbox"
+            id="democrat"
+            name="Democratic Party"
+            onClick={(e) => updatePartyFilter(e)}
+          ></input>
           <label className="filter-label" htmlFor="democrat">
             Democrat
           </label>
 
           <br></br>
-          <input type="checkbox" id="other" name="Other" onClick={e => updatePartyFilter(e)}></input>
+          <input
+            type="checkbox"
+            id="other"
+            name="Other"
+            onClick={(e) => updatePartyFilter(e)}
+          ></input>
           <label className="filter-label" htmlFor="other">
             Other
           </label>
@@ -113,8 +124,14 @@ function DetailedSearch() {
             {address &&
               officials.length > 0 &&
               officials
-                .filter((official) => branchFilter.size == 0 ? true : branchFilter.has(official.office))
-                .filter((official) => partyFilter.size == 0 ? true: partyFilter.has(official.party))
+                .filter((official) =>
+                  branchFilter.size == 0
+                    ? true
+                    : branchFilter.has(official.office)
+                )
+                .filter((official) =>
+                  partyFilter.size == 0 ? true : partyFilter.has(official.party)
+                )
                 .map((official) => CandidateCard(official))}
           </div>
         </div>
