@@ -6,21 +6,13 @@
 
 *****************************************************/
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 import imgLanding from "../images/landing-page-main-img.png";
-// import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
 // Renders the Landing Page
 export class LandingPage extends Component {
   render() {
-    // let navigate = useNavigate();
-    // let changePage = (e) => {
-    //   e.preventDefault();
-    //   let path = `/privacy-policy`;
-    //   navigate(path, { replace: true });
-    // };
-
     return (
       <div className="page-container">
         <div className="landing-title-container">
