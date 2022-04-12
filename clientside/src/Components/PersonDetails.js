@@ -15,9 +15,11 @@ import twitterIcon from "../images/twitter.svg";
 import instagramIcon from "../images/instagram.svg";
 import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
-import dummyContributions from "../images/dummy_contributions.png";
-import dummyIndustries from "../images/dummy_industries.png";
+// import dummyContributions from "../images/dummy_contributions.png";
+// import dummyIndustries from "../images/dummy_industries.png";
 import defaultProfile from "../images/default-profile.png";
+// import Top10Pie from "./Top10Pie";
+import Top10Bar from "./Top10Bar";
 
 export default function PersonDetails() {
   const { search } = useLocation();
@@ -177,8 +179,10 @@ export default function PersonDetails() {
           <div className="card datavis-card mt-5 p-3">
             <h5 className="mt-3">Funding at a glance:</h5>
             <div>
-              <img src={dummyIndustries} />
-              <img src={dummyContributions} />
+              <Top10Bar repsData={details} />
+              {/* <Top10Pie repsData={details} /> */}
+              {/* <img src={dummyIndustries} />
+              <img src={dummyContributions} /> */}
             </div>
           </div>
           <div className="card text-card mt-5 mb-5 p-3">

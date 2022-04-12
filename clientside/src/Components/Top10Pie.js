@@ -3,6 +3,7 @@ import React from "react";
 
 function Top10Pie(props) {
   let data = props;
+  console.log(data);
   window.addEventListener("load", async function () {
     let response = await fetch(
       `http://localhost:3000/v1/topten?cid=${data.cid}&cycle=2020`
