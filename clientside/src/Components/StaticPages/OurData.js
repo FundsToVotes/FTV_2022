@@ -13,7 +13,7 @@ import GoogleLogo from "../../images/google.png";
 export class OurData extends Component {
   render() {
     return (
-      <div className="static-page">
+      <div className="static-page page-container">
         <div className="static-header">
           <h1>Our Data</h1>
           <p className="header-text">
@@ -32,13 +32,19 @@ export class OurData extends Component {
                   U.S. Senators and U.S. Representatives based on their address.
                   It also provides basic demographic and contact information.
                 </p>
-                <img
-                  src={GoogleLogo}
-                  alt="Google logo"
-                  height="150px"
-                  width="150px"
-                  className="ml-2"
-                />
+                <a
+                  href="https://developers.google.com/civic-information"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src={GoogleLogo}
+                    alt="Google logo"
+                    height="150px"
+                    width="150px"
+                    className="ml-2"
+                  />
+                </a>
               </div>
             </div>
 
@@ -53,18 +59,24 @@ export class OurData extends Component {
                   Campaign Finance API to get campaign finance data,
                   specifically for independent expenditures.
                 </p>{" "}
-                <img
-                  src={ProPublicaLogo}
-                  alt="ProPublica logo"
-                  height="150px"
-                  width="150px"
-                  className="ml-2"
-                />
+                <a
+                  href="https://www.propublica.org/datastore/apis"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src={ProPublicaLogo}
+                    alt="ProPublica logo"
+                    height="150px"
+                    width="150px"
+                    className="ml-2"
+                  />
+                </a>
               </div>
             </div>
 
             <div className="mb-5 card info-card data-card">
-              <h3>OpenSecrets.org</h3>
+              <h3>OpenSecrets</h3>
               <div className="inner-card-data">
                 <p>
                   The Center for Responsive Politics is a research group that
@@ -73,13 +85,19 @@ export class OurData extends Component {
                   specifically for the industries that support a U.S.
                   Representative or U.S. Senator.
                 </p>
-                <img
-                  src={OpenSecretsLogo}
-                  alt="OpenSecrets logo"
-                  width="200px"
-                  height="150px"
-                  className="ml-2"
-                />
+                <a
+                  href="https://www.opensecrets.org/open-data/api"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src={OpenSecretsLogo}
+                    alt="OpenSecrets logo"
+                    width="200px"
+                    height="150px"
+                    className="ml-2"
+                  />
+                </a>
               </div>
             </div>
           </div>
