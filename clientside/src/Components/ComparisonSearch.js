@@ -3,13 +3,13 @@ import { useState } from "react";
 
 // Creates the Search bar where users will input their Name, GoogleAPI.js is called when submitted
 export function ComparisonSearch() {
-  const [name, setName] = useState(""); // '' is the initial state value
+  const [setName] = useState(""); // '' is the initial state value
 
   return (
     <div className="form-background">
       <div className="form-container">
         <AiOutlineSearch className="search-icon" />
-        <form className="form-contents" >
+        <form className="form-contents">
           <input
             className="form-control search-bar"
             type="text"
