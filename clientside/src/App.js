@@ -19,6 +19,10 @@ import Header from "./Components/Header";
 import DetailedSearch from "./Components/Search";
 import PersonDetails from "./Components/PersonDetails";
 import LandingPage from "./Components/LandingPage";
+import Top10Pie from "./Components/Top10Pie";
+import Top10Bar from "./Components/Top10Bar";
+import Comparison from "./Components/ComparisonPage";
+
 
 export class App extends Component {
   render() {
@@ -34,6 +38,10 @@ export class App extends Component {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/detailed-search" element={<DetailedSearch />} />
           <Route path="/details" element={<PersonDetails />} />
+          <Route path="/top10pie" element={<Top10Pie />} />
+          <Route path="/top10bar" element={<Top10Bar />} />
+          <Route path="/comparison" element={<Comparison />} />
+
         </Routes>
       </div>
     );
