@@ -6,13 +6,21 @@
 
 *****************************************************/
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+// import { Link } from "@reach/router";
 import imgLanding from "../images/landing-page-main-img.png";
+import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
 // Renders the Landing Page
 export class LandingPage extends Component {
   render() {
+    let navigate = useNavigate();
+    let changePage = (e) => {
+      e.preventDefault();
+      let path = "/privacy-policy";
+      navigate(path);
+    };
+
     return (
       <div className="page-container">
         <div className="landing-title-container">
@@ -26,9 +34,9 @@ export class LandingPage extends Component {
           <SearchBar />
           <p className="landing-text pt-2">
             We don't save your information. See our{" "}
-            <Link to="/privacy-policy" className="privacy-link">
+            <a href="#" onClick={changePage} className="privacy-link">
               Privacy Policy
-            </Link>
+            </a>
             .
           </p>
         </div>

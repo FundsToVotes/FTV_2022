@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useLocation } from "react-router-dom";
 import queryString from "query-string";
-// import { FaUserAlt } from "react-icons/fa";
 // import { test } from "../api.js"
 import defaultProfile from "../images/default-profile.png";
 
