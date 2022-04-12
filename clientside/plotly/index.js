@@ -46,7 +46,7 @@ window.addEventListener('load', async function () {
         '#187d54',
         '#408c46',
         '#699832',
-        '#96a216',
+        '#96aa216',
         '#c9a700',
         '#ffa600',
         '#ffd500'
