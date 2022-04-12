@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useLocation } from "react-router-dom";
 import queryString from "query-string";
+// import { FaUserAlt } from "react-icons/fa";
 // import { test } from "../api.js"
+import defaultProfile from "../images/default-profile.png";
 
 function DetailedSearch() {
   const { search } = useLocation();
@@ -51,88 +53,92 @@ function DetailedSearch() {
   console.log(officials);
   console.log(partyFilter);
   return (
-    <div className="detailed-search-page page-container">
-      <div className="search-side-panel">
-        <h4 className="pt-3">
-          <strong>Filters</strong>
-        </h4>
+    <div className="page-container">
+      <div className="detailed-search-page">
+        <div className="search-side-panel">
+          <h4 className="pt-3">
+            <strong>Filters</strong>
+          </h4>
 
-        <form>
-          <h5 className="pt-3">Position</h5>
-          <input
-            type="checkbox"
-            id="senator"
-            name="U.S. Senator"
-            onClick={(e) => updateBranchFilter(e)}
-          ></input>
-          <label className="filter-label" htmlFor="senator">
-            Senator
-          </label>
-          <br></br>
-          <input
-            type="checkbox"
-            id="representative"
-            name="U.S. Representative"
-            onClick={(e) => updateBranchFilter(e)}
-          ></input>
-          <label className="filter-label" htmlFor="representative">
-            Representative
-          </label>
+          <form>
+            <h5 className="pt-3">Position</h5>
+            <input
+              type="checkbox"
+              id="senator"
+              name="U.S. Senator"
+              onClick={(e) => updateBranchFilter(e)}
+            ></input>
+            <label className="filter-label" htmlFor="senator">
+              Senator
+            </label>
+            <br></br>
+            <input
+              type="checkbox"
+              id="representative"
+              name="U.S. Representative"
+              onClick={(e) => updateBranchFilter(e)}
+            ></input>
+            <label className="filter-label" htmlFor="representative">
+              Representative
+            </label>
 
-          <h5 className="pt-3">Party</h5>
-          <input
-            type="checkbox"
-            id="republican"
-            name="Republican Party"
-            onClick={(e) => updatePartyFilter(e)}
-          ></input>
-          <label className="filter-label" htmlFor="republican">
-            Republican
-          </label>
-          <br></br>
-          <input
-            type="checkbox"
-            id="democrat"
-            name="Democratic Party"
-            onClick={(e) => updatePartyFilter(e)}
-          ></input>
-          <label className="filter-label" htmlFor="democrat">
-            Democrat
-          </label>
+            <h5 className="pt-3">Party</h5>
+            <input
+              type="checkbox"
+              id="republican"
+              name="Republican Party"
+              onClick={(e) => updatePartyFilter(e)}
+            ></input>
+            <label className="filter-label" htmlFor="republican">
+              Republican
+            </label>
+            <br></br>
+            <input
+              type="checkbox"
+              id="democrat"
+              name="Democratic Party"
+              onClick={(e) => updatePartyFilter(e)}
+            ></input>
+            <label className="filter-label" htmlFor="democrat">
+              Democrat
+            </label>
 
-          <br></br>
-          <input
-            type="checkbox"
-            id="other"
-            name="Other"
-            onClick={(e) => updatePartyFilter(e)}
-          ></input>
-          <label className="filter-label" htmlFor="other">
-            Other
-          </label>
-        </form>
-      </div>
-      <div className="results-panel">
-        <div className="results-header">
-          <h1>Representatives for</h1>
-          <h2>{address || "No address specified"}</h2>
-          <SearchBar />
+            <br></br>
+            <input
+              type="checkbox"
+              id="other"
+              name="Other"
+              onClick={(e) => updatePartyFilter(e)}
+            ></input>
+            <label className="filter-label" htmlFor="other">
+              Other
+            </label>
+          </form>
         </div>
-        <div className="search-results">
-          <div className="results">
-            {/* idk how to make it refresh when it get's here with a new url... */}
-            {address &&
-              officials.length > 0 &&
-              officials
-                .filter((official) =>
-                  branchFilter.size == 0
-                    ? true
-                    : branchFilter.has(official.office)
-                )
-                .filter((official) =>
-                  partyFilter.size == 0 ? true : partyFilter.has(official.party)
-                )
-                .map((official) => CandidateCard(official))}
+        <div className="results-panel">
+          <div className="results-header">
+            <h1>Representatives for</h1>
+            <h2>{address || "No address specified"}</h2>
+            <SearchBar />
+          </div>
+          <div className="search-results">
+            <div className="results">
+              {/* idk how to make it refresh when it get's here with a new url... */}
+              {address &&
+                officials.length > 0 &&
+                officials
+                  .filter((official) =>
+                    branchFilter.size == 0
+                      ? true
+                      : branchFilter.has(official.office)
+                  )
+                  .filter((official) =>
+                    partyFilter.size == 0
+                      ? true
+                      : partyFilter.has(official.party)
+                  )
+                  .map((official) => CandidateCard(official))}
+            </div>
           </div>
         </div>
       </div>
@@ -148,9 +154,14 @@ export function CandidateCard(props) {
     <div className="card candidate-card m-2 p-1">
       <div className="image-cropper mt-3">
         <img
+          id="profile-image"
           src={candidate.photoUrl}
           alt="candidate headshot"
           className="headshot"
+          onError={(event) => {
+            event.target.src = defaultProfile;
+            event.onerror = null;
+          }}
         />
       </div>
       <p className="mt-4">

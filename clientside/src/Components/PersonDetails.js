@@ -17,6 +17,7 @@ import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
 import dummyContributions from "../images/dummy_contributions.png";
 import dummyIndustries from "../images/dummy_industries.png";
+import defaultProfile from "../images/default-profile.png";
 
 export default function PersonDetails() {
   const { search } = useLocation();
@@ -60,23 +61,27 @@ export default function PersonDetails() {
     )
       .then((response) => response.json())
       .then((data) => {
-        let _ = data.urls.filter((d) => d.includes(".gov"));
-        if (_.length > 0) {
-          data.urls = (
-            <div>
-              <h5 className="mt-3">Representative Websites:</h5>
+        if (data.urls) {
+          let _ = data.urls.filter((d) => d.includes(".gov"));
+          console.log(_);
+          if (_.length > 0) {
+            data.urls = (
               <div>
-                {_.map((d) => (
-                  <a key={d} href={d}>
-                    {d}
-                  </a>
-                ))}
+                <h5 className="mt-3">Representative Websites:</h5>
+                <div>
+                  {_.map((d) => (
+                    <a key={d} href={d}>
+                      {d}
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          );
-        } else {
-          data.urls = undefined;
+            );
+          } else {
+            data.urls = undefined;
+          }
         }
+
         data.address =
           data.address.line1 +
           " " +
@@ -86,6 +91,16 @@ export default function PersonDetails() {
         data.socials = data.socials.map((d) => setupIcon(d.platform, d.id));
         setDetails(data);
       });
+  };
+
+  const colorCodeParty = (party) => {
+    if (party === "Republican Party") {
+      return "red";
+    } else if (party === "Democratic Party") {
+      return "blue";
+    } else {
+      return "black";
+    }
   };
 
   const phoneToString = (phone) => {
@@ -125,11 +140,20 @@ export default function PersonDetails() {
                   src={details.photoUrl}
                   alt="candidate headshot"
                   className="headshot image-details-cropper"
+                  onError={(event) => {
+                    event.target.src = defaultProfile;
+                    event.onerror = null;
+                  }}
                 />
               </div>
             </div>
 
-            <h4 className="mt-3">{details.party}</h4>
+            <h4
+              className="mt-3"
+              style={{ color: colorCodeParty(details.party) }}
+            >
+              {details.party}
+            </h4>
           </div>
 
           <h5 className="mt-4">DC Office Number:</h5>

@@ -6,8 +6,6 @@
 
 *****************************************************/
 import React, { Component } from "react";
-// import { GoogleAPI } from "../GoogleAPI";
-// import { useState } from "react";
 import { Link } from "@reach/router";
 import imgLanding from "../images/landing-page-main-img.png";
 import SearchBar from "./SearchBar";
