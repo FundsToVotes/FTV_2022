@@ -15,7 +15,7 @@ export class Top10Bar extends Component {
 
     window.addEventListener("load", async function () {
       let response = await fetch(
-        `http://localhost:3000/v1/topten?cid=${data.cid}&cycle=2020`
+        `http://localhost:3000/v1/topten?cid=${repsData.cid}&cycle=2020`
       );
       //somehow get rep name
       let top10 = await response.json();

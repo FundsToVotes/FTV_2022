@@ -111,6 +111,7 @@ h3 {
   display: flex !important;
   align-items: center;
   color: black;
+  justify-content: center;
 }
 
 .form-contents {
@@ -118,6 +119,8 @@ h3 {
   width: 100%;
   padding: .25rem;
   padding-right: .5rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-bar {
@@ -397,3 +400,10 @@ h3 {
 .position-text {
   font-size: 1.25rem;
 }
+
+/* Comparison Page */
+
+.comparison-header {
+  text-align: center;
+}
+
