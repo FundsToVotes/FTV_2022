@@ -401,6 +401,23 @@ h3 {
   font-size: 1.25rem;
 }
 
+.bills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.bill-card {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+  margin: 1rem;
+  width: 22rem;
+  background-color: whitesmoke;
+  outline: none;
+}
+
+.bill-card > p > strong {
+  color: #8fbe5a;
+}
+
 /* Comparison Page */
 
 .comparison-header {

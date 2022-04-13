@@ -15,9 +15,8 @@ import twitterIcon from "../images/twitter.svg";
 import instagramIcon from "../images/instagram.svg";
 import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
-// import dummyContributions from "../images/dummy_contributions.png";
-// import dummyIndustries from "../images/dummy_industries.png";
 import defaultProfile from "../images/default-profile.png";
+import BillsData from "./BillsData";
 // import Top10Pie from "./Top10Pie";
 // import Top10Bar from "./Top10Bar";
 
@@ -176,37 +175,16 @@ export default function PersonDetails() {
 
         {/* Right side of web page */}
         <div className="breakdown-panel">
-          <div className="card datavis-card mt-5 p-3">
+          <div className="card datavis-card m-4 p-3">
             <h5 className="mt-3">Funding at a glance:</h5>
             <div>
               {/* <Top10Bar repsData={details} /> */}
               {/* <Top10Pie repsData={details} /> */}
-              {/* <img src={dummyIndustries} />
-              <img src={dummyContributions} /> */}
             </div>
           </div>
-          <div className="card text-card mt-5 mb-5 p-3">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
+          <div className="card text-card m-4 mb-5 p-3">
+            <h5 className="mt-3">Bills at a Glance:</h5>
+            <BillsData firstName={firstName} lastName={lastName} />
           </div>
         </div>
       </div>
