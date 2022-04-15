@@ -3,7 +3,7 @@
 docker stop mysqldb-1.0
 
 export ENV_LOCATION="../.env"
-source ../export_env_variables.sh
+source ../_export_env_variables.sh
 
 docker rm mysqldb-1.0
 
