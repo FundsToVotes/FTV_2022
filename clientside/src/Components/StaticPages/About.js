@@ -7,7 +7,6 @@
 
 import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
-// import imgHandDollarIcon from "../../images/hand_with_dollar_sign.png";
 import imgGrady from "../../images/Grady.jpg";
 import imgJay from "../../images/Jay.jpg";
 import imgHaykal from "../../images/Haykal.jpg";
@@ -21,13 +20,13 @@ import imgThomas from "../../images/thomas.jpeg";
 export class About extends Component {
   render() {
     return (
-      <div className="static-page">
+      <div className="static-page page-container mb-2">
         <div className="static-header">
           <h1>About</h1>
         </div>
 
         <div className="static-container">
-          <div className="mb-5 card info-card">
+          <div className="card info-card">
             <h3>
               {/* <img
                 src={imgHandDollarIcon}
@@ -58,7 +57,7 @@ export class About extends Component {
             </p>
           </div>
 
-          <div className="mb-5 card info-card">
+          <div className="card info-card">
             <h3>Context</h3>
             <ul>
               <li>
@@ -77,7 +76,7 @@ export class About extends Component {
             </ul>
           </div>
 
-          <div className="mb-5 card info-card">
+          <div className="card info-card">
             <h3>Key Features</h3>
             <ul>
               <li>
@@ -100,56 +99,56 @@ export class About extends Component {
             </ul>
           </div>
 
-          <div className="mb-5 card info-card">
+          <div className="card info-card">
             <h3>Team Members 2022</h3>
             <MDBContainer>
               <MDBRow>
                 <MDBCol>
                   <img src={imgHailey} alt="Hailey" className="about-photos" />
-                  <p>Hailey Meister</p>
+                  <p className="mt-1">Hailey Meister</p>
                 </MDBCol>
                 <MDBCol>
                   <img src={imgCarson} alt="Carson" className="about-photos" />
-                  <p>Carson Bryant</p>
+                  <p className="mt-1">Carson Bryant</p>
                 </MDBCol>
                 <MDBCol>
                   <img src={imgThomas} alt="Thomas" className="about-photos" />
-                  <p>Thomas Serrano</p>
+                  <p className="mt-1">Thomas Serrano</p>
                 </MDBCol>
                 <MDBCol>
                   <img src={imgLiv} alt="Liv" className="about-photos" />
-                  <p>Liv Victorino</p>
+                  <p className="mt-1">Liv Victorino</p>
                 </MDBCol>
               </MDBRow>
             </MDBContainer>
           </div>
 
-          <div className="mb-5 card info-card">
+          <div className="card info-card">
             <h3>Team Members 2021</h3>
             <MDBContainer>
               <MDBRow>
                 <MDBCol>
                   <img src={imgGrady} alt="Grady" />
-                  <p>Grady Thompson</p>
+                  <p className="mt-1">Grady Thompson</p>
                 </MDBCol>
                 <MDBCol>
                   <img src={imgJay} alt="Jay" />
-                  <p>Jay Houppermans</p>
+                  <p className="mt-1">Jay Houppermans</p>
                 </MDBCol>
                 <MDBCol>
                   <img src={imgHaykal} alt="Haykal" />
-                  <p>Haykal Mubin</p>
+                  <p className="mt-1">Haykal Mubin</p>
                 </MDBCol>
                 <MDBCol>
                   <img src={imgReyan} alt="Reyan" />
-                  <p>Reyan Haji</p>
+                  <p className="mt-1">Reyan Haji</p>
                 </MDBCol>
               </MDBRow>
             </MDBContainer>
           </div>
 
           <div className="project-info">
-            <div className="mb-5 mr-5 card info-card">
+            <div className="mr-5 card info-card">
               <h3>Project Status</h3>
               <p>
                 This project was developed by students at the University of
@@ -158,7 +157,7 @@ export class About extends Component {
                 passed down from team to team.
               </p>
             </div>
-            <div className="mb-5 card info-card">
+            <div className="card info-card">
               <p>
                 Email the project team at{" "}
                 <a href="mailto:hello@fundstovotes.info">

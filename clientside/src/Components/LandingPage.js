@@ -6,18 +6,15 @@
 
 *****************************************************/
 import React, { Component } from "react";
-// import { GoogleAPI } from "../GoogleAPI";
-// import { useState } from "react";
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 import imgLanding from "../images/landing-page-main-img.png";
 import SearchBar from "./SearchBar";
 
 // Renders the Landing Page
 export class LandingPage extends Component {
-
   render() {
     return (
-      <div>
+      <div className="page-container">
         <div className="landing-title-container">
           <div>
             <h2 className="landing-title">Who Funds Your Representatives?</h2>
@@ -29,7 +26,7 @@ export class LandingPage extends Component {
           <SearchBar />
           <p className="landing-text pt-2">
             We don't save your information. See our{" "}
-            <Link to="/privacy-policy" className="privacy-link">
+            <Link to="privacy-policy" className="privacy-link">
               Privacy Policy
             </Link>
             .
@@ -38,9 +35,9 @@ export class LandingPage extends Component {
         <div className="landing-bottom">
           <div className="p-5">
             <p className="landing-paragraph">
-            Anyone 18 over over and who is a U.S. Citizen or permanent resident may donate to the campaigns of federal candidates. Political action committees (PACs), often ran by organizations or companies, can also donate.
+              Helping Americas voters make informed decisions!
             </p>
-            <a href="/" className="btn landing-button learn-more">
+            <a href="/take-action" className="btn landing-button learn-more">
               Learn More
             </a>
           </div>
