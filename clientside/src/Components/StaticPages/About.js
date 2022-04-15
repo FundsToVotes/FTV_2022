@@ -179,6 +179,7 @@ export class About extends Component {
             role="img"
             alt="University of Washington Information School logo"
             width="300px"
+            className="mb-2"
             style={{
               display: "block",
               marginLeft: "auto",
