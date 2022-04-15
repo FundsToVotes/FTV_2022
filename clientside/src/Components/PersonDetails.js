@@ -129,7 +129,7 @@ export default function PersonDetails() {
         </h1>
       </div>
 
-      <div className="details-container">
+      <div>
         {/* Side Panel */}
         <div className="details-side-panel">
           <div className="details-side-header">
@@ -176,14 +176,14 @@ export default function PersonDetails() {
         {/* Right side of web page */}
         <div className="breakdown-panel">
           <div className="card datavis-card m-4 p-3">
-            <h5 className="mt-3">Funding at a glance:</h5>
+            <h3 className="mt-3 details-gradiant">Funding at a glance:</h3>
             <div>
               {/* <Top10Bar repsData={details} /> */}
               {/* <Top10Pie repsData={details} /> */}
             </div>
           </div>
-          <div className="card text-card m-4 mb-5 p-3">
-            <h5 className="mt-3">Bills at a Glance:</h5>
+          <div className="m-4 mb-5 p-3">
+            <h3 className="mt-3 details-gradiant">Bill Voting History</h3>
             <BillsData firstName={firstName} lastName={lastName} />
           </div>
         </div>

@@ -116,7 +116,7 @@ function DetailedSearch() {
         </div>
         <div className="results-panel">
           <div className="results-header">
-            <h1>Representatives for</h1>
+            <h1 className="reps-for">Representatives for</h1>
             <h2>{address || "No address specified"}</h2>
             <SearchBar />
           </div>
@@ -149,6 +149,7 @@ export default DetailedSearch;
 
 export function CandidateCard(props) {
   let candidate = props;
+  console.log(candidate);
   return (
     <div className="card candidate-card m-2 p-1">
       <div className="image-cropper mt-3">
@@ -163,10 +164,10 @@ export function CandidateCard(props) {
           }}
         />
       </div>
-      <p className="mt-4">
-        {candidate.name} - {candidate.party}
+      <p className="mt-4">{candidate.name}</p>
+      <p className="mb-1">
+        {candidate.office} - {candidate.party}
       </p>
-      <p>{candidate.position}</p>
       <Link
         to={`/details?representative=${candidate.name}`}
         className="btn landing-button search details-button"

@@ -10,13 +10,13 @@ import React, { Component } from "react";
 export class Finance101 extends Component {
   render() {
     return (
-      <div className="static-page page-container">
+      <div className="page-container">
         <div className="static-header">
           <h1>Campaign Finance 101</h1>
-          <p className="header-text">
+          {/* <p className="header-text">
             This information applies to elections for federal offices. Other
             rules apply for state and local elections.
-          </p>
+          </p> */}
         </div>
         <div className="static-container">
           <div className="mt-2 card info-card">

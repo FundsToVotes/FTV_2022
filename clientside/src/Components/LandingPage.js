@@ -17,7 +17,12 @@ export class LandingPage extends Component {
       <div className="page-container">
         <div className="landing-title-container">
           <div>
-            <h2 className="landing-title">Who Funds Your Representatives?</h2>
+            <h2 className="landing-title">
+              <strong>Who Funds Your</strong>
+            </h2>
+            <h2 className="landing-title landing-title-reps">
+              <strong>Representatives?</strong>
+            </h2>
             <p className="landing-text">
               Search to see what industries are donating to your representatives
               and how they voted on relvant issues.
@@ -33,12 +38,11 @@ export class LandingPage extends Component {
           </p>
         </div>
         <div className="landing-bottom">
-          <div className="p-5">
-            <p className="landing-paragraph">
-              Helping Americas voters make informed decisions!
-            </p>
+          <div className="p-5 landing-card">
+            <h3>About Our Project</h3>
+            <p className="landing-paragraph">As part of our project...</p>
             <a href="/take-action" className="btn landing-button learn-more">
-              Learn More
+              Learn More Our Team
             </a>
           </div>
           <img
