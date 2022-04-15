@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 // import ComparisonSearch from "./ComparisonSearch";
 // import Top10Pie from "./Top10Pie";
-// import Top10Bar from "./Top10Bar";
+ import Top10Bar from "./Top10Bar";
 
 export class ComparisonPage extends Component {
   constructor(props) {
@@ -24,7 +24,11 @@ export class ComparisonPage extends Component {
     //cid= is candidate id, which Top10 components use for API call
     //name= is candidate name
     //<ComparisonSearch/> TODO: see above TODO
-    return <div>{/* <ComparisonSearch /> */}</div>;
+
+    return <div>
+      <Top10Bar/>
+      {/* <ComparisonSearch /> */}
+    </div>;
   }
 }
 

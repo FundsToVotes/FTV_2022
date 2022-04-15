@@ -8,8 +8,8 @@
 *****************************************************/
 
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import queryString from "query-string";
+// import { useLocation } from "react-router-dom";
+// import queryString from "query-string";
 
 import twitterIcon from "../images/twitter.svg";
 import instagramIcon from "../images/instagram.svg";
@@ -22,9 +22,12 @@ import defaultProfile from "../images/default-profile.png";
 import Top10Bar from "./Top10Bar";
 
 export default function PersonDetails() {
-  const { search } = useLocation();
-  const { representative } = queryString.parse(search);
-  const [firstName, lastName] = representative.split(" ");
+  // const { search } = useLocation();
+  // const { representative } = queryString.parse(search);
+  //DUMMY BELOW
+  //const [firstName, lastName] = representative.split(" ");
+  const firstName = "Anibal"
+  const lastName = "Acevedo-Vila"
   const [details, setDetails] = useState([]);
   // const [urls, setUrls] = useState([]);
 
@@ -57,10 +60,16 @@ export default function PersonDetails() {
     );
   };
 
+
+//this code breaks the API
   const fetchRepresentativeDetails = () => {
+
     fetch(
       `http://localhost:3000/v1/representativeDetails?firstName=${firstName}&lastName=${lastName}`
     )
+
+
+    //comes up as 404 not found
       .then((response) => response.json())
       .then((data) => {
         if (data.urls) {
@@ -83,7 +92,12 @@ export default function PersonDetails() {
             data.urls = undefined;
           }
         }
+        //DUMMY FOR TESTING_______
+        data.cid="N00007836"
+        data.name = "Maria Cantwell" //`${firstName} ${lastName}`
+        //________________________
 
+        console.log(JSON.stringify(data))
         data.address =
           data.address.line1 +
           " " +
@@ -93,7 +107,10 @@ export default function PersonDetails() {
         data.socials = data.socials.map((d) => setupIcon(d.platform, d.id));
         setDetails(data);
       });
+      
   };
+
+  
 
   const colorCodeParty = (party) => {
     if (party === "Republican Party") {
@@ -179,7 +196,14 @@ export default function PersonDetails() {
           <div className="card datavis-card mt-5 p-3">
             <h5 className="mt-3">Funding at a glance:</h5>
             <div>
-              <Top10Bar repsData={details} />
+                  here is where the graph should be
+                
+              {/*"details" in state is blank at this point_____________*/}
+
+              <Top10Bar/>
+
+              {/*______________________________________________________*/}
+
               {/* <Top10Pie repsData={details} /> */}
               {/* <img src={dummyIndustries} />
               <img src={dummyContributions} /> */}
