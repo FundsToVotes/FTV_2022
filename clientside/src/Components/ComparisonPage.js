@@ -2,7 +2,8 @@
 import React, { Component } from "react";
 // import ComparisonSearch from "./ComparisonSearch";
 // import Top10Pie from "./Top10Pie";
-import Top10Bar from "./Top10Bar";
+//import Top10Bar from "./Top10Bar";
+import ButterflyChart from "./ButterflyChart";
 
 export class ComparisonPage extends Component {
   constructor(props) {
@@ -27,8 +28,9 @@ export class ComparisonPage extends Component {
 
     return (
       <div>
-        <Top10Bar />
-        {/* <ComparisonSearch /> */}
+      {/*  <Top10Bar />   */}
+        <ButterflyChart />
+        <div id="myDiv"></div>
       </div>
     );
   }

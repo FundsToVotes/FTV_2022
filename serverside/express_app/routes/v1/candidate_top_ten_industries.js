@@ -98,7 +98,7 @@ router.get('/', function(req, res, next) {
         "msg": "Internal Server error"
       })
     }
-    if (data.length > 0) {
+    if (data && data.length > 0) {
       res.send(data)
     } else {
       res.status(404)
