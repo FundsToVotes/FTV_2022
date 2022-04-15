@@ -1,0 +1,5 @@
+node_modules
+.vscode
+build
+.gitignore
+export_env_variables.sh

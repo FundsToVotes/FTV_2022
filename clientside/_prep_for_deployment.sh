@@ -1,0 +1,1 @@
+find . -type f -not -path "./node_modules/*" -not -path "./*.sh" -not -path "./build/*" -exec sed -i 's/localhtoast/https:\/\/api.mandoorhandhookcardoor.me/g' {} +
