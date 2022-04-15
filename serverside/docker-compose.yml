@@ -1,0 +1,22 @@
+version: "3"
+services:
+  web:
+    depends_on:
+      - database
+    build: ./express_app/
+    ports:
+      - "3308:3005"
+    networks: 
+      - backend
+
+  database:
+    build: ./database/
+    ports:
+      - "3309:3306"
+    networks: 
+      - backend
+    environment: 
+      - MYSQL_DATABASE=ftvBackend 
+      - MYSQL_ROOT_PASSWORD=secret
+networks: 
+  backend:
