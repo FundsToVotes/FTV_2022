@@ -9,17 +9,18 @@ export class Top10Bar extends Component {
   render() {
     //let repsData = this.props;
 
-    let repsData = {name: "Anibal Acevedo-Vila", cid: "N00009825"}
+    let repsData = { name: "Anibal Acevedo-Vila", cid: "N00009825" };
+    console.log(repsData);
+    console.log(this.props);
     //here is the candidate data thomas says to query using the name
     //You will want to set up the same structure for the other top ten file as well
     // I will be back online in a couple hours and can help with whatever - H
     console.log(repsData);
 
     window.addEventListener("load", async function () {
-
       //i think partly, that the top10 name endpoint may be broken. once thomas does the name setup you can change this to repsData.name
       let response = await fetch(
-        `http://localhost:3000/v1/topten?cid=${repsData.cid}&cycle=2020`
+        `http://localhost:3000/v1/topten?name=${repsData.name}&cycle=2020`
       );
 
       //somehow get rep name
@@ -122,11 +123,11 @@ export class Top10Bar extends Component {
         },
         xref: "paper",
       };
-//eventually, you won't get CID so you need to change this to another id
-      Plotly.newPlot(`bar${repsData.cid}`, data1, layout1);
+      //eventually, you won't get CID so you need to change this to another id
+      Plotly.newPlot(`bar${repsData.name}`, data1, layout1);
     });
     //each tag is unique to the cid prop
-    let IDtag = `bar${repsData.cid}`;
+    let IDtag = `bar${repsData.name}`;
     return (
       <div>
         <div id={IDtag}></div>
