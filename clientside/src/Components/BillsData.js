@@ -1,16 +1,20 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from "react";
 
 export default class BillsData extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstName: this.props.firstName,
+      lastName: this.props.lastName,
       bills: [],
     };
   }
 
   fetchBillsData = () => {
+    console.log(this.props);
     fetch(
-      `http://localhost:3000/v1/bills?firstName=${this.props.firstName}&lastName=${this.props.lastName}`
+      `http://localhost:3000/v1/bills?firstName=${this.state.firstName}&lastName=${this.state.lastName}`
     )
       .then((response) => response.json())
       .then((data) => {
