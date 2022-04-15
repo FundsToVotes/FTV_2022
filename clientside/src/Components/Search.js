@@ -52,7 +52,7 @@ function DetailedSearch() {
   console.log(officials);
   console.log(partyFilter);
   return (
-    <div className="page-container">
+    <div className="white-container">
       <div className="detailed-search-page">
         <div className="search-side-panel">
           <h4 className="pt-3">

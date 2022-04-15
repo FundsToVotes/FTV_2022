@@ -54,7 +54,6 @@ input[type]:focus,
   min-height: 100%;
   overflow: auto;
 }
-
 /* Navigation */
 .nav-title {
   background-image: linear-gradient(89.94deg, #8FBE5A 2.46%, #F8CC5A 104.8%);
@@ -125,6 +124,7 @@ input[type]:focus,
   border-radius: 15px;
   width: 90%;
   margin: auto;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   padding: 0.25em;
 }
 
@@ -133,7 +133,6 @@ input[type]:focus,
   align-items: center;
   color: black;
   justify-content: center;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 7px;
 }
 
@@ -191,11 +190,10 @@ input[type]:focus,
 
 .landing-img {
   padding-top: 3em;
-  position: absolute;
+  position: sticky;
   height: 25em;
   width: auto;
   bottom: 0;
-  padding-right: 2em;
   right: 0;
 }
 
@@ -276,7 +274,7 @@ input[type]:focus,
 }
 
 .data-card {
-  width: 35rem;
+  width: 28rem;
   margin: 2rem;
 }
 
@@ -302,6 +300,9 @@ input[type]:focus,
 
 .detailed-search-page {
   display: inline;
+}
+.white-container {
+  padding-top: 5.8rem;
 }
 
 .results-header {
@@ -329,6 +330,7 @@ input[type]:focus,
   width: 80%;
   float: right;
   outline: 2px solid #8fbe5a;
+  background-color: white;
 }
 
 .candidate-card {
@@ -378,7 +380,7 @@ input[type]:focus,
 /* Candidate Details Page */
 
 .details-header {
-  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
   text-align: center;
   padding: 1.5rem;
   width: 100%;
@@ -394,6 +396,11 @@ input[type]:focus,
   width: 25%;
   height: 100%;
   padding: 1rem;
+  background-color: white;
+}
+
+.white-container {
+  background-color: white !important;
 }
 
 .breakdown-panel {
@@ -447,6 +454,9 @@ input[type]:focus,
 
 .comparison-header {
   text-align: center;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .comp-side-left {

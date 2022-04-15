@@ -121,7 +121,7 @@ export default function PersonDetails() {
   console.log(details);
 
   return (
-    <div className="page-container">
+    <div className="white-container">
       {/* Header */}
       <div className="details-header">
         <h1 className="details-header-text">

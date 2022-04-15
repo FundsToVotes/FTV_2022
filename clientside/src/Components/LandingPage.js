@@ -37,8 +37,7 @@ export class LandingPage extends Component {
               continue the design of the Funds to Vote project started in 2021.
               Our site is intended to help voters get all the facts about where
               polititions get their funding from and their voting history thus
-              far. Click the button below to learn more about our team and the
-              project!
+              far.
             </p>
             <a href="/take-action" className="btn landing-button learn-more">
               Learn More - Our Team

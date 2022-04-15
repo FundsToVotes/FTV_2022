@@ -192,8 +192,8 @@ export class ComparisonPage extends Component {
     }
 
     return (
-      <div className="static-page page-container mb-2">
-        <div className="static-header comparison-header">
+      <div className="white-container mb-2">
+        <div className="comparison-header">
           <h1>Candidate Comparison</h1>
           <div className="form-background mt-3">
             <div className="form-container">
