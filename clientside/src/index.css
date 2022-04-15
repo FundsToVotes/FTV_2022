@@ -1,6 +1,8 @@
 html,body{
-  height:100%;
   color: #3C4245;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -49,6 +51,8 @@ input[type]:focus,
 .page-container {
   padding-top: 5.8rem;
   background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
+  min-height: 100%;
+  overflow: auto;
 }
 
 /* Navigation */
@@ -104,7 +108,8 @@ input[type]:focus,
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0px 4px 4px 5px rgba(143, 190, 90, 0.15);
   border-radius: 10px;
-  margin: 3em
+  margin: 3em;
+  width: 45%;
 }
 
 .landing-title {
@@ -128,6 +133,8 @@ input[type]:focus,
   align-items: center;
   color: black;
   justify-content: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 7px;
 }
 
 .form-contents {
@@ -167,9 +174,6 @@ input[type]:focus,
 }
 
 /* Bottom of the landing page */
-.landing-paragraph {
-  font-size: 2rem;
-}
 
 .landing-button {
   background-color: #8fbe5a;
@@ -187,9 +191,12 @@ input[type]:focus,
 
 .landing-img {
   padding-top: 3em;
+  position: absolute;
   height: 25em;
   width: auto;
+  bottom: 0;
   padding-right: 2em;
+  right: 0;
 }
 
 .landing-bottom {

@@ -6,7 +6,6 @@
 
 *****************************************************/
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import imgLanding from "../images/landing-page-main-img.png";
 import SearchBar from "./SearchBar";
 
@@ -29,20 +28,20 @@ export class LandingPage extends Component {
             </p>
           </div>
           <SearchBar />
-          <p className="landing-text pt-2">
-            We don't save your information. See our{" "}
-            <Link to="privacy-policy" className="privacy-link">
-              Privacy Policy
-            </Link>
-            .
-          </p>
         </div>
         <div className="landing-bottom">
           <div className="p-5 landing-card">
             <h3>About Our Project</h3>
-            <p className="landing-paragraph">As part of our project...</p>
+            <p>
+              For our Informatics Capstone, we wanted to improve apon and
+              continue the design of the Funds to Vote project started in 2021.
+              Our site is intended to help voters get all the facts about where
+              polititions get their funding from and their voting history thus
+              far. Click the button below to learn more about our team and the
+              project!
+            </p>
             <a href="/take-action" className="btn landing-button learn-more">
-              Learn More Our Team
+              Learn More - Our Team
             </a>
           </div>
           <img
