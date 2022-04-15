@@ -50,7 +50,7 @@ function DetailedSearch() {
   }, [address]);
 
   console.log(officials);
-  console.log(partyFilter);
+  // console.log(partyFilter);
   return (
     <div className="page-container">
       <div className="detailed-search-page">
