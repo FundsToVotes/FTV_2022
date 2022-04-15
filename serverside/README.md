@@ -4,3 +4,5 @@ MYSQL_DATABASE=something
 
 # WHERE DO IT GO!!!
 .env belongs in the root of the serverside directory
+
+# IF YOU ARE ON WINDOWS YOU SHOULD GET PUTTY SO YOU CAN USE PLINK BC WINDOWS POWERSHELL CANNOT <

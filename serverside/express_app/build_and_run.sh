@@ -1,0 +1,2 @@
+source build_docker_image.sh
+source run_docker_image.sh
