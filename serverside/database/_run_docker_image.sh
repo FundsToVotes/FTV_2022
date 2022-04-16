@@ -15,4 +15,3 @@ docker run -d \
 -e MYSQL_DATABASE=$MYSQL_DATABASE \
 -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD \
 serrat/ftv-mysql-1.0
-
