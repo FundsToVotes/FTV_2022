@@ -106,21 +106,26 @@ router.get('/', async function(req, res, next) {
         "error": err,
         "msg": "Internal Server error"
       })
-    }
-    if (data.length == 0) {
-      res.status(404)
-      res.send(`Representative ${candidateFullName} not found!`)
     } else {
-      res.send({
-        name: data[0].name,
-        address: data[0].address, 
-        party: data[0].party,
-        office: data[0].office,
-        phones: JSON.parse(data[0].phones),
-        photoUrl: data[0].photoUrl,
-        urls: JSON.parse(data[0].urls),
-        socials: JSON.parse(data[0].channels)
-      });
+      if (data) {
+        if (data.length == 0) {
+          res.status(404)
+          res.send(`Representative ${candidateFullName} not found!`)
+        } else {
+          res.send({
+            name: data[0].name,
+            address: data[0].address, 
+            party: data[0].party,
+            office: data[0].office,
+            phones: JSON.parse(data[0].phones),
+            photoUrl: data[0].photoUrl,
+            urls: JSON.parse(data[0].urls),
+            socials: JSON.parse(data[0].channels)
+          });
+        }
+      } else {
+        res.send("????")
+      }
     }
   });
 });

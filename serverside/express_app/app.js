@@ -33,12 +33,12 @@ app.options("*", cors())
 
 var con = mysql.createPool({
     connectionLimit: 5,
-    host:"localhost",
+    host:"mysql",
     user:"root",
     password:"secret",
-    database:"ftvBackEnd",
-    port:"3309"
+    database:"ftvBackEnd"
 })
+console.log("updated")
 
 // todo: this is left here before I rework representative bills details
 let houseSenateMap = setupHouseSenateMap(117)
