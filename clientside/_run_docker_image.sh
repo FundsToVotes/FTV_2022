@@ -1,5 +1,3 @@
-#!/bin/bash
-
 docker stop ftv-frontend-1.0
 docker rm ftv-frontend-1.0
 
