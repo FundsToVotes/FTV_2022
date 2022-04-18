@@ -15,7 +15,7 @@ export class Top10Bar extends Component {
 
     window.addEventListener("load", async function () {
       let response = await fetch(
-        `http://localhost:3000/v1/topten?cid=${data.cid}&cycle=2020`
+        `http://localhost:3000/v1/topten?cid=${repsData.cid}&cycle=2020`
       );
       //somehow get rep name
       let top10 = await response.json();
@@ -106,7 +106,7 @@ export class Top10Bar extends Component {
         barmode: "stack",
         width: "600",
         title: {
-          text: `Number of PAC vs Individual Contributions by Industry for ${data.name}`,
+          text: `Number of PAC vs Individual Contributions by Industry for ${repsData.name}`,
           font: {
             family: "Optima, sans-serif",
           },
@@ -118,10 +118,10 @@ export class Top10Bar extends Component {
         xref: "paper",
       };
 
-      Plotly.newPlot(`bar${data.cid}`, data1, layout1);
+      Plotly.newPlot(`bar${repsData.cid}`, data1, layout1);
     });
     //each tag is unique to the cid prop
-    let IDtag = `bar${data.cid}`;
+    let IDtag = `bar${repsData.cid}`;
     return (
       <div>
         <div id={IDtag}></div>
