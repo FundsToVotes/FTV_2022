@@ -1,3 +1,10 @@
+html,body{
+  color: #3C4245;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: "Comfortaa", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
@@ -6,23 +13,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* padding-bottom: 220px; */
   background-color: white !important;
-  color: black;
+  color: #3C4245;;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Hiragino Kaku Gothic Pro";
+  color: #3C4245;
+  font-weight: 700;
+}
+
 
 a {
   color: darkgreen;
 }
 a:hover {
   color:darkgreen;
-}
-
-Footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 100px;
-  background-color: #9e9e9e;
 }
 
 textarea:focus,
@@ -43,17 +48,17 @@ input[type]:focus,
   font-size: 13px;
 }
 
-h3 {
-  font-weight: 700;
-}
-
 .page-container {
   padding-top: 5.8rem;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
+  min-height: 100%;
+  overflow: auto;
 }
-
 /* Navigation */
 .nav-title {
-  color: #8fbe5a;
+  background-image: linear-gradient(89.94deg, #8FBE5A 2.46%, #F8CC5A 104.8%);
+  background-clip: text;
+  color: transparent
 }
 
 .nav-title-link:hover {
@@ -79,23 +84,38 @@ h3 {
 /* Top of landing page */
 
 .landing-title-container {
-  background-color: #8fbe5a;
-  text-align: center;
-  display: block;
-  width: 100%;
-  padding-top: 5em;
-  padding-left: 5em;
-  padding-right: 5em;
-  padding-bottom: 2em;
+  background-color: rgba(255, 255, 255, 0.85);
+  text-align: left;
+  border-radius: 10px;
+  margin-top: 3em;
+  margin-left: 3em;
+  margin-right: 3em;
+  padding-top: 3em;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-bottom: 1em;
+}
+
+.landing-title-reps {
+  background-image: linear-gradient(89.94deg, #8FBE5A 2.46%, #F8CC5A 104.8%);
+  background-clip: text;
+  width: 10em;
+  color: transparent
+}
+
+.landing-card {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0px 4px 4px 5px rgba(143, 190, 90, 0.15);
+  border-radius: 10px;
+  margin: 3em;
+  width: 45%;
 }
 
 .landing-title {
   font-size: 3rem;
-  color: white;
 }
 
 .landing-text {
-  color: white;
   font-size: 1.25rem;
 }
 
@@ -104,6 +124,7 @@ h3 {
   border-radius: 15px;
   width: 90%;
   margin: auto;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   padding: 0.25em;
 }
 
@@ -111,6 +132,8 @@ h3 {
   display: flex !important;
   align-items: center;
   color: black;
+  justify-content: center;
+  border-radius: 7px;
 }
 
 .form-contents {
@@ -118,6 +141,8 @@ h3 {
   width: 100%;
   padding: .25rem;
   padding-right: .5rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-bar {
@@ -139,7 +164,6 @@ h3 {
 }
 
 .privacy-link {
-  color: white;
   text-decoration: none;
 }
 
@@ -149,10 +173,6 @@ h3 {
 }
 
 /* Bottom of the landing page */
-.landing-paragraph {
-  color: #2f2e41;
-  font-size: 2rem;
-}
 
 .landing-button {
   background-color: #8fbe5a;
@@ -170,9 +190,11 @@ h3 {
 
 .landing-img {
   padding-top: 3em;
+  position: sticky;
   height: 25em;
   width: auto;
-  padding-right: 2em;
+  bottom: 0;
+  right: 0;
 }
 
 .landing-bottom {
@@ -180,12 +202,11 @@ h3 {
 }
 .nav-link {
   color: black;
+  border-bottom: 2px solid #8FBE5A;
+  margin: 1em;
 }
 
 /* Static Pages */
-.static-page {
-  background-color: #f4f7fd;
-}
 
 .static-container {
   display: flex;
@@ -196,11 +217,12 @@ h3 {
 }
 
 .static-header {
-  background-color: #8fbe5a;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);;
   width: 100%;
   text-align: left;
-  color: white;
-  padding: 3em;
+  padding: 2em;
+  margin-top: 1rem;
 }
 
 .info-card {
@@ -252,7 +274,7 @@ h3 {
 }
 
 .data-card {
-  width: 35rem;
+  width: 28rem;
   margin: 2rem;
 }
 
@@ -279,19 +301,27 @@ h3 {
 .detailed-search-page {
   display: inline;
 }
+.white-container {
+  padding-top: 5.8rem;
+}
 
 .results-header {
-  background-color: #8fbe5a;
-  color: white;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);;
   text-align: center;
   width: 100%;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
+.reps-for {
+  font-weight: 400;
+  font-size: 2em;
+}
+
 .search-side-panel {
   padding: 1em;
   height: 30rem;
+  height: 100%;
   width: 20%;
   float: left;
 }
@@ -300,6 +330,7 @@ h3 {
   width: 80%;
   float: right;
   outline: 2px solid #8fbe5a;
+  background-color: white;
 }
 
 .candidate-card {
@@ -349,29 +380,27 @@ h3 {
 /* Candidate Details Page */
 
 .details-header {
-  background-color: #8fbe5a;
-  color: white;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
   text-align: center;
-  padding: 0.1rem;
-  position: fixed;
-  top: 20;
+  padding: 1.5rem;
   width: 100%;
-  z-index: 9999;
-}
-
-.details-container {
-  padding-top: 3rem;
 }
 
 .details-header-text {
   padding-top: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.8em;
 }
 
 .details-side-panel {
   float: left;
   width: 25%;
+  height: 100%;
   padding: 1rem;
+  background-color: white;
+}
+
+.white-container {
+  background-color: white !important;
 }
 
 .breakdown-panel {
@@ -396,4 +425,48 @@ h3 {
 
 .position-text {
   font-size: 1.25rem;
+}
+
+.bills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.bill-card {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+  margin: 1rem;
+  width: 25rem;
+  outline: none;
+}
+
+.details-gradiant {
+  background-image: linear-gradient(89.94deg, #8FBE5A 2.46%, #F8CC5A 104.8%);
+  background-clip: text;
+  width: 15em;
+  color: transparent;
+}
+
+.position-container h6, .position-container p {
+  display: inline;
+}
+
+/* Comparison Page */
+
+.comparison-header {
+  text-align: center;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.comp-side-left {
+  display: block;
+  background-color: rgba(143, 190, 90, 0.1);
+  height: 100%;
+}
+
+.comp-side-right {
+  display: block;
+  float: right;
+  background-color: rgba(245, 188, 41, 0.1);
 }

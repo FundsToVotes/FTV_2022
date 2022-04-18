@@ -11,14 +11,16 @@ export class Header extends Component {
         <Navbar.Brand href="/">
           <span className="icon-container">
             <FontAwesomeIcon icon={faVoteYea} size="3x" />
-            <h1 className="nav-title pl-3 pr-5 pt-1">Funds to Vote</h1>
+            <h1 className="nav-title pl-3 pr-5 pt-1">
+              <strong>Funds to Vote</strong>
+            </h1>
           </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav style={{ width: "100%" }}>
-            <Link className="pr-3 nav-link" to="/finance-101">
-              Campaign Finance 101
+            <Link className="pr-3 nav-link" to="/comparison">
+              Campaign Comparison
             </Link>
             <Link className="pr-3 nav-link" to="/take-action">
               Take Action

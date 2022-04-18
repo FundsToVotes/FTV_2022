@@ -1,8 +1,8 @@
 {
-  "short_name": "Funds to Votes",
+  "short_name": "Funds to Vote",
   "name": "A browser based application for displaying the voting records and financial information of Elected Representatives",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
 }

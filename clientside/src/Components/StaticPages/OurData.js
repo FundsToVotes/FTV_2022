@@ -9,6 +9,7 @@ import React, { Component } from "react";
 import OpenSecretsLogo from "../../images/open-secrets.png";
 import ProPublicaLogo from "../../images/ProPublica-monogram-color.svg";
 import GoogleLogo from "../../images/google.png";
+import { Link } from "react-router-dom";
 
 export class OurData extends Component {
   render() {
@@ -19,7 +20,11 @@ export class OurData extends Component {
           <p className="header-text">
             Funds to Votes relies on free, publicly-available APIs. We thank the
             sponsors and maintainers of these APIs for supporting civic
-            technology.
+            technology. We don't save your information. See our{" "}
+            <Link to="privacy-policy" className="privacy-link">
+              Privacy Policy
+            </Link>
+            .
           </p>
         </div>
         <div className="static-container">
