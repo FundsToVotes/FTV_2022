@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // import Top10Pie from "./Top10Pie";
 // import Top10Bar from "./Top10Bar";
 import defaultProfile from "../images/default-profile.png";
+import { ComparisonModal } from "./ComparisonModal";
 
 export class ComparisonPage extends Component {
   constructor(props) {
@@ -10,100 +11,17 @@ export class ComparisonPage extends Component {
 
     //default state
     this.state = {
-      name1: "",
-      name2: "",
+      show: false,
     };
   }
 
-  fetchRepresentativeDetails = () => {
-    fetch(
-      `http://localhost:3000/v1/representativeDetails?firstName=${this.state.name1[0]}&lastName=${this.state.name1[1]}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.urls) {
-          let _ = data.urls.filter((d) => d.includes(".gov"));
-          console.log(_);
-          if (_.length > 0) {
-            data.urls = (
-              <div>
-                <h5 className="mt-3">Representative Websites:</h5>
-                <div>
-                  {_.map((d) => (
-                    <a key={d} href={d}>
-                      {d}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            );
-          } else {
-            data.urls = undefined;
-          }
-        }
-        console.log(data.urls);
-
-        data.address =
-          data.address.line1 +
-          " " +
-          data.address.city +
-          ", " +
-          data.address.state;
-        this.setState({ repOne: data });
-      });
-
-    fetch(
-      `http://localhost:3000/v1/representativeDetails?firstName=${this.state.name2[0]}&lastName=${this.state.name2[1]}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.urls) {
-          let _ = data.urls.filter((d) => d.includes(".gov"));
-          console.log(_);
-          if (_.length > 0) {
-            data.urls = (
-              <div>
-                <h5 className="mt-3">Representative Websites:</h5>
-                <div>
-                  {_.map((d) => (
-                    <a key={d} href={d}>
-                      {d}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            );
-          } else {
-            data.urls = undefined;
-          }
-        }
-        console.log(data.urls);
-
-        data.address =
-          data.address.line1 +
-          " " +
-          data.address.city +
-          ", " +
-          data.address.state;
-        this.setState({ repTwo: data });
-      });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state);
-    this.fetchRepresentativeDetails();
-  };
-
-  getNameOne = (value) => {
-    console.log(value);
-    let name = value.split(" ");
-    this.setState({ name1: name });
-  };
-  getNameTwo = (value) => {
-    console.log(value);
-    let name = value.split(" ");
-    this.setState({ name2: name });
+  repsCallback = (details, side) => {
+    if (side === "left") {
+      this.setState({ repOne: details });
+    } else {
+      this.setState({ repTwo: details });
+    }
+    this.setState({ show: false });
   };
 
   colorCodeParty = (party) => {
@@ -126,16 +44,11 @@ export class ComparisonPage extends Component {
     return "" + arr;
   };
 
-  makeSidePanel = (details, side) => {
+  makeSidePanel = (details) => {
     console.log(details.name);
-    let sideClass;
-    if (side === "right") {
-      sideClass = "details-side-panel comp-side-right comp-side";
-    } else {
-      sideClass = "details-side-panel comp-side-left";
-    }
+
     return (
-      <div className={sideClass}>
+      <div>
         <div className="details-side-header">
           <h2>{details.name}</h2>
           <h3 className="position-text mb-3">{details.office}</h3>
@@ -174,67 +87,88 @@ export class ComparisonPage extends Component {
     );
   };
 
+  showModal = (side) => {
+    this.setState({ show: true, side: side });
+  };
+
+  toggle = () => {
+    this.setState({
+      show: !this.state.show,
+    });
+  };
+
   render() {
     console.log(this.state);
+
     let sidePanelOne;
     if (this.state.repOne) {
       console.log(this.state.repOne);
       sidePanelOne = this.makeSidePanel(this.state.repOne, "left");
-    } else {
-      sidePanelOne = <p></p>;
     }
+
     let sidePanelTwo;
     if (this.state.repTwo) {
       console.log(this.state.repTwo);
       sidePanelTwo = this.makeSidePanel(this.state.repTwo, "right");
+    }
+
+    let candidateChosen = false;
+    if (this.state.repOne && this.state.repTwo) {
+      candidateChosen = true;
+    }
+
+    let candidates;
+    if (candidateChosen) {
+      candidates = this.state.repOne.name + " and " + this.state.repTwo.name;
     } else {
-      sidePanelTwo = <p></p>;
+      candidates = "";
     }
 
     return (
       <div className="white-container mb-2">
         <div className="comparison-header">
           <h1>Candidate Comparison</h1>
-          <div className="form-background mt-3">
-            <div className="form-container">
-              <form className="form-contents" onSubmit={this.handleSubmit}>
-                <p>Compare</p>
-                <input
-                  className="form-control search-bar"
-                  type="text"
-                  placeholder="Search by name..."
-                  name="name-one"
-                  onChange={(e) => this.getNameOne(e.target.value)}
-                />
-
-                <p>and</p>
-
-                <input
-                  className="form-control search-bar"
-                  type="text"
-                  placeholder="Search by name..."
-                  name="name-two"
-                  onChange={(e) => this.getNameTwo(e.target.value)}
-                />
-
-                <input
-                  type="submit"
-                  value="Search"
-                  className="btn landing-button search"
-                />
-              </form>
-            </div>
-          </div>
+          <h2>{candidates}</h2>
         </div>
 
         {/* Side panel one */}
-        <div>{sidePanelOne}</div>
+        <div>
+          <div className="details-side-panel comp-side-left">
+            {sidePanelOne}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                this.showModal("left");
+              }}
+              className="btn landing-button learn-more select-candidate"
+            >
+              Select Candidate
+            </button>
+          </div>
+        </div>
 
         {/* Make container for liv to put visualizations */}
         <div className="comp-viz-container"></div>
 
         {/* Side panel two */}
-        <div>{sidePanelTwo}</div>
+        <div className="details-side-panel comp-side-right comp-side">
+          {sidePanelTwo}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              this.showModal("right");
+            }}
+            className="btn landing-button learn-more select-candidate"
+          >
+            Select Candidate
+          </button>
+        </div>
+        <ComparisonModal
+          show={this.state.show}
+          toggle={this.toggle}
+          repsCallback={this.repsCallback}
+          side={this.state.side}
+        />
       </div>
     );
   }
