@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import defaultProfile from "../images/default-profile.png";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export class ComparisonModal extends Component {
   constructor(props) {
@@ -107,6 +108,7 @@ export class ComparisonModal extends Component {
             {/* Search Bar */}
             <div className="form-background mt-3">
               <div className="form-container">
+                <AiOutlineSearch className="search-icon" />
                 <form className="form-contents" onSubmit={this.handleSubmit}>
                   <input
                     className="form-control search-bar"
@@ -125,7 +127,7 @@ export class ComparisonModal extends Component {
             </div>
 
             {/* Candidate Cards */}
-            <div className="modal-cards-container">
+            <div className="modal-cards-container mt-2">
               {this.state.address &&
                 this.state.officials.length > 0 &&
                 this.state.officials.map((official) => {
