@@ -94,8 +94,13 @@ export class ComparisonModal extends Component {
 
     return (
       <div>
-        <Modal isOpen={this.props.show} toggle={this.props.toggle} size="lg">
-          <ModalHeader toggle={this.props.toggle}>
+        <Modal
+          modalClassName="modal"
+          isOpen={this.props.show}
+          toggle={this.props.toggle}
+          size="lg"
+        >
+          <ModalHeader closeButton>
             Search Representative for Comparison
           </ModalHeader>
           <ModalBody>
@@ -120,7 +125,7 @@ export class ComparisonModal extends Component {
             </div>
 
             {/* Candidate Cards */}
-            <div>
+            <div className="modal-cards-container">
               {this.state.address &&
                 this.state.officials.length > 0 &&
                 this.state.officials.map((official) => {
@@ -128,9 +133,9 @@ export class ComparisonModal extends Component {
                   return (
                     <div
                       key={candidate.name}
-                      className="card candidate-card m-2 p-1"
+                      className="card candidate-card m-2 p-1 modal-card"
                     >
-                      <div className="image-cropper mt-3">
+                      <div className="image-cropper">
                         <img
                           id="profile-image"
                           src={candidate.photoUrl}
@@ -142,9 +147,9 @@ export class ComparisonModal extends Component {
                           }}
                         />
                       </div>
-                      <div>
-                        <p className="mt-4">{candidate.name}</p>
-                        <p className="mb-1">
+                      <div className="card-comp-info">
+                        <p>{candidate.name}</p>
+                        <p>
                           {candidate.office} - {candidate.party}
                         </p>
                         <button
@@ -153,7 +158,7 @@ export class ComparisonModal extends Component {
                             e.preventDefault();
                             this.onButtonClick(e.target.value);
                           }}
-                          className="btn landing-button search details-button"
+                          className="btn landing-button search"
                           value={candidate.name}
                         >
                           Select

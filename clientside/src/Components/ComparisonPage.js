@@ -151,14 +151,14 @@ export class ComparisonPage extends Component {
         <div className="comp-viz-container"></div>
 
         {/* Side panel two */}
-        <div className="details-side-panel comp-side-right comp-side">
+        <div className="details-side-panel comp-side-right">
           {sidePanelTwo}
           <button
             onClick={(e) => {
               e.preventDefault();
               this.showModal("right");
             }}
-            className="btn landing-button learn-more select-candidate"
+            className="btn landing-button learn-more select-candidate btn-right"
           >
             Select Candidate
           </button>
