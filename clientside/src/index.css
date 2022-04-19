@@ -298,9 +298,6 @@ input[type]:focus,
 
 /* Search Page */
 
-.detailed-search-page {
-  display: inline;
-}
 .white-container {
   padding-top: 5.8rem;
 }
@@ -368,6 +365,7 @@ input[type]:focus,
   width: 100%;
 }
 
+
 .filter-label {
   padding-left: 0.5rem;
 }
@@ -397,6 +395,10 @@ input[type]:focus,
   height: 100%;
   padding: 1rem;
   background-color: white;
+}
+
+.websites {
+  overflow-wrap: break-word;
 }
 
 .white-container {
@@ -460,13 +462,54 @@ input[type]:focus,
 }
 
 .comp-side-left {
-  display: block;
+  display: flex;
+  flex-direction: column;
   background-color: rgba(143, 190, 90, 0.1);
   height: 100%;
+  border-right: 3px solid #8fbe5a;
+  border-bottom: 3px solid #8fbe5a;
 }
 
 .comp-side-right {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid #F8BA1B;
+  border-bottom: 3px solid #F8BA1B;
   float: right;
+  height: 100%;
   background-color: rgba(245, 188, 41, 0.1);
 }
+
+.btn-right {
+  background-color: #F8BA1B;
+}
+.btn-right:hover {
+  background-color: #e0a816;
+}
+
+/* Modal */
+.modal {
+  margin-top: 8rem;
+}
+
+/* want to make the modal header stay as you scroll */
+
+.modal-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.modal-card {
+  flex-direction: row;
+  width: 20em;
+  height: 13em;
+}
+.select-candidate {
+  margin-top: 1rem;
+}
+
+.card-comp-info {
+  flex-direction: column;
+}
+

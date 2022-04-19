@@ -35,7 +35,7 @@ export class App extends Component {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/detailed-search" element={<DetailedSearch />} />
           <Route path="/details" element={<PersonDetails />} />
-          <Route path="/comparison" element={<Comparison />} />
+          <Route path="/compare-reps" element={<Comparison />} />
         </Routes>
       </div>
     );

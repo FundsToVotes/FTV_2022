@@ -12,7 +12,6 @@ export default class BillsData extends Component {
   }
 
   fetchBillsData = () => {
-    console.log(this.props);
     fetch(
       `http://localhost:3000/v1/bills?firstName=${this.state.firstName}&lastName=${this.state.lastName}`
     )
@@ -35,13 +34,11 @@ export default class BillsData extends Component {
   };
 
   render() {
-    console.log(this.state);
     let billsDom = <div></div>;
     if (this.state.bills.length > 0) {
       billsDom = (
         <div className="bills-container">
           {this.state.bills.map((d) => {
-            console.log(d);
             return (
               <div key={d} className="card mb-2 p-2 bill-card">
                 <h6>{d.bill.shortTitle}</h6>

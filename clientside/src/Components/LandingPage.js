@@ -27,7 +27,7 @@ export class LandingPage extends Component {
               and how they voted on relvant issues.
             </p>
           </div>
-          <SearchBar />
+          <SearchBar handleSubmit={this.handleSubmit} />
         </div>
         <div className="landing-bottom">
           <div className="p-5 landing-card">
