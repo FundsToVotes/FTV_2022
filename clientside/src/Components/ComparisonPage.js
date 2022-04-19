@@ -1,8 +1,7 @@
 // import Plotly from 'plotly.js'
 import React, { Component } from "react";
 // import Top10Pie from "./Top10Pie";
-// import Top10Bar from "./Top10Bar";
-import defaultProfile from "../images/default-profile.png";
+import Top10Bar from "./Top10Bar";
 
 export class ComparisonPage extends Component {
   constructor(props) {
@@ -175,66 +174,14 @@ export class ComparisonPage extends Component {
   };
 
   render() {
-    console.log(this.state);
-    let sidePanelOne;
-    if (this.state.repOne) {
-      console.log(this.state.repOne);
-      sidePanelOne = this.makeSidePanel(this.state.repOne, "left");
-    } else {
-      sidePanelOne = <p></p>;
-    }
-    let sidePanelTwo;
-    if (this.state.repTwo) {
-      console.log(this.state.repTwo);
-      sidePanelTwo = this.makeSidePanel(this.state.repTwo, "right");
-    } else {
-      sidePanelTwo = <p></p>;
-    }
+    //cid= is candidate id, which Top10 components use for API call
+    //name= is candidate name
+    //<ComparisonSearch/> TODO: see above TODO
 
     return (
-      <div className="white-container mb-2">
-        <div className="comparison-header">
-          <h1>Candidate Comparison</h1>
-          <div className="form-background mt-3">
-            <div className="form-container">
-              <form className="form-contents" onSubmit={this.handleSubmit}>
-                <p>Compare</p>
-                <input
-                  className="form-control search-bar"
-                  type="text"
-                  placeholder="Search by name..."
-                  name="name-one"
-                  onChange={(e) => this.getNameOne(e.target.value)}
-                />
-
-                <p>and</p>
-
-                <input
-                  className="form-control search-bar"
-                  type="text"
-                  placeholder="Search by name..."
-                  name="name-two"
-                  onChange={(e) => this.getNameTwo(e.target.value)}
-                />
-
-                <input
-                  type="submit"
-                  value="Search"
-                  className="btn landing-button search"
-                />
-              </form>
-            </div>
-          </div>
-        </div>
-
-        {/* Side panel one */}
-        <div>{sidePanelOne}</div>
-
-        {/* Make container for liv to put visualizations */}
-        <div className="comp-viz-container"></div>
-
-        {/* Side panel two */}
-        <div>{sidePanelTwo}</div>
+      <div>
+        <Top10Bar />
+        {/* <ComparisonSearch /> */}
       </div>
     );
   }
