@@ -25,7 +25,7 @@ export default function PersonDetails() {
   const { representative } = queryString.parse(search);
   const [firstName, lastName] = representative.split(" ");
   const [details, setDetails] = useState([]);
-  const [industries, setIndustries] = useState({})
+  const [industries, setIndustries] = useState([])
   // const [urls, setUrls] = useState([]);
 
   const setupIcon = (platform, id) => {
@@ -101,8 +101,16 @@ export default function PersonDetails() {
       .then((response) => response.json())
       .then((data) => {
         data = {"name": representative, "data": data}
-        setIndustries(data);
-      });
+        let dataviz = <div className="side-by-side">
+          <Top10Bar repsData={data} />
+          <Top10Pie repsData={data} />
+        </div>
+        setIndustries(dataviz);
+      })
+      .catch(() => {
+        setIndustries("no data found :(")
+      })
+      ;
     
   }
 
@@ -129,6 +137,7 @@ export default function PersonDetails() {
     fetchRepresentativeDetails();
     fetchTopTen();
   }, []);
+
 
 
   return (
@@ -188,10 +197,7 @@ export default function PersonDetails() {
         <div className="breakdown-panel">
           <div className="card datavis-card m-4 p-3">
             <h3 className="mt-3 details-gradiant">Funding at a glance:</h3>
-            <div className="side-by-side">
-              <Top10Bar repsData={industries} />
-              <Top10Pie repsData={industries} />
-            </div>
+            <div>{industries}</div>
           </div>
           <div className="m-4 mb-5 p-3">
             <h3 className="mt-3 details-gradiant">Bill Voting History</h3>
