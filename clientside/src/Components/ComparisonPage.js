@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 // import Top10Pie from "./Top10Pie";
 // import Top10Bar from "./Top10Bar";
-import defaultProfile from "../images/default-profile.png";
+// import defaultProfile from "../images/default-profile.png";
 import { ComparisonModal } from "./ComparisonModal";
 
 export class ComparisonPage extends Component {
