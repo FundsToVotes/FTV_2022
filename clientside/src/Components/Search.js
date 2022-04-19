@@ -49,7 +49,7 @@ function DetailedSearch() {
   }, [address]);
 
   console.log(officials);
-  console.log(partyFilter);
+  // console.log(partyFilter);
   return (
     <div className="white-container">
       <div className="detailed-search-page">
@@ -121,7 +121,6 @@ function DetailedSearch() {
           </div>
           <div className="search-results">
             <div className="results">
-              {/* idk how to make it refresh when it get's here with a new url... */}
               {address &&
                 officials.length > 0 &&
                 officials
