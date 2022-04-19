@@ -17,14 +17,15 @@ import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
 import defaultProfile from "../images/default-profile.png";
 import BillsData from "./BillsData";
-// import Top10Pie from "./Top10Pie";
-// import Top10Bar from "./Top10Bar";
+import Top10Pie from "./Top10Pie";
+import Top10Bar from "./Top10Bar";
 
 export default function PersonDetails() {
   const { search } = useLocation();
   const { representative } = queryString.parse(search);
   const [firstName, lastName] = representative.split(" ");
   const [details, setDetails] = useState([]);
+  const [industries, setIndustries] = useState({})
   // const [urls, setUrls] = useState([]);
 
   const setupIcon = (platform, id) => {
@@ -64,7 +65,6 @@ export default function PersonDetails() {
       .then((data) => {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
-          console.log(_);
           if (_.length > 0) {
             data.urls = (
               <div>
@@ -94,6 +94,18 @@ export default function PersonDetails() {
       });
   };
 
+  const fetchTopTen = () => {
+    fetch(
+      `http://localhost:3000/v1/topten?firstName=${firstName}&lastName=${lastName}&cycle=2020`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        data = {"name": representative, "data": data}
+        setIndustries(data);
+      });
+    
+  }
+
   const colorCodeParty = (party) => {
     if (party === "Republican Party") {
       return "red";
@@ -108,7 +120,6 @@ export default function PersonDetails() {
     if (phone == undefined) {
       return;
     }
-    console.log(phone[0]);
     const regex = /\d+/;
     let arr = phone[0].match(regex);
     return "" + arr;
@@ -116,9 +127,9 @@ export default function PersonDetails() {
 
   useEffect(() => {
     fetchRepresentativeDetails();
+    fetchTopTen();
   }, []);
 
-  console.log(details);
 
   return (
     <div className="white-container">
@@ -177,9 +188,9 @@ export default function PersonDetails() {
         <div className="breakdown-panel">
           <div className="card datavis-card m-4 p-3">
             <h3 className="mt-3 details-gradiant">Funding at a glance:</h3>
-            <div>
-              {/* <Top10Bar repsData={details} /> */}
-              {/* <Top10Pie repsData={details} /> */}
+            <div className="side-by-side">
+              <Top10Bar repsData={industries} />
+              <Top10Pie repsData={industries} />
             </div>
           </div>
           <div className="m-4 mb-5 p-3">

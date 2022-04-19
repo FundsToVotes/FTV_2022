@@ -145,7 +145,7 @@ export class ComparisonPage extends Component {
                 alt="candidate headshot"
                 className="headshot image-details-cropper"
                 onError={(event) => {
-                  event.target.src = defaultProfile;
+                  // event.target.src = defaultProfile;
                   event.onerror = null;
                 }}
               />

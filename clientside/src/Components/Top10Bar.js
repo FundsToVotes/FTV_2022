@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import Plotly from "plotly.js";
+import Plot from  "react-plotly.js";
 // import React from "react";
 // import {
 //   // rest of the elements/components imported remain same
@@ -7,35 +7,12 @@ import Plotly from "plotly.js";
 // } from "react-router-dom";
 
 export default function Top10Bar(props) {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { repsData: props.repsData };
-  // }
   const { repsData } = props;
-  console.log(repsData);
+  let returned;
 
-  //here is the candidate data thomas says to query using the name
-  //You will want to set up the same structure for the other top ten file as well
-  // I will be back online in a couple hours and can help with whatever - H
-  let formattedName;
   if (repsData.name) {
-    formattedName = repsData.name.split(" ");
-    repsData.name = formattedName[1] + ",%20" + formattedName[0];
-    console.log(repsData.name);
-  }
-
-  repsData.name = window.addEventListener("load", async function () {
-    let response = await fetch(
-      //going to need to make it so that the user can pick a cycle year and we use that to query
-
-      //CHANGE THIS TO NAME= ONCE THOMAS FINISHES THE ENDPOINT UPDATE
-      `http://localhost:3000/v1/topten?cid=N00042868&cycle=2020`
-    );
-
     //somehow get rep name
-    let top10 = await response.json();
-    console.log(top10);
-
+    let top10 = repsData.data
     //fetch mans, do things with data
     let values = [];
     let labels = [];
@@ -121,7 +98,7 @@ export default function Top10Bar(props) {
       barmode: "stack",
       width: "600",
       title: {
-        text: `Number of PAC vs Individual Contributions by Industry for ${repsData.name}`,
+        text: `Number of PAC vs Individual Contributions by Industry<br>for ${repsData.name}`,
         font: {
           family: "Optima, sans-serif",
         },
@@ -132,14 +109,20 @@ export default function Top10Bar(props) {
       },
       xref: "paper",
     };
-    //eventually, you won't get CID so you need to change this to another id
-    Plotly.newPlot(`bar${repsData.name}`, data1, layout1);
-  });
-  //each tag is unique to the cid prop
-  let IDtag = `bar${repsData.name}`;
+    // //eventually, you won't get CID so you need to change this to another id
+    // Plotly.newPlot(`bar${repsData.name}`, data1, layout1);
+    //each tag is unique to the cid prop
+    returned = <Plot
+      data={data1}
+      layout={layout1} />
+  } else {
+    returned = <div/>
+  }
+
+  
   return (
     <div>
-      <div id={IDtag}></div>
+       {returned}
     </div>
   );
 }

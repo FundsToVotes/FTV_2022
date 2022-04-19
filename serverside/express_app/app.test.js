@@ -122,22 +122,9 @@ describe("Application Endpoint Tests", () => {
             await supertest(app).get('/v1/topten')
                 .expect(400)
         })
-        test("Endpoint should 200 when supplied with the correct cid", async () => {
-            await supertest(app).get('/v1/topten?cid=N00012192&cycle=2020')
-                .expect(200)
-                .then((response) => {
-                    expect(response.body.length > 0)
-                    let oneEntry = response.body[0]
-                    expect(typeof(oneEntry["industry_name"]) == String)
-                    expect(typeof(oneEntry["industry_code"]) == String)
-                    expect(typeof(oneEntry["indivs"]) == Number)
-                    expect(typeof(oneEntry["pacs"]) == Number)
-                    expect(typeof(oneEntry["total"]) == Number)
-                    expect(typeof(oneEntry["last_updated"]) == String)
-                })
-        })
+
         test("Endpoint should 200 when supplied with the a good name", async () => {
-            await supertest(app).get('/v1/topten?name=Benford, Dorothy&cycle=2020')
+            await supertest(app).get('/v1/topten?firstName=Maria&lastName=Cantwell&cycle=2020')
                 .expect(200)
                 .then((response) => {
                     expect(response.body.length > 0)
@@ -153,7 +140,7 @@ describe("Application Endpoint Tests", () => {
         test("Endpoint should 404 when no results are found", async () => {
             await supertest(app).get('/v1/topten?cid=N000112192&cycle=2020')
                 .expect(404)
-            await supertest(app).get('/v1/topten?name=Your, Mom&cycle=2020')
+            await supertest(app).get('/v1/topten?firstName=Your&lastName=Mom&cycle=2020')
                 .expect(404)
         })
     })

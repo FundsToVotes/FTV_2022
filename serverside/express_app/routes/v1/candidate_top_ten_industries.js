@@ -7,7 +7,7 @@ import express from 'express';
 var router = express.Router();
 
 let selectCandidateViaCIDTopTenQuery = `
-  SELECT 
+  SELECT
     industry.name as "industry_name",
     industry.code as "industry_code",
 	  indivs,
@@ -25,10 +25,10 @@ let selectCandidateViaCIDTopTenQuery = `
       SELECT
         candidate.id
       FROM
-        candidate 
-      WHERE 
+        candidate
+      WHERE
         cid = ?
-      AND 
+      AND
         cycle = ?
       )
     ORDER BY
@@ -36,7 +36,7 @@ let selectCandidateViaCIDTopTenQuery = `
   `
 
 let selectCandidateViaNameTopTenQuery = `
-  SELECT 
+  SELECT
     industry.name as "industry_name",
     industry.code as "industry_code",
 	  indivs,
@@ -54,10 +54,10 @@ let selectCandidateViaNameTopTenQuery = `
       SELECT
         candidate.id
       FROM
-        candidate 
-      WHERE 
+        candidate
+      WHERE
         \`name\` LIKE ?
-      AND 
+      AND
         cycle = ?
       )
     ORDER BY
@@ -66,14 +66,15 @@ let selectCandidateViaNameTopTenQuery = `
 
 router.get('/', function(req, res, next) {
   let candidateId = req.query.cid
-  let candidateName = req.query.name
+  let candidateFirstName = req.query.firstName
+  let candidateLastName = req.query.lastName
   let chosenQuery, identifier
   if (candidateId) {
     chosenQuery = selectCandidateViaCIDTopTenQuery
     identifier = candidateId
-  } else if (candidateName) {
+  } else if (candidateFirstName, candidateLastName) {
     chosenQuery = selectCandidateViaNameTopTenQuery
-    identifier = `%${candidateName}%`
+    identifier = `%${candidateFirstName} ${candidateLastName}%`
   } else {
     res.status(400)
     res.send("No candidate information supplied")
@@ -97,12 +98,13 @@ router.get('/', function(req, res, next) {
         "error": err,
         "msg": "Internal Server error"
       })
+      return
     }
     if (data.length > 0) {
       res.send(data)
     } else {
       res.status(404)
-      res.send("No results found for" + (candidateId || candidateName))
+      res.send("No results found for " + (candidateId || identifier) + " in cycle " + cycle )
     }
   });
 });

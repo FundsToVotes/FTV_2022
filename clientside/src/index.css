@@ -298,9 +298,6 @@ input[type]:focus,
 
 /* Search Page */
 
-.detailed-search-page {
-  display: inline;
-}
 .white-container {
   padding-top: 5.8rem;
 }
@@ -469,4 +466,9 @@ input[type]:focus,
   display: block;
   float: right;
   background-color: rgba(245, 188, 41, 0.1);
+}
+
+.side-by-side {
+  display:flex;
+  flex-wrap: wrap;
 }
