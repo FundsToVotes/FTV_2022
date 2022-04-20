@@ -60,7 +60,6 @@ input[type]:focus,
   background-clip: text;
   color: transparent
 }
-
 .nav-title-link:hover {
   text-decoration: none;
 }
@@ -80,6 +79,11 @@ input[type]:focus,
   display: flex;
   align-items: center;
 }
+
+.nav-icon {
+  width: 5rem;
+}
+
 
 /* Top of landing page */
 
@@ -161,6 +165,7 @@ input[type]:focus,
 .landing-dropdown {
   margin-right: 1rem;
   width: 20rem;
+  display: none;
 }
 
 .privacy-link {
@@ -195,6 +200,7 @@ input[type]:focus,
   width: auto;
   bottom: 0;
   right: 0;
+  display: none;
 }
 
 .landing-bottom {
@@ -513,3 +519,69 @@ input[type]:focus,
   flex-direction: column;
 }
 
+
+/* Mobile Friendly */
+
+/* I want the entire search bar to go away and just have a button that says start searching that takes you to the details search page */
+
+@media (max-width: 386) {
+  .nav-title { 
+    font-size: 1.25rem;
+  }
+
+}
+
+@media (max-width: 550px) {
+  .landing-title { 
+    font-size: 1.5rem;
+  }
+  .landing-text {
+    font-size: .75rem;
+  }
+  .landing-title-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 625px) {
+  .landing-card {
+    width: 100%;
+  }
+
+  .landing-search{
+    display: none;
+  }
+
+  .search-icon {
+    display: none;
+  }
+
+  body {
+    font-size: .75rem;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5rem;
+  }
+
+  .nav-icon {
+    width: 2.5rem;
+  }
+
+}
+
+@media (max-width: 768px){
+  .landing-card {
+    width: 100%;
+  }
+  
+}
+
+@media (min-width: 768px) {
+  .landing-img {
+    display: block;
+  }
+.landing-dropdown {
+    display: block;
+  }
+}
