@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import Plot from  "react-plotly.js";
+import Plot from "react-plotly.js";
 // import React from "react";
 // import {
 //   // rest of the elements/components imported remain same
@@ -12,14 +12,14 @@ export default function Top10Bar(props) {
 
   if (repsData.name) {
     //somehow get rep name
-    let top10 = repsData.data
+    // let top10 = repsData.data
     //fetch mans, do things with data
-    let values = [];
-    let labels = [];
-    top10.forEach((d) => {
-      values.push(d.total);
-      labels.push(d.industry_name);
-    });
+    // let values = [];
+    // let labels = [];
+    // top10.forEach((d) => {
+    //   values.push(d.total);
+    //   labels.push(d.industry_name);
+    // });
     var colorScheme = [];
     // var colorBlind = [
     //   "#003f5c",
@@ -66,11 +66,11 @@ export default function Top10Bar(props) {
     let yAxis1 = [];
     let yAxis2 = [];
 
-    top10.forEach((d) => {
-      xAxis.push(d.industry_name);
-      yAxis1.push(d.indivs);
-      yAxis2.push(d.pacs);
-    });
+    // top10.forEach((d) => {
+    //   xAxis.push(d.industry_name);
+    //   yAxis1.push(d.indivs);
+    //   yAxis2.push(d.pacs);
+    // });
 
     var trace1 = {
       x: xAxis,
@@ -112,17 +112,10 @@ export default function Top10Bar(props) {
     // //eventually, you won't get CID so you need to change this to another id
     // Plotly.newPlot(`bar${repsData.name}`, data1, layout1);
     //each tag is unique to the cid prop
-    returned = <Plot
-      data={data1}
-      layout={layout1} />
+    returned = <Plot data={data1} layout={layout1} />;
   } else {
-    returned = <div/>
+    returned = <div />;
   }
 
-  
-  return (
-    <div>
-       {returned}
-    </div>
-  );
+  return <div>{returned}</div>;
 }
