@@ -2,7 +2,7 @@ import Plotly from "plotly.js";
 import React from "react";
 
 
-  
+
 function ButterflyChart() {
 
   let repsData = {name: "Maria Cantwell", cid: "N00009825"}
@@ -48,7 +48,7 @@ function ButterflyChart() {
 
     let xAxis = [];
     let yAxis1 = [];
-    let yAxis2 = [];
+   // let yAxis2 = [];
 
     top10.forEach((d) => {
       xAxis.push(d.industry_name);
@@ -58,7 +58,12 @@ function ButterflyChart() {
 
     var trace1 = {
       x:  yAxis1,
-      y: xAxis,
+      //y: xAxis,
+      text: xAxis.map(String),
+      textposition: 'auto',
+
+      yaxis: 'y2',
+      xaxis: 'x2',
       name: "Individual Contributions",
       type: "bar",
       marker: {
@@ -70,7 +75,10 @@ function ButterflyChart() {
 
     var trace2 = {
       x: yAxis1,
-      y: xAxis ,
+     // y: xAxis ,
+           //y: xAxis,
+           text: xAxis.map(String),
+           textposition: 'auto',
       name: "PAC Contributions",
       type: "bar",
       marker: {
@@ -83,19 +91,10 @@ function ButterflyChart() {
     var data1 = [trace1, trace2];
 
     var layout1 = {
-      barmode: "stack",
-      width: "600",
-      title: {
-        text: `Number of PAC vs Individual Contributions by Industry for ${repsData.name}`,
-        font: {
-          family: "Optima, sans-serif",
-        },
-        xref: "paper",
-      },
-      font: {
-        family: "Optima, sans-serif",
-      },
-      xref: "paper",
+ 
+     grid: {rows: 1, columns: 2, pattern: 'independent'},
+     xaxis:{
+       autorange: 'reversed'}
 
     };
 
