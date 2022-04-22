@@ -32,23 +32,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.options("*", cors())
 
 // // for building and deploying. 
-// var con = mysql.createPool({
-//     connectionLimit: 5,
-//     host:"mysql",
-//     user:"root",
-//     password:"secret",
-//     database:"ftvBackEnd"
-// })
-
-// for doing stuff locally without needing to build a docker image with express stuff. 
 var con = mysql.createPool({
-    connectionLimit: 500,
-    host:"localhost",
+    connectionLimit: 5,
+    host:"mysql",
     user:"root",
     password:"secret",
-    database:"ftvBackEnd",
-    port:"3309"
+    database:"ftvBackEnd"
 })
+
+// // for doing stuff locally without needing to build a docker image with express stuff. 
+// var con = mysql.createPool({
+//     connectionLimit: 500,
+//     host:"localhost",
+//     user:"root",
+//     password:"secret",
+//     database:"ftvBackEnd",
+//     port:"3309"
+// })
 
 // // todo: this is left here before I rework representative bills details
 // let houseSenateMap = setupHouseSenateMap(117)

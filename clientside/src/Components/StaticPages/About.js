@@ -38,7 +38,7 @@ export class About extends Component {
             </h3>
             <h4 className="second-header">
               <em>
-                Informing curious voters on their representatives' campaign
+                Informing curious voters on their congresspeoples' campaign
                 finances
               </em>
             </h4>
@@ -80,21 +80,21 @@ export class About extends Component {
             <h3>Key Features</h3>
             <ul>
               <li>
-                Learn what top industries are donating to your representatives
+                Learn what top industries are donating to your congresspeople
                 in the U.S. Congress.
               </li>
               <li>
-                Identify the bills your representative voted on and their
+                Identify the bills your congresspeople voted on and their
                 positions.
               </li>
               <li>
-                See how your representatives voted on bills that correlate with
+                See how your congresspeople voted on bills that correlate with
                 a top industry they are funded by.
               </li>
               <li>Get an overview of the campaign finance system.</li>
               <li>
                 Take action, such as by registering to vote or contacting your
-                representatives.
+                congresspeople.
               </li>
             </ul>
           </div>
