@@ -29,7 +29,7 @@ export class ComparisonModal extends Component {
           if (_.length > 0) {
             data.urls = (
               <div>
-                <h5 className="mt-3">Representative Websites:</h5>
+                <h5 className="mt-3">Congressperson Websites:</h5>
                 <div>
                   {_.map((d) => (
                     <a className="websites" key={d} href={d}>
