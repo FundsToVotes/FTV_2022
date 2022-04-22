@@ -116,7 +116,7 @@ function DetailedSearch() {
 
         <div className="results-panel">
           <div className="results-header">
-            <h1 className="reps-for">Representatives for</h1>
+            <h1 className="reps-for">Congresspeople for</h1>
             <h2>{address || "No address specified"}</h2>
             <div className="detailed-searchbar">
               <SearchBar />

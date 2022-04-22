@@ -3,13 +3,11 @@ import React from "react";
 
 function Top10Pie(props) {
   const { repsData } = props;
-  console.log(repsData);
   let returned;
 
   if (repsData.name) {
     //somehow get rep name
     let top10 = repsData.data;
-    console.log(top10);
 
     //fetch mans, do things with data
     let values = [];
