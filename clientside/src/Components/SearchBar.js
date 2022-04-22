@@ -16,7 +16,6 @@ export function SearchBar() {
   return (
     <div className="form-background">
       <div className="form-container">
-        <AiOutlineSearch className="search-icon" />
         <form
           className="form-contents"
           onSubmit={(e) => {
@@ -31,11 +30,9 @@ export function SearchBar() {
             onChange={(e) => setAddress(e.target.value)}
           />
 
-          <input
-            type="submit"
-            value="Search"
-            className="btn landing-button search"
-          />
+          <button type="submit" value="Search" className="btn search-button">
+            <AiOutlineSearch className="search-icon" />{" "}
+          </button>
         </form>
       </div>
     </div>

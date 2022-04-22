@@ -113,11 +113,14 @@ function DetailedSearch() {
             </label>
           </form>
         </div>
+
         <div className="results-panel">
           <div className="results-header">
             <h1 className="reps-for">Representatives for</h1>
             <h2>{address || "No address specified"}</h2>
-            <SearchBar />
+            <div className="detailed-searchbar">
+              <SearchBar />
+            </div>
           </div>
           <div className="search-results">
             <div className="results">

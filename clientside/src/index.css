@@ -107,6 +107,8 @@ input[type]:focus,
   color: transparent
 }
 
+
+
 .landing-card {
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0px 4px 4px 5px rgba(143, 190, 90, 0.15);
@@ -130,6 +132,14 @@ input[type]:focus,
   justify-content: center;
   border-radius: 7px;
 }
+.form-background {
+    background-color: #ffffff;
+    border-radius: 15px;
+    width: 90%;
+    margin: auto;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    padding: 0.25em;
+  }
 
 .form-contents {
   display: flex;
@@ -149,8 +159,8 @@ input[type]:focus,
 }
 
 .search-icon {
-  margin-left: 0.5rem;
   font-size: 2rem;
+  color: #8fbe5a;
 }
 
 .landing-dropdown {
@@ -537,13 +547,7 @@ input[type]:focus,
     width: 100%;
   }
 
-  .search-bar, .search-icon {
-    display: none;
-  }
 
-  .form-background, .form-container { 
-    color: transparent;
-  }
 
   body {
     font-size: .75rem;
@@ -559,29 +563,27 @@ input[type]:focus,
 
 }
 
-@media (min-width: 625px) {
-  .form-background {
-    background-color: #ffffff;
-    border-radius: 15px;
-    width: 90%;
-    margin: auto;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    padding: 0.25em;
-}
-}
 
 @media (max-width: 768px){
   .landing-card {
     width: 100%;
   }
-  
 }
 
 @media (min-width: 768px) {
   .landing-img {
     display: block;
   }
-.landing-dropdown {
+  .landing-dropdown {
     display: block;
+  }
+}
+
+@media (max-width: 884px) {
+  .search-side-panel {
+    display: none;
+  }
+  .results-panel {
+    width: 100%;
   }
 }
