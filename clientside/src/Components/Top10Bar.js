@@ -11,15 +11,16 @@ export default function Top10Bar(props) {
   let returned;
 
   if (repsData.name) {
+    
     //somehow get rep name
-    // let top10 = repsData.data
+    let top10 = repsData.data
     //fetch mans, do things with data
-    // let values = [];
-    // let labels = [];
-    // top10.forEach((d) => {
-    //   values.push(d.total);
-    //   labels.push(d.industry_name);
-    // });
+    let values = [];
+    let labels = [];
+    top10.forEach((d) => {
+      values.push(d.total);
+      labels.push(d.industry_name);
+    });
     var colorScheme = [];
     // var colorBlind = [
     //   "#003f5c",
@@ -66,11 +67,11 @@ export default function Top10Bar(props) {
     let yAxis1 = [];
     let yAxis2 = [];
 
-    // top10.forEach((d) => {
-    //   xAxis.push(d.industry_name);
-    //   yAxis1.push(d.indivs);
-    //   yAxis2.push(d.pacs);
-    // });
+    top10.forEach((d) => {
+      xAxis.push(d.industry_name);
+      yAxis1.push(d.indivs);
+      yAxis2.push(d.pacs);
+    });
 
     var trace1 = {
       x: xAxis,
