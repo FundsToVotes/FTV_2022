@@ -229,7 +229,7 @@ input[type]:focus,
   width: 100%;
   text-align: left;
   padding: 2em;
-  margin-top: 1rem;
+  margin-top: 2.5rem;
 }
 
 .info-card {
@@ -239,9 +239,11 @@ input[type]:focus,
   color: #a1adc3;
   margin-bottom: 1rem;
 }
-.info-card > h3 {
+
+.inner-card-data > h3 {
   color: #8fbe5a;
 }
+
 .card-info > h3 {
   color: #8fbe5a;
 }
@@ -282,13 +284,19 @@ input[type]:focus,
   width: 75%;
 }
 
-.inner-card-data {
-  display: flex;
+.data-img {
+  width: 150px;
+  margin-left: 2rem;
 }
 
 .data-card {
-  width: 28rem;
-  margin: 2rem;
+  width: 35rem;
+  height: auto;
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .data-cards {
@@ -569,8 +577,11 @@ input[type]:focus,
     padding-top: 5rem;
   }
 
-}
+  .static-header {
+    margin-top: .05rem;
+  }
 
+}
 
 @media (max-width: 768px){
   .landing-card {
