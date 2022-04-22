@@ -232,6 +232,10 @@ input[type]:focus,
   margin-top: 2.5rem;
 }
 
+.status-card {
+  margin-right: 1.5rem;
+}
+
 .info-card {
   padding: 1rem;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
@@ -241,6 +245,10 @@ input[type]:focus,
 }
 
 .inner-card-data > h3 {
+  color: #8fbe5a;
+}
+
+.info-card > h3 {
   color: #8fbe5a;
 }
 
@@ -307,7 +315,9 @@ input[type]:focus,
 
 .project-info {
   display: flex;
+  flex-direction: row;
 }
+
 .second-header {
   color: #8fbe5a;
 }
@@ -315,6 +325,12 @@ input[type]:focus,
 .about-photos {
   height: 13rem;
   width: 13rem;
+}
+
+.about-img-card {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 /* Search Page */
@@ -583,6 +599,14 @@ input[type]:focus,
 
   .static-header {
     margin-top: .05rem;
+  }
+
+  .project-info {
+    flex-direction: column;
+  }
+
+  .status-card {
+    margin-right: 0rem;
   }
 
 }
