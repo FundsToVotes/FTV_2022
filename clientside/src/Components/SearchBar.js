@@ -31,15 +31,6 @@ export function SearchBar() {
             onChange={(e) => setAddress(e.target.value)}
           />
 
-          <select
-            defaultValue="representatives"
-            className="custom-select landing-dropdown"
-          >
-            <option value="representatives">Representatives</option>
-            <option value="senators">Senators</option>
-            <option value="candidates">Candidates</option>
-          </select>
-
           <input
             type="submit"
             value="Search"

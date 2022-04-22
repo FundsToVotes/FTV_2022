@@ -123,15 +123,6 @@ input[type]:focus,
   font-size: 1.25rem;
 }
 
-.form-background {
-  background-color: #ffffff;
-  border-radius: 15px;
-  width: 90%;
-  margin: auto;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  padding: 0.25em;
-}
-
 .form-container {
   display: flex !important;
   align-items: center;
@@ -522,8 +513,6 @@ input[type]:focus,
 
 /* Mobile Friendly */
 
-/* I want the entire search bar to go away and just have a button that says start searching that takes you to the details search page */
-
 @media (max-width: 386) {
   .nav-title { 
     font-size: 1.25rem;
@@ -548,12 +537,12 @@ input[type]:focus,
     width: 100%;
   }
 
-  .landing-search{
+  .search-bar, .search-icon {
     display: none;
   }
 
-  .search-icon {
-    display: none;
+  .form-background, .form-container { 
+    color: transparent;
   }
 
   body {
@@ -568,6 +557,17 @@ input[type]:focus,
     width: 2.5rem;
   }
 
+}
+
+@media (min-width: 625px) {
+  .form-background {
+    background-color: #ffffff;
+    border-radius: 15px;
+    width: 90%;
+    margin: auto;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    padding: 0.25em;
+}
 }
 
 @media (max-width: 768px){

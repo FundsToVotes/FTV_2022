@@ -30,10 +30,6 @@ export class LandingPage extends Component {
           <div className="landing-search">
             <SearchBar handleSubmit={this.handleSubmit} />
           </div>
-
-          <a href="/detailed-search" className="btn landing-button">
-            Search
-          </a>
         </div>
         <div className="landing-bottom">
           <div className="p-5 landing-card">
