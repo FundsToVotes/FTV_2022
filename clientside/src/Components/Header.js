@@ -11,7 +11,6 @@ export class Header extends Component {
       <Navbar className="nav-bar" expand="lg">
         <Navbar.Brand href="/">
           <span className="icon-container">
-            {/* <FontAwesomeIcon icon={faVoteYea} size="3x" /> */}
             <img
               src={navIcon}
               className="nav-icon"

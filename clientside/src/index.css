@@ -250,14 +250,20 @@ input[type]:focus,
   display: flex;
   flex-direction: row;
 }
+
+.card-info {
+  flex: 1;
+}
+
 .number-icon {
   background-color: #8fbe5a;
   color: white;
   border-radius: 50%;
-  width: 3.75em;
+  width: 6em;
   height: 3rem;
   margin-right: 1rem;
   text-align: center;
+  flex: 0 0 3rem;
 }
 .two {
   width: 7.25em;
@@ -306,7 +312,7 @@ input[type]:focus,
 /* Search Page */
 
 .white-container {
-  padding-top: 5.8rem;
+  padding-top: 7rem;
 }
 
 .results-header {
@@ -547,8 +553,6 @@ input[type]:focus,
     width: 100%;
   }
 
-
-
   body {
     font-size: .75rem;
   }
@@ -559,6 +563,10 @@ input[type]:focus,
 
   .nav-icon {
     width: 2.5rem;
+  }
+
+  .white-container {
+    padding-top: 5rem;
   }
 
 }
