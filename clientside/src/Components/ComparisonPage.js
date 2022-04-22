@@ -1,7 +1,7 @@
 // import Plotly from 'plotly.js'
 import React, { Component } from "react";
-// import Top10Pie from "./Top10Pie";
-// import Top10Bar from "./Top10Bar";
+//import Top10Pie from "./Top10Pie";
+import Top10Bar from "./Top10Bar";
 import defaultProfile from "../images/default-profile.png";
 import { ComparisonModal } from "./ComparisonModal";
 
@@ -97,7 +97,23 @@ export class ComparisonPage extends Component {
     });
   };
 
+  makeBarChart = (details) => {
+    console.log(details);
+
+    return (
+      <div>
+        <Top10Bar repsData={details} />
+      </div>
+    );
+  };
+
   render() {
+    // function Visual() {
+    //   if (this.state.repOne) {
+    //     return <Top10Bar repsData={this.state.repOne}/>;
+    //   }
+    //   return "No candidate selected"
+    // }
     console.log(this.state);
 
     let sidePanelOne;
@@ -110,6 +126,17 @@ export class ComparisonPage extends Component {
     if (this.state.repTwo) {
       console.log(this.state.repTwo);
       sidePanelTwo = this.makeSidePanel(this.state.repTwo, "right");
+    }
+    let BarChartOne;
+    if (this.state.repOne) {
+      console.log(this.state.repOne);
+      BarChartOne = this.makeBarChart(this.state.repOne);
+    }
+    let BarChartTwo;
+    // TODO: SHOULD THIS BE REPTWO???? it was repOne and i changed it - H
+    if (this.state.repTwo) {
+      console.log(this.state.repTwo);
+      BarChartTwo = this.makeBarChart(this.state.repTwo);
     }
 
     let candidateChosen = false;
@@ -148,7 +175,10 @@ export class ComparisonPage extends Component {
         </div>
 
         {/* Make container for liv to put visualizations */}
-        <div className="comp-viz-container"></div>
+        <div className="comp-viz-container">
+          {BarChartOne}
+          {BarChartTwo}
+        </div>
 
         {/* Side panel two */}
         <div className="details-side-panel comp-side-right">
