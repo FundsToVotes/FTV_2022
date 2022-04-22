@@ -42,7 +42,7 @@ app.options("*", cors())
 
 // for doing stuff locally without needing to build a docker image with express stuff. 
 var con = mysql.createPool({
-    connectionLimit: 5,
+    connectionLimit: 500,
     host:"localhost",
     user:"root",
     password:"secret",
