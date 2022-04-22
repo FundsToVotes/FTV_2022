@@ -108,7 +108,6 @@ export class ComparisonModal extends Component {
             {/* Search Bar */}
             <div className="form-background mt-3">
               <div className="form-container">
-                <AiOutlineSearch className="search-icon" />
                 <form className="form-contents" onSubmit={this.handleSubmit}>
                   <input
                     className="form-control search-bar"
@@ -117,11 +116,13 @@ export class ComparisonModal extends Component {
                     name="address"
                     onChange={(e) => this.getAddress(e.target.value)}
                   />
-                  <input
+                  <button
                     type="submit"
                     value="Search"
-                    className="btn landing-button search"
-                  />
+                    className="btn search-button"
+                  >
+                    <AiOutlineSearch className="search-icon" />
+                  </button>
                 </form>
               </div>
             </div>

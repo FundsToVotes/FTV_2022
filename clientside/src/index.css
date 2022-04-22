@@ -426,9 +426,13 @@ input[type]:focus,
   font-size: 1.8em;
 }
 
+.details-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .details-side-panel {
-  float: left;
-  width: 25%;
+  flex: 1;
   height: 100%;
   padding: 1rem;
   background-color: white;
@@ -443,8 +447,7 @@ input[type]:focus,
 }
 
 .breakdown-panel {
-  float: right;
-  width: 75%;
+  flex: 3;
   background-color: #f6f6f6;
 }
 
@@ -456,6 +459,11 @@ input[type]:focus,
 
 .image-details-cropper {
   border-radius: 5px;
+}
+
+.details-card {
+  margin: 2rem;
+
 }
 
 .details-side-header {
@@ -471,6 +479,7 @@ input[type]:focus,
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .bill-card {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
   margin: 1rem;
@@ -481,7 +490,7 @@ input[type]:focus,
 .details-gradiant {
   background-image: linear-gradient(89.94deg, #8FBE5A 2.46%, #F8CC5A 104.8%);
   background-clip: text;
-  width: 15em;
+  width: 13em;
   color: transparent;
 }
 
@@ -585,7 +594,7 @@ input[type]:focus,
     font-size: .75rem;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4 {
     font-size: 1.5rem;
   }
 
@@ -609,6 +618,37 @@ input[type]:focus,
     margin-right: 0rem;
   }
 
+  .comparison-tool-all {
+    display: none;
+  }
+
+  .side-panel-header {
+    display: none;
+  }
+
+}
+
+@media (max-width: 763px) {
+  .details-container {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 625px) {
+  .mobile-comparison {
+    display: none;
+  }
+}
+
+@media (min-width: 541px) and (max-width: 625px) {
+  .details-side-panel {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .details-info {
+    margin-left: 1rem;
+  }
 }
 
 @media (max-width: 768px){

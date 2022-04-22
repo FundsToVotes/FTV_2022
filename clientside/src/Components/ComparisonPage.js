@@ -158,47 +158,53 @@ export class ComparisonPage extends Component {
           <h2>{candidates}</h2>
         </div>
 
-        {/* Side panel one */}
-        <div>
-          <div className="details-side-panel comp-side-left">
-            {sidePanelOne}
+        <div className="mobile-comparison card info-card m-4">
+          <h2> Please go to the desktop site to use this feature.</h2>
+        </div>
+
+        <div className="comparison-tool-all">
+          {/* Side panel one */}
+          <div>
+            <div className="details-side-panel comp-side-left">
+              {sidePanelOne}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.showModal("left");
+                }}
+                className="btn landing-button learn-more select-candidate"
+              >
+                Select Candidate
+              </button>
+            </div>
+          </div>
+
+          {/* Make container for liv to put visualizations */}
+          <div className="comp-viz-container">
+            {BarChartOne}
+            {BarChartTwo}
+          </div>
+
+          {/* Side panel two */}
+          <div className="details-side-panel comp-side-right">
+            {sidePanelTwo}
             <button
               onClick={(e) => {
                 e.preventDefault();
-                this.showModal("left");
+                this.showModal("right");
               }}
-              className="btn landing-button learn-more select-candidate"
+              className="btn landing-button learn-more select-candidate btn-right"
             >
               Select Candidate
             </button>
           </div>
+          <ComparisonModal
+            show={this.state.show}
+            toggle={this.toggle}
+            repsCallback={this.repsCallback}
+            side={this.state.side}
+          />
         </div>
-
-        {/* Make container for liv to put visualizations */}
-        <div className="comp-viz-container">
-          {BarChartOne}
-          {BarChartTwo}
-        </div>
-
-        {/* Side panel two */}
-        <div className="details-side-panel comp-side-right">
-          {sidePanelTwo}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              this.showModal("right");
-            }}
-            className="btn landing-button learn-more select-candidate btn-right"
-          >
-            Select Candidate
-          </button>
-        </div>
-        <ComparisonModal
-          show={this.state.show}
-          toggle={this.toggle}
-          repsCallback={this.repsCallback}
-          side={this.state.side}
-        />
       </div>
     );
   }

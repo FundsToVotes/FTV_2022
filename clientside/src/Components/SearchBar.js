@@ -31,7 +31,7 @@ export function SearchBar() {
           />
 
           <button type="submit" value="Search" className="btn search-button">
-            <AiOutlineSearch className="search-icon" />{" "}
+            <AiOutlineSearch className="search-icon" />
           </button>
         </form>
       </div>
