@@ -102,7 +102,7 @@ export class ComparisonPage extends Component {
 
     return (
       <div>
-        <Top10Bar repsData={details} />
+        <Top10Bar repsName={name} />
       </div>
     );
   };
