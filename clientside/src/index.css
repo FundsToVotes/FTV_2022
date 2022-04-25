@@ -509,6 +509,7 @@ input[type]:focus,
 
 .comp-side-left {
   display: flex;
+  float: left;
   flex-direction: column;
   background-color: rgba(143, 190, 90, 0.1);
   height: 100%;
@@ -523,6 +524,7 @@ input[type]:focus,
   border-bottom: 3px solid #F8BA1B;
   float: right;
   height: 100%;
+  flex: ;
   background-color: rgba(245, 188, 41, 0.1);
 }
 

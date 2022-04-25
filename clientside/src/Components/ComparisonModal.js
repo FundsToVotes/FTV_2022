@@ -16,8 +16,6 @@ export class ComparisonModal extends Component {
 
   fetchRepresentativeDetails = (name) => {
     let splitName = name.split(" ");
-    console.log(this.state);
-    console.log(splitName);
     fetch(
       `http://localhost:3000/v1/representativeDetails?firstName=${splitName[0]}&lastName=${splitName[1]}`
     )
@@ -25,7 +23,6 @@ export class ComparisonModal extends Component {
       .then((data) => {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
-          console.log(_);
           if (_.length > 0) {
             data.urls = (
               <div>
@@ -43,7 +40,6 @@ export class ComparisonModal extends Component {
             data.urls = undefined;
           }
         }
-        console.log(data.urls);
 
         data.address =
           data.address.line1 +
@@ -64,14 +60,12 @@ export class ComparisonModal extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         this.setState({ officials: data.officials });
       });
   };
 
   //sends reps details back to the parent ComparisonPage.js
   selectCandidate(details) {
-    console.log(details);
     this.props.repsCallback(details, this.props.side);
   }
 
@@ -82,7 +76,6 @@ export class ComparisonModal extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
     this.fetchRepresentatives();
   };
 
@@ -91,8 +84,6 @@ export class ComparisonModal extends Component {
   };
 
   render() {
-    console.log(this.state);
-
     return (
       <div>
         <Modal
@@ -157,7 +148,6 @@ export class ComparisonModal extends Component {
                         </p>
                         <button
                           onClick={(e) => {
-                            console.log(e);
                             e.preventDefault();
                             this.onButtonClick(e.target.value);
                           }}

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import Plot from "react-plotly.js";
 import React, { Component } from "react";
 
@@ -9,7 +8,6 @@ export default class Top10Bar extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     let splitName = this.props.repsName.split(" ");
     fetch(
       `https://api.fundstovote.com/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
@@ -23,7 +21,6 @@ export default class Top10Bar extends Component {
           //fetch mans, do things with data
           let values = [];
           let labels = [];
-          console.log(top10);
           top10.forEach((d) => {
             values.push(d.total);
             labels.push(d.industry_name);

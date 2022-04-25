@@ -38,15 +38,12 @@ export class ComparisonPage extends Component {
     if (phone == undefined) {
       return;
     }
-    console.log(phone[0]);
     const regex = /\d+/;
     let arr = phone[0].match(regex);
     return "" + arr;
   };
 
   makeSidePanel = (details) => {
-    console.log(details.name);
-
     return (
       <div>
         <div className="details-side-header">
@@ -98,44 +95,29 @@ export class ComparisonPage extends Component {
   };
 
   makeBarChart = (details) => {
-    console.log(details);
-
     return (
       <div>
-        <Top10Bar repsName={name} />
+        <Top10Bar repsName={details.name} />
       </div>
     );
   };
 
   render() {
-    // function Visual() {
-    //   if (this.state.repOne) {
-    //     return <Top10Bar repsData={this.state.repOne}/>;
-    //   }
-    //   return "No candidate selected"
-    // }
-    console.log(this.state);
-
     let sidePanelOne;
     if (this.state.repOne) {
-      console.log(this.state.repOne);
       sidePanelOne = this.makeSidePanel(this.state.repOne, "left");
     }
 
     let sidePanelTwo;
     if (this.state.repTwo) {
-      console.log(this.state.repTwo);
       sidePanelTwo = this.makeSidePanel(this.state.repTwo, "right");
     }
     let BarChartOne;
     if (this.state.repOne) {
-      console.log(this.state.repOne);
       BarChartOne = this.makeBarChart(this.state.repOne);
     }
     let BarChartTwo;
-    // TODO: SHOULD THIS BE REPTWO???? it was repOne and i changed it - H
     if (this.state.repTwo) {
-      console.log(this.state.repTwo);
       BarChartTwo = this.makeBarChart(this.state.repTwo);
     }
 
@@ -154,7 +136,7 @@ export class ComparisonPage extends Component {
     return (
       <div className="white-container mb-2">
         <div className="comparison-header">
-          <h1>Candidate Comparison</h1>
+          <h1>Congress Comparison</h1>
           <h2>{candidates}</h2>
         </div>
 
@@ -174,7 +156,7 @@ export class ComparisonPage extends Component {
                 }}
                 className="btn landing-button learn-more select-candidate"
               >
-                Select Candidate
+                Select Congressperson
               </button>
             </div>
           </div>
@@ -195,7 +177,7 @@ export class ComparisonPage extends Component {
               }}
               className="btn landing-button learn-more select-candidate btn-right"
             >
-              Select Candidate
+              Select Congressperson
             </button>
           </div>
           <ComparisonModal
