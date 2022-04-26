@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.options("*", cors())
 
-// for building and deploying. 
+// // for building and deploying. 
 // var con = mysql.createPool({
 //     connectionLimit: 5,
 //     host:"mysql",
@@ -42,7 +42,7 @@ app.options("*", cors())
 
 // for doing stuff locally without needing to build a docker image with express stuff. 
 var con = mysql.createPool({
-    connectionLimit: 5,
+    connectionLimit: 500,
     host:"localhost",
     user:"root",
     password:"secret",
@@ -50,23 +50,7 @@ var con = mysql.createPool({
     port:"3309"
 })
 
-// todo: this is left here before I rework representative bills details
-let houseSenateMap = setupHouseSenateMap(117)
-let houseMemberMap = new Map()
-setupRepresentativeMap(houseMemberMap, 117, "house")
-let senateMemberMap = new Map()
-setupRepresentativeMap(senateMemberMap, 117, "senate")
-let activeHouseBills = []
-getActiveBills(activeHouseBills, 117, "house")
-let activeSenateBills = []
-getActiveBills(activeSenateBills, 117, "senate")
-
 app.set("mysql", con)
-app.set("propublicaOfficialsData", houseSenateMap)
-app.set("houseMemberMap", houseMemberMap)
-app.set("senateMemberMap", senateMemberMap)
-app.set("senateBillData", activeSenateBills)
-app.set("houseBillData", activeSenateBills)
 app.use('/hello', helloRouter);
 app.use('/v1/bills', billsRouter);
 app.use('/v1/topten', toptenRouter);

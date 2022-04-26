@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable max-len */
 /* ****************************************************
-
     This file is responsible for creating the representative details page
     with three visualizations: Top 10 Industries, Bills Table, and Independent Expenditures
-
 *****************************************************/
 
 import { useEffect, useState } from "react";
@@ -25,8 +23,6 @@ export default function PersonDetails() {
   const { representative } = queryString.parse(search);
   const [firstName, lastName] = representative.split(" ");
   const [details, setDetails] = useState([]);
-  const [industries, setIndustries] = useState([])
-  // const [urls, setUrls] = useState([]);
 
   const setupIcon = (platform, id) => {
     let url, icon;
@@ -66,15 +62,16 @@ export default function PersonDetails() {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
           if (_.length > 0) {
+            console.log(data);
             data.urls = (
               <div>
-                <h5 className="mt-3">Representative Websites:</h5>
+                <h5 className="mt-3">Congressperson Websites:</h5>
                 <div>
-                  {_.map((d) => (
+                  {_.map((d) => {
                     <a key={d} href={d}>
                       {d}
-                    </a>
-                  ))}
+                    </a>;
+                  })}
                 </div>
               </div>
             );
@@ -83,36 +80,23 @@ export default function PersonDetails() {
           }
         }
 
-        data.address =
-          data.address.line1 +
-          " " +
-          data.address.city +
-          ", " +
-          data.address.state;
+        data.address = formatAddress(
+          data.address.line1,
+          data.address.city,
+          data.address.state
+        );
         data.socials = data.socials.map((d) => setupIcon(d.platform, d.id));
         setDetails(data);
       });
   };
 
-  const fetchTopTen = () => {
-    fetch(
-      `http://localhost:3000/v1/topten?firstName=${firstName}&lastName=${lastName}&cycle=2020`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        data = {"name": representative, "data": data}
-        let dataviz = <div className="side-by-side">
-          <Top10Bar repsData={data} />
-          <Top10Pie repsData={data} />
-        </div>
-        setIndustries(dataviz);
-      })
-      .catch(() => {
-        setIndustries("no data found :(")
-      })
-      ;
-    
-  }
+  const formatAddress = (address, city, state) => {
+    return (
+      <p>
+        {address} <br></br> {city}, {state}
+      </p>
+    );
+  };
 
   const colorCodeParty = (party) => {
     if (party === "Republican Party") {
@@ -135,10 +119,7 @@ export default function PersonDetails() {
 
   useEffect(() => {
     fetchRepresentativeDetails();
-    fetchTopTen();
   }, []);
-
-
 
   return (
     <div className="white-container">
@@ -149,12 +130,15 @@ export default function PersonDetails() {
         </h1>
       </div>
 
-      <div>
+      <div className="details-container">
         {/* Side Panel */}
         <div className="details-side-panel">
           <div className="details-side-header">
-            <h2>{details.name}</h2>
-            <h3 className="position-text mb-3">{details.office}</h3>
+            <div className="side-panel-header">
+              <h2>{details.name}</h2>
+              <h3 className="position-text mb-3">{details.office}</h3>
+            </div>
+
             <div className="image-box">
               <div>
                 <img
@@ -177,27 +161,37 @@ export default function PersonDetails() {
             </h4>
           </div>
 
-          <h5 className="mt-4">DC Office Number:</h5>
-          <a href={`tel:${phoneToString(details.phones)}`}>{details.phones}</a>
+          <div className="details-info">
+            <h5 className="mt-4">DC Office Number:</h5>
+            <a href={`tel:${phoneToString(details.phones)}`}>
+              {details.phones}
+            </a>
 
-          {details.urls}
+            {details.urls}
 
-          <h5 className="mt-3">Office Mailing Address:</h5>
-          {details.address}
+            <h5 className="mt-3">Office Mailing Address:</h5>
+            {details.address}
 
-          <h5 className="mt-3">Socials:</h5>
-          <p className="m-1">{details.socials}</p>
+            <h5 className="mt-3">Socials:</h5>
+            <p className="m-1">{details.socials}</p>
 
-          <a href="/take-action" className="btn landing-button learn-more mt-3">
-            Take Action
-          </a>
+            <a
+              href="/take-action"
+              className="btn landing-button learn-more mt-3"
+            >
+              Take Action
+            </a>
+          </div>
         </div>
 
         {/* Right side of web page */}
         <div className="breakdown-panel">
           <div className="card datavis-card m-4 p-3">
             <h3 className="mt-3 details-gradiant">Funding at a glance:</h3>
-            <div>{industries}</div>
+            <div>
+              <Top10Bar repsName={representative} />
+              <Top10Pie repsName={representative} />
+            </div>
           </div>
           <div className="m-4 mb-5 p-3">
             <h3 className="mt-3 details-gradiant">Bill Voting History</h3>

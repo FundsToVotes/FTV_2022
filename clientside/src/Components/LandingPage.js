@@ -20,14 +20,16 @@ export class LandingPage extends Component {
               <strong>Who Funds Your</strong>
             </h2>
             <h2 className="landing-title landing-title-reps">
-              <strong>Representatives?</strong>
+              <strong>Congresspeople?</strong>
             </h2>
             <p className="landing-text">
-              Search to see what industries are donating to your representatives
+              Search to see what industries are donating to your congresspeople
               and how they voted on relvant issues.
             </p>
           </div>
-          <SearchBar handleSubmit={this.handleSubmit} />
+          <div className="landing-search">
+            <SearchBar handleSubmit={this.handleSubmit} />
+          </div>
         </div>
         <div className="landing-bottom">
           <div className="p-5 landing-card">

@@ -11,10 +11,10 @@ const REP_LAST_NAME = "Cantwell"
 const REP_NAME = REP_FIRST_NAME + " " + REP_LAST_NAME
 const REP_ID = "N00009825"
 
-// waits for 20 seconds so the app can initialze.
-beforeAll(async () => {
-    return await new Promise(r => setTimeout(r, 60000))
-}, 65000);
+// // waits for 20 seconds so the app can initialze.
+// beforeAll(async () => {
+//     return await new Promise(r => setTimeout(r, 60000))
+// }, 65000);
 
 describe("Application Endpoint Tests", () => {
     describe("/hello", () => {
@@ -56,7 +56,6 @@ describe("Application Endpoint Tests", () => {
             // tests that the response is formatted correctly
             function testResponse(response) {
                 let responseJson = response.body
-                expect(responseJson["representativeId"] == REP_ID)
                 expect(responseJson["representativeName"] == REP_NAME)
                 // im a dum dum and this is the best way to check if array in my head lmao
                 expect(typeof(responseJson["votes"]) == typeof([]))
@@ -106,13 +105,13 @@ describe("Application Endpoint Tests", () => {
             await supertest(app).get(`/v1/bills?firstName=${BAD_FIRST_NAME}&lastName=${BAD_LAST_NAME}`)
                 .expect(404)
                 .then((response) => {
-                    expect(response.text).toBe(`Representative: ${BAD_FIRST_NAME + " " + BAD_LAST_NAME} not found in our data...`)
+                    expect(response.text).toBe(`No results found for ${BAD_FIRST_NAME} ${BAD_LAST_NAME}`)
                 })
             // full name 
             await supertest(app).get(`/v1/bills?fullName=${BAD_NAME}`)
                 .expect(404)
                 .then((response) => {
-                    expect(response.text).toBe(`Representative: ${BAD_NAME} not found in our data...`)
+                    expect(response.text).toBe(`No results found for ${BAD_FIRST_NAME} ${BAD_LAST_NAME}`)
                 })
         })
     })

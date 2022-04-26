@@ -40,7 +40,7 @@ export default class BillsData extends Component {
         <div className="bills-container">
           {this.state.bills.map((d) => {
             return (
-              <div key={d} className="card mb-2 p-2 bill-card">
+              <div key={d.bill.shortTitle} className="card mb-2 p-2 bill-card">
                 <h6>{d.bill.shortTitle}</h6>
 
                 <div className="position-container mt-3 mb-2">

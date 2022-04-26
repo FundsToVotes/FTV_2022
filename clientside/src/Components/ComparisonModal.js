@@ -16,8 +16,6 @@ export class ComparisonModal extends Component {
 
   fetchRepresentativeDetails = (name) => {
     let splitName = name.split(" ");
-    console.log(this.state);
-    console.log(splitName);
     fetch(
       `http://localhost:3000/v1/representativeDetails?firstName=${splitName[0]}&lastName=${splitName[1]}`
     )
@@ -25,11 +23,10 @@ export class ComparisonModal extends Component {
       .then((data) => {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
-          console.log(_);
           if (_.length > 0) {
             data.urls = (
               <div>
-                <h5 className="mt-3">Representative Websites:</h5>
+                <h5 className="mt-3">Congressperson Websites:</h5>
                 <div>
                   {_.map((d) => (
                     <a className="websites" key={d} href={d}>
@@ -43,16 +40,22 @@ export class ComparisonModal extends Component {
             data.urls = undefined;
           }
         }
-        console.log(data.urls);
 
-        data.address =
-          data.address.line1 +
-          " " +
-          data.address.city +
-          ", " +
-          data.address.state;
+        data.address = this.formatAddress(
+          data.address.line1,
+          data.address.city,
+          data.address.state
+        );
         this.selectCandidate(data);
       });
+  };
+
+  formatAddress = (address, city, state) => {
+    return (
+      <p>
+        {address} <br></br> {city}, {state}
+      </p>
+    );
   };
 
   //gets the list of representatives to display in search
@@ -64,14 +67,12 @@ export class ComparisonModal extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         this.setState({ officials: data.officials });
       });
   };
 
   //sends reps details back to the parent ComparisonPage.js
   selectCandidate(details) {
-    console.log(details);
     this.props.repsCallback(details, this.props.side);
   }
 
@@ -82,7 +83,6 @@ export class ComparisonModal extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
     this.fetchRepresentatives();
   };
 
@@ -91,8 +91,6 @@ export class ComparisonModal extends Component {
   };
 
   render() {
-    console.log(this.state);
-
     return (
       <div>
         <Modal
@@ -101,14 +99,11 @@ export class ComparisonModal extends Component {
           toggle={this.props.toggle}
           size="lg"
         >
-          <ModalHeader closeButton>
-            Search Representative for Comparison
-          </ModalHeader>
+          <ModalHeader>Search Representative for Comparison</ModalHeader>
           <ModalBody>
             {/* Search Bar */}
             <div className="form-background mt-3">
               <div className="form-container">
-                <AiOutlineSearch className="search-icon" />
                 <form className="form-contents" onSubmit={this.handleSubmit}>
                   <input
                     className="form-control search-bar"
@@ -117,11 +112,13 @@ export class ComparisonModal extends Component {
                     name="address"
                     onChange={(e) => this.getAddress(e.target.value)}
                   />
-                  <input
+                  <button
                     type="submit"
                     value="Search"
-                    className="btn landing-button search"
-                  />
+                    className="btn search-button"
+                  >
+                    <AiOutlineSearch className="search-icon" />
+                  </button>
                 </form>
               </div>
             </div>
@@ -156,7 +153,6 @@ export class ComparisonModal extends Component {
                         </p>
                         <button
                           onClick={(e) => {
-                            console.log(e);
                             e.preventDefault();
                             this.onButtonClick(e.target.value);
                           }}

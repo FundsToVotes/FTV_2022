@@ -1,7 +1,7 @@
 // import Plotly from 'plotly.js'
 import React, { Component } from "react";
-// import Top10Pie from "./Top10Pie";
-// import Top10Bar from "./Top10Bar";
+//import Top10Pie from "./Top10Pie";
+import Top10Bar from "./Top10Bar";
 import defaultProfile from "../images/default-profile.png";
 import { ComparisonModal } from "./ComparisonModal";
 
@@ -38,15 +38,12 @@ export class ComparisonPage extends Component {
     if (phone == undefined) {
       return;
     }
-    console.log(phone[0]);
     const regex = /\d+/;
     let arr = phone[0].match(regex);
     return "" + arr;
   };
 
   makeSidePanel = (details) => {
-    console.log(details.name);
-
     return (
       <div>
         <div className="details-side-header">
@@ -97,19 +94,31 @@ export class ComparisonPage extends Component {
     });
   };
 
-  render() {
-    console.log(this.state);
+  makeBarChart = (details) => {
+    return (
+      <div>
+        <Top10Bar repsName={details.name} />
+      </div>
+    );
+  };
 
+  render() {
     let sidePanelOne;
     if (this.state.repOne) {
-      console.log(this.state.repOne);
       sidePanelOne = this.makeSidePanel(this.state.repOne, "left");
     }
 
     let sidePanelTwo;
     if (this.state.repTwo) {
-      console.log(this.state.repTwo);
       sidePanelTwo = this.makeSidePanel(this.state.repTwo, "right");
+    }
+    let BarChartOne;
+    if (this.state.repOne) {
+      BarChartOne = this.makeBarChart(this.state.repOne);
+    }
+    let BarChartTwo;
+    if (this.state.repTwo) {
+      BarChartTwo = this.makeBarChart(this.state.repTwo);
     }
 
     let candidateChosen = false;
@@ -127,48 +136,57 @@ export class ComparisonPage extends Component {
     return (
       <div className="white-container mb-2">
         <div className="comparison-header">
-          <h1>Candidate Comparison</h1>
+          <h1>Congress Comparison</h1>
           <h2>{candidates}</h2>
         </div>
 
-        {/* Side panel one */}
-        <div>
-          <div className="details-side-panel comp-side-left">
-            {sidePanelOne}
+        <div className="mobile-comparison card info-card m-4">
+          <h2> Please go to the desktop site to use this feature.</h2>
+        </div>
+
+        <div className="comparison-tool-all">
+          {/* Side panel one */}
+          <div>
+            <div className="details-side-panel comp-side-left">
+              {sidePanelOne}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.showModal("left");
+                }}
+                className="btn landing-button learn-more select-candidate"
+              >
+                Select Congressperson
+              </button>
+            </div>
+          </div>
+
+          {/* Visualizations */}
+          <div className="comp-viz-container">
+            {BarChartOne}
+            {BarChartTwo}
+          </div>
+
+          {/* Side panel two */}
+          <div className="details-side-panel comp-side-right">
+            {sidePanelTwo}
             <button
               onClick={(e) => {
                 e.preventDefault();
-                this.showModal("left");
+                this.showModal("right");
               }}
-              className="btn landing-button learn-more select-candidate"
+              className="btn landing-button learn-more select-candidate btn-right"
             >
-              Select Candidate
+              Select Congressperson
             </button>
           </div>
+          <ComparisonModal
+            show={this.state.show}
+            toggle={this.toggle}
+            repsCallback={this.repsCallback}
+            side={this.state.side}
+          />
         </div>
-
-        {/* Make container for liv to put visualizations */}
-        <div className="comp-viz-container"></div>
-
-        {/* Side panel two */}
-        <div className="details-side-panel comp-side-right">
-          {sidePanelTwo}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              this.showModal("right");
-            }}
-            className="btn landing-button learn-more select-candidate btn-right"
-          >
-            Select Candidate
-          </button>
-        </div>
-        <ComparisonModal
-          show={this.state.show}
-          toggle={this.toggle}
-          repsCallback={this.repsCallback}
-          side={this.state.side}
-        />
       </div>
     );
   }

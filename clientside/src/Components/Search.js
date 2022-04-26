@@ -19,7 +19,6 @@ function DetailedSearch() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         return setOfficials(data.officials);
       });
   };
@@ -30,7 +29,6 @@ function DetailedSearch() {
     } else {
       branchFilter.delete(e.target.name);
     }
-    console.log(e);
     setBranchFilter(new Set(branchFilter));
   };
 
@@ -40,7 +38,6 @@ function DetailedSearch() {
     } else {
       partyFilter.delete(e.target.name);
     }
-    console.log(e);
     setPartyFilter(new Set(partyFilter));
   };
 
@@ -48,8 +45,6 @@ function DetailedSearch() {
     fetchRepresentatives();
   }, [address]);
 
-  console.log(officials);
-  // console.log(partyFilter);
   return (
     <div className="white-container">
       <div className="detailed-search-page">
@@ -113,11 +108,14 @@ function DetailedSearch() {
             </label>
           </form>
         </div>
+
         <div className="results-panel">
           <div className="results-header">
-            <h1 className="reps-for">Representatives for</h1>
+            <h1 className="reps-for">Congresspeople for</h1>
             <h2>{address || "No address specified"}</h2>
-            <SearchBar />
+            <div className="detailed-searchbar">
+              <SearchBar />
+            </div>
           </div>
           <div className="search-results">
             <div className="results">
@@ -147,7 +145,6 @@ export default DetailedSearch;
 
 export function CandidateCard(props) {
   let candidate = props;
-  console.log(candidate);
   return (
     <div className="card candidate-card m-2 p-1">
       <div className="image-cropper mt-3">

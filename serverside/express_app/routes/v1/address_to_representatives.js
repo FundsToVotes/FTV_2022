@@ -140,7 +140,6 @@ let insertCandidateCivicInfoChannel = `
 // a senator gets looked up ONCE in the workflow, we gucci.
 function parseAndStoreRepresentatives(response, pool) {
   response = response.data;
-  console.log(response);
   let payload = {};
   payload["found_address"] = response.normalizedInput;
   payload["officials"] = [];
@@ -197,7 +196,6 @@ function storeGoogleApiData(officialData, pool) {
         connection
       );
       officialData.channels.forEach(function (channel) {
-        console.log(channel);
         connection.query(insertChannel, [channel.type], (queryErr, result) => {
           if (queryErr)
             console.log("Error inserting channel info" + queryErr.toString());
