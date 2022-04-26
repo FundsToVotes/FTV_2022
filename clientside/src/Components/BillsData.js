@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from "react";
+import { BsArrowRight } from "react-icons/bs";
 
 export default class BillsData extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ export default class BillsData extends Component {
 
   render() {
     let billsDom = <div></div>;
+    console.log(this.state.bills);
     if (this.state.bills.length > 0) {
       billsDom = (
         <div className="bills-container">
@@ -52,6 +54,14 @@ export default class BillsData extends Component {
                 </div>
 
                 <p>{d.bill.title}</p>
+                <a
+                  href="https://www.google.com"
+                  rel="noreferrer"
+                  target="_blank"
+                  className="bills-read-more"
+                >
+                  Read More <BsArrowRight />
+                </a>
               </div>
             );
           })}

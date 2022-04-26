@@ -47,7 +47,13 @@ export default function PersonDetails() {
         return;
     }
     return (
-      <a href={url} target="_blank" rel="noreferrer" className="mr-1">
+      <a
+        href={url}
+        key={platform}
+        target="_blank"
+        rel="noreferrer"
+        className="mr-1"
+      >
         <img src={icon} alt={platform}></img>
       </a>
     );
@@ -62,15 +68,16 @@ export default function PersonDetails() {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
           if (_.length > 0) {
-            console.log(data);
             data.urls = (
               <div>
                 <h5 className="mt-3">Congressperson Websites:</h5>
                 <div>
                   {_.map((d) => {
-                    <a key={d} href={d}>
-                      {d}
-                    </a>;
+                    return (
+                      <a key={d} href={d}>
+                        {d}
+                      </a>
+                    );
                   })}
                 </div>
               </div>
