@@ -161,7 +161,7 @@ export class ComparisonPage extends Component {
             </div>
           </div>
 
-          {/* Make container for liv to put visualizations */}
+          {/* Visualizations */}
           <div className="comp-viz-container">
             {BarChartOne}
             {BarChartTwo}

@@ -41,14 +41,21 @@ export class ComparisonModal extends Component {
           }
         }
 
-        data.address =
-          data.address.line1 +
-          " " +
-          data.address.city +
-          ", " +
-          data.address.state;
+        data.address = this.formatAddress(
+          data.address.line1,
+          data.address.city,
+          data.address.state
+        );
         this.selectCandidate(data);
       });
+  };
+
+  formatAddress = (address, city, state) => {
+    return (
+      <p>
+        {address} <br></br> {city}, {state}
+      </p>
+    );
   };
 
   //gets the list of representatives to display in search
@@ -92,9 +99,7 @@ export class ComparisonModal extends Component {
           toggle={this.props.toggle}
           size="lg"
         >
-          <ModalHeader closeButton>
-            Search Representative for Comparison
-          </ModalHeader>
+          <ModalHeader>Search Representative for Comparison</ModalHeader>
           <ModalBody>
             {/* Search Bar */}
             <div className="form-background mt-3">

@@ -13,7 +13,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* padding-bottom: 220px; */
   background-color: white !important;
-  color: #3C4245;;
+  color: #3C4245;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -509,10 +509,10 @@ input[type]:focus,
 
 .comp-side-left {
   display: flex;
-  float: left;
   flex-direction: column;
   background-color: rgba(143, 190, 90, 0.1);
   height: 100%;
+  flex: 1 1 0px;
   border-right: 3px solid #8fbe5a;
   border-bottom: 3px solid #8fbe5a;
 }
@@ -522,10 +522,21 @@ input[type]:focus,
   flex-direction: column;
   border-left: 3px solid #F8BA1B;
   border-bottom: 3px solid #F8BA1B;
-  float: right;
   height: 100%;
-  flex: ;
+  flex: 1 1 0px;
   background-color: rgba(245, 188, 41, 0.1);
+}
+
+.comp-viz-container {
+  flex: 3 1 0px;
+}
+
+.comparison-tool-all {
+  display: flex;
+  flex-direction: row;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .btn-right {
