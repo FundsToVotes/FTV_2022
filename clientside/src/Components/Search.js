@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useLocation } from "react-router-dom";
 import queryString from "query-string";
-import defaultProfile from "../images/default-profile.png";
+import DemocratProfile from "../images/democrat-temp.png";
+import RepublicanProfile from "../images/republican-temp.png";
 
 function DetailedSearch() {
   const { search } = useLocation();
@@ -145,6 +146,12 @@ export default DetailedSearch;
 
 export function CandidateCard(props) {
   let candidate = props;
+  if (candidate.party === "Republican Party") {
+    candidate.party = "Republican";
+  } else if (candidate.party === "Democratic Party") {
+    candidate.party = "Democrat";
+  }
+
   return (
     <div className="card candidate-card m-2 p-1">
       <div className="image-cropper mt-3">
@@ -154,7 +161,11 @@ export function CandidateCard(props) {
           alt="candidate headshot"
           className="headshot"
           onError={(event) => {
-            event.target.src = defaultProfile;
+            if (candidate.party === "Republican Party") {
+              event.target.src = RepublicanProfile;
+            } else {
+              event.target.src = DemocratProfile;
+            }
             event.onerror = null;
           }}
         />
