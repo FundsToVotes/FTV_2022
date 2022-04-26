@@ -1,7 +1,9 @@
 import { Component } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import defaultProfile from "../images/default-profile.png";
 import { AiOutlineSearch } from "react-icons/ai";
+import DemocratProfile from "../images/democrat-temp.png";
+import RepublicanProfile from "../images/republican-temp.png";
+import { BsArrowLeft } from "react-icons/bs";
 
 export class ComparisonModal extends Component {
   constructor(props) {
@@ -99,7 +101,17 @@ export class ComparisonModal extends Component {
           toggle={this.props.toggle}
           size="lg"
         >
-          <ModalHeader>Search Representative for Comparison</ModalHeader>
+          <ModalHeader className="modal-header">
+            <button
+              type="button"
+              className="close"
+              aria-label="Close"
+              onClick={this.props.toggle}
+            >
+              <BsArrowLeft aria-hidden="true" className="modal-icon" />
+            </button>
+            Search Congresspeople for Comparison
+          </ModalHeader>
           <ModalBody>
             {/* Search Bar */}
             <div className="form-background mt-3">
@@ -134,14 +146,18 @@ export class ComparisonModal extends Component {
                       key={candidate.name}
                       className="card candidate-card m-2 p-1 modal-card"
                     >
-                      <div className="image-cropper">
+                      <div className="comp-img-crop">
                         <img
                           id="profile-image"
                           src={candidate.photoUrl}
                           alt="candidate headshot"
                           className="headshot"
                           onError={(event) => {
-                            event.target.src = defaultProfile;
+                            if (candidate.party === "Republican Party") {
+                              event.target.src = RepublicanProfile;
+                            } else {
+                              event.target.src = DemocratProfile;
+                            }
                             event.onerror = null;
                           }}
                         />
