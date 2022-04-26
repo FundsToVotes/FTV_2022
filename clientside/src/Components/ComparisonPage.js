@@ -134,7 +134,7 @@ export class ComparisonPage extends Component {
     }
 
     return (
-      <div className="white-container mb-2">
+      <div className="white-container">
         <div className="comparison-header">
           <h1>Congress Comparison</h1>
           <h2>{candidates}</h2>
@@ -146,19 +146,17 @@ export class ComparisonPage extends Component {
 
         <div className="comparison-tool-all">
           {/* Side panel one */}
-          <div>
-            <div className="details-side-panel comp-side-left">
-              {sidePanelOne}
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  this.showModal("left");
-                }}
-                className="btn landing-button learn-more select-candidate"
-              >
-                Select Congressperson
-              </button>
-            </div>
+          <div className="details-side-panel comp-side-left">
+            {sidePanelOne}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                this.showModal("left");
+              }}
+              className="btn landing-button learn-more select-candidate"
+            >
+              Select Congressperson
+            </button>
           </div>
 
           {/* Visualizations */}
@@ -180,6 +178,7 @@ export class ComparisonPage extends Component {
               Select Congressperson
             </button>
           </div>
+
           <ComparisonModal
             show={this.state.show}
             toggle={this.toggle}

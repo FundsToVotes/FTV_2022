@@ -24,7 +24,7 @@ import Comparison from "./Components/ComparisonPage";
 export class App extends Component {
   render() {
     return (
-      <div>
+      <div className="app">
         <Header />
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
