@@ -1,11 +1,4 @@
-# what this do, yo???
-build_docker_image.sh builds the docker image with our database in it.
+# notes to self. 
+I need to write a python script for another container to continuously update our data. This shit hurteth. 
 
-run_docker_image.sh spins up a new docker image with our db
-
-# other
-Can I just use python to scrape this information every X days in the database docker image?
-
-I might just scrape once, and then dump it as a backup just in case. 
-
-Gotta go through the endpoints lol
+The etl folder is a mess and I'm afraid to open it ngl.

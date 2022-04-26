@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useLocation } from "react-router-dom";
 import queryString from "query-string";
-// import { test } from "../api.js"
 import defaultProfile from "../images/default-profile.png";
 
 function DetailedSearch() {
@@ -20,7 +19,6 @@ function DetailedSearch() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         return setOfficials(data.officials);
       });
   };
@@ -31,7 +29,6 @@ function DetailedSearch() {
     } else {
       branchFilter.delete(e.target.name);
     }
-    console.log(e);
     setBranchFilter(new Set(branchFilter));
   };
 
@@ -41,7 +38,6 @@ function DetailedSearch() {
     } else {
       partyFilter.delete(e.target.name);
     }
-    console.log(e);
     setPartyFilter(new Set(partyFilter));
   };
 
@@ -49,10 +45,8 @@ function DetailedSearch() {
     fetchRepresentatives();
   }, [address]);
 
-  console.log(officials);
-  // console.log(partyFilter);
   return (
-    <div className="page-container">
+    <div className="white-container">
       <div className="detailed-search-page">
         <div className="search-side-panel">
           <h4 className="pt-3">
@@ -114,15 +108,17 @@ function DetailedSearch() {
             </label>
           </form>
         </div>
+
         <div className="results-panel">
           <div className="results-header">
-            <h1>Representatives for</h1>
+            <h1 className="reps-for">Congresspeople for</h1>
             <h2>{address || "No address specified"}</h2>
-            <SearchBar />
+            <div className="detailed-searchbar">
+              <SearchBar />
+            </div>
           </div>
           <div className="search-results">
             <div className="results">
-              {/* idk how to make it refresh when it get's here with a new url... */}
               {address &&
                 officials.length > 0 &&
                 officials
@@ -163,10 +159,10 @@ export function CandidateCard(props) {
           }}
         />
       </div>
-      <p className="mt-4">
-        {candidate.name} - {candidate.party}
+      <p className="mt-4">{candidate.name}</p>
+      <p className="mb-1">
+        {candidate.office} - {candidate.party}
       </p>
-      <p>{candidate.position}</p>
       <Link
         to={`/details?representative=${candidate.name}`}
         className="btn landing-button search details-button"

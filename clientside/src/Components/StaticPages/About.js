@@ -27,18 +27,10 @@ export class About extends Component {
 
         <div className="static-container">
           <div className="card info-card">
-            <h3>
-              {/* <img
-                src={imgHandDollarIcon}
-                alt="Hand with dollar sign icon"
-                style={{ display: "inline-block" }}
-                width="50px"
-              /> */}
-              Funds to Votes
-            </h3>
+            <h3>Funds to Vote</h3>
             <h4 className="second-header">
               <em>
-                Informing curious voters on their representatives' campaign
+                Informing curious voters on their congresspeoples' campaign
                 finances
               </em>
             </h4>
@@ -80,21 +72,21 @@ export class About extends Component {
             <h3>Key Features</h3>
             <ul>
               <li>
-                Learn what top industries are donating to your representatives
+                Learn what top industries are donating to your congresspeople
                 in the U.S. Congress.
               </li>
               <li>
-                Identify the bills your representative voted on and their
+                Identify the bills your congresspeople voted on and their
                 positions.
               </li>
               <li>
-                See how your representatives voted on bills that correlate with
+                See how your congresspeople voted on bills that correlate with
                 a top industry they are funded by.
               </li>
               <li>Get an overview of the campaign finance system.</li>
               <li>
                 Take action, such as by registering to vote or contacting your
-                representatives.
+                congresspeople.
               </li>
             </ul>
           </div>
@@ -102,23 +94,43 @@ export class About extends Component {
           <div className="card info-card">
             <h3>Team Members 2022</h3>
             <MDBContainer>
-              <MDBRow>
-                <MDBCol>
-                  <img src={imgHailey} alt="Hailey" className="about-photos" />
-                  <p className="mt-1">Hailey Meister</p>
-                </MDBCol>
-                <MDBCol>
-                  <img src={imgCarson} alt="Carson" className="about-photos" />
-                  <p className="mt-1">Carson Bryant</p>
-                </MDBCol>
-                <MDBCol>
-                  <img src={imgThomas} alt="Thomas" className="about-photos" />
-                  <p className="mt-1">Thomas Serrano</p>
-                </MDBCol>
-                <MDBCol>
-                  <img src={imgLiv} alt="Liv" className="about-photos" />
-                  <p className="mt-1">Liv Victorino</p>
-                </MDBCol>
+              <MDBRow className="about-img-card">
+                <div>
+                  <MDBCol>
+                    <img
+                      src={imgHailey}
+                      alt="Hailey"
+                      className="about-photos"
+                    />
+                    <p className="mt-1">Hailey Meister</p>
+                  </MDBCol>
+                </div>
+                <div>
+                  <MDBCol>
+                    <img
+                      src={imgCarson}
+                      alt="Carson"
+                      className="about-photos"
+                    />
+                    <p className="mt-1">Carson Bryant</p>
+                  </MDBCol>
+                </div>
+                <div>
+                  <MDBCol>
+                    <img
+                      src={imgThomas}
+                      alt="Thomas"
+                      className="about-photos"
+                    />
+                    <p className="mt-1">Thomas Serrano</p>
+                  </MDBCol>
+                </div>
+                <div>
+                  <MDBCol>
+                    <img src={imgLiv} alt="Liv" className="about-photos" />
+                    <p className="mt-1">Liv Victorino</p>
+                  </MDBCol>
+                </div>
               </MDBRow>
             </MDBContainer>
           </div>
@@ -126,29 +138,38 @@ export class About extends Component {
           <div className="card info-card">
             <h3>Team Members 2021</h3>
             <MDBContainer>
-              <MDBRow>
-                <MDBCol>
-                  <img src={imgGrady} alt="Grady" />
-                  <p className="mt-1">Grady Thompson</p>
-                </MDBCol>
-                <MDBCol>
-                  <img src={imgJay} alt="Jay" />
-                  <p className="mt-1">Jay Houppermans</p>
-                </MDBCol>
-                <MDBCol>
-                  <img src={imgHaykal} alt="Haykal" />
-                  <p className="mt-1">Haykal Mubin</p>
-                </MDBCol>
-                <MDBCol>
-                  <img src={imgReyan} alt="Reyan" />
-                  <p className="mt-1">Reyan Haji</p>
-                </MDBCol>
+              <MDBRow className="about-img-card">
+                <div>
+                  {" "}
+                  <MDBCol>
+                    <img src={imgGrady} alt="Grady" />
+                    <p className="mt-1">Grady Thompson</p>
+                  </MDBCol>
+                </div>
+                <div>
+                  <MDBCol>
+                    <img src={imgJay} alt="Jay" />
+                    <p className="mt-1">Jay Houppermans</p>
+                  </MDBCol>
+                </div>
+                <div>
+                  <MDBCol>
+                    <img src={imgHaykal} alt="Haykal" />
+                    <p className="mt-1">Haykal Mubin</p>
+                  </MDBCol>
+                </div>
+                <div>
+                  <MDBCol>
+                    <img src={imgReyan} alt="Reyan" />
+                    <p className="mt-1">Reyan Haji</p>
+                  </MDBCol>
+                </div>
               </MDBRow>
             </MDBContainer>
           </div>
 
           <div className="project-info">
-            <div className="mr-5 card info-card">
+            <div className="card info-card status-card">
               <h3>Project Status</h3>
               <p>
                 This project was developed by students at the University of
@@ -179,6 +200,7 @@ export class About extends Component {
             role="img"
             alt="University of Washington Information School logo"
             width="300px"
+            className="mb-2"
             style={{
               display: "block",
               marginLeft: "auto",

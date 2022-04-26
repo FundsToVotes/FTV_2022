@@ -1,3 +1,10 @@
+html,body{
+  color: #3C4245;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: "Comfortaa", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
@@ -6,23 +13,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* padding-bottom: 220px; */
   background-color: white !important;
-  color: black;
+  color: #3C4245;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Hiragino Kaku Gothic Pro";
+  color: #3C4245;
+  font-weight: 700;
+}
+
 
 a {
   color: darkgreen;
 }
 a:hover {
   color:darkgreen;
-}
-
-Footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 100px;
-  background-color: #9e9e9e;
 }
 
 textarea:focus,
@@ -43,19 +48,18 @@ input[type]:focus,
   font-size: 13px;
 }
 
-h3 {
-  font-weight: 700;
-}
-
 .page-container {
   padding-top: 5.8rem;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
+  min-height: 100%;
+  overflow: auto;
 }
-
 /* Navigation */
 .nav-title {
-  color: #8fbe5a;
+  background-image: linear-gradient(89.94deg, #8FBE5A 2.46%, #F8CC5A 104.8%);
+  background-clip: text;
+  color: transparent
 }
-
 .nav-title-link:hover {
   text-decoration: none;
 }
@@ -76,48 +80,74 @@ h3 {
   align-items: center;
 }
 
+.nav-icon {
+  width: 5rem;
+}
+
+
 /* Top of landing page */
 
 .landing-title-container {
-  background-color: #8fbe5a;
-  text-align: center;
-  display: block;
-  width: 100%;
-  padding-top: 5em;
-  padding-left: 5em;
-  padding-right: 5em;
-  padding-bottom: 2em;
+  background-color: rgba(255, 255, 255, 0.85);
+  text-align: left;
+  border-radius: 10px;
+  margin-top: 3em;
+  margin-left: 3em;
+  margin-right: 3em;
+  padding-top: 3em;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-bottom: 1em;
+}
+
+.landing-title-reps {
+  background-image: linear-gradient(89.94deg, #8FBE5A 2.46%, #F8CC5A 104.8%);
+  background-clip: text;
+  width: 10em;
+  color: transparent
+}
+
+
+
+.landing-card {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0px 4px 4px 5px rgba(143, 190, 90, 0.15);
+  border-radius: 10px;
+  margin: 3em;
+  width: 45%;
 }
 
 .landing-title {
   font-size: 3rem;
-  color: white;
 }
 
 .landing-text {
-  color: white;
   font-size: 1.25rem;
-}
-
-.form-background {
-  background-color: #ffffff;
-  border-radius: 15px;
-  width: 90%;
-  margin: auto;
-  padding: 0.25em;
 }
 
 .form-container {
   display: flex !important;
   align-items: center;
   color: black;
+  justify-content: center;
+  border-radius: 7px;
 }
+.form-background {
+    background-color: #ffffff;
+    border-radius: 15px;
+    width: 90%;
+    margin: auto;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    padding: 0.25em;
+  }
 
 .form-contents {
   display: flex;
   width: 100%;
   padding: .25rem;
   padding-right: .5rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-bar {
@@ -129,17 +159,17 @@ h3 {
 }
 
 .search-icon {
-  margin-left: 0.5rem;
   font-size: 2rem;
+  color: #8fbe5a;
 }
 
 .landing-dropdown {
   margin-right: 1rem;
   width: 20rem;
+  display: none;
 }
 
 .privacy-link {
-  color: white;
   text-decoration: none;
 }
 
@@ -149,10 +179,6 @@ h3 {
 }
 
 /* Bottom of the landing page */
-.landing-paragraph {
-  color: #2f2e41;
-  font-size: 2rem;
-}
 
 .landing-button {
   background-color: #8fbe5a;
@@ -170,9 +196,12 @@ h3 {
 
 .landing-img {
   padding-top: 3em;
+  position: sticky;
   height: 25em;
   width: auto;
-  padding-right: 2em;
+  bottom: 0;
+  right: 0;
+  display: none;
 }
 
 .landing-bottom {
@@ -180,12 +209,11 @@ h3 {
 }
 .nav-link {
   color: black;
+  border-bottom: 2px solid #8FBE5A;
+  margin: 1em;
 }
 
 /* Static Pages */
-.static-page {
-  background-color: #f4f7fd;
-}
 
 .static-container {
   display: flex;
@@ -196,11 +224,16 @@ h3 {
 }
 
 .static-header {
-  background-color: #8fbe5a;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);;
   width: 100%;
   text-align: left;
-  color: white;
-  padding: 3em;
+  padding: 2em;
+  margin-top: 2.5rem;
+}
+
+.status-card {
+  margin-right: 1.5rem;
 }
 
 .info-card {
@@ -210,9 +243,15 @@ h3 {
   color: #a1adc3;
   margin-bottom: 1rem;
 }
+
+.inner-card-data > h3 {
+  color: #8fbe5a;
+}
+
 .info-card > h3 {
   color: #8fbe5a;
 }
+
 .card-info > h3 {
   color: #8fbe5a;
 }
@@ -221,14 +260,20 @@ h3 {
   display: flex;
   flex-direction: row;
 }
+
+.card-info {
+  flex: 1;
+}
+
 .number-icon {
   background-color: #8fbe5a;
   color: white;
   border-radius: 50%;
-  width: 3.75em;
+  width: 6em;
   height: 3rem;
   margin-right: 1rem;
   text-align: center;
+  flex: 0 0 3rem;
 }
 .two {
   width: 7.25em;
@@ -247,13 +292,19 @@ h3 {
   width: 75%;
 }
 
-.inner-card-data {
-  display: flex;
+.data-img {
+  width: 150px;
+  margin-left: 2rem;
 }
 
 .data-card {
   width: 35rem;
-  margin: 2rem;
+  height: auto;
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .data-cards {
@@ -264,7 +315,9 @@ h3 {
 
 .project-info {
   display: flex;
+  flex-direction: row;
 }
+
 .second-header {
   color: #8fbe5a;
 }
@@ -274,24 +327,35 @@ h3 {
   width: 13rem;
 }
 
+.about-img-card {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 /* Search Page */
 
-.detailed-search-page {
-  display: inline;
+.white-container {
+  padding-top: 7rem;
 }
 
 .results-header {
-  background-color: #8fbe5a;
-  color: white;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);;
   text-align: center;
   width: 100%;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
+.reps-for {
+  font-weight: 400;
+  font-size: 2em;
+}
+
 .search-side-panel {
   padding: 1em;
   height: 30rem;
+  height: 100%;
   width: 20%;
   float: left;
 }
@@ -300,6 +364,7 @@ h3 {
   width: 80%;
   float: right;
   outline: 2px solid #8fbe5a;
+  background-color: white;
 }
 
 .candidate-card {
@@ -337,6 +402,7 @@ h3 {
   width: 100%;
 }
 
+
 .filter-label {
   padding-left: 0.5rem;
 }
@@ -349,34 +415,39 @@ h3 {
 /* Candidate Details Page */
 
 .details-header {
-  background-color: #8fbe5a;
-  color: white;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
   text-align: center;
-  padding: 0.1rem;
-  position: fixed;
-  top: 20;
+  padding: 1.5rem;
   width: 100%;
-  z-index: 9999;
-}
-
-.details-container {
-  padding-top: 3rem;
 }
 
 .details-header-text {
   padding-top: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.8em;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: row;
 }
 
 .details-side-panel {
-  float: left;
-  width: 25%;
+  flex: 1;
+  height: 100%;
   padding: 1rem;
+  background-color: white;
+}
+
+.websites {
+  overflow-wrap: break-word;
+}
+
+.white-container {
+  background-color: white !important;
 }
 
 .breakdown-panel {
-  float: right;
-  width: 75%;
+  flex: 3;
   background-color: #f6f6f6;
 }
 
@@ -390,10 +461,229 @@ h3 {
   border-radius: 5px;
 }
 
+.details-card {
+  margin: 2rem;
+
+}
+
 .details-side-header {
   text-align: center;
 }
 
 .position-text {
   font-size: 1.25rem;
+}
+
+.bills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bill-card {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+  margin: 1rem;
+  width: 25rem;
+  outline: none;
+}
+
+.details-gradiant {
+  background-image: linear-gradient(89.94deg, #8FBE5A 2.46%, #F8CC5A 104.8%);
+  background-clip: text;
+  width: 13em;
+  color: transparent;
+}
+
+.position-container h6, .position-container p {
+  display: inline;
+}
+
+/* Comparison Page */
+
+.comparison-header {
+  text-align: center;
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.comp-side-left {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(143, 190, 90, 0.1);
+  height: 100%;
+  flex: 1 1 0px;
+  border-right: 3px solid #8fbe5a;
+  border-bottom: 3px solid #8fbe5a;
+}
+
+.comp-side-right {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid #F8BA1B;
+  border-bottom: 3px solid #F8BA1B;
+  height: 100%;
+  flex: 1 1 0px;
+  background-color: rgba(245, 188, 41, 0.1);
+}
+
+.comp-viz-container {
+  flex: 3 1 0px;
+}
+
+.comparison-tool-all {
+  display: flex;
+  flex-direction: row;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.btn-right {
+  background-color: #F8BA1B;
+}
+.btn-right:hover {
+  background-color: #e0a816;
+}
+
+/* Modal */
+.modal {
+  margin-top: 8rem;
+}
+
+/* want to make the modal header stay as you scroll */
+
+.modal-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.modal-card {
+  flex-direction: row;
+  width: 20em;
+  height: 13em;
+}
+.select-candidate {
+  margin-top: 1rem;
+}
+
+.card-comp-info {
+  flex-direction: column;
+}
+
+
+/* Mobile Friendly */
+
+@media (max-width: 386) {
+  .nav-title { 
+    font-size: 1.25rem;
+  }
+
+}
+
+@media (max-width: 550px) {
+  .landing-title { 
+    font-size: 1.5rem;
+  }
+  .landing-text {
+    font-size: .75rem;
+  }
+  .landing-title-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 625px) {
+  .landing-card {
+    width: 100%;
+  }
+
+  .data-img {
+    width: 100px;
+  }
+
+  body {
+    font-size: .75rem;
+  }
+
+  h1, h2, h3, h4 {
+    font-size: 1.5rem;
+  }
+
+  .nav-icon {
+    width: 2.5rem;
+  }
+
+  .white-container {
+    padding-top: 5rem;
+  }
+
+  .static-header {
+    margin-top: .05rem;
+  }
+
+  .project-info {
+    flex-direction: column;
+  }
+
+  .status-card {
+    margin-right: 0rem;
+  }
+
+  .comparison-tool-all {
+    display: none;
+  }
+
+  .side-panel-header {
+    display: none;
+  }
+
+}
+
+@media (max-width: 763px) {
+  .details-container {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 625px) {
+  .mobile-comparison {
+    display: none;
+  }
+}
+
+@media (min-width: 541px) and (max-width: 625px) {
+  .details-side-panel {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .details-info {
+    margin-left: 1rem;
+  }
+}
+
+@media (max-width: 768px){
+  .landing-card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .landing-img {
+    display: block;
+  }
+  .landing-dropdown {
+    display: block;
+  }
+}
+
+@media (max-width: 884px) {
+  .search-side-panel {
+    display: none;
+  }
+  .results-panel {
+    width: 100%;
+  }
 }

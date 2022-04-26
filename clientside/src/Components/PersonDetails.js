@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable max-len */
 /* ****************************************************
-
     This file is responsible for creating the representative details page
     with three visualizations: Top 10 Industries, Bills Table, and Independent Expenditures
-
 *****************************************************/
 
 import { useEffect, useState } from "react";
@@ -15,10 +13,9 @@ import twitterIcon from "../images/twitter.svg";
 import instagramIcon from "../images/instagram.svg";
 import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
-// import dummyContributions from "../images/dummy_contributions.png";
-// import dummyIndustries from "../images/dummy_industries.png";
 import defaultProfile from "../images/default-profile.png";
-// import Top10Pie from "./Top10Pie";
+import BillsData from "./BillsData";
+import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
 
 export default function PersonDetails() {
@@ -26,7 +23,6 @@ export default function PersonDetails() {
   const { representative } = queryString.parse(search);
   const [firstName, lastName] = representative.split(" ");
   const [details, setDetails] = useState([]);
-  // const [urls, setUrls] = useState([]);
 
   const setupIcon = (platform, id) => {
     let url, icon;
@@ -65,17 +61,17 @@ export default function PersonDetails() {
       .then((data) => {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
-          console.log(_);
           if (_.length > 0) {
+            console.log(data);
             data.urls = (
               <div>
-                <h5 className="mt-3">Representative Websites:</h5>
+                <h5 className="mt-3">Congressperson Websites:</h5>
                 <div>
-                  {_.map((d) => (
+                  {_.map((d) => {
                     <a key={d} href={d}>
                       {d}
-                    </a>
-                  ))}
+                    </a>;
+                  })}
                 </div>
               </div>
             );
@@ -84,15 +80,22 @@ export default function PersonDetails() {
           }
         }
 
-        data.address =
-          data.address.line1 +
-          " " +
-          data.address.city +
-          ", " +
-          data.address.state;
+        data.address = formatAddress(
+          data.address.line1,
+          data.address.city,
+          data.address.state
+        );
         data.socials = data.socials.map((d) => setupIcon(d.platform, d.id));
         setDetails(data);
       });
+  };
+
+  const formatAddress = (address, city, state) => {
+    return (
+      <p>
+        {address} <br></br> {city}, {state}
+      </p>
+    );
   };
 
   const colorCodeParty = (party) => {
@@ -109,7 +112,6 @@ export default function PersonDetails() {
     if (phone == undefined) {
       return;
     }
-    console.log(phone[0]);
     const regex = /\d+/;
     let arr = phone[0].match(regex);
     return "" + arr;
@@ -119,10 +121,8 @@ export default function PersonDetails() {
     fetchRepresentativeDetails();
   }, []);
 
-  console.log(details);
-
   return (
-    <div className="page-container">
+    <div className="white-container">
       {/* Header */}
       <div className="details-header">
         <h1 className="details-header-text">
@@ -134,8 +134,11 @@ export default function PersonDetails() {
         {/* Side Panel */}
         <div className="details-side-panel">
           <div className="details-side-header">
-            <h2>{details.name}</h2>
-            <h3 className="position-text mb-3">{details.office}</h3>
+            <div className="side-panel-header">
+              <h2>{details.name}</h2>
+              <h3 className="position-text mb-3">{details.office}</h3>
+            </div>
+
             <div className="image-box">
               <div>
                 <img
@@ -158,55 +161,41 @@ export default function PersonDetails() {
             </h4>
           </div>
 
-          <h5 className="mt-4">DC Office Number:</h5>
-          <a href={`tel:${phoneToString(details.phones)}`}>{details.phones}</a>
+          <div className="details-info">
+            <h5 className="mt-4">DC Office Number:</h5>
+            <a href={`tel:${phoneToString(details.phones)}`}>
+              {details.phones}
+            </a>
 
-          {details.urls}
+            {details.urls}
 
-          <h5 className="mt-3">Office Mailing Address:</h5>
-          {details.address}
+            <h5 className="mt-3">Office Mailing Address:</h5>
+            {details.address}
 
-          <h5 className="mt-3">Socials:</h5>
-          <p className="m-1">{details.socials}</p>
+            <h5 className="mt-3">Socials:</h5>
+            <p className="m-1">{details.socials}</p>
 
-          <a href="/take-action" className="btn landing-button learn-more mt-3">
-            Take Action
-          </a>
+            <a
+              href="/take-action"
+              className="btn landing-button learn-more mt-3"
+            >
+              Take Action
+            </a>
+          </div>
         </div>
 
         {/* Right side of web page */}
         <div className="breakdown-panel">
-          <div className="card datavis-card mt-5 p-3">
-            <h5 className="mt-3">Funding at a glance:</h5>
+          <div className="card datavis-card m-4 p-3">
+            <h3 className="mt-3 details-gradiant">Funding at a glance:</h3>
             <div>
-              <Top10Bar repsData={details} />
-              {/* <Top10Pie repsData={details} /> */}
-              {/* <img src={dummyIndustries} />
-              <img src={dummyContributions} /> */}
+              <Top10Bar repsName={representative} />
+              <Top10Pie repsName={representative} />
             </div>
           </div>
-          <div className="card text-card mt-5 mb-5 p-3">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
+          <div className="m-4 mb-5 p-3">
+            <h3 className="mt-3 details-gradiant">Bill Voting History</h3>
+            <BillsData firstName={firstName} lastName={lastName} />
           </div>
         </div>
       </div>
