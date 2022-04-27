@@ -25,7 +25,7 @@ export function SearchBar() {
           <input
             className="form-control search-bar"
             type="text"
-            placeholder="Type address here..."
+            placeholder="e.g: 1234 Main St. Seattle, WA; or Seattle, WA; or WA"
             address="address"
             onChange={(e) => setAddress(e.target.value)}
           />

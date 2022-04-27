@@ -120,7 +120,7 @@ export class ComparisonModal extends Component {
                   <input
                     className="form-control search-bar"
                     type="text"
-                    placeholder="Search by address..."
+                    placeholder="e.g: 1234 Main St. Seattle, WA; or Seattle, WA; or WA"
                     name="address"
                     onChange={(e) => this.getAddress(e.target.value)}
                   />
