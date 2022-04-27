@@ -10,7 +10,7 @@ export default class Top10Bar extends Component {
   componentDidMount() {
     let splitName = this.props.repsName.split(" ");
     fetch(
-      `https://api.fundstovote.com/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
+      `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -73,9 +73,10 @@ export default class Top10Bar extends Component {
 
           var data1 = [trace1, trace2];
 
-          var layout1 = {
+          var layout = {
             barmode: "stack",
             width: "600",
+            autosize: true,
             title: {
               text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.props.repsName}`,
               font: {
@@ -89,7 +90,7 @@ export default class Top10Bar extends Component {
             xref: "paper",
           };
 
-          this.setState({ plot: <Plot data={data1} layout={layout1} /> });
+          this.setState({ plot: <Plot data={data1} layout={layout} /> });
         } else {
           this.setState({ plot: <div /> });
         }

@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useLocation } from "react-router-dom";
 import queryString from "query-string";
-import defaultProfile from "../images/default-profile.png";
+import DemocratProfile from "../images/democrat-temp.png";
+import RepublicanProfile from "../images/republican-temp.png";
 
 function DetailedSearch() {
   const { search } = useLocation();
@@ -46,7 +47,7 @@ function DetailedSearch() {
   }, [address]);
 
   return (
-    <div className="white-container">
+    <div className="white-container vertical-stretch">
       <div className="detailed-search-page">
         <div className="search-side-panel">
           <h4 className="pt-3">
@@ -118,6 +119,71 @@ function DetailedSearch() {
             </div>
           </div>
           <div className="search-results">
+            <div className="mobile-filters">
+              <label htmlFor="touch">
+                <span className="filter-title">Filter</span>
+              </label>
+              <input type="checkbox" id="touch" />
+
+              <ul className="slide">
+                <div>
+                  <h5 className="pt-3">Position</h5>
+                  <input
+                    type="checkbox"
+                    id="senator"
+                    name="U.S. Senator"
+                    onClick={(e) => updateBranchFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="senator">
+                    Senator
+                  </label>
+                  <br></br>
+                  <input
+                    type="checkbox"
+                    id="representative"
+                    name="U.S. Representative"
+                    onClick={(e) => updateBranchFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="representative">
+                    Representative
+                  </label>
+                </div>
+                <div>
+                  <h5 className="pt-3">Party</h5>
+                  <input
+                    type="checkbox"
+                    id="republican"
+                    name="Republican Party"
+                    onClick={(e) => updatePartyFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="republican">
+                    Republican
+                  </label>
+                  <br></br>
+                  <input
+                    type="checkbox"
+                    id="democrat"
+                    name="Democratic Party"
+                    onClick={(e) => updatePartyFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="democrat">
+                    Democrat
+                  </label>
+
+                  <br></br>
+                  <input
+                    type="checkbox"
+                    id="other"
+                    name="Other"
+                    onClick={(e) => updatePartyFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="other">
+                    Other
+                  </label>
+                </div>
+              </ul>
+            </div>
+
             <div className="results">
               {address &&
                 officials.length > 0 &&
@@ -145,8 +211,15 @@ export default DetailedSearch;
 
 export function CandidateCard(props) {
   let candidate = props;
+  let party;
+  if (candidate.party === "Republican Party") {
+    party = "Republican";
+  } else if (candidate.party === "Democratic Party") {
+    party = "Democrat";
+  }
+
   return (
-    <div className="card candidate-card m-2 p-1">
+    <div key={props.name} className="card candidate-card m-3 p-1">
       <div className="image-cropper mt-3">
         <img
           id="profile-image"
@@ -154,14 +227,18 @@ export function CandidateCard(props) {
           alt="candidate headshot"
           className="headshot"
           onError={(event) => {
-            event.target.src = defaultProfile;
+            if (candidate.party === "Republican Party") {
+              event.target.src = RepublicanProfile;
+            } else {
+              event.target.src = DemocratProfile;
+            }
             event.onerror = null;
           }}
         />
       </div>
       <p className="mt-4">{candidate.name}</p>
       <p className="mb-1">
-        {candidate.office} - {candidate.party}
+        {candidate.office} - {party}
       </p>
       <Link
         to={`/details?representative=${candidate.name}`}

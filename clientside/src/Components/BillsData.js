@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from "react";
+import { BsArrowRight } from "react-icons/bs";
 
 export default class BillsData extends Component {
   constructor(props) {
@@ -35,23 +36,45 @@ export default class BillsData extends Component {
 
   render() {
     let billsDom = <div></div>;
+    console.log(this.state.bills);
     if (this.state.bills.length > 0) {
       billsDom = (
         <div className="bills-container">
           {this.state.bills.map((d) => {
+            let billLink;
+            if (d.bill.billUri.length > 0) {
+              billLink = (
+                <a
+                  href={d.bill.congressDotGovUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                  className="bills-read-more"
+                >
+                  Read More <BsArrowRight />
+                </a>
+              );
+            }
             return (
               <div key={d.bill.shortTitle} className="card mb-2 p-2 bill-card">
-                <h6>{d.bill.shortTitle}</h6>
-
-                <div className="position-container mt-3 mb-2">
-                  <h6>Position:</h6>
-                  <p style={{ color: this.voteColor(d.position) }}>
-                    {" "}
+                <p>
+                  <strong>Bill ID:</strong> {d.bill.billId}
+                </p>
+                <p>
+                  <strong>Subject:</strong> {d.bill.primarySubject}
+                </p>
+                <p>
+                  <strong>Position:</strong>{" "}
+                  <span style={{ color: this.voteColor(d.position) }}>
                     {d.position}
-                  </p>
-                </div>
-
-                <p>{d.bill.title}</p>
+                  </span>
+                </p>
+                <p>
+                  <strong>Short Summary:</strong> {d.bill.title}
+                </p>
+                <p>
+                  <strong>Latest Action:</strong> {d.bill.latestAction}
+                </p>
+                {billLink}
               </div>
             );
           })}

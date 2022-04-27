@@ -24,11 +24,11 @@ import Comparison from "./Components/ComparisonPage";
 export class App extends Component {
   render() {
     return (
-      <div>
+      <div className="app">
         <Header />
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
-          <Route path="/finance-101" element={<Finance101 />} />
+          <Route path="/political-funding" element={<Finance101 />} />
           <Route path="/take-action" element={<TakeAction />} />
           <Route path="/our-data" element={<OurData />} />
           <Route path="/about" element={<About />} />

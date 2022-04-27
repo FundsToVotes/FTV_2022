@@ -78,6 +78,7 @@ describe("Application Endpoint Tests", () => {
                 expect(typeof(voteJson["bill"]["openSecretsSectorPrefix"]) == String)
                 expect(typeof(voteJson["bill"]["openSecretsSector"]) == String)
                 expect(typeof(voteJson["bill"]["openSecretsSectorLong"]) == String)
+                expect(typeof(voteJson["bill"]["congressDotGovUrl"]) == String)
             }     
             // full name
             await supertest(app).get(`/v1/bills?fullName=${REP_NAME}`)

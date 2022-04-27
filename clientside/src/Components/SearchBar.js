@@ -25,12 +25,12 @@ export function SearchBar() {
           <input
             className="form-control search-bar"
             type="text"
-            placeholder="Type address here..."
+            placeholder="e.g: 1234 Main St. Seattle, WA; or Seattle, WA; or WA"
             address="address"
             onChange={(e) => setAddress(e.target.value)}
           />
 
-          <button type="submit" value="Search" className="btn search-button">
+          <button type="submit" value="Search" className="btn">
             <AiOutlineSearch className="search-icon" />
           </button>
         </form>
