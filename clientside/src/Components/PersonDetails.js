@@ -193,13 +193,52 @@ export default function PersonDetails() {
 
         {/* Right side of web page */}
         <div className="breakdown-panel">
-          <div className="card datavis-card m-4 p-3">
-            <h3 className="mt-3 details-gradiant">Funding at a glance:</h3>
-            <div>
-              <Top10Bar repsName={representative} />
-              <Top10Pie repsName={representative} />
+          <h3 className="mt-3 details-gradiant mr-4 ml-4 mt-4 p-3">
+            Funding at a glance
+          </h3>
+
+          <div className="card datavis-card mr-4 ml-4 p-3 ">
+            <div className="m-2">
+              <h4 className="graph-title">
+                Political Action Committee vs. Individual Contrabutions
+              </h4>
+              <div className="graph-container">
+                <div className="graph-explanation">
+                  <h5>What does this mean?</h5>
+                  <p>
+                    Explanation of what this graph shows. Since a big part of
+                    our project is about informing people of politcal
+                    literacies, I think there’s a disconnect by not fully
+                    explaining what our graphs mean. Like this is where we could
+                    expalin what PAC and what a Indiviual Contribution means and
+                    what the difference between the two our bc deadass I dont
+                    even know lol
+                  </p>
+                </div>
+                <Top10Bar repsName={representative} />
+              </div>
+            </div>
+
+            <div className="m-2">
+              <h4 className="graph-title">Top 10 Supporting Instrudies</h4>
+              <div className="graph-container">
+                <div className="graph-explanation">
+                  <h5>What does this mean?</h5>
+                  <p>
+                    Explanation of what this graph shows. Since a big part of
+                    our project is about informing people of politcal
+                    literacies, I think there’s a disconnect by not fully
+                    explaining what our graphs mean. Like this is where we could
+                    expalin what PAC and what a Indiviual Contribution means and
+                    what the difference between the two our bc deadass I dont
+                    even know lol
+                  </p>
+                </div>
+                <Top10Pie repsName={representative} />
+              </div>
             </div>
           </div>
+
           <div className="m-4 mb-5 p-3">
             <h3 className="mt-3 details-gradiant">Bill Voting History</h3>
             <BillsData firstName={firstName} lastName={lastName} />

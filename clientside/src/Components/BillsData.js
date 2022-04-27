@@ -36,23 +36,37 @@ export default class BillsData extends Component {
 
   render() {
     let billsDom = <div></div>;
+    console.log(this.state.bills);
     if (this.state.bills.length > 0) {
       billsDom = (
         <div className="bills-container">
           {this.state.bills.map((d) => {
+            let billLink;
+            if (d.bill.billUri.length > 0) {
+              billLink = (
+                <a
+                  href={d.bill.congressDotGovUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                  className="bills-read-more"
+                >
+                  Read More <BsArrowRight />
+                </a>
+              );
+            }
             return (
               <div key={d.bill.shortTitle} className="card mb-2 p-2 bill-card">
                 <p>
                   <strong>Bill ID:</strong> {d.bill.billId}
                 </p>
                 <p>
-                  <strong>Subject:</strong>{" "}
-                  <span style={{ color: this.voteColor(d.position) }}>
-                    {d.bill.primarySubject}
-                  </span>
+                  <strong>Subject:</strong> {d.bill.primarySubject}
                 </p>
                 <p>
-                  <strong>Position:</strong> {d.position}
+                  <strong>Position:</strong>{" "}
+                  <span style={{ color: this.voteColor(d.position) }}>
+                    {d.position}
+                  </span>
                 </p>
                 <p>
                   <strong>Short Summary:</strong> {d.bill.title}
@@ -60,14 +74,7 @@ export default class BillsData extends Component {
                 <p>
                   <strong>Latest Action:</strong> {d.bill.latestAction}
                 </p>
-                <a
-                  href="https://www.google.com"
-                  rel="noreferrer"
-                  target="_blank"
-                  className="bills-read-more"
-                >
-                  Read More <BsArrowRight />
-                </a>
+                {billLink}
               </div>
             );
           })}

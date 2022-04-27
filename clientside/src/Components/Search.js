@@ -142,10 +142,11 @@ export default DetailedSearch;
 
 export function CandidateCard(props) {
   let candidate = props;
+  let party;
   if (candidate.party === "Republican Party") {
-    candidate.party = "Republican";
+    party = "Republican";
   } else if (candidate.party === "Democratic Party") {
-    candidate.party = "Democrat";
+    party = "Democrat";
   }
 
   return (
@@ -168,7 +169,7 @@ export function CandidateCard(props) {
       </div>
       <p className="mt-4">{candidate.name}</p>
       <p className="mb-1">
-        {candidate.office} - {candidate.party}
+        {candidate.office} - {party}
       </p>
       <Link
         to={`/details?representative=${candidate.name}`}
