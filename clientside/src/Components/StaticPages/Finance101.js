@@ -70,6 +70,15 @@ export class Finance101 extends Component {
               phone calls, text messages, and postcards to voters.
             </p>
           </div>
+          <div className="mt-4 mb-4 card info-card">
+            <h3>Want to learn how to get involved?</h3>
+            <a
+              href="/take-action"
+              className="btn landing-button learn-more mt-3"
+            >
+              Take Action
+            </a>
+          </div>
         </div>
       </div>
     );

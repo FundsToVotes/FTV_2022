@@ -30,7 +30,7 @@ export function SearchBar() {
             onChange={(e) => setAddress(e.target.value)}
           />
 
-          <button type="submit" value="Search" className="btn search-button">
+          <button type="submit" value="Search" className="btn">
             <AiOutlineSearch className="search-icon" />
           </button>
         </form>

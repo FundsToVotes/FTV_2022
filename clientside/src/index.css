@@ -17,8 +17,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: white !important;
   color: #3C4245;
-  height: 100%;
   background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -33,24 +36,6 @@ a {
 a:hover {
   color:darkgreen;
 }
-/* 
-textarea:focus,
-input:focus,
-input[type]:focus,
-.uneditable-input:focus {
-  border-color: #638f3b;
-  box-shadow: 0 1px 1px #638f3b inset, 0 0 8px #638f3b;
-  outline: 0 none;
-}
-
-.hideExamples {
-  display: none;
-}
-
-.hoverIndustry:hover + .hideExamples {
-  display: block;
-  font-size: 13px;
-} */
 
 .white-container {
   padding-top: 6rem;
@@ -347,7 +332,7 @@ input[type]:focus,
   text-align: center;
   width: 100%;
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
 }
 
 .reps-for {
@@ -355,24 +340,36 @@ input[type]:focus,
   font-size: 2em;
 }
 
+.vertical-stretch {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .detailed-search-page {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  flex: 1 1 0;
+  align-items: stretch;
 }
 
 .search-side-panel {
   padding: 1em;
-  height: 100%;
   width: 20rem;
   flex: .15 0 0;
   background-color: white;
+  border-right: 2px solid #8fbe5a;
+  z-index: 1000;
+  align-self: stretch;
 }
 
 .results-panel {
   flex: 1 1 0;
+  width: 100%;
   height: 100%;
-  outline: 2px solid #8fbe5a;
   background-color: white;
+  align-self: stretch;
 }
 
 .candidate-card {
@@ -711,6 +708,9 @@ input[type]:focus,
   .details-container {
     flex-direction: column;
   }
+  .graph-container {
+    flex-direction: column;
+  }
   
 }
 
@@ -733,6 +733,13 @@ input[type]:focus,
   }
   .results-panel {
     width: 100%;
+  }
+}
+
+@media (min-width: 1158px) {
+  /* Show/hide filter dropdown */
+  .search-dropdown {
+    display: none;
   }
 }
 

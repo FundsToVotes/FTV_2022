@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faVoteYea } from "@fortawesome/free-solid-svg-icons";
 import navIcon from "../images/nav-icon.png";
 
 export class Header extends Component {
@@ -27,8 +25,8 @@ export class Header extends Component {
             <Link className="pr-3 nav-link" to="/compare-reps">
               Congress Comparison
             </Link>
-            <Link className="pr-3 nav-link" to="/take-action">
-              Take Action
+            <Link className="pr-3 nav-link" to="/political-funding">
+              Political Funding
             </Link>
             <Link className="pr-3 nav-link" to="/our-data">
               Our Data
