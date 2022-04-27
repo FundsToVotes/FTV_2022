@@ -72,9 +72,13 @@ export class ComparisonPage extends Component {
         </div>
 
         <h5 className="mt-4">DC Office Number:</h5>
-        <a href={`tel:${this.phoneToString(details.phones)}`}>
+        <a
+          className="phone-for-mobile"
+          href={`tel:${this.phoneToString(details.phones)}`}
+        >
           {details.phones}
         </a>
+        <p className="phone-for-desktop">{details.phones}</p>
 
         <h5 className="mt-3">Congressperson Websites:</h5>
         {details.urls}
@@ -137,7 +141,7 @@ export class ComparisonPage extends Component {
     return (
       <div className="white-container">
         <div className="comparison-header">
-          <h1>Congress Comparison</h1>
+          <h1>Campaign Comparison</h1>
           <h2>{candidates}</h2>
         </div>
 

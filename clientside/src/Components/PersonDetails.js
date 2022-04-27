@@ -80,7 +80,6 @@ export default function PersonDetails() {
             );
           }
         } else {
-          console.log(data);
           data.urls = (
             <div>
               <p>No sites listed</p>
@@ -171,9 +170,13 @@ export default function PersonDetails() {
 
           <div className="details-info">
             <h5 className="mt-4">DC Office Number:</h5>
-            <a href={`tel:${phoneToString(details.phones)}`}>
+            <a
+              className="phone-for-mobile"
+              href={`tel:${phoneToString(details.phones)}`}
+            >
               {details.phones}
             </a>
+            <p className="phone-for-desktop">{details.phones}</p>
 
             <h5 className="mt-3">Congressperson Websites:</h5>
             {details.urls}
@@ -222,7 +225,7 @@ export default function PersonDetails() {
             </div>
 
             <div className="m-2">
-              <h4 className="graph-title">Top 10 Supporting Instrudies</h4>
+              <h4 className="graph-title">Top 10 Supporting Industries</h4>
               <div className="graph-container">
                 <div className="graph-explanation">
                   <h5>What does this mean?</h5>

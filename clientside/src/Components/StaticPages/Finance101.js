@@ -12,7 +12,7 @@ export class Finance101 extends Component {
     return (
       <div className="page-container">
         <div className="static-header">
-          <h1>Campaign Finance 101</h1>
+          <h1>Political Funding</h1>
           {/* <p className="header-text">
             This information applies to elections for federal offices. Other
             rules apply for state and local elections.

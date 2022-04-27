@@ -363,6 +363,10 @@ a:hover {
   /* align-self: stretch; */
 }
 
+.phone-for-desktop {
+  display: none;
+}
+
 .results-panel {
   flex: 1 1 100%;
   flex-wrap: wrap;
@@ -728,6 +732,12 @@ a:hover {
   .landing-img{
     display: block;
     height: 22rem;
+  }
+  .phone-for-desktop {
+    display: block;
+  }
+  .phone-for-mobile {
+    display:none;
   }
 }
 

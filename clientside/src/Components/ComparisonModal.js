@@ -51,6 +51,7 @@ export class ComparisonModal extends Component {
           data.address.city,
           data.address.state
         );
+
         this.selectCandidate(data);
       });
   };

@@ -23,7 +23,7 @@ export class Header extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav style={{ width: "100%" }}>
             <Link className="pr-3 nav-link" to="/compare-reps">
-              Congress Comparison
+              Campaign Comparison
             </Link>
             <Link className="pr-3 nav-link" to="/political-funding">
               Political Funding
