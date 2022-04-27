@@ -13,7 +13,7 @@ export default class BillsData extends Component {
 
   fetchBillsData = () => {
     fetch(
-      `http://localhost:3000/v1/bills?firstName=${this.state.firstName}&lastName=${this.state.lastName}`
+      `https://api.fundstovote.com/v1/bills?firstName=${this.state.firstName}&lastName=${this.state.lastName}`
     )
       .then((response) => response.json())
       .then((data) => {

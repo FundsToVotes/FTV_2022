@@ -4,6 +4,9 @@ import React, { Component } from "react";
 import Top10Bar from "./Top10Bar";
 import defaultProfile from "../images/default-profile.png";
 import { ComparisonModal } from "./ComparisonModal";
+//import { ButterflyChart }from "./ButterflyChart"
+
+
 
 export class ComparisonPage extends Component {
   constructor(props) {
@@ -102,6 +105,16 @@ export class ComparisonPage extends Component {
     );
   };
 
+  makeButterflyChart = (details1, details2) => {
+    return (
+      <div>
+        <ButterflyChart repsName1={details1.name} repsName2={details2.name} />
+      </div>
+    );
+  };
+
+
+
   render() {
     let sidePanelOne;
     if (this.state.repOne) {
@@ -112,13 +125,18 @@ export class ComparisonPage extends Component {
     if (this.state.repTwo) {
       sidePanelTwo = this.makeSidePanel(this.state.repTwo, "right");
     }
-    let BarChartOne;
-    if (this.state.repOne) {
-      BarChartOne = this.makeBarChart(this.state.repOne);
-    }
-    let BarChartTwo;
-    if (this.state.repTwo) {
-      BarChartTwo = this.makeBarChart(this.state.repTwo);
+    // let BarChartOne;
+    // if (this.state.repOne) {
+    //   BarChartOne = this.makeBarChart(this.state.repOne);
+    // }
+    // let BarChartTwo;
+    // if (this.state.repTwo) {
+    //   BarChartTwo = this.makeBarChart(this.state.repTwo);
+    // }
+
+    let ButterflyChart;
+    if (this.state.repOne && this.state.repTwo) {
+      ButterflyChart = this.makeButterflyChart(this.state.repTwo, this.state.repOne);
     }
 
     let candidateChosen = false;
@@ -163,9 +181,13 @@ export class ComparisonPage extends Component {
 
           {/* Visualizations */}
           <div className="comp-viz-container">
-            {BarChartOne}
-            {BarChartTwo}
+            {/* {BarChartOne} */}
+            {/* {BarChartTwo} */}
+
+            {/* <ButterflyChart/> */}
           </div>
+
+          
 
           {/* Side panel two */}
           <div className="details-side-panel comp-side-right">
