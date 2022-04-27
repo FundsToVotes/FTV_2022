@@ -42,17 +42,24 @@ export default class BillsData extends Component {
           {this.state.bills.map((d) => {
             return (
               <div key={d.bill.shortTitle} className="card mb-2 p-2 bill-card">
-                <h6>{d.bill.shortTitle}</h6>
-
-                <div className="position-container mt-3 mb-2">
-                  <h6>Position:</h6>
-                  <p style={{ color: this.voteColor(d.position) }}>
-                    {" "}
-                    {d.position}
-                  </p>
-                </div>
-
-                <p>{d.bill.title}</p>
+                <p>
+                  <strong>Bill ID:</strong> {d.bill.billId}
+                </p>
+                <p>
+                  <strong>Subject:</strong>{" "}
+                  <span style={{ color: this.voteColor(d.position) }}>
+                    {d.bill.primarySubject}
+                  </span>
+                </p>
+                <p>
+                  <strong>Position:</strong> {d.position}
+                </p>
+                <p>
+                  <strong>Short Summary:</strong> {d.bill.title}
+                </p>
+                <p>
+                  <strong>Latest Action:</strong> {d.bill.latestAction}
+                </p>
                 <a
                   href="https://www.google.com"
                   rel="noreferrer"
