@@ -539,32 +539,39 @@ a:hover {
 .comparison-header {
   text-align: center;
   background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1.75rem;
+  padding-bottom: 1.5rem;
 }
 
 .comp-side-left {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   background-color: rgba(143, 190, 90, 0.1);
-  height: 100%;
   flex: 1 1 0px;
   border-right: 3px solid #8fbe5a;
   border-bottom: 3px solid #8fbe5a;
+  align-self: stretch;
 }
 
 .comp-side-right {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   border-left: 3px solid #F8BA1B;
   border-bottom: 3px solid #F8BA1B;
-  height: 100%;
   flex: 1 1 0px;
   background-color: rgba(245, 188, 41, 0.1);
+  align-self: stretch;
 }
 
 .comp-viz-container {
+  padding: 1rem;
   flex: 3 1 0px;
+  align-self: stretch;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .comparison-tool-all {

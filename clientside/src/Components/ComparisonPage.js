@@ -105,12 +105,12 @@ export class ComparisonPage extends Component {
   render() {
     let sidePanelOne;
     if (this.state.repOne) {
-      sidePanelOne = this.makeSidePanel(this.state.repOne, "left");
+      sidePanelOne = this.makeSidePanel(this.state.repOne);
     }
 
     let sidePanelTwo;
     if (this.state.repTwo) {
-      sidePanelTwo = this.makeSidePanel(this.state.repTwo, "right");
+      sidePanelTwo = this.makeSidePanel(this.state.repTwo);
     }
     let BarChartOne;
     if (this.state.repOne) {
@@ -144,41 +144,42 @@ export class ComparisonPage extends Component {
           <h2> Please go to the desktop site to use this feature.</h2>
         </div>
 
-        <div className="comparison-tool-all">
-          {/* Side panel one */}
-          <div className="details-side-panel comp-side-left">
-            {sidePanelOne}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                this.showModal("left");
-              }}
-              className="btn landing-button learn-more select-candidate"
-            >
-              Select Congressperson
-            </button>
-          </div>
+        <div className="vertical-stretch">
+          <div className="comparison-tool-all">
+            {/* Side panel one */}
+            <div className="comp-side-left">
+              {sidePanelOne}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.showModal("left");
+                }}
+                className="btn landing-button learn-more select-candidate"
+              >
+                Select Congressperson
+              </button>
+            </div>
 
-          {/* Visualizations */}
-          <div className="comp-viz-container">
-            {BarChartOne}
-            {BarChartTwo}
-          </div>
+            {/* Visualizations */}
+            <div className="comp-viz-container">
+              {BarChartOne}
+              {BarChartTwo}
+            </div>
 
-          {/* Side panel two */}
-          <div className="details-side-panel comp-side-right">
-            {sidePanelTwo}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                this.showModal("right");
-              }}
-              className="btn landing-button learn-more select-candidate btn-right"
-            >
-              Select Congressperson
-            </button>
+            {/* Side panel two */}
+            <div className="comp-side-right">
+              {sidePanelTwo}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.showModal("right");
+                }}
+                className="btn landing-button learn-more select-candidate btn-right"
+              >
+                Select Congressperson
+              </button>
+            </div>
           </div>
-
           <ComparisonModal
             show={this.state.show}
             toggle={this.toggle}
