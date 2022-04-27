@@ -157,4 +157,3 @@ function ButterflyChart() {
     );
     }
     
-  export default ButterflyChart;
