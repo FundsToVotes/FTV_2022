@@ -119,6 +119,71 @@ function DetailedSearch() {
             </div>
           </div>
           <div className="search-results">
+            <div className="mobile-filters">
+              <label htmlFor="touch">
+                <span className="filter-title">Filter</span>
+              </label>
+              <input type="checkbox" id="touch" />
+
+              <ul className="slide">
+                <div>
+                  <h5 className="pt-3">Position</h5>
+                  <input
+                    type="checkbox"
+                    id="senator"
+                    name="U.S. Senator"
+                    onClick={(e) => updateBranchFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="senator">
+                    Senator
+                  </label>
+                  <br></br>
+                  <input
+                    type="checkbox"
+                    id="representative"
+                    name="U.S. Representative"
+                    onClick={(e) => updateBranchFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="representative">
+                    Representative
+                  </label>
+                </div>
+                <div>
+                  <h5 className="pt-3">Party</h5>
+                  <input
+                    type="checkbox"
+                    id="republican"
+                    name="Republican Party"
+                    onClick={(e) => updatePartyFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="republican">
+                    Republican
+                  </label>
+                  <br></br>
+                  <input
+                    type="checkbox"
+                    id="democrat"
+                    name="Democratic Party"
+                    onClick={(e) => updatePartyFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="democrat">
+                    Democrat
+                  </label>
+
+                  <br></br>
+                  <input
+                    type="checkbox"
+                    id="other"
+                    name="Other"
+                    onClick={(e) => updatePartyFilter(e)}
+                  ></input>
+                  <label className="filter-label" htmlFor="other">
+                    Other
+                  </label>
+                </div>
+              </ul>
+            </div>
+
             <div className="results">
               {address &&
                 officials.length > 0 &&

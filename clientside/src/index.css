@@ -3,6 +3,7 @@ html, body{
   height: 100%;
   margin: 0px !important;
   padding: 0px !important;
+  box-sizing: border-box;
 }
 
 .app {
@@ -637,6 +638,30 @@ a:hover {
   flex-direction: column;
 }
 
+/* Mobile Filters */
+li a {text-decoration : none; color : #2d2f31;}
+
+.filter-title {
+  padding : 1rem;
+  color : black;
+  outline: 1px solid #79a745;
+  font-variant : small-caps;
+  display: block;
+}
+
+.slide {
+  clear:both;
+  width:100%;
+  height:0px;
+  overflow: hidden;
+  text-align: center;
+  transition: height .4s ease;
+  display: flex;
+}
+
+#touch {position: absolute; opacity: 0; height: 0px;}    
+
+#touch:checked + .slide {height: 10rem;} 
 
 /* Mobile Friendly */
 
@@ -753,6 +778,9 @@ a:hover {
 @media (min-width: 1158px) {
   /* Show/hide filter dropdown */
   .search-dropdown {
+    display: none;
+  }
+  .mobile-filters {
     display: none;
   }
 }

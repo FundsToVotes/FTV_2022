@@ -199,7 +199,7 @@ export default function PersonDetails() {
         {/* Right side of web page */}
         <div className="breakdown-panel">
           <h3 className="mt-3 details-gradiant mr-4 ml-4 mt-4 p-3">
-            Funding at a glance
+            Campaign Funding
           </h3>
 
           <div className="card datavis-card mr-4 ml-4 p-3 ">
