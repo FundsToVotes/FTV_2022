@@ -15,9 +15,6 @@ import representativeDetails from './routes/v1/representative_details.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-import { setupHouseSenateMap, setupRepresentativeMap } from './utils/setup_representative_details.js';
-import { getActiveBills } from './utils/retrieve_bills.js';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
