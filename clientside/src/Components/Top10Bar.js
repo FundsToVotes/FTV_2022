@@ -77,7 +77,7 @@ export default class Top10Bar extends Component {
             barmode: "stack",
             width: "600",
             title: {
-              text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.state.repsData.name}`,
+              text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.props.repsName}`,
               font: {
                 family: "Optima, sans-serif",
               },
