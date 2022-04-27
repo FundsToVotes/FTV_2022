@@ -48,7 +48,6 @@ function DetailedSearch() {
 
   return (
     <div className="white-container vertical-stretch">
-      {/* Filter Panel */}
       <div className="detailed-search-page">
         <div className="search-side-panel">
           <h4 className="pt-3">

@@ -15,10 +15,9 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: white !important;
   color: #3C4245;
   background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
-  display: flex;
+  /* display: flex; */
   flex-direction: row;
   align-items: stretch;
   justify-content: stretch;
@@ -330,7 +329,7 @@ a:hover {
 .results-header {
   background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 75.05%, rgba(152, 215, 82, 0.5) 95.87%);
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
   padding-top: 2rem;
   padding-bottom: 1.5rem;
 }
@@ -343,33 +342,33 @@ a:hover {
 .vertical-stretch {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  height: 100vh;
+  /* width: 100%; */
 }
 
 .detailed-search-page {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  /* width: 100%; */
   flex: 1 1 0;
-  align-items: stretch;
+  /* align-items: stretch; */
+  background-color: white;
 }
 
 .search-side-panel {
   padding: 1em;
-  width: 20rem;
-  flex: .15 0 0;
-  background-color: white;
+  flex: 0 0 200px;
   border-right: 2px solid #8fbe5a;
   z-index: 1000;
-  align-self: stretch;
+  /* align-self: stretch; */
 }
 
 .results-panel {
-  flex: 1 1 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  align-self: stretch;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  /* width: 100%;
+  height: 100%; */
+  /* align-self: stretch; */
 }
 
 .candidate-card {
@@ -467,7 +466,6 @@ a:hover {
 
 .details-card {
   margin: 2rem;
-
 }
 
 .details-side-header {
@@ -483,7 +481,8 @@ a:hover {
    flex-wrap: wrap;
    justify-content: center;
  }
- .bill-card {
+
+.bill-card {
    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
    margin: 1rem;
    width: 22rem;
@@ -491,7 +490,7 @@ a:hover {
    outline: none;
  }
 
- .bill-card > p > strong {
+.bill-card > p > strong {
    color: #8fbe5a;
  }
 
@@ -588,8 +587,6 @@ a:hover {
 .modal {
   margin-top: 8rem;
 }
-
-/* want to make the modal header stay as you scroll */
 
 .modal-cards-container {
   display: flex;
