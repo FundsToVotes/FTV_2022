@@ -26,21 +26,24 @@ export class ComparisonModal extends Component {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
           if (_.length > 0) {
+            console.log(_);
             data.urls = (
               <div>
-                <h5 className="mt-3">Congressperson Websites:</h5>
-                <div>
-                  {_.map((d) => (
-                    <a className="websites" key={d} href={d}>
-                      {d}
-                    </a>
-                  ))}
-                </div>
+                {_.map((d) => (
+                  <a className="websites" key={d} href={d}>
+                    {d}
+                  </a>
+                ))}
               </div>
             );
-          } else {
-            data.urls = undefined;
           }
+        } else {
+          console.log(data);
+          data.urls = (
+            <div>
+              <p>No sites listed</p>
+            </div>
+          );
         }
 
         data.address = this.formatAddress(

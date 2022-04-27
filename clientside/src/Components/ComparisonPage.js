@@ -76,6 +76,7 @@ export class ComparisonPage extends Component {
           {details.phones}
         </a>
 
+        <h5 className="mt-3">Congressperson Websites:</h5>
         {details.urls}
 
         <h5 className="mt-3">Office Mailing Address:</h5>
