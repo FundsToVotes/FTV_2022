@@ -211,13 +211,12 @@ export default function PersonDetails() {
                 <div className="graph-explanation">
                   <h5>What does this mean?</h5>
                   <p>
-                    Explanation of what this graph shows. Since a big part of
-                    our project is about informing people of politcal
-                    literacies, I think there’s a disconnect by not fully
-                    explaining what our graphs mean. Like this is where we could
-                    expalin what PAC and what a Indiviual Contribution means and
-                    what the difference between the two our bc deadass I dont
-                    even know lol
+                    What is a pac? A Pac, or political action committee is a
+                    term for a political committee that raises and spends money
+                    in order to elect and defeat candidates. Most PACs represent
+                    businesses, labor, or ideological interests.
+                    <br></br>
+                    The bar chart shows total contributions by industry
                   </p>
                 </div>
                 <Top10Bar repsName={representative} />
@@ -230,13 +229,8 @@ export default function PersonDetails() {
                 <div className="graph-explanation">
                   <h5>What does this mean?</h5>
                   <p>
-                    Explanation of what this graph shows. Since a big part of
-                    our project is about informing people of politcal
-                    literacies, I think there’s a disconnect by not fully
-                    explaining what our graphs mean. Like this is where we could
-                    expalin what PAC and what a Indiviual Contribution means and
-                    what the difference between the two our bc deadass I dont
-                    even know lol
+                    This pie chart shows the percent total of contributions to a
+                    candidate by a particular industry
                   </p>
                 </div>
                 <Top10Pie repsName={representative} />
