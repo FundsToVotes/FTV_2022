@@ -665,29 +665,13 @@ a:hover {
 }
 
 /* Mobile Filters */
-li a {text-decoration : none; color : #2d2f31;}
 
-.filter-title {
-  padding : 1rem;
-  color : black;
-  outline: 1px solid #79a745;
-  font-variant : small-caps;
-  display: block;
-}
-
-.slide {
-  clear:both;
-  width:100%;
-  height:0px;
-  overflow: hidden;
-  text-align: center;
-  transition: height .4s ease;
+.mobile-filters {
   display: flex;
+  margin: 1rem;
+  align-items: center;
+  justify-content: center;
 }
-
-#touch {position: absolute; opacity: 0; height: 0px;}    
-
-#touch:checked + .slide {height: 10rem;} 
 
 /* Landing Page */
 

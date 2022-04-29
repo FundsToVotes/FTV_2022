@@ -222,12 +222,13 @@ export default function PersonDetails() {
                 <div className="graph-explanation">
                   <h5>What does this mean?</h5>
                   <p>
-                    What is a pac? A Pac, or political action committee is a
-                    term for a political committee that raises and spends money
-                    in order to elect and defeat candidates. Most PACs represent
-                    businesses, labor, or ideological interests.
+                    A Pac, or political action committee is a term for a
+                    political committee that raises and spends money in order to
+                    elect and defeat candidates. Most PACs represent businesses,
+                    labor, or ideological interests. An individual contribution
+                    is a contribution made by an individual to a politician.
                     <br></br>
-                    The bar chart shows total contributions by industry
+                    The bar chart shows total contributions by industry.
                   </p>
                 </div>
                 <Top10Bar repsName={representative} />
@@ -241,7 +242,7 @@ export default function PersonDetails() {
                   <h5>What does this mean?</h5>
                   <p>
                     This pie chart shows the percent total of contributions to a
-                    candidate by a particular industry
+                    candidate by a particular industry.
                   </p>
                 </div>
                 <Top10Pie repsName={representative} />

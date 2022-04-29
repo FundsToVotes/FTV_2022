@@ -46,6 +46,20 @@ function DetailedSearch() {
     fetchRepresentatives();
   }, [address]);
 
+  // const mobileFilter = (type, e) => {
+  //   if (type === "congressPeople") {
+  //     branchFilter.add(e.target.name);
+  //   } else {
+  //     branchFilter.delete(e.target.name);
+  //   }
+
+  //   if (type === "party") {
+  //     partyFilter.add(e.target.name);
+  //   } else {
+  //     partyFilter.delete(e.target.name);
+  //   }
+  // };
+
   return (
     <div className="white-container vertical-stretch">
       <div className="detailed-search-page">
@@ -57,7 +71,7 @@ function DetailedSearch() {
           <form>
             <h5 className="pt-3">Position</h5>
             <input
-              type="checkbox"
+              type="radio"
               id="senator"
               name="U.S. Senator"
               onClick={(e) => updateBranchFilter(e)}
@@ -67,7 +81,7 @@ function DetailedSearch() {
             </label>
             <br></br>
             <input
-              type="checkbox"
+              type="radio"
               id="representative"
               name="U.S. Representative"
               onClick={(e) => updateBranchFilter(e)}
@@ -78,7 +92,7 @@ function DetailedSearch() {
 
             <h5 className="pt-3">Party</h5>
             <input
-              type="checkbox"
+              type="radio"
               id="republican"
               name="Republican Party"
               onClick={(e) => updatePartyFilter(e)}
@@ -88,7 +102,7 @@ function DetailedSearch() {
             </label>
             <br></br>
             <input
-              type="checkbox"
+              type="radio"
               id="democrat"
               name="Democratic Party"
               onClick={(e) => updatePartyFilter(e)}
@@ -99,7 +113,7 @@ function DetailedSearch() {
 
             <br></br>
             <input
-              type="checkbox"
+              type="radio"
               id="other"
               name="Other"
               onClick={(e) => updatePartyFilter(e)}
@@ -120,68 +134,26 @@ function DetailedSearch() {
           </div>
           <div className="search-results">
             <div className="mobile-filters">
-              <label htmlFor="touch">
-                <span className="filter-title">Filter</span>
-              </label>
-              <input type="checkbox" id="touch" />
+              <div className="mobile-filters">
+                <select
+                  defaultValue="congressPeople"
+                  className="custom-select landing-dropdown"
+                >
+                  <option value="congressPeople">Congress People</option>
+                  <option value="representatives">Representatives</option>
+                  <option value="senators">Senators</option>
+                </select>
 
-              <ul className="slide">
-                <div>
-                  <h5 className="pt-3">Position</h5>
-                  <input
-                    type="checkbox"
-                    id="senator"
-                    name="U.S. Senator"
-                    onClick={(e) => updateBranchFilter(e)}
-                  ></input>
-                  <label className="filter-label" htmlFor="senator">
-                    Senator
-                  </label>
-                  <br></br>
-                  <input
-                    type="checkbox"
-                    id="representative"
-                    name="U.S. Representative"
-                    onClick={(e) => updateBranchFilter(e)}
-                  ></input>
-                  <label className="filter-label" htmlFor="representative">
-                    Representative
-                  </label>
-                </div>
-                <div>
-                  <h5 className="pt-3">Party</h5>
-                  <input
-                    type="checkbox"
-                    id="republican"
-                    name="Republican Party"
-                    onClick={(e) => updatePartyFilter(e)}
-                  ></input>
-                  <label className="filter-label" htmlFor="republican">
-                    Republican
-                  </label>
-                  <br></br>
-                  <input
-                    type="checkbox"
-                    id="democrat"
-                    name="Democratic Party"
-                    onClick={(e) => updatePartyFilter(e)}
-                  ></input>
-                  <label className="filter-label" htmlFor="democrat">
-                    Democrat
-                  </label>
-
-                  <br></br>
-                  <input
-                    type="checkbox"
-                    id="other"
-                    name="Other"
-                    onClick={(e) => updatePartyFilter(e)}
-                  ></input>
-                  <label className="filter-label" htmlFor="other">
-                    Other
-                  </label>
-                </div>
-              </ul>
+                <select
+                  defaultValue="party"
+                  className="custom-select landing-dropdown"
+                >
+                  <option value="party">Party</option>
+                  <option value="democrat">Democrat</option>
+                  <option value="republican">Republican</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
             </div>
 
             <div className="results">
