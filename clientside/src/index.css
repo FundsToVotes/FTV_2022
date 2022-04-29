@@ -825,39 +825,46 @@ li a {text-decoration : none; color : #2d2f31;}
 
 .landing-background {
   background-image: url("images/squiggle-background.png");
-  background-size: contain;
-  display: flex;
-  width: 100%;
-  height: 100%;
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 .circle-background {
   background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 79.51%, rgba(152, 215, 82, 0.5) 95.87%);
   border-radius: 50%;
-  width: 14rem;
+  width: 10rem;
   height: 10rem;
-  margin: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.circle-flex {
+  display: flex;
   align-items: center;
   justify-content: center;
-  display: flex;
 }
 
 .computer-img {
-  height: 27rem;
+  max-height: 30rem;
   width: auto;
+  margin-bottom: 10rem;
 }
 
 .right-container {
-  width: 25%;
-  float: right;
+  width: 50%;
+  height: 100%;
+  padding-top: 0px !important;
   justify-content: center;
   align-items: center;
+  display: inline-block;
 }
 
 .left-container {
-  width: 75%;
-  float:left
+  width: 50%;
+  display: inline-block;
 }
 
 .circle-container {
@@ -872,5 +879,10 @@ li a {text-decoration : none; color : #2d2f31;}
   height: 5.5rem;
   width: auto;
   align-self: center;
+}
+
+.landing-btn {
+  align-self: center;
+  
 }
 

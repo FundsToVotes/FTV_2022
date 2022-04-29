@@ -25,7 +25,7 @@ import LandingPage from "./Components/LandingPage";
 export class App extends Component {
   render() {
     return (
-      <div className="app">
+      <div>
         {window.location.pathname !== "/landing" ? <Header /> : null}
         <Routes>
           <Route exact path="/" element={<HomePage />} />
