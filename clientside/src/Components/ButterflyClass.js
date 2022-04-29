@@ -14,7 +14,7 @@ export default class ButterflyChart1 extends Component {
     let splitName2 = this.props.repsName2.split(" ")
     console.log(splitName)
     fetch(
-      `https://api.fundstovote.com/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
+      `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -24,7 +24,7 @@ export default class ButterflyChart1 extends Component {
             congressperson1 = data;
         
             return fetch(
-                `https://api.fundstovote.com/v1/topten?firstName=${splitName2[0]}&lastName=${splitName2[1]}&cycle=2020`
+                `http://localhost:3000/v1/topten?firstName=${splitName2[0]}&lastName=${splitName2[1]}&cycle=2020`
               );
       
 
