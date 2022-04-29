@@ -18,16 +18,17 @@ import PrivacyPolicy from "./Components/StaticPages/PrivacyPolicy";
 import Header from "./Components/Header";
 import DetailedSearch from "./Components/Search";
 import PersonDetails from "./Components/PersonDetails";
-import LandingPage from "./Components/LandingPage";
+import HomePage from "./Components/HomePage";
 import Comparison from "./Components/ComparisonPage";
+import LandingPage from "./Components/LandingPage";
 
 export class App extends Component {
   render() {
     return (
       <div className="app">
-        <Header />
+        {window.location.pathname !== "/landing" ? <Header /> : null}
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/" element={<HomePage />} />
           <Route path="/political-funding" element={<Finance101 />} />
           <Route path="/take-action" element={<TakeAction />} />
           <Route path="/our-data" element={<OurData />} />
@@ -36,6 +37,7 @@ export class App extends Component {
           <Route path="/detailed-search" element={<DetailedSearch />} />
           <Route path="/details" element={<PersonDetails />} />
           <Route path="/compare-reps" element={<Comparison />} />
+          <Route path="/landing" element={<LandingPage />} />
         </Routes>
       </div>
     );

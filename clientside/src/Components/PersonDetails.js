@@ -13,7 +13,7 @@ import twitterIcon from "../images/twitter.svg";
 import instagramIcon from "../images/instagram.svg";
 import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
-import defaultProfile from "../images/default-profile.png";
+import defaultProfile from "../images/placeholder-square.png";
 import BillsData from "./BillsData";
 import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
@@ -115,6 +115,14 @@ export default function PersonDetails() {
     }
   };
 
+  const colorCodeBackground = (party) => {
+    if (party === "Republican Party") {
+      return "republican-background";
+    } else {
+      return "democrat-background";
+    }
+  };
+
   const phoneToString = (phone) => {
     if (phone == undefined) {
       return;
@@ -151,7 +159,10 @@ export default function PersonDetails() {
                 <img
                   src={details.photoUrl}
                   alt="candidate headshot"
-                  className="headshot image-details-cropper"
+                  className={
+                    "headshot image-details-cropper " +
+                    colorCodeBackground(details.party)
+                  }
                   onError={(event) => {
                     event.target.src = defaultProfile;
                     event.onerror = null;

@@ -1,8 +1,6 @@
-// import Plotly from 'plotly.js'
 import React, { Component } from "react";
-//import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
-import defaultProfile from "../images/default-profile.png";
+import defaultProfile from "../images/placeholder-square.png";
 import { ComparisonModal } from "./ComparisonModal";
 import ButterflyClass from "./ButterflyClass";
 
@@ -55,7 +53,10 @@ export class ComparisonPage extends Component {
               <img
                 src={details.photoUrl}
                 alt="candidate headshot"
-                className="headshot image-details-cropper"
+                className={
+                  "headshot image-details-cropper " +
+                  this.colorCodeBackground(details.party)
+                }
                 onError={(event) => {
                   event.target.src = defaultProfile;
                   event.onerror = null;
@@ -118,6 +119,14 @@ export class ComparisonPage extends Component {
     );
   };
 
+  colorCodeBackground = (party) => {
+    if (party === "Republican Party") {
+      return "republican-background";
+    } else {
+      return "democrat-background";
+    }
+  };
+
   render() {
     let sidePanelOne;
     if (this.state.repOne) {
@@ -128,14 +137,6 @@ export class ComparisonPage extends Component {
     if (this.state.repTwo) {
       sidePanelTwo = this.makeSidePanel(this.state.repTwo);
     }
-    // let BarChartOne;
-    // if (this.state.repOne) {
-    //   BarChartOne = this.makeBarChart(this.state.repOne);
-    // }
-    // let BarChartTwo;
-    // if (this.state.repTwo) {
-    //   BarChartTwo = this.makeBarChart(this.state.repTwo);
-    // }
 
     let ButterflyChart;
     if (this.state.repOne && this.state.repTwo) {
