@@ -689,7 +689,92 @@ li a {text-decoration : none; color : #2d2f31;}
 
 #touch:checked + .slide {height: 10rem;} 
 
+/* Landing Page */
+
+.landing-background {
+  background-image: url("images/squiggle-background.png");
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.circle-background {
+  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 79.51%, rgba(152, 215, 82, 0.5) 95.87%);
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.circle-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.computer-img {
+  max-height: 30rem;
+  width: auto;
+  margin-bottom: 10rem;
+}
+
+.display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-container {
+  width: 50%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem;
+  margin-left: 2rem;
+}
+
+.landing-icon-img {
+  height: 5.5rem;
+  width: auto;
+  align-self: center;
+}
+
+.landing-btn {
+  align-self: center;
+  font-size: 2rem;
+}
+
+
 /* Mobile Friendly */
+
+@media (min-height: 375px) {
+  .computer-img {
+    height: 15rem;
+  }
+
+  .landing-btn {
+    font-size: 1rem;
+  }
+}
 
 @media (max-width: 560px) {
   .landing-title { 
@@ -703,6 +788,7 @@ li a {text-decoration : none; color : #2d2f31;}
   }
 }
 
+
 @media (min-width: 541px) and (max-width: 625px) {
   .details-side-panel {
     display: flex;
@@ -711,6 +797,9 @@ li a {text-decoration : none; color : #2d2f31;}
 
   .details-info {
     margin-left: 1rem;
+  }
+  .computer-img {
+    height: 17rem;
   }
 }
 
@@ -761,6 +850,9 @@ li a {text-decoration : none; color : #2d2f31;}
   .mobile-comparison {
     display: none;
   }
+  .computer-img {
+    height: 20rem;
+  }
 }
 
 @media (max-width: 763px) {
@@ -770,7 +862,24 @@ li a {text-decoration : none; color : #2d2f31;}
   .graph-container {
     flex-direction: column;
   }
-  
+  .display {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 875px) {
+  .display {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left-container, .right-container {
+    width: 100%;
+    margin: 1rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -789,6 +898,9 @@ li a {text-decoration : none; color : #2d2f31;}
   }
   .phone-for-mobile {
     display:none;
+  }
+  .computer-img {
+    height: 25rem;
   }
 }
 
@@ -832,70 +944,4 @@ li a {text-decoration : none; color : #2d2f31;}
   }
 }
 
-
-
-/* Landing Page */
-
-.landing-background {
-  background-image: url("images/squiggle-background.png");
-  background-size: cover;
-  min-width: 100%;
-  min-height: 100%;
-  background-repeat: no-repeat;
-  overflow: hidden;
-}
-
-.circle-background {
-  background-image: linear-gradient(263.78deg, rgba(245, 188, 41, 0.25) 0.67%, rgba(234, 209, 109, 0.296571) 19.01%, rgba(175, 208, 72, 0.438802) 79.51%, rgba(152, 215, 82, 0.5) 95.87%);
-  border-radius: 50%;
-  width: 10rem;
-  height: 10rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-
-.circle-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.computer-img {
-  max-height: 30rem;
-  width: auto;
-  margin-bottom: 10rem;
-}
-
-.right-container {
-  width: 50%;
-  height: 100%;
-  padding-top: 0px !important;
-  justify-content: center;
-  align-items: center;
-  display: inline-block;
-}
-
-.left-container {
-  width: 50%;
-  display: inline-block;
-}
-
-.circle-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 1rem;
-  margin-left: 2rem;
-}
-
-.landing-icon-img {
-  height: 5.5rem;
-  width: auto;
-  align-self: center;
-}
-
-.landing-btn {
-  align-self: center;
-  
-}
 

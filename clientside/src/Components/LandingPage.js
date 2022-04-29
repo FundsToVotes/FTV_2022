@@ -21,8 +21,9 @@ export default class LandingPage extends Component {
             </strong>
           </h1>
         </span>
-        <div>
-          <div className="left-container mt-3">
+
+        <div className="display">
+          <div className="left-container">
             <div className="circle-container">
               <div className="circle-background circle-flex">
                 <img
@@ -62,7 +63,9 @@ export default class LandingPage extends Component {
           </div>
 
           <div className="right-container">
-            <h2>Helping Americas voters make informed decisions</h2>
+            <h2>
+              Helping Americas voters <br></br>make informed decisions
+            </h2>
             <a href="/" className="btn landing-button mt-3 landing-btn">
               Show me the money
             </a>
