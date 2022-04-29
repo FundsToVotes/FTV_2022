@@ -15,7 +15,7 @@ function DetailedSearch() {
   const [partyFilter, setPartyFilter] = useState(new Set());
 
   const fetchRepresentatives = () => {
-    fetch(`http://localhost:3000/v1/addressRepresentative?address=${address}`)
+    fetch(`https://api.fundstovote.com/v1/addressRepresentative?address=${address}`)
       .then((response) => {
         return response.json();
       })
