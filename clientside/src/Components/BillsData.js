@@ -36,7 +36,6 @@ export default class BillsData extends Component {
 
   render() {
     let billsDom = <div></div>;
-    console.log(this.state.bills);
     if (this.state.bills.length > 0) {
       billsDom = (
         <div className="bills-container">

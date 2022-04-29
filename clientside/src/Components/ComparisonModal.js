@@ -26,7 +26,6 @@ export class ComparisonModal extends Component {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
           if (_.length > 0) {
-            console.log(_);
             data.urls = (
               <div>
                 {_.map((d) => (
@@ -38,7 +37,6 @@ export class ComparisonModal extends Component {
             );
           }
         } else {
-          console.log(data);
           data.urls = (
             <div>
               <p>No sites listed</p>

@@ -111,8 +111,6 @@ export class ComparisonPage extends Component {
   };
 
   makeButterflyChart = (details1, details2) => {
-    console.log("bf function");
-    console.log(`${details2.name} + ${details1.name}`);
     return (
       <div>
         <ButterflyClass repsName1={details1.name} repsName2={details2.name} />
@@ -141,7 +139,6 @@ export class ComparisonPage extends Component {
 
     let ButterflyChart;
     if (this.state.repOne && this.state.repTwo) {
-      console.log("here");
       ButterflyChart = this.makeButterflyChart(
         this.state.repTwo,
         this.state.repOne

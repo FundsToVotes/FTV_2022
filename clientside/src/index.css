@@ -843,9 +843,7 @@ a:hover {
   .details-container {
     flex-direction: column;
   }
-  .graph-container {
-    flex-direction: column;
-  }
+  
   .display {
     flex-direction: column;
     align-items: center;
@@ -919,6 +917,12 @@ a:hover {
   }
   .landing-img{
     display: none;
+  }
+}
+
+@media (max-width: 1259px) {
+  .graph-container {
+    flex-direction: column;
   }
 }
 

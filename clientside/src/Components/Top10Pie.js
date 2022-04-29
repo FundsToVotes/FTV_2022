@@ -16,7 +16,6 @@ export default class Top10Pie extends Component {
       .then((data) => {
         //somehow get rep name
         let top10 = data;
-        console.log(top10);
 
         //fetch mans, do things with data
         let values = [];
