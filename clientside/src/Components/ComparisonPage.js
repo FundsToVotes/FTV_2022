@@ -3,6 +3,7 @@ import Top10Bar from "./Top10Bar";
 import defaultProfile from "../images/placeholder-square.png";
 import { ComparisonModal } from "./ComparisonModal";
 import ButterflyClass from "./ButterflyClass";
+import unavailImg from "../images/comparison-unavail.png";
 
 export class ComparisonPage extends Component {
   constructor(props) {
@@ -166,8 +167,19 @@ export class ComparisonPage extends Component {
           <h2>{candidates}</h2>
         </div>
 
-        <div className="mobile-comparison card info-card m-4">
-          <h2> Please go to the desktop site to use this feature.</h2>
+        <div className="mobile-comparison m-5">
+          <img
+            src={unavailImg}
+            className="mobile-img"
+            alt="man sitting next to computer"
+          />
+          <h2 className="mt-3">Unavailable Feature</h2>
+          <p className="mobile-text">
+            Please go to the desktop site to use this feature.
+          </p>
+          <a href="/home" className="btn landing-button">
+            Go Home
+          </a>
         </div>
 
         <div className="vertical-stretch">
