@@ -61,7 +61,7 @@ export default function PersonDetails() {
 
   const fetchRepresentativeDetails = () => {
     fetch(
-      `https://api.fundstovote.com/v1/representativeDetails?firstName=${firstName}&lastName=${lastName}`
+      `http://localhost:3000/v1/representativeDetails?firstName=${firstName}&lastName=${lastName}`
     )
       .then((response) => response.json())
       .then((data) => {

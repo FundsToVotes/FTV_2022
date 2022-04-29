@@ -19,7 +19,7 @@ export class ComparisonModal extends Component {
   fetchRepresentativeDetails = (name) => {
     let splitName = name.split(" ");
     fetch(
-      `https://api.fundstovote.com/v1/representativeDetails?firstName=${splitName[0]}&lastName=${splitName[1]}`
+      `http://localhost:3000/v1/representativeDetails?firstName=${splitName[0]}&lastName=${splitName[1]}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -67,7 +67,7 @@ export class ComparisonModal extends Component {
   //gets the list of representatives to display in search
   fetchRepresentatives = () => {
     fetch(
-      `https://api.fundstovote.com/v1/addressRepresentative?address=${this.state.address}`
+      `http://localhost:3000/v1/addressRepresentative?address=${this.state.address}`
     )
       .then((response) => {
         return response.json();

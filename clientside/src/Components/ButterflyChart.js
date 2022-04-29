@@ -15,7 +15,7 @@ function ButterflyChart() {
 
     //i think partly, that the top10 name endpoint may be broken. once thomas does the name setup you can change this to repsData.name
     let response = await fetch(
-      `https://api.fundstovote.com/v1/topten?firstName=${names[0]}&lastName=${names[1]}&cycle=2020`
+      `http://localhost:3000/v1/topten?firstName=${names[0]}&lastName=${names[1]}&cycle=2020`
     );
 
     //somehow get rep name
