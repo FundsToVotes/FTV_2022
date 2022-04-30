@@ -1,9 +1,9 @@
-// import Plotly from 'plotly.js'
 import React, { Component } from "react";
-//import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
-import defaultProfile from "../images/default-profile.png";
+import defaultProfile from "../images/placeholder-square.png";
 import { ComparisonModal } from "./ComparisonModal";
+import ButterflyClass from "./ButterflyClass";
+import unavailImg from "../images/comparison-unavail.png";
 
 export class ComparisonPage extends Component {
   constructor(props) {
@@ -54,7 +54,10 @@ export class ComparisonPage extends Component {
               <img
                 src={details.photoUrl}
                 alt="candidate headshot"
-                className="headshot image-details-cropper"
+                className={
+                  "headshot image-details-cropper " +
+                  this.colorCodeBackground(details.party)
+                }
                 onError={(event) => {
                   event.target.src = defaultProfile;
                   event.onerror = null;
@@ -72,10 +75,15 @@ export class ComparisonPage extends Component {
         </div>
 
         <h5 className="mt-4">DC Office Number:</h5>
-        <a href={`tel:${this.phoneToString(details.phones)}`}>
+        <a
+          className="phone-for-mobile"
+          href={`tel:${this.phoneToString(details.phones)}`}
+        >
           {details.phones}
         </a>
+        <p className="phone-for-desktop">{details.phones}</p>
 
+        <h5 className="mt-3">Congressperson Websites:</h5>
         {details.urls}
 
         <h5 className="mt-3">Office Mailing Address:</h5>
@@ -102,23 +110,39 @@ export class ComparisonPage extends Component {
     );
   };
 
+  makeButterflyChart = (details1, details2) => {
+    return (
+      <div>
+        <ButterflyClass repsName1={details1.name} repsName2={details2.name} />
+      </div>
+    );
+  };
+
+  colorCodeBackground = (party) => {
+    if (party === "Republican Party") {
+      return "republican-background";
+    } else {
+      return "democrat-background";
+    }
+  };
+
   render() {
     let sidePanelOne;
     if (this.state.repOne) {
-      sidePanelOne = this.makeSidePanel(this.state.repOne, "left");
+      sidePanelOne = this.makeSidePanel(this.state.repOne);
     }
 
     let sidePanelTwo;
     if (this.state.repTwo) {
-      sidePanelTwo = this.makeSidePanel(this.state.repTwo, "right");
+      sidePanelTwo = this.makeSidePanel(this.state.repTwo);
     }
-    let BarChartOne;
-    if (this.state.repOne) {
-      BarChartOne = this.makeBarChart(this.state.repOne);
-    }
-    let BarChartTwo;
-    if (this.state.repTwo) {
-      BarChartTwo = this.makeBarChart(this.state.repTwo);
+
+    let ButterflyChart;
+    if (this.state.repOne && this.state.repTwo) {
+      ButterflyChart = this.makeButterflyChart(
+        this.state.repTwo,
+        this.state.repOne
+      );
     }
 
     let candidateChosen = false;
@@ -134,20 +158,31 @@ export class ComparisonPage extends Component {
     }
 
     return (
-      <div className="white-container mb-2">
+      <div className="white-container">
         <div className="comparison-header">
-          <h1>Congress Comparison</h1>
+          <h1>Campaign Comparison</h1>
           <h2>{candidates}</h2>
         </div>
 
-        <div className="mobile-comparison card info-card m-4">
-          <h2> Please go to the desktop site to use this feature.</h2>
+        <div className="mobile-comparison m-5">
+          <img
+            src={unavailImg}
+            className="mobile-img"
+            alt="man sitting next to computer"
+          />
+          <h2 className="mt-3">Unavailable Feature</h2>
+          <p className="mobile-text">
+            Please go to the desktop site to use this feature.
+          </p>
+          <a href="/home" className="btn landing-button">
+            Go Home
+          </a>
         </div>
 
-        <div className="comparison-tool-all">
-          {/* Side panel one */}
-          <div>
-            <div className="details-side-panel comp-side-left">
+        <div className="vertical-stretch">
+          <div className="comparison-tool-all">
+            {/* Side panel one */}
+            <div className="comp-side-left">
               {sidePanelOne}
               <button
                 onClick={(e) => {
@@ -159,26 +194,23 @@ export class ComparisonPage extends Component {
                 Select Congressperson
               </button>
             </div>
-          </div>
 
-          {/* Visualizations */}
-          <div className="comp-viz-container">
-            {BarChartOne}
-            {BarChartTwo}
-          </div>
+            {/* Visualizations */}
+            <div className="comp-viz-container">{ButterflyChart}</div>
 
-          {/* Side panel two */}
-          <div className="details-side-panel comp-side-right">
-            {sidePanelTwo}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                this.showModal("right");
-              }}
-              className="btn landing-button learn-more select-candidate btn-right"
-            >
-              Select Congressperson
-            </button>
+            {/* Side panel two */}
+            <div className="details-side-panel comp-side-right">
+              {sidePanelTwo}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.showModal("right");
+                }}
+                className="btn landing-button learn-more select-candidate btn-right"
+              >
+                Select Congressperson
+              </button>
+            </div>
           </div>
           <ComparisonModal
             show={this.state.show}

@@ -1,7 +1,9 @@
 import { Component } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import defaultProfile from "../images/default-profile.png";
 import { AiOutlineSearch } from "react-icons/ai";
+import DemocratProfile from "../images/democrat-temp.png";
+import RepublicanProfile from "../images/republican-temp.png";
+import { BsArrowLeft } from "react-icons/bs";
 
 export class ComparisonModal extends Component {
   constructor(props) {
@@ -26,19 +28,20 @@ export class ComparisonModal extends Component {
           if (_.length > 0) {
             data.urls = (
               <div>
-                <h5 className="mt-3">Congressperson Websites:</h5>
-                <div>
-                  {_.map((d) => (
-                    <a className="websites" key={d} href={d}>
-                      {d}
-                    </a>
-                  ))}
-                </div>
+                {_.map((d) => (
+                  <a className="websites" key={d} href={d}>
+                    {d}
+                  </a>
+                ))}
               </div>
             );
-          } else {
-            data.urls = undefined;
           }
+        } else {
+          data.urls = (
+            <div>
+              <p>No sites listed</p>
+            </div>
+          );
         }
 
         data.address = this.formatAddress(
@@ -46,6 +49,7 @@ export class ComparisonModal extends Component {
           data.address.city,
           data.address.state
         );
+
         this.selectCandidate(data);
       });
   };
@@ -99,7 +103,17 @@ export class ComparisonModal extends Component {
           toggle={this.props.toggle}
           size="lg"
         >
-          <ModalHeader>Search Representative for Comparison</ModalHeader>
+          <ModalHeader className="modal-header">
+            <button
+              type="button"
+              className="close"
+              aria-label="Close"
+              onClick={this.props.toggle}
+            >
+              <BsArrowLeft aria-hidden="true" className="modal-icon" />
+            </button>
+            Search Congresspeople for Comparison
+          </ModalHeader>
           <ModalBody>
             {/* Search Bar */}
             <div className="form-background mt-3">
@@ -108,7 +122,7 @@ export class ComparisonModal extends Component {
                   <input
                     className="form-control search-bar"
                     type="text"
-                    placeholder="Search by address..."
+                    placeholder="e.g: 1234 Main St. Seattle, WA; or Seattle, WA; or WA"
                     name="address"
                     onChange={(e) => this.getAddress(e.target.value)}
                   />
@@ -134,14 +148,18 @@ export class ComparisonModal extends Component {
                       key={candidate.name}
                       className="card candidate-card m-2 p-1 modal-card"
                     >
-                      <div className="image-cropper">
+                      <div className="comp-img-crop">
                         <img
                           id="profile-image"
                           src={candidate.photoUrl}
                           alt="candidate headshot"
                           className="headshot"
                           onError={(event) => {
-                            event.target.src = defaultProfile;
+                            if (candidate.party === "Republican Party") {
+                              event.target.src = RepublicanProfile;
+                            } else {
+                              event.target.src = DemocratProfile;
+                            }
                             event.onerror = null;
                           }}
                         />

@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useLocation } from "react-router-dom";
 import queryString from "query-string";
-import defaultProfile from "../images/default-profile.png";
+import DemocratProfile from "../images/democrat-temp.png";
+import RepublicanProfile from "../images/republican-temp.png";
 
 function DetailedSearch() {
   const { search } = useLocation();
@@ -45,8 +46,22 @@ function DetailedSearch() {
     fetchRepresentatives();
   }, [address]);
 
+  // const mobileFilter = (type, e) => {
+  //   if (type === "congressPeople") {
+  //     branchFilter.add(e.target.name);
+  //   } else {
+  //     branchFilter.delete(e.target.name);
+  //   }
+
+  //   if (type === "party") {
+  //     partyFilter.add(e.target.name);
+  //   } else {
+  //     partyFilter.delete(e.target.name);
+  //   }
+  // };
+
   return (
-    <div className="white-container">
+    <div className="white-container vertical-stretch">
       <div className="detailed-search-page">
         <div className="search-side-panel">
           <h4 className="pt-3">
@@ -56,7 +71,7 @@ function DetailedSearch() {
           <form>
             <h5 className="pt-3">Position</h5>
             <input
-              type="checkbox"
+              type="radio"
               id="senator"
               name="U.S. Senator"
               onClick={(e) => updateBranchFilter(e)}
@@ -66,7 +81,7 @@ function DetailedSearch() {
             </label>
             <br></br>
             <input
-              type="checkbox"
+              type="radio"
               id="representative"
               name="U.S. Representative"
               onClick={(e) => updateBranchFilter(e)}
@@ -77,7 +92,7 @@ function DetailedSearch() {
 
             <h5 className="pt-3">Party</h5>
             <input
-              type="checkbox"
+              type="radio"
               id="republican"
               name="Republican Party"
               onClick={(e) => updatePartyFilter(e)}
@@ -87,7 +102,7 @@ function DetailedSearch() {
             </label>
             <br></br>
             <input
-              type="checkbox"
+              type="radio"
               id="democrat"
               name="Democratic Party"
               onClick={(e) => updatePartyFilter(e)}
@@ -98,7 +113,7 @@ function DetailedSearch() {
 
             <br></br>
             <input
-              type="checkbox"
+              type="radio"
               id="other"
               name="Other"
               onClick={(e) => updatePartyFilter(e)}
@@ -118,6 +133,29 @@ function DetailedSearch() {
             </div>
           </div>
           <div className="search-results">
+            <div className="mobile-filters">
+              <div className="mobile-filters">
+                <select
+                  defaultValue="congressPeople"
+                  className="custom-select landing-dropdown"
+                >
+                  <option value="congressPeople">Congress People</option>
+                  <option value="representatives">Representatives</option>
+                  <option value="senators">Senators</option>
+                </select>
+
+                <select
+                  defaultValue="party"
+                  className="custom-select landing-dropdown"
+                >
+                  <option value="party">Party</option>
+                  <option value="democrat">Democrat</option>
+                  <option value="republican">Republican</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
             <div className="results">
               {address &&
                 officials.length > 0 &&
@@ -145,8 +183,15 @@ export default DetailedSearch;
 
 export function CandidateCard(props) {
   let candidate = props;
+  let party;
+  if (candidate.party === "Republican Party") {
+    party = "Republican";
+  } else if (candidate.party === "Democratic Party") {
+    party = "Democrat";
+  }
+
   return (
-    <div className="card candidate-card m-2 p-1">
+    <div key={props.name} className="card candidate-card m-3 p-1">
       <div className="image-cropper mt-3">
         <img
           id="profile-image"
@@ -154,14 +199,18 @@ export function CandidateCard(props) {
           alt="candidate headshot"
           className="headshot"
           onError={(event) => {
-            event.target.src = defaultProfile;
+            if (candidate.party === "Republican Party") {
+              event.target.src = RepublicanProfile;
+            } else {
+              event.target.src = DemocratProfile;
+            }
             event.onerror = null;
           }}
         />
       </div>
       <p className="mt-4">{candidate.name}</p>
       <p className="mb-1">
-        {candidate.office} - {candidate.party}
+        {candidate.office} - {party}
       </p>
       <Link
         to={`/details?representative=${candidate.name}`}

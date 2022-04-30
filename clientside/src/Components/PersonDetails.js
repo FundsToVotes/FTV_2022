@@ -13,7 +13,7 @@ import twitterIcon from "../images/twitter.svg";
 import instagramIcon from "../images/instagram.svg";
 import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
-import defaultProfile from "../images/default-profile.png";
+import defaultProfile from "../images/placeholder-square.png";
 import BillsData from "./BillsData";
 import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
@@ -47,7 +47,13 @@ export default function PersonDetails() {
         return;
     }
     return (
-      <a href={url} target="_blank" rel="noreferrer" className="mr-1">
+      <a
+        href={url}
+        key={platform}
+        target="_blank"
+        rel="noreferrer"
+        className="mr-1"
+      >
         <img src={icon} alt={platform}></img>
       </a>
     );
@@ -62,22 +68,22 @@ export default function PersonDetails() {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
           if (_.length > 0) {
-            console.log(data);
             data.urls = (
               <div>
-                <h5 className="mt-3">Congressperson Websites:</h5>
-                <div>
-                  {_.map((d) => {
-                    <a key={d} href={d}>
-                      {d}
-                    </a>;
-                  })}
-                </div>
+                {_.map((d) => (
+                  <a className="websites" key={d} href={d}>
+                    {d}
+                  </a>
+                ))}
               </div>
             );
-          } else {
-            data.urls = undefined;
           }
+        } else {
+          data.urls = (
+            <div>
+              <p>No sites listed</p>
+            </div>
+          );
         }
 
         data.address = formatAddress(
@@ -105,6 +111,14 @@ export default function PersonDetails() {
       return "blue";
     } else {
       return "black";
+    }
+  };
+
+  const colorCodeBackground = (party) => {
+    if (party === "Republican Party") {
+      return "republican-background";
+    } else {
+      return "democrat-background";
     }
   };
 
@@ -144,7 +158,10 @@ export default function PersonDetails() {
                 <img
                   src={details.photoUrl}
                   alt="candidate headshot"
-                  className="headshot image-details-cropper"
+                  className={
+                    "headshot image-details-cropper " +
+                    colorCodeBackground(details.party)
+                  }
                   onError={(event) => {
                     event.target.src = defaultProfile;
                     event.onerror = null;
@@ -163,10 +180,15 @@ export default function PersonDetails() {
 
           <div className="details-info">
             <h5 className="mt-4">DC Office Number:</h5>
-            <a href={`tel:${phoneToString(details.phones)}`}>
+            <a
+              className="phone-for-mobile"
+              href={`tel:${phoneToString(details.phones)}`}
+            >
               {details.phones}
             </a>
+            <p className="phone-for-desktop">{details.phones}</p>
 
+            <h5 className="mt-3">Congressperson Websites:</h5>
             {details.urls}
 
             <h5 className="mt-3">Office Mailing Address:</h5>
@@ -186,13 +208,47 @@ export default function PersonDetails() {
 
         {/* Right side of web page */}
         <div className="breakdown-panel">
-          <div className="card datavis-card m-4 p-3">
-            <h3 className="mt-3 details-gradiant">Funding at a glance:</h3>
-            <div>
-              <Top10Bar repsName={representative} />
-              <Top10Pie repsName={representative} />
+          <h3 className="mt-3 details-gradiant mr-4 ml-4 mt-4 p-3">
+            Campaign Funding
+          </h3>
+
+          <div className="card datavis-card mr-4 ml-4 p-3 ">
+            <div className="m-2">
+              <h4 className="graph-title">
+                Political Action Committee vs. Individual Contrabutions
+              </h4>
+              <div className="graph-container">
+                <div className="graph-explanation">
+                  <h5>What does this mean?</h5>
+                  <p>
+                    A Pac, or political action committee is a term for a
+                    political committee that raises and spends money in order to
+                    elect and defeat candidates. Most PACs represent businesses,
+                    labor, or ideological interests. An individual contribution
+                    is a contribution made by an individual to a politician.
+                    <br></br>
+                    The bar chart shows total contributions by industry.
+                  </p>
+                </div>
+                <Top10Bar repsName={representative} />
+              </div>
+            </div>
+
+            <div className="m-2">
+              <h4 className="graph-title">Top 10 Supporting Industries</h4>
+              <div className="graph-container">
+                <div className="graph-explanation">
+                  <h5>What does this mean?</h5>
+                  <p>
+                    This pie chart shows the percent total of contributions to a
+                    candidate by a particular industry.
+                  </p>
+                </div>
+                <Top10Pie repsName={representative} />
+              </div>
             </div>
           </div>
+
           <div className="m-4 mb-5 p-3">
             <h3 className="mt-3 details-gradiant">Bill Voting History</h3>
             <BillsData firstName={firstName} lastName={lastName} />
