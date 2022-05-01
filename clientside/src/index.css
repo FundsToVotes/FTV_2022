@@ -747,6 +747,10 @@ a:hover {
   font-size: 2rem;
 }
 
+.make-it-big {
+  height:100vh;
+}
+
 
 /* Mobile Friendly */
 

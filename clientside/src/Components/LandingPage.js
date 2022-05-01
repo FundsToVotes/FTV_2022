@@ -5,10 +5,12 @@ import piggyBank from "../images/piggy-bank.png";
 import presentingMan from "../images/presenting-man.png";
 import computer from "../images/computer.png";
 
+
 export default class LandingPage extends Component {
   render() {
     return (
-      <div className="landing-background table">
+      <div className="make-it-big">
+      <div className="landing-background table ">
         <span className="icon-container">
           <img
             src={navIcon}
@@ -72,6 +74,7 @@ export default class LandingPage extends Component {
             <img src={computer} alt="computer" className="computer-img" />
           </div>
         </div>
+      </div>
       </div>
     );
   }
