@@ -72,16 +72,16 @@ export class About extends Component {
             <h3>Key Features</h3>
             <ul>
               <li>
-                Learn what top industries are donating to your congresspeople
-                in the U.S. Congress.
+                Learn what top industries are donating to your congresspeople in
+                the U.S. Congress.
               </li>
               <li>
                 Identify the bills your congresspeople voted on and their
                 positions.
               </li>
               <li>
-                See how your congresspeople voted on bills that correlate with
-                a top industry they are funded by.
+                See how your congresspeople voted on bills that correlate with a
+                top industry they are funded by.
               </li>
               <li>Get an overview of the campaign finance system.</li>
               <li>
@@ -174,9 +174,11 @@ export class About extends Component {
               <p>
                 This project was developed by students at the University of
                 Washington Information School as part of the Informatics
-                program's 2021 Capstone. In 2022, the current team took over the project
-                to continue its work. We hope this project continues to be
-                passed down from team to team.
+                program's 2021 Capstone. In 2022, the current team took over the
+                project to continue its work. We hope this project continues to
+                be passed down from team to team. Development for the 2022
+                capstone cycle will be complete on June 1st, 2022 and updates
+                will no longer be made.
               </p>
             </div>
             <div className="card info-card">
@@ -200,43 +202,41 @@ export class About extends Component {
             <h3>Privacy Policy</h3>
             <ul>
               <li>
-                Funds to Vote is an open source project created by students at the {" "}
+                Funds to Vote is an open source project created by students at
+                the{" "}
                 <a href="https://ischool.uw.edu">
-                University of Washington Information School
-                </a> during capstone 2021 and continued by a new team in 2022.
+                  University of Washington Information School
+                </a>{" "}
+                during capstone 2021 and continued by a new team in 2022.
               </li>
+              <li>Funds To Vote does not collect nor store any user data</li>
               <li>
-                Funds To Vote does not collect nor store any user data
-              </li>
-              <li>
-                This app utilizes the Google Civic Information API. When using our app, we use this
-                service to determine your elected officials based on the address
-                you enter. The use is bound by the {" "}
+                This app utilizes the Google Civic Information API. When using
+                our app, we use this service to determine your elected officials
+                based on the address you enter. The use is bound by the{" "}
                 <a href="https://developers.google.com/civic-information/docs/terms">
                   Google APIs Terms of Service
                 </a>
                 .
               </li>
               <li>
-                This app utilizes the ProPublica Congress and Campaign Finance APIs. We use these
-                services to obtain data about bills, votes, and some campaign
-                finance information. The use is bound by the{" "}
+                This app utilizes the ProPublica Congress and Campaign Finance
+                APIs. We use these services to obtain data about bills, votes,
+                and some campaign finance information. The use is bound by the{" "}
                 <a href="https://projects.propublica.org/api-docs/campaign-finance/">
                   Terms of Service
                 </a>
                 .
               </li>
               <li>
-                This app utilizes the OpenSecrets.org API. We use this service to obtain certain
-                campaign finance data. The use is bound by the{" "}
+                This app utilizes the OpenSecrets.org API. We use this service
+                to obtain certain campaign finance data. The use is bound by the{" "}
                 <a href="https://www.opensecrets.org/open-data/api-terms-of-service">
                   Terms of Service
                 </a>
                 .
               </li>
-              <li>
-                This app is hosted entirely on DigitalOcean
-              </li>
+              <li>This app is hosted entirely on DigitalOcean</li>
             </ul>
           </div>
 
