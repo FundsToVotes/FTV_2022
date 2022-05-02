@@ -22,7 +22,7 @@ export default class Top10Pie extends Component {
         let values = [];
         let labels = [];
 
-        top10.forEach((d) => {
+        top10.data.forEach((d) => {
           values.push(d.total);
           labels.push(d.industry_name);
         });

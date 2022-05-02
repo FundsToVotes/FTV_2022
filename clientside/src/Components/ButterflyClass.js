@@ -38,7 +38,7 @@ export default class ButterflyChart1 extends Component {
 
 
         if(congressperson1 && congressperson2 ){
-          let top10_1 = congressperson1;
+          let top10_1 = congressperson1.data;
           //fetch mans, do things with data
           let values = [];
           let labels = [];
@@ -94,7 +94,7 @@ export default class ButterflyChart1 extends Component {
 
 
 
-            let top10_2 = congressperson2;
+            let top10_2 = congressperson2.data;
             //fetch mans, do things with data
             let values_2 = [];
             let labels_2 = [];
