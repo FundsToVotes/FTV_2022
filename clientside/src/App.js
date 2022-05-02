@@ -14,7 +14,6 @@ import About from "./Components/StaticPages/About";
 import Finance101 from "./Components/StaticPages/Finance101";
 import OurData from "./Components/StaticPages/OurData";
 import TakeAction from "./Components/StaticPages/TakeAction";
-import PrivacyPolicy from "./Components/StaticPages/PrivacyPolicy";
 import Header from "./Components/Header";
 import DetailedSearch from "./Components/Search";
 import PersonDetails from "./Components/PersonDetails";
@@ -33,7 +32,6 @@ export class App extends Component {
           <Route path="/take-action" element={<TakeAction />} />
           <Route path="/our-data" element={<OurData />} />
           <Route path="/about" element={<About />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/detailed-search" element={<DetailedSearch />} />
           <Route path="/details" element={<PersonDetails />} />
           <Route path="/compare-reps" element={<Comparison />} />
