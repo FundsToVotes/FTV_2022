@@ -15,9 +15,10 @@ export default class Top10Bar extends Component {
       .then((response) => response.json())
       .then((data) => {
         // this.setState({ repsData: data });
-        if (data.length > 0) {
+        if (data.data.length > 0) {
           //somehow get rep name
-          let top10 = data;
+          let top10 = data.data;
+          let cycle = data.cycle;
           //fetch mans, do things with data
           let values = [];
           let labels = [];
@@ -78,7 +79,7 @@ export default class Top10Bar extends Component {
             width: "600",
             autosize: true,
             title: {
-              text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.props.repsName}`,
+              text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.props.repsName} in ${cycle}`,
               font: {
                 family: "Optima, sans-serif",
               },

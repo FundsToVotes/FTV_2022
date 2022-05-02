@@ -11,8 +11,8 @@ function DetailedSearch() {
   const { address } = queryString.parse(search);
 
   const [officials, setOfficials] = useState([]);
-  const [branchFilter, setBranchFilter] = useState(new Set());
-  const [partyFilter, setPartyFilter] = useState(new Set());
+  const [branchFilter, setBranchFilter] = useState("");
+  const [partyFilter, setPartyFilter] = useState("");
 
   const fetchRepresentatives = () => {
     fetch(`http://localhost:3000/v1/addressRepresentative?address=${address}`)
@@ -25,21 +25,39 @@ function DetailedSearch() {
   };
 
   const updateBranchFilter = (e) => {
-    if (e.target.checked) {
-      branchFilter.add(e.target.name);
+    if (e.target.nodeName == "INPUT") {
+      if (e.target.id == "all-chamber") {
+        setBranchFilter("");
+      } else {
+        setBranchFilter(e.target.id == "radio-representative" ? "U.S. Representative" : "U.S. Senator");
+      }
+      document.querySelector("#congresspeople").value = e.target.id
     } else {
-      branchFilter.delete(e.target.name);
+      if (e.target.value == "all-chamber") {
+        setBranchFilter("");
+      } else {
+        setBranchFilter(e.target.value == "radio-representative" ? "U.S. Representative" : "U.S. Senator");
+      }
+      document.querySelector(`#${e.target.value}`).checked = true
     }
-    setBranchFilter(new Set(branchFilter));
   };
 
   const updatePartyFilter = (e) => {
-    if (e.target.checked) {
-      partyFilter.add(e.target.name);
+    if (e.target.nodeName == "INPUT") {
+      if (e.target.id == "all-party") {
+        setPartyFilter("");
+      } else {
+        setPartyFilter(e.target.id == "radio-republican" ? "Republican Party" : e.target.id == "radio-democrat" ? "Democratic Party": "other");
+      }
+      document.querySelector("#party").value = e.target.id
     } else {
-      partyFilter.delete(e.target.name);
+      if (e.target.value == "all-party") {
+        setPartyFilter("");
+      } else {
+        setPartyFilter(e.target.value == "radio-republican" ? "Republican Party" : e.target.value == "radio-democrat" ? "Democratic Party": "other");
+      }
+      document.querySelector(`#${e.target.value}`).checked=true
     }
-    setPartyFilter(new Set(partyFilter));
   };
 
   useEffect(() => {
@@ -72,53 +90,75 @@ function DetailedSearch() {
             <h5 className="pt-3">Position</h5>
             <input
               type="radio"
-              id="senator"
-              name="U.S. Senator"
+              id="all-chamber"
+              name="chamber"
+              onClick={(e) => updateBranchFilter(e)}
+              defaultChecked
+            ></input>
+            <label className="filter-label" htmlFor="all-chamber">
+              All
+            </label>
+            <br></br>
+            <input
+              type="radio"
+              id="radio-senator"
+              name="chamber"
               onClick={(e) => updateBranchFilter(e)}
             ></input>
-            <label className="filter-label" htmlFor="senator">
+            <label className="filter-label" htmlFor="radio-senator">
               Senator
             </label>
             <br></br>
             <input
               type="radio"
-              id="representative"
-              name="U.S. Representative"
+              id="radio-representative"
+              name="chamber"
               onClick={(e) => updateBranchFilter(e)}
             ></input>
-            <label className="filter-label" htmlFor="representative">
+            <label className="filter-label" htmlFor="radio-representative">
               Representative
             </label>
 
             <h5 className="pt-3">Party</h5>
             <input
               type="radio"
-              id="republican"
-              name="Republican Party"
+              id="all-party"
+              name="Party"
+              value="testest"
+              onClick={(e) => updatePartyFilter(e)}
+              defaultChecked
+            ></input>
+            <label className="filter-label" htmlFor="all-party">
+              All
+            </label>
+            <br></br>
+            <input
+              type="radio"
+              id="radio-republican"
+              name="Party"
               onClick={(e) => updatePartyFilter(e)}
             ></input>
-            <label className="filter-label" htmlFor="republican">
+            <label className="filter-label" htmlFor="radio-republican">
               Republican
             </label>
             <br></br>
             <input
               type="radio"
-              id="democrat"
-              name="Democratic Party"
+              id="radio-democrat"
+              name="Party"
               onClick={(e) => updatePartyFilter(e)}
             ></input>
-            <label className="filter-label" htmlFor="democrat">
+            <label className="filter-label" htmlFor="radio-democrat">
               Democrat
             </label>
-
             <br></br>
             <input
               type="radio"
-              id="other"
-              name="Other"
+              id="radio-other"
+              name="Party"
               onClick={(e) => updatePartyFilter(e)}
             ></input>
-            <label className="filter-label" htmlFor="other">
+            <label className="filter-label" htmlFor="radio-other">
               Other
             </label>
           </form>
@@ -137,21 +177,25 @@ function DetailedSearch() {
               <div className="mobile-filters">
                 <select
                   defaultValue="congressPeople"
+                  id="congresspeople"
                   className="custom-select landing-dropdown"
+                  onChange={(e) => updateBranchFilter(e)}
                 >
-                  <option value="congressPeople">Congress People</option>
-                  <option value="representatives">Representatives</option>
-                  <option value="senators">Senators</option>
+                  <option value="all-chamber">Congresspeople</option>
+                  <option value="radio-representative">Representatives</option>
+                  <option value="radio-senator">Senators</option>
                 </select>
 
                 <select
-                  defaultValue="party"
+                  defaultValue="all"
                   className="custom-select landing-dropdown"
+                  id="party"
+                  onChange={(e) => updatePartyFilter(e)}
                 >
-                  <option value="party">Party</option>
-                  <option value="democrat">Democrat</option>
-                  <option value="republican">Republican</option>
-                  <option value="other">Other</option>
+                  <option value="all-party">All Parties</option>
+                  <option value="radio-democrat">Democratic Party</option>
+                  <option value="radio-republican">Republican Party</option>
+                  <option value="radio-other">Other</option>
                 </select>
               </div>
             </div>
@@ -161,14 +205,14 @@ function DetailedSearch() {
                 officials.length > 0 &&
                 officials
                   .filter((official) =>
-                    branchFilter.size == 0
+                    branchFilter.length == 0
                       ? true
-                      : branchFilter.has(official.office)
+                      : branchFilter.toLowerCase() == official.office.toLowerCase()
                   )
                   .filter((official) =>
-                    partyFilter.size == 0
+                    partyFilter.length == 0
                       ? true
-                      : partyFilter.has(official.party)
+                      : partyFilter.toLowerCase() == official.party.toLowerCase()
                   )
                   .map((official) => CandidateCard(official))}
             </div>

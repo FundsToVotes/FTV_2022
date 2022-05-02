@@ -41,7 +41,7 @@ export class HomePage extends Component {
               polititions get their funding from and their voting history thus
               far.
             </p>
-            <a href="/take-action" className="btn landing-button learn-more">
+            <a href="/about" className="btn landing-button learn-more">
               Learn More - Our Team
             </a>
           </div>

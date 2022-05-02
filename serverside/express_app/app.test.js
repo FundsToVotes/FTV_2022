@@ -127,8 +127,13 @@ describe("Application Endpoint Tests", () => {
             await supertest(app).get('/v1/topten?firstName=Maria&lastName=Cantwell&cycle=2020')
                 .expect(200)
                 .then((response) => {
-                    expect(response.body.length > 0)
-                    let oneEntry = response.body[0]
+                    let name = response.body.name
+                    expect(typeof(name) == String)
+                    let cycle = response.body.cycle
+                    expect(typeof(cycle) == Number)
+                    let data = response.body.data
+                    expect(data.length > 0)
+                    let oneEntry = data[0]
                     expect(typeof(oneEntry["industry_name"]) == String)
                     expect(typeof(oneEntry["industry_code"]) == String)
                     expect(typeof(oneEntry["indivs"]) == Number)

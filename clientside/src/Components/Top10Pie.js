@@ -15,7 +15,8 @@ export default class Top10Pie extends Component {
       .then((response) => response.json())
       .then((data) => {
         //somehow get rep name
-        let top10 = data;
+          let top10 = data.data;
+          let cycle = data.cycle;
 
         //fetch mans, do things with data
         let values = [];
@@ -56,7 +57,7 @@ export default class Top10Pie extends Component {
 
         var layout = {
           title: {
-            text: `Top 10 Industries Supporting ${this.props.repsName}`,
+            text: `Top 10 Industries Supporting ${this.props.repsName} in ${cycle}`,
             font: {
               family: "Optima, sans-serif",
             },
