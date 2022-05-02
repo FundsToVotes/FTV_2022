@@ -28,9 +28,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.options("*", cors())
 
-// for building and deploying. 
+// // for building and deploying. 
 // var con = mysql.createPool({
-//     connectionLimit: 5,
+//     connectionLimit: 500,
 //     host:"mysql",
 //     user:"root",
 //     password:"secret",

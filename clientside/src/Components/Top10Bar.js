@@ -15,10 +15,10 @@ export default class Top10Bar extends Component {
       .then((response) => response.json())
       .then((data) => {
         // this.setState({ repsData: data });
-        console.log("this is the data" + JSON.stringify(data.data))
-        if (data.length > 0) {
+        if (data.data.length > 0) {
           //somehow get rep name
           let top10 = data.data;
+          let cycle = data.cycle;
           //fetch mans, do things with data
           let values = [];
           let labels = [];
@@ -81,10 +81,11 @@ export default class Top10Bar extends Component {
             showlegend: true,
             legend: {
               x: 1,
-              xanchor: 'right',
-              y: 1},
+              xanchor: "right",
+              y: 1,
+            },
             title: {
-              text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.props.repsName}`,
+              text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.props.repsName} in ${cycle}`,
               font: {
                 family: "Optima, sans-serif",
               },
@@ -101,23 +102,42 @@ export default class Top10Bar extends Component {
         var config = {
           responsive: true,
           displaylogo: false,
-          modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d', 'hoverClosestGl2d', 'hoverClosestPie', 'toggleHover', 'resetViews', 'sendDataToCloud', 'toggleSpikelines', 'resetViewMapbox'],
+          modeBarButtonsToRemove: [
+            "zoom2d",
+            "pan2d",
+            "select2d",
+            "lasso2d",
+            "zoomIn2d",
+            "zoomOut2d",
+            "autoScale2d",
+            "resetScale2d",
+            "hoverClosestGl2d",
+            "hoverClosestPie",
+            "toggleHover",
+            "resetViews",
+            "sendDataToCloud",
+            "toggleSpikelines",
+            "resetViewMapbox",
+          ],
           toImageButtonOptions: {
-            format: 'png',
+            format: "png",
             filename: `PACvsIndividualChart-${splitName[1]}`,
             height: 500,
             width: 500,
-            scale: 8
-          }}
+            scale: 8,
+          },
+        };
         Plotly.newPlot(`barchart1`, data1, layout1, config);
       });
   }
 
   render() {
     //return <div>{this.state.plot}</div>;
-   return( <div>
-    <div id="barchart1"></div>
-  </div>)
+    return (
+      <div>
+        <div id="barchart1"></div>
+      </div>
+    );
   }
 }
 

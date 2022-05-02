@@ -1,10 +1,9 @@
-// import Plotly from 'plotly.js'
 import React, { Component } from "react";
-//import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
-import defaultProfile from "../images/default-profile.png";
+import defaultProfile from "../images/placeholder-square.png";
 import { ComparisonModal } from "./ComparisonModal";
 import ButterflyClass from "./ButterflyClass";
+import unavailImg from "../images/comparison-unavail.png";
 
 export class ComparisonPage extends Component {
   constructor(props) {
@@ -48,14 +47,17 @@ export class ComparisonPage extends Component {
     return (
       <div>
         <div className="details-side-header">
-          <h2>{details.name}</h2>
-          <h3 className="position-text mb-3">{details.office}</h3>
+          <h2 className="comp-resize">{details.name}</h2>
+          <h3 className="position-text mb-3 comp-resize">{details.office}</h3>
           <div className="image-box">
             <div>
               <img
                 src={details.photoUrl}
                 alt="candidate headshot"
-                className="headshot image-details-cropper"
+                className={
+                  "headshot image-details-cropper " +
+                  this.colorCodeBackground(details.party)
+                }
                 onError={(event) => {
                   event.target.src = defaultProfile;
                   event.onerror = null;
@@ -65,14 +67,14 @@ export class ComparisonPage extends Component {
           </div>
 
           <h4
-            className="mt-3"
+            className="mt-3 comp-resize"
             style={{ color: this.colorCodeParty(details.party) }}
           >
             {details.party}
           </h4>
         </div>
 
-        <h5 className="mt-4">DC Office Number:</h5>
+        <h5 className="mt-4 comp-resize">DC Office Number:</h5>
         <a
           className="phone-for-mobile"
           href={`tel:${this.phoneToString(details.phones)}`}
@@ -81,10 +83,10 @@ export class ComparisonPage extends Component {
         </a>
         <p className="phone-for-desktop">{details.phones}</p>
 
-        <h5 className="mt-3">Congressperson Websites:</h5>
+        <h5 className="mt-3 comp-resize">Congressperson Websites:</h5>
         {details.urls}
 
-        <h5 className="mt-3">Office Mailing Address:</h5>
+        <h5 className="mt-3 comp-resize">Office Mailing Address:</h5>
         {details.address}
       </div>
     );
@@ -109,13 +111,19 @@ export class ComparisonPage extends Component {
   };
 
   makeButterflyChart = (details1, details2) => {
-    console.log("bf function");
-    console.log(`${details2.name} + ${details1.name}`);
     return (
       <div>
         <ButterflyClass repsName1={details1.name} repsName2={details2.name} />
       </div>
     );
+  };
+
+  colorCodeBackground = (party) => {
+    if (party === "Republican Party") {
+      return "republican-background";
+    } else {
+      return "democrat-background";
+    }
   };
 
   render() {
@@ -128,18 +136,9 @@ export class ComparisonPage extends Component {
     if (this.state.repTwo) {
       sidePanelTwo = this.makeSidePanel(this.state.repTwo);
     }
-    // let BarChartOne;
-    // if (this.state.repOne) {
-    //   BarChartOne = this.makeBarChart(this.state.repOne);
-    // }
-    // let BarChartTwo;
-    // if (this.state.repTwo) {
-    //   BarChartTwo = this.makeBarChart(this.state.repTwo);
-    // }
 
     let ButterflyChart;
     if (this.state.repOne && this.state.repTwo) {
-      console.log("here");
       ButterflyChart = this.makeButterflyChart(
         this.state.repTwo,
         this.state.repOne
@@ -162,11 +161,22 @@ export class ComparisonPage extends Component {
       <div className="white-container">
         <div className="comparison-header">
           <h1>Campaign Comparison</h1>
-          <h2>{candidates}</h2>
+          <h2 className="candidate-names">{candidates}</h2>
         </div>
 
-        <div className="mobile-comparison card info-card m-4">
-          <h2> Please go to the desktop site to use this feature.</h2>
+        <div className="mobile-comparison m-5">
+          <img
+            src={unavailImg}
+            className="mobile-img"
+            alt="man sitting next to computer"
+          />
+          <h2 className="mt-3">Unavailable Feature</h2>
+          <p className="mobile-text">
+            Please go to the desktop site to use this feature.
+          </p>
+          <a href="/home" className="btn landing-button">
+            Go Home
+          </a>
         </div>
 
         <div className="vertical-stretch">

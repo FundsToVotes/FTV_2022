@@ -13,7 +13,7 @@ import twitterIcon from "../images/twitter.svg";
 import instagramIcon from "../images/instagram.svg";
 import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
-import defaultProfile from "../images/default-profile.png";
+import defaultProfile from "../images/placeholder-square.png";
 import BillsData from "./BillsData";
 import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
@@ -61,14 +61,13 @@ export default function PersonDetails() {
 
   const fetchRepresentativeDetails = () => {
     fetch(
-      `https://api.fundstovote.com/v1/representativeDetails?firstName=${firstName}&lastName=${lastName}`
+      `http://localhost:3000/v1/representativeDetails?firstName=${firstName}&lastName=${lastName}`
     )
       .then((response) => response.json())
       .then((data) => {
         if (data.urls) {
           let _ = data.urls.filter((d) => d.includes(".gov"));
           if (_.length > 0) {
-            console.log(_);
             data.urls = (
               <div>
                 {_.map((d) => (
@@ -115,6 +114,14 @@ export default function PersonDetails() {
     }
   };
 
+  const colorCodeBackground = (party) => {
+    if (party === "Republican Party") {
+      return "republican-background";
+    } else {
+      return "democrat-background";
+    }
+  };
+
   const phoneToString = (phone) => {
     if (phone == undefined) {
       return;
@@ -151,7 +158,10 @@ export default function PersonDetails() {
                 <img
                   src={details.photoUrl}
                   alt="candidate headshot"
-                  className="headshot image-details-cropper"
+                  className={
+                    "headshot image-details-cropper " +
+                    colorCodeBackground(details.party)
+                  }
                   onError={(event) => {
                     event.target.src = defaultProfile;
                     event.onerror = null;
@@ -211,12 +221,13 @@ export default function PersonDetails() {
                 <div className="graph-explanation">
                   <h5>What does this mean?</h5>
                   <p>
-                    What is a pac? A Pac, or political action committee is a
-                    term for a political committee that raises and spends money
-                    in order to elect and defeat candidates. Most PACs represent
-                    businesses, labor, or ideological interests.
+                    A Pac, or political action committee is a term for a
+                    political committee that raises and spends money in order to
+                    elect and defeat candidates. Most PACs represent businesses,
+                    labor, or ideological interests. An individual contribution
+                    is a contribution made by an individual to a politician.
                     <br></br>
-                    The bar chart shows total contributions by industry
+                    The bar chart shows total contributions by industry.
                   </p>
                 </div>
                 <Top10Bar repsName={representative} />
@@ -230,7 +241,7 @@ export default function PersonDetails() {
                   <h5>What does this mean?</h5>
                   <p>
                     This pie chart shows the percent total of contributions to a
-                    candidate by a particular industry
+                    candidate by a particular industry.
                   </p>
                 </div>
                 <Top10Pie repsName={representative} />

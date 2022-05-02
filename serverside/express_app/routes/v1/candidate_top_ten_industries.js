@@ -100,8 +100,13 @@ router.get('/', function(req, res, next) {
       })
       return
     }
-    if (data && data.length > 0) {
-      res.send(data)
+    if (data.length > 0) {
+      let payload = {
+        name: identifier,
+        cycle: cycle,
+        data: data
+      }
+      res.send(payload)
     } else {
       res.status(404)
       res.send("No results found for " + (candidateId || identifier) + " in cycle " + cycle )

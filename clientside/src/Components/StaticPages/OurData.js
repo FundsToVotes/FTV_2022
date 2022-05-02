@@ -18,13 +18,13 @@ export class OurData extends Component {
         <div className="static-header">
           <h1>Our Data</h1>
           <p className="header-text">
-            Funds to Votes relies on free, publicly-available APIs. We thank the
+            Funds to Vote relies on free, publicly-available APIs. We thank the
             sponsors and maintainers of these APIs for supporting civic
-            technology. We don't save your information. See our{" "}
-            <Link to="privacy-policy" className="privacy-link">
-              Privacy Policy
-            </Link>
-            .
+            technology. We don't save your information. See the bottom of our{" "}
+            <Link to="about" className="privacy-link">
+              About Page
+            </Link>{" "}
+            for more information on our privacy policy.
           </p>
         </div>
         <div className="static-container">
