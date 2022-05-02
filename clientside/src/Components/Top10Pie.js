@@ -1,4 +1,4 @@
-import Plot from "react-plotly.js";
+import Plotly from "plotly.js";
 import React, { Component } from "react";
 
 export default class Top10Pie extends Component {
@@ -10,7 +10,7 @@ export default class Top10Pie extends Component {
   componentDidMount() {
     let splitName = this.props.repsName.split(" ");
     fetch(
-      `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
+      `https://api.fundstovote.com/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -63,19 +63,41 @@ export default class Top10Pie extends Component {
             },
             xref: "paper",
           },
-          legend: {
-            font: {
-              family: "Optima, sans-serif",
-            },
-          },
+          showlegend: false,
+          // legend: {
+          //   font: {
+          //     family: "Optima, sans-serif",
+          //   },
+          //   x: 1,
+          //   xanchor: 'right',
+          //   y: 1
+        //  },
           width: "600",
         };
+        var config = {
+          displaylogo: false,
+          responsive: true,
+          toImageButtonOptions: {
+            format: 'png',
+           // resolution: 10,
+            filename: `Top10Pie-${splitName[1]}`,
+            height: 500,
+            width: 500,
+            scale: 8
 
-        this.setState({ plot: <Plot data={value} layout={layout} /> });
+          }}
+
+        Plotly.newPlot(`pie1`, value, layout, config);
+
+       // this.setState({ plot: <Plot data={value} layout={layout} /> });
+        
       });
   }
 
   render() {
-    return <div>{this.state.plot}</div>;
+    //return <div>{this.state.plot}</div>;
+   return( <div>
+    <div id="pie1"></div>
+  </div>)
   }
 }

@@ -1,4 +1,4 @@
-import Plot from "react-plotly.js";
+import Plotly from "plotly.js";
 import React, { Component } from "react";
 
 export default class Top10Bar extends Component {
@@ -10,7 +10,7 @@ export default class Top10Bar extends Component {
   componentDidMount() {
     let splitName = this.props.repsName.split(" ");
     fetch(
-      `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
+      `https://api.fundstovote.com/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -73,10 +73,14 @@ export default class Top10Bar extends Component {
 
           var data1 = [trace1, trace2];
 
-          var layout = {
+          var layout1 = {
             barmode: "stack",
             width: "600",
-            autosize: true,
+            showlegend: true,
+            legend: {
+              x: 1,
+              xanchor: 'right',
+              y: 1},
             title: {
               text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.props.repsName}`,
               font: {
@@ -90,15 +94,34 @@ export default class Top10Bar extends Component {
             xref: "paper",
           };
 
-          this.setState({ plot: <Plot data={data1} layout={layout} /> });
-        } else {
-          this.setState({ plot: <div /> });
+          //this.setState({ plot: <Plot data={data1} layout={layout1} /> });
         }
+        var config = {
+          responsive: true,
+          displaylogo: false,
+          modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d', 'hoverClosestGl2d', 'hoverClosestPie', 'toggleHover', 'resetViews', 'sendDataToCloud', 'toggleSpikelines', 'resetViewMapbox'],
+          toImageButtonOptions: {
+            format: 'png',
+            filename: `PACvsIndividualChart-${splitName[1]}`,
+            height: 500,
+            width: 500,
+            scale: 8
+          }}
+        Plotly.newPlot(`barchart1`, data1, layout1, config);
       });
   }
 
   render() {
-    return <div>{this.state.plot}</div>;
+    //return <div>{this.state.plot}</div>;
+   return( <div>
+    <div id="barchart1"></div>
+  </div>)
   }
 }
-//export default Top10Bar;
+
+/*video notes!
+lol
+
+video no slides, don't exceed 10 slides
+
+*/

@@ -80,8 +80,8 @@ export default class ButterflyChart1 extends Component {
       
             yaxis: 'y2',
             xaxis: 'x2',
-            name: "Individual Contributions",
-            type: "bar",
+            name: `${this.props.repsName1}`,
+                        type: "bar",
             marker: {
               color: colorScheme[8],
             },
@@ -123,7 +123,7 @@ export default class ButterflyChart1 extends Component {
                  //y: xAxis,
                  text: xAxis.map(String),
                  textposition: 'auto',
-            name: "PAC Contributions",
+            name: `${this.props.repsName2}`,
             type: "bar",
             marker: {
               color: colorScheme[0],
@@ -131,7 +131,7 @@ export default class ButterflyChart1 extends Component {
             orientation: "h"
       
           };
-      
+    
           var data1 = [trace1, trace2];
       
           var layout1 = {
@@ -139,7 +139,7 @@ export default class ButterflyChart1 extends Component {
            xaxis:{
              autorange: 'reversed'},
              title: {
-                text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.props.repsName1} and ${this.props.repsName2}`,
+                text: `Amount of Contributions by Industry<br>for ${this.props.repsName1} and ${this.props.repsName2}`,
                 font: {
                   family: "Optima, sans-serif",
                 },
@@ -156,7 +156,7 @@ export default class ButterflyChart1 extends Component {
 
         }
         var config = {responsive: true}
-        Plotly.newPlot(`myDiv`, data1, layout1, config);
+        Plotly.newPlot(`butterfly`, data1, layout1, config);
 
       });
   }
@@ -164,7 +164,7 @@ export default class ButterflyChart1 extends Component {
   render() {
     //return <div>{this.state.plot}</div>;
    return( <div>
-    <div id="myDiv"></div>
+    <div id="butterfly"></div>
   </div>)
   }
 }
