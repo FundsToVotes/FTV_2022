@@ -847,12 +847,18 @@ a:hover {
 }
 
 @media (min-width: 736px){
-.mobile-comparison {
+  .mobile-comparison {
     display: none;
+  }
+  .candidate-names {
+    display: block;
   }
 }
 @media (max-width: 736px){
   .comparison-tool-all {
+    display: none;
+  }
+  .candidate-names {
     display: none;
   }
 }

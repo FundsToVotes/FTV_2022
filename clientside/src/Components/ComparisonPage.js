@@ -161,7 +161,7 @@ export class ComparisonPage extends Component {
       <div className="white-container">
         <div className="comparison-header">
           <h1>Campaign Comparison</h1>
-          <h2>{candidates}</h2>
+          <h2 className="candidate-names">{candidates}</h2>
         </div>
 
         <div className="mobile-comparison m-5">
