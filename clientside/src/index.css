@@ -565,6 +565,8 @@ a:hover {
   border-right: 3px solid #8fbe5a;
   border-bottom: 3px solid #8fbe5a;
   align-self: stretch;
+  height: 100%;
+  overflow: scroll;
 }
 
 .comp-side-right {
@@ -576,9 +578,12 @@ a:hover {
   flex: 1 1 0px;
   background-color: rgba(245, 188, 41, 0.1);
   align-self: stretch;
+  height: 100%;
+  overflow: scroll;
 }
 
 .comp-viz-container {
+  height: 100%;
   padding: 1rem;
   flex: 3 1 0px;
   align-self: stretch;
@@ -658,6 +663,7 @@ a:hover {
 
 .select-candidate {
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .card-comp-info {
@@ -796,7 +802,7 @@ a:hover {
     font-size: .75rem;
   }
 
-  h1, h2, h3, h4 {
+  h1, h2, h3, h4, h5 {
     font-size: 1.5rem;
   }
 
@@ -820,10 +826,6 @@ a:hover {
     margin-right: 0rem;
   }
 
-  .comparison-tool-all {
-    display: none;
-  }
-
   .side-panel-header {
     display: none;
   }
@@ -831,11 +833,19 @@ a:hover {
 }
 
 @media (min-width: 625px) {
-  .mobile-comparison {
-    display: none;
-  }
   .computer-img {
     height: 20rem;
+  }
+}
+
+@media (min-width: 736px){
+.mobile-comparison {
+    display: none;
+  }
+}
+@media (max-width: 736px){
+  .comparison-tool-all {
+    display: none;
   }
 }
 
@@ -917,6 +927,10 @@ a:hover {
   }
   .landing-img{
     display: none;
+  }
+
+  .comp-resize {
+    font-size: 1rem;
   }
 }
 

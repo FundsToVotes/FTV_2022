@@ -47,8 +47,8 @@ export class ComparisonPage extends Component {
     return (
       <div>
         <div className="details-side-header">
-          <h2>{details.name}</h2>
-          <h3 className="position-text mb-3">{details.office}</h3>
+          <h2 className="comp-resize">{details.name}</h2>
+          <h3 className="position-text mb-3 comp-resize">{details.office}</h3>
           <div className="image-box">
             <div>
               <img
@@ -67,14 +67,14 @@ export class ComparisonPage extends Component {
           </div>
 
           <h4
-            className="mt-3"
+            className="mt-3 comp-resize"
             style={{ color: this.colorCodeParty(details.party) }}
           >
             {details.party}
           </h4>
         </div>
 
-        <h5 className="mt-4">DC Office Number:</h5>
+        <h5 className="mt-4 comp-resize">DC Office Number:</h5>
         <a
           className="phone-for-mobile"
           href={`tel:${this.phoneToString(details.phones)}`}
@@ -83,10 +83,10 @@ export class ComparisonPage extends Component {
         </a>
         <p className="phone-for-desktop">{details.phones}</p>
 
-        <h5 className="mt-3">Congressperson Websites:</h5>
+        <h5 className="mt-3 comp-resize">Congressperson Websites:</h5>
         {details.urls}
 
-        <h5 className="mt-3">Office Mailing Address:</h5>
+        <h5 className="mt-3 comp-resize">Office Mailing Address:</h5>
         {details.address}
       </div>
     );
