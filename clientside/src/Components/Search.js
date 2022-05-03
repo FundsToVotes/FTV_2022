@@ -84,20 +84,6 @@ function DetailedSearch() {
     fetchRepresentatives();
   }, [address]);
 
-  // const mobileFilter = (type, e) => {
-  //   if (type === "congressPeople") {
-  //     branchFilter.add(e.target.name);
-  //   } else {
-  //     branchFilter.delete(e.target.name);
-  //   }
-
-  //   if (type === "party") {
-  //     partyFilter.add(e.target.name);
-  //   } else {
-  //     partyFilter.delete(e.target.name);
-  //   }
-  // };
-
   return (
     <div className="white-container vertical-stretch">
       <div className="detailed-search-page">

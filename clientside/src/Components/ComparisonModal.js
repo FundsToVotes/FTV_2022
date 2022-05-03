@@ -137,6 +137,31 @@ export class ComparisonModal extends Component {
               </div>
             </div>
 
+            <div className="mobile-filters">
+              <select
+                defaultValue="congressPeople"
+                id="congresspeople"
+                className="custom-select m-1"
+                // onChange={(e) => updateBranchFilter(e)}
+              >
+                <option value="all-chamber">Congresspeople</option>
+                <option value="radio-representative">Representatives</option>
+                <option value="radio-senator">Senators</option>
+              </select>
+
+              <select
+                defaultValue="all"
+                className="custom-select m-1"
+                id="party"
+                // onChange={(e) => updatePartyFilter(e)}
+              >
+                <option value="all-party">All Parties</option>
+                <option value="radio-democrat">Democratic Party</option>
+                <option value="radio-republican">Republican Party</option>
+                <option value="radio-other">Other</option>
+              </select>
+            </div>
+
             {/* Candidate Cards */}
             <div className="modal-cards-container mt-2">
               {this.state.address &&

@@ -174,7 +174,7 @@ export class ComparisonPage extends Component {
           <p className="mobile-text">
             Please go to the desktop site to use this feature.
           </p>
-          <a href="/home" className="btn landing-button">
+          <a href="/" className="btn landing-button">
             Go Home
           </a>
         </div>
