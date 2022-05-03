@@ -156,11 +156,6 @@ a:hover {
   color: #8fbe5a;
 }
 
-.landing-dropdown {
-  margin-right: 1rem;
-  width: 20rem;
-  display: none;
-}
 
 .privacy-link {
   text-decoration: none;
@@ -674,6 +669,7 @@ a:hover {
 
 .mobile-filters {
   display: flex;
+  flex-direction: row;
   margin: 1rem;
   align-items: center;
   justify-content: center;
@@ -899,9 +895,6 @@ a:hover {
 }
 
 @media (min-width: 768px) {
-  .landing-dropdown {
-    display: block;
-  }
   .landing-card {
     width: 45%;
   }
@@ -913,7 +906,7 @@ a:hover {
     display: block;
   }
   .phone-for-mobile {
-    display:none;
+    display: none;
   }
   .computer-img {
     height: 25rem;

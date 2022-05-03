@@ -128,11 +128,11 @@ export default class Top10Bar extends Component {
           },
         };
         Plotly.newPlot(`barchart1`, data1, layout1, config);
-      });
+      })
+      .catch(<p>No funding data at this time</p>);
   }
 
   render() {
-    //return <div>{this.state.plot}</div>;
     return (
       <div>
         <div id="barchart1"></div>

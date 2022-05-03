@@ -29,16 +29,24 @@ function DetailedSearch() {
       if (e.target.id == "all-chamber") {
         setBranchFilter("");
       } else {
-        setBranchFilter(e.target.id == "radio-representative" ? "U.S. Representative" : "U.S. Senator");
+        setBranchFilter(
+          e.target.id == "radio-representative"
+            ? "U.S. Representative"
+            : "U.S. Senator"
+        );
       }
-      document.querySelector("#congresspeople").value = e.target.id
+      document.querySelector("#congresspeople").value = e.target.id;
     } else {
       if (e.target.value == "all-chamber") {
         setBranchFilter("");
       } else {
-        setBranchFilter(e.target.value == "radio-representative" ? "U.S. Representative" : "U.S. Senator");
+        setBranchFilter(
+          e.target.value == "radio-representative"
+            ? "U.S. Representative"
+            : "U.S. Senator"
+        );
       }
-      document.querySelector(`#${e.target.value}`).checked = true
+      document.querySelector(`#${e.target.value}`).checked = true;
     }
   };
 
@@ -47,16 +55,28 @@ function DetailedSearch() {
       if (e.target.id == "all-party") {
         setPartyFilter("");
       } else {
-        setPartyFilter(e.target.id == "radio-republican" ? "Republican Party" : e.target.id == "radio-democrat" ? "Democratic Party": "other");
+        setPartyFilter(
+          e.target.id == "radio-republican"
+            ? "Republican Party"
+            : e.target.id == "radio-democrat"
+            ? "Democratic Party"
+            : "other"
+        );
       }
-      document.querySelector("#party").value = e.target.id
+      document.querySelector("#party").value = e.target.id;
     } else {
       if (e.target.value == "all-party") {
         setPartyFilter("");
       } else {
-        setPartyFilter(e.target.value == "radio-republican" ? "Republican Party" : e.target.value == "radio-democrat" ? "Democratic Party": "other");
+        setPartyFilter(
+          e.target.value == "radio-republican"
+            ? "Republican Party"
+            : e.target.value == "radio-democrat"
+            ? "Democratic Party"
+            : "other"
+        );
       }
-      document.querySelector(`#${e.target.value}`).checked=true
+      document.querySelector(`#${e.target.value}`).checked = true;
     }
   };
 
@@ -174,30 +194,28 @@ function DetailedSearch() {
           </div>
           <div className="search-results">
             <div className="mobile-filters">
-              <div className="mobile-filters">
-                <select
-                  defaultValue="congressPeople"
-                  id="congresspeople"
-                  className="custom-select landing-dropdown"
-                  onChange={(e) => updateBranchFilter(e)}
-                >
-                  <option value="all-chamber">Congresspeople</option>
-                  <option value="radio-representative">Representatives</option>
-                  <option value="radio-senator">Senators</option>
-                </select>
+              <select
+                defaultValue="congressPeople"
+                id="congresspeople"
+                className="custom-select m-1"
+                onChange={(e) => updateBranchFilter(e)}
+              >
+                <option value="all-chamber">Congresspeople</option>
+                <option value="radio-representative">Representatives</option>
+                <option value="radio-senator">Senators</option>
+              </select>
 
-                <select
-                  defaultValue="all"
-                  className="custom-select landing-dropdown"
-                  id="party"
-                  onChange={(e) => updatePartyFilter(e)}
-                >
-                  <option value="all-party">All Parties</option>
-                  <option value="radio-democrat">Democratic Party</option>
-                  <option value="radio-republican">Republican Party</option>
-                  <option value="radio-other">Other</option>
-                </select>
-              </div>
+              <select
+                defaultValue="all"
+                className="custom-select m-1"
+                id="party"
+                onChange={(e) => updatePartyFilter(e)}
+              >
+                <option value="all-party">All Parties</option>
+                <option value="radio-democrat">Democratic Party</option>
+                <option value="radio-republican">Republican Party</option>
+                <option value="radio-other">Other</option>
+              </select>
             </div>
 
             <div className="results">
@@ -207,12 +225,14 @@ function DetailedSearch() {
                   .filter((official) =>
                     branchFilter.length == 0
                       ? true
-                      : branchFilter.toLowerCase() == official.office.toLowerCase()
+                      : branchFilter.toLowerCase() ==
+                        official.office.toLowerCase()
                   )
                   .filter((official) =>
                     partyFilter.length == 0
                       ? true
-                      : partyFilter.toLowerCase() == official.party.toLowerCase()
+                      : partyFilter.toLowerCase() ==
+                        official.party.toLowerCase()
                   )
                   .map((official) => CandidateCard(official))}
             </div>
