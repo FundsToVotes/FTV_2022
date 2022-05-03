@@ -62,17 +62,14 @@ export default class ButterflyChart1 extends Component {
 
           let xAxis = [];
           let yAxis1 = [];
-          // let yAxis2 = [];
 
           top10_1.forEach((d) => {
             xAxis.push(d.industry_name);
             yAxis1.push(d.total);
-            // yAxis2.push(d.pacs);
           });
 
           var trace1 = {
             x: yAxis1,
-            //y: xAxis,
             text: xAxis.map(String),
             textposition: "auto",
 
@@ -97,18 +94,14 @@ export default class ButterflyChart1 extends Component {
 
           let xAxis_2 = [];
           let yAxis1_2 = [];
-          // let yAxis2 = [];
 
           top10_2.forEach((d) => {
             xAxis_2.push(d.industry_name);
             yAxis1_2.push(d.total);
-            // yAxis2.push(d.pacs);
           });
 
           var trace2 = {
             x: yAxis1_2,
-            // y: xAxis ,
-            //y: xAxis,
             text: xAxis.map(String),
             textposition: "auto",
             name: `${this.props.repsName2}`,
@@ -137,8 +130,6 @@ export default class ButterflyChart1 extends Component {
               family: "Optima, sans-serif",
             },
           };
-
-          //this.setState({ plot: <Plot data={data1} layout={layout1} style={{width: `100%`, height: `100%`}}/> });
         }
         var config = { responsive: true };
         Plotly.newPlot(`butterfly`, data1, layout1, config);
@@ -146,9 +137,18 @@ export default class ButterflyChart1 extends Component {
   }
 
   render() {
-    //return <div>{this.state.plot}</div>;
     return (
       <div>
+        <div className="graph-explanation comp-explanation">
+          <h5 className="graph-title mt-1">
+            Amount of Contrabutions by Industries
+          </h5>
+          <p className="mt-1">
+            This butterfly chart shows the amount of money each politition spent
+            on the <strong>2018</strong> election cycle.
+          </p>
+        </div>
+
         <div id="butterfly"></div>
       </div>
     );

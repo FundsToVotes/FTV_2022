@@ -14,7 +14,6 @@ export default class Top10Bar extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        // this.setState({ repsData: data });
         if (data.data.length > 0) {
           //somehow get rep name
           let top10 = data.data;

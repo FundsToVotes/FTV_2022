@@ -534,6 +534,8 @@ a:hover {
 .graph-explanation{
   margin-right: 1rem;
   margin-top: 1rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .graph-title {
@@ -543,6 +545,12 @@ a:hover {
 }
 
 /* Comparison Page */
+
+.comp-explanation {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 
 .comparison-header {
   text-align: center;
