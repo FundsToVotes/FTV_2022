@@ -1,5 +1,5 @@
-# Funds To Votes 2022
-This repository will contain both front end and serverside code for the continuation of the Funds To Votes project made by the UW iSchool capstone team Water Coolers. This README is still under construction as we continue to develop and create our project.
+# Funds To Vote 2022
+This repository will contain both front end and serverside code for the continuation of the Funds To Vote project made by the UW iSchool capstone team Water Coolers. This README is still under construction as we continue to develop and create our project.
 
 ## Purpose
 
@@ -24,8 +24,8 @@ To contribute, please create your own work in a branch and submit a pull request
 ## Continuation
 We hope that this project may be further developed by future iSchool capstone teams. Below are some things we wish that we had done and some ideas for continuation
 
-1. Placheolder
-2. Placeholder
+1. Cute and informational exports for the graphs we generate. One of the big things we wanted to do but ran out of time for was make exportable graphs that people could share on social media to spread funding awareness.
+2. We are going into an election cycle and would love for more up to dat information to be added to the site when an election cycle comes around.
 
 # Other
 
@@ -33,7 +33,7 @@ We hope that this project may be further developed by future iSchool capstone te
 It is highly recommended to use LF line endings for .sh scripts. This makes Linux distributions able to execute these scripts, as well as bash/git bash. You can change line endings by clicking the bottom right corner of the VSCode editor where it says CRLF or LF. If it says LF, you're good to go! LF vs CRLF can cause bugs that are hard to squish because the error messages are vague.
 
 ## Building
-In order to build each docker container, there are build sh scripts that you can run from your terminal to dockerize your microservices. 
+In order to build each docker container, there are build sh scripts that you can run from your terminal to dockerize your microservices.
 
 ### Running things locally
 Just run the code as you have learned to. The order of operations for running stuff is:
@@ -74,13 +74,16 @@ The BIGGEST learning curve for me was learning how to use bash scripts to make l
 
 Using Mysql workbench is super nice to see if there is any issue with data as well!
 
-Also, if you decide to redo or add to the API, be sure to use a folder/route with v2 to help with organization. 
+Also, if you decide to redo or add to the API, be sure to use a folder/route with v2 to help with organization.
 
 ## Carson
 
 ## Olivia
 
 ## Hailey
+The biggest mistake that I think I learned from during this project is that style and organization is important!! Never never never use inline style it is so messy and complicated to keep track of. That being said the index.css file is definitly conveluted as well. It is seperated into sections for each page but it will definitly take some reading through to get an understanding of what is going on.
+
+Another note on architecture and organization - whenever possible do not use react functions they are hella confusing and component extentions are just so much easier to pass data between.
 
 ## Contact information
 Olivia Victorino - ovictor@uw.edu
@@ -89,6 +92,6 @@ Carson Bryant - caronab@uw.edu
 
 Thomas Serrano - serrat@uw.edu
 
-Hailey Meister - hmeister@uw.edu
+Hailey Meister - hailey@whimsicle.net
 
 Please feel free to reach out to us if you have any questions!
