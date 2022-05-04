@@ -137,7 +137,7 @@ export class ComparisonModal extends Component {
               </div>
             </div>
 
-            <div className="mobile-filters">
+            <div className="modal-filters">
               <select
                 defaultValue="congressPeople"
                 id="congresspeople"

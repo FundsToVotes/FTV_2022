@@ -675,7 +675,7 @@ a:hover {
 
 /* Mobile Filters */
 
-.mobile-filters {
+.mobile-filters, .modal-filters {
   display: flex;
   flex-direction: row;
   margin: 1rem;
