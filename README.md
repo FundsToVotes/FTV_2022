@@ -77,6 +77,9 @@ Using Mysql workbench is super nice to see if there is any issue with data as we
 Also, if you decide to redo or add to the API, be sure to use a folder/route with v2 to help with organization.
 
 ## Carson
+One of the main tasks that we took on with this project was updating the websites UX/UI. This project has so much valuable information for users, but if the website itself doesn't look user-friendly, then people might not take advantage of all that our site has to offer. While we did make a lot of process in the UX/UI, I still think there's always more that could be improved!
+
+My advice to Funds to Vote's next designer is to work closely with the team's Front-End Developers to get an idea of what's feasible with their skillset, the given timeline, and to also get their opinions on information architecture. I'd recommend this so that you don't have to worry about running into any blockers later if your developers realize your design changes realistically can't be made given the scope of the project. 
 
 ## Olivia
 
