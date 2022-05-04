@@ -159,7 +159,7 @@ export default function PersonDetails() {
                   src={details.photoUrl}
                   alt="candidate headshot"
                   className={
-                    "headshot image-details-cropper " +
+                    "headshot image-details-cropper details-headshot " +
                     colorCodeBackground(details.party)
                   }
                   onError={(event) => {

@@ -55,7 +55,7 @@ export class ComparisonPage extends Component {
                 src={details.photoUrl}
                 alt="candidate headshot"
                 className={
-                  "headshot image-details-cropper " +
+                  "headshot image-details-cropper details-headshot " +
                   this.colorCodeBackground(details.party)
                 }
                 onError={(event) => {

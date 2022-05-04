@@ -406,6 +406,11 @@ a:hover {
   width: 100%;
 }
 
+.details-headshot {
+  height: 225px;
+  width: auto;
+}
+
 .filter-label {
   padding-left: 0.5rem;
 }
