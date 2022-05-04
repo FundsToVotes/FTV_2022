@@ -71,7 +71,23 @@ export default class Top10Pie extends Component {
           width: "600",
         };
 
-        this.setState({ plot: <Plot data={value} layout={layout} /> });
+        let content = (
+          <div className="graph-container">
+            <div className="graph-explanation">
+              <h5>What does this mean?</h5>
+              <p>
+                This pie chart shows the percent total of contributions to a
+                candidate by a particular industry.
+              </p>
+            </div>
+            <Plot data={value} layout={layout} />
+          </div>
+        );
+
+        this.setState({ plot: content });
+      })
+      .catch(() => {
+        this.setState({ plot: <p>No funding data at this time.</p> });
       });
   }
 

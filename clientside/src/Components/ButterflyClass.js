@@ -6,20 +6,16 @@ export default class ButterflyChart1 extends Component {
   constructor(props) {
     super(props);
     this.state = { repsData: {} };
-    console.log(this.props);
   }
 
   componentDidMount() {
     let splitName = this.props.repsName1.split(" ");
     let splitName2 = this.props.repsName2.split(" ");
-    console.log(splitName);
     fetch(
       `https://api.fundstovote.com/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
       .then((response) => response.json())
       .then((data) => {
-        // this.setState({ repsData: data });
-
         //caching to variable
         congressperson1 = data;
 
@@ -32,7 +28,6 @@ export default class ButterflyChart1 extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         congressperson2 = data;
 
         if (congressperson1 && congressperson2) {
@@ -132,14 +127,23 @@ export default class ButterflyChart1 extends Component {
           };
         }
         var config = { responsive: true };
+        this.setState({ error: <p></p>, display: "" });
         Plotly.newPlot(`butterfly`, data1, layout1, config);
-      });
+      })
+      .catch(
+        this.setState({
+          error: <p>Neither candidate has funding data at this time.</p>,
+          display: "no-data",
+        })
+      );
   }
 
   render() {
     return (
       <div>
-        <div className="graph-explanation comp-explanation">
+        <div
+          className={"graph-explanation comp-explanation " + this.state.display}
+        >
           <h5 className="graph-title mt-1">
             Amount of Contrabutions by Industries
           </h5>

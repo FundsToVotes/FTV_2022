@@ -126,15 +126,36 @@ export default class Top10Bar extends Component {
             scale: 8,
           },
         };
+        this.setState({ error: <p></p>, display: "" });
         Plotly.newPlot(`barchart1`, data1, layout1, config);
       })
-      .catch(<p>No funding data at this time</p>);
+      .catch(
+        this.setState({
+          error: <p className="mt-2">No funding data at this time.</p>,
+          display: "no-data",
+        })
+      );
   }
 
   render() {
     return (
       <div>
-        <div id="barchart1"></div>
+        <div className={"graph-container " + this.state.display}>
+          <div className="graph-explanation">
+            <h5>What does this mean?</h5>
+            <p>
+              A PAC, or political action committee, is a term for a political
+              committee that raises and spends money in order to elect and
+              defeat candidates. Most PACs represent businesses, labor, or
+              ideological interests. An individual contribution is a
+              contribution made by an individual to a politician.
+              <br></br>
+              The bar chart shows total contributions by industry.
+            </p>
+          </div>
+          <div id="barchart1"></div>
+        </div>
+        <div>{this.state.error}</div>
       </div>
     );
   }

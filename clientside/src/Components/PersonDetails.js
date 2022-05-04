@@ -49,7 +49,7 @@ export default function PersonDetails() {
     return (
       <a
         href={url}
-        key={platform}
+        key={platform + url}
         target="_blank"
         rel="noreferrer"
         className="mr-1"
@@ -217,35 +217,13 @@ export default function PersonDetails() {
               <h4 className="graph-title">
                 Political Action Committee vs. Individual Contrabutions
               </h4>
-              <div className="graph-container">
-                <div className="graph-explanation">
-                  <h5>What does this mean?</h5>
-                  <p>
-                    A PAC, or political action committee, is a term for a
-                    political committee that raises and spends money in order to
-                    elect and defeat candidates. Most PACs represent businesses,
-                    labor, or ideological interests. An individual contribution
-                    is a contribution made by an individual to a politician.
-                    <br></br>
-                    The bar chart shows total contributions by industry.
-                  </p>
-                </div>
-                <Top10Bar repsName={representative} />
-              </div>
+
+              <Top10Bar repsName={representative} />
             </div>
 
             <div className="m-2">
               <h4 className="graph-title">Top 10 Supporting Industries</h4>
-              <div className="graph-container">
-                <div className="graph-explanation">
-                  <h5>What does this mean?</h5>
-                  <p>
-                    This pie chart shows the percent total of contributions to a
-                    candidate by a particular industry.
-                  </p>
-                </div>
-                <Top10Pie repsName={representative} />
-              </div>
+              <Top10Pie repsName={representative} />
             </div>
           </div>
 

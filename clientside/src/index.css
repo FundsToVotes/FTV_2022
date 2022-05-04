@@ -527,6 +527,10 @@ a:hover {
   flex-direction: row;
 }
 
+.no-data {
+  display: none;
+}
+
 .graph-explanation > h5 {
   color: #8FBE5A;
 }
