@@ -221,7 +221,7 @@ export default function PersonDetails() {
                 <div className="graph-explanation">
                   <h5>What does this mean?</h5>
                   <p>
-                    A Pac, or political action committee is a term for a
+                    A PAC, or political action committee, is a term for a
                     political committee that raises and spends money in order to
                     elect and defeat candidates. Most PACs represent businesses,
                     labor, or ideological interests. An individual contribution
