@@ -183,11 +183,8 @@ export class About extends Component {
             </div>
             <div className="card info-card">
               <p>
-                Email the project team at{" "}
-                <a href="mailto:hello@fundstovotes.info">
-                  hello@fundstovotes.info
-                </a>
-                .
+                Contact information can be found on our Github ReadMe linked
+                below.
               </p>
               <p>
                 The project is now open sourced. Source code and documentation

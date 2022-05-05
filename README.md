@@ -82,6 +82,9 @@ One of the main tasks that we took on with this project was updating the website
 My advice to Funds to Vote's next designer is to work closely with the team's Front-End Developers to get an idea of what's feasible with their skillset, the given timeline, and to also get their opinions on information architecture. I'd recommend this so that you don't have to worry about running into any blockers later if your developers realize your design changes realistically can't be made given the scope of the project. 
 
 ## Olivia
+This was my first data visualization project with Plotly, and first full-stack application with a team. The biggest issue we had was refactoring code to fit the parameters of both react and plotly when dealing with state. Another challenge was designing how to generate the graphs programmatically, depending on user actions.
+
+I recommend reading up on State, and coordinating closely with your front-end developer or React engineer to learn the most efficeint way to trigger the visualizations. I also recommend reusing frameworks in our project to make calls to he API.
 
 ## Hailey
 The biggest mistake that I think I learned from during this project is that style and organization is important!! Never never never use inline style it is so messy and complicated to keep track of. That being said the index.css file is definitly conveluted as well. It is seperated into sections for each page but it will definitly take some reading through to get an understanding of what is going on.
@@ -89,7 +92,7 @@ The biggest mistake that I think I learned from during this project is that styl
 Another note on architecture and organization - whenever possible do not use react functions they are hella confusing and component extentions are just so much easier to pass data between.
 
 ## Contact information
-Olivia Victorino - ovictor@uw.edu
+Olivia Victorino - olivia.victorino@gmail.com
 
 Carson Bryant - caronab@uw.edu
 
