@@ -3,7 +3,7 @@ import navIcon from "../images/nav-icon.png";
 import circlePeople from "../images/circle-people.png";
 import piggyBank from "../images/piggy-bank.png";
 import presentingMan from "../images/presenting-man.png";
-import computer from "../images/computer.png";
+// import computer from "../images/computer.png";
 
 export default class LandingPage extends Component {
   render() {
@@ -70,7 +70,17 @@ export default class LandingPage extends Component {
               <a href="/" className="btn landing-button mt-3 landing-btn">
                 Show me the money
               </a>
-              <img src={computer} alt="computer" className="computer-img" />
+              <div className="outer">
+                {/* <img src={computer} alt="computer" className="computer-img" /> */}
+                <iframe
+                  className="inner"
+                  src="https://www.youtube.com/embed/EJR1H5tf5wE"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
             </div>
           </div>
           <p className="development-note">

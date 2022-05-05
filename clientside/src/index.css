@@ -724,6 +724,23 @@ a:hover {
   margin-bottom: 10rem;
 }
 
+.outer {
+    background-image: url("images/computer.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: auto;
+    height: 29rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+.inner {
+    width: 38rem;
+    height: 26rem;
+    padding: 4.7rem;
+    margin-top: .25rem;
+    margin-right: 1rem;
+}
+
 .display {
   display: flex;
   align-items: center;
@@ -778,10 +795,6 @@ a:hover {
 /* Mobile Friendly */
 
 @media (min-height: 375px) {
-  .computer-img {
-    height: 15rem;
-  }
-
   .landing-btn {
     font-size: 1rem;
   }
@@ -799,7 +812,6 @@ a:hover {
   }
 }
 
-
 @media (min-width: 541px) and (max-width: 625px) {
   .details-side-panel {
     display: flex;
@@ -808,9 +820,6 @@ a:hover {
 
   .details-info {
     margin-left: 1rem;
-  }
-  .computer-img {
-    height: 17rem;
   }
 }
 
@@ -850,12 +859,17 @@ a:hover {
   .side-panel-header {
     display: none;
   }
+  .outer {
+    height: 15rem;
+    width: auto;
+  }
 
-}
-
-@media (min-width: 625px) {
-  .computer-img {
-    height: 20rem;
+  .inner {
+    height: 10rem;
+    width: 17rem;
+    padding: 1rem;
+    margin-top: 1.7rem;
+    margin-left: 1.4rem;
   }
 }
 
@@ -867,6 +881,7 @@ a:hover {
     display: block;
   }
 }
+
 @media (max-width: 736px){
   .comparison-tool-all {
     display: none;
@@ -898,19 +913,6 @@ a:hover {
   }
 }
 
-@media (max-width: 875px) {
-  .display {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .left-container, .right-container {
-    width: 100%;
-    margin: 1rem;
-  }
-}
-
 @media (min-width: 768px) {
   .landing-card {
     width: 45%;
@@ -936,6 +938,19 @@ a:hover {
   }
   .results-panel {
     width: 100%;
+  }
+}
+
+@media (max-width: 1056px) {
+  .display {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left-container, .right-container {
+    width: 100%;
+    margin: 1rem;
   }
 }
 
@@ -979,5 +994,3 @@ a:hover {
     height: 25rem;
   }
 }
-
-
