@@ -14,7 +14,7 @@ export default class ButterflyChart1 extends Component {
     let splitName2 = this.props.repsName2.split(" ");
     console.log(splitName);
     fetch(
-      `https://api.fundstovote.com/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
+      `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -24,7 +24,7 @@ export default class ButterflyChart1 extends Component {
         congressperson1 = data;
 
         return fetch(
-          `https://api.fundstovote.com/v1/topten?firstName=${splitName2[0]}&lastName=${splitName2[1]}&cycle=2020`
+          `http://localhost:3000/v1/topten?firstName=${splitName2[0]}&lastName=${splitName2[1]}&cycle=2020`
         );
       })
       .then((response) => {
@@ -44,21 +44,6 @@ export default class ButterflyChart1 extends Component {
             values.push(d.total);
             labels.push(d.industry_name);
           });
-          var colorScheme = [];
-          var redWhiteGreen = [
-            "#1a4242",
-            "#005c5a",
-            "#006d5b",
-            "#187d54",
-            "#408c46",
-            "#699832",
-            "#96a216",
-            "#c9a700",
-            "#ffa600",
-            "#ffd500",
-          ];
-
-          colorScheme = redWhiteGreen;
 
           let xAxis = [];
           let yAxis1 = [];
@@ -68,20 +53,6 @@ export default class ButterflyChart1 extends Component {
             yAxis1.push(d.total);
           });
 
-          var trace1 = {
-            x: yAxis1,
-            text: xAxis.map(String),
-            textposition: "auto",
-
-            yaxis: "y2",
-            xaxis: "x2",
-            name: `${this.props.repsName1}`,
-            type: "bar",
-            marker: {
-              color: colorScheme[8],
-            },
-            orientation: "h",
-          };
 
           let top10_2 = congressperson2.data;
           //fetch mans, do things with data
@@ -100,16 +71,45 @@ export default class ButterflyChart1 extends Component {
             yAxis1_2.push(d.total);
           });
 
+          let xAxisRange = []
+          //Math.max(...yAxis1_2)
+
+          if(Math.max(...yAxis1_2) > Math.max(...yAxis1)){
+            xAxisRange = [0, Math.max(...yAxis1_2)]
+            console.log(xAxisRange)
+          }else{
+            xAxisRange = [0, Math.max(...yAxis1)]
+            console.log(xAxisRange)
+
+          }
+
+          var trace1 = {
+            x: yAxis1,
+            text: xAxis.map(String),
+            textposition: "outside",
+            yaxis: "y2",
+            xaxis: "x2",
+            name: `${this.props.repsName1}`,
+            type: "bar",
+            hovertemplate:
+            '<b>Sum of Donations</b>: %{x}<br>',
+            marker: {
+              color: `#F8BA1B`,
+            },
+            orientation: "h",
+          };
           var trace2 = {
             x: yAxis1_2,
-            text: xAxis.map(String),
-            textposition: "auto",
+            text: xAxis_2.map(String),
+            textposition: "outside",
             name: `${this.props.repsName2}`,
             type: "bar",
             marker: {
-              color: colorScheme[0],
+              color: `#91B05E`,
             },
             orientation: "h",
+            hovertemplate:
+                        '<b>Sum of Donations</b>: %{x}<br>'
           };
 
           var data1 = [trace1, trace2];
@@ -118,9 +118,31 @@ export default class ButterflyChart1 extends Component {
             grid: { rows: 1, columns: 2, pattern: "independent" },
             xaxis: {
               autorange: "reversed",
-            },
+                range: xAxisRange
+              },
+              xaxis2: {
+                range: xAxisRange
+              },
+            yaxis: {
+              autorange: true,
+              showgrid: false,
+              zeroline: false,
+              showline: false,
+              autotick: true,
+              ticks: '',
+              showticklabels: false            },
+              yaxis2: {
+                autorange: true,
+                showgrid: false,
+                zeroline: false,
+                showline: false,
+                autotick: true,
+                ticks: '',
+                showticklabels: false            },
+
+                      
             title: {
-              text: `Amount of Contributions by Industry<br>for ${this.props.repsName1} and ${this.props.repsName2}`,
+              text: `Amount of Contributions by Industry<br>for ${this.props.repsName2} and ${this.props.repsName1}`,
               font: {
                 family: "Optima, sans-serif",
               },
@@ -141,11 +163,11 @@ export default class ButterflyChart1 extends Component {
       <div>
         <div className="graph-explanation comp-explanation">
           <h5 className="graph-title mt-1">
-            Amount of Contrabutions by Industries
+            Contributions Amount by Industry
           </h5>
           <p className="mt-1">
             This butterfly chart shows the amount of money each politition spent
-            on the <strong>2018</strong> election cycle.
+            on the <strong>2020</strong> election cycle.
           </p>
         </div>
 
