@@ -16,6 +16,7 @@ export default class ButterflyChart1 extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         //caching to variable
         congressperson1 = data;
 
@@ -29,6 +30,9 @@ export default class ButterflyChart1 extends Component {
       })
       .then((data) => {
         congressperson2 = data;
+        console.log(data);
+
+        console.log("then");
 
         if (congressperson1 && congressperson2) {
           let top10_1 = congressperson1.data;
@@ -48,7 +52,6 @@ export default class ButterflyChart1 extends Component {
             yAxis1.push(d.total);
           });
 
-
           let top10_2 = congressperson2.data;
           //fetch mans, do things with data
           let values_2 = [];
@@ -66,16 +69,14 @@ export default class ButterflyChart1 extends Component {
             yAxis1_2.push(d.total);
           });
 
-          let xAxisRange = []
-          //Math.max(...yAxis1_2)
+          let xAxisRange = [];
 
-          if(Math.max(...yAxis1_2) > Math.max(...yAxis1)){
-            xAxisRange = [0, Math.max(...yAxis1_2)]
-            console.log(xAxisRange)
-          }else{
-            xAxisRange = [0, Math.max(...yAxis1)]
-            console.log(xAxisRange)
-
+          if (Math.max(...yAxis1_2) > Math.max(...yAxis1)) {
+            xAxisRange = [0, Math.max(...yAxis1_2)];
+            console.log(xAxisRange);
+          } else {
+            xAxisRange = [0, Math.max(...yAxis1)];
+            console.log(xAxisRange);
           }
 
           var trace1 = {
@@ -86,8 +87,7 @@ export default class ButterflyChart1 extends Component {
             xaxis: "x2",
             name: `${this.props.repsName1}`,
             type: "bar",
-            hovertemplate:
-            '<b>Sum of Donations</b>: %{x}<br>',
+            hovertemplate: "<b>Sum of Donations</b>: %{x}<br>",
             marker: {
               color: `#F8BA1B`,
             },
@@ -103,8 +103,7 @@ export default class ButterflyChart1 extends Component {
               color: `#91B05E`,
             },
             orientation: "h",
-            hovertemplate:
-                        '<b>Sum of Donations</b>: %{x}<br>'
+            hovertemplate: "<b>Sum of Donations</b>: %{x}<br>",
           };
 
           var data1 = [trace1, trace2];
@@ -113,29 +112,30 @@ export default class ButterflyChart1 extends Component {
             grid: { rows: 1, columns: 2, pattern: "independent" },
             xaxis: {
               autorange: "reversed",
-                range: xAxisRange
-              },
-              xaxis2: {
-                range: xAxisRange
-              },
+              range: xAxisRange,
+            },
+            xaxis2: {
+              range: xAxisRange,
+            },
             yaxis: {
               autorange: true,
               showgrid: false,
               zeroline: false,
               showline: false,
               autotick: true,
-              ticks: '',
-              showticklabels: false            },
-              yaxis2: {
-                autorange: true,
-                showgrid: false,
-                zeroline: false,
-                showline: false,
-                autotick: true,
-                ticks: '',
-                showticklabels: false            },
+              ticks: "",
+              showticklabels: false,
+            },
+            yaxis2: {
+              autorange: true,
+              showgrid: false,
+              zeroline: false,
+              showline: false,
+              autotick: true,
+              ticks: "",
+              showticklabels: false,
+            },
 
-                      
             title: {
               text: `Amount of Contributions by Industry<br>for ${this.props.repsName2} and ${this.props.repsName1}`,
               font: {
@@ -147,6 +147,10 @@ export default class ButterflyChart1 extends Component {
               family: "Optima, sans-serif",
             },
           };
+        } else if (congressperson1 && !congressperson2) {
+          console.log("1st");
+        } else if (congressperson2 && !congressperson1) {
+          console.log("2nd");
         }
         var config = { responsive: true };
         this.setState({ error: <p></p>, display: "" });
@@ -166,9 +170,7 @@ export default class ButterflyChart1 extends Component {
         <div
           className={"graph-explanation comp-explanation " + this.state.display}
         >
-          <h5 className="graph-title mt-1">
-            Contributions Amount by Industry
-          </h5>
+          <h5 className="graph-title mt-1">Contributions Amount by Industry</h5>
           <p className="mt-1">
             This butterfly chart shows the amount of money each politition spent
             on the <strong>2020</strong> election cycle.
@@ -176,6 +178,7 @@ export default class ButterflyChart1 extends Component {
         </div>
 
         <div id="butterfly"></div>
+        <div>{this.state.error}</div>
       </div>
     );
   }
