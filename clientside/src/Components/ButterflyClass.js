@@ -4,12 +4,15 @@ import React, { Component } from "react";
 export default class ButterflyChart1 extends Component {
   constructor(props) {
     super(props);
-    this.state = { repsData: {} };
+    this.state = {
+      repsName1: this.props.repsName1,
+      repsName2: this.props.repsName2,
+    };
   }
 
   componentDidMount() {
-    let splitName = this.props.repsName1.split(" ");
-    let splitName2 = this.props.repsName2.split(" ");
+    let splitName = this.state.repsName1.split(" ");
+    let splitName2 = this.state.repsName2.split(" ");
     console.log(splitName);
     console.log(splitName2);
     fetch(
@@ -27,7 +30,7 @@ export default class ButterflyChart1 extends Component {
           congressperson1: {
             cycle: "2020",
             data: [],
-            name: this.props.repsName1,
+            name: this.state.repsName1,
           },
         });
       });
@@ -49,7 +52,7 @@ export default class ButterflyChart1 extends Component {
           congressperson2: {
             cycle: "2020",
             data: [],
-            name: this.props.repsName2,
+            name: this.state.repsName2,
           },
         });
       });
