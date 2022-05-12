@@ -172,7 +172,6 @@ export default class ButterflyChart1 extends Component {
     };
 
     var config = { responsive: true };
-    // this.setState({ error: <p></p>, display: "" });
     Plotly.newPlot(`butterfly`, data1, layout1, config);
   }
 
@@ -184,14 +183,6 @@ export default class ButterflyChart1 extends Component {
     if (this.state.congressperson1 && this.state.congressperson2) {
       this.setUpGraph();
     }
-    // } else if (this.state.congressperson1) {
-    //   this.setUpGraph();
-    // } else if (this.state.congressperson2) {
-    //   this.setUpGraph();
-    // } else {
-    //   error = <p>Neither candidate has funding data at this time.</p>;
-    //   display = "no-data";
-    // }
 
     return (
       <div>
