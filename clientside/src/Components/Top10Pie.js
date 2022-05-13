@@ -10,7 +10,7 @@ export default class Top10Pie extends Component {
   componentDidMount() {
     let splitName = this.props.repsName.split(" ");
     fetch(
-      `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
+      `https://api.fundstovote.com/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
       .then((response) => response.json())
       .then((data) => {

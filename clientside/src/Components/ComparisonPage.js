@@ -126,6 +126,22 @@ export class ComparisonPage extends Component {
     }
   };
 
+
+  //#########################################################
+  //#########################################################
+//this is my stab at getting the butterfly graph to update. how do you access the old state for comparison?
+  ComponentDidUpdate(){
+    //how to access old state for comparison
+    if(this.state.rep1.name != /*old rep name*/ || this.state.rep1.name != /*old rep name*/ )
+    let ButterflyChart = Document.getElementById('comp-vis-container')
+    if (this.state.repOne && this.state.repTwo) {
+      ButterflyChart.innerHTML = this.makeButterflyChart(
+        this.state.repTwo,
+        this.state.repOne
+      );
+    }
+}
+
   render() {
     let sidePanelOne;
     if (this.state.repOne) {

@@ -9,10 +9,14 @@ export default class ButterflyChart1 extends Component {
   }
 
   componentDidMount() {
-    let splitName = this.props.repsName1.split(" ");
-    let splitName2 = this.props.repsName2.split(" ");
+    this.createChart(this.props.repsName1, this.props.repsName2)
+    
+  }
+  createChart = (name1, name2) => {
+    let splitName = name1.split(" ");
+    let splitName2 = name2.split(" ");
     fetch(
-      `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
+      `https://api.fundstovote.com/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -20,7 +24,7 @@ export default class ButterflyChart1 extends Component {
         congressperson1 = data;
 
         return fetch(
-          `http://localhost:3000/v1/topten?firstName=${splitName2[0]}&lastName=${splitName2[1]}&cycle=2020`
+          `https://api.fundstovote.com/v1/topten?firstName=${splitName2[0]}&lastName=${splitName2[1]}&cycle=2020`
         );
       })
       .then((response) => {
@@ -159,6 +163,9 @@ export default class ButterflyChart1 extends Component {
         })
       );
   }
+  /*ComponentDidUpdate(){
+    this.createChart(this.props.repsName1, this.props.repsName2)
+  } */
 
   render() {
     return (
