@@ -4,6 +4,7 @@ import defaultProfile from "../images/placeholder-square.png";
 import { ComparisonModal } from "./ComparisonModal";
 import ButterflyClass from "./ButterflyClass";
 import unavailImg from "../images/comparison-unavail.png";
+import { useHistory } from "react-router-dom";
 
 export class ComparisonPage extends Component {
   constructor(props) {
