@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Top10Bar from "./Top10Bar";
 import defaultProfile from "../images/placeholder-square.png";
 import { ComparisonModal } from "./ComparisonModal";
 import ButterflyClass from "./ButterflyClass";
 import unavailImg from "../images/comparison-unavail.png";
+import { useHistory } from "react-router-dom";
 
 export class ComparisonPage extends Component {
   constructor(props) {
@@ -102,10 +102,10 @@ export class ComparisonPage extends Component {
     });
   };
 
-  makeButterflyChart = (details1, details2) => {
+  makeButterflyChart = () => {
     return (
       <div>
-        <ButterflyClass repsName1={details1.name} repsName2={details2.name} />
+        <ButterflyClass />
       </div>
     );
   };
@@ -129,12 +129,14 @@ export class ComparisonPage extends Component {
       sidePanelTwo = this.makeSidePanel(this.state.repTwo);
     }
 
+    history = useHistory();
+
     let ButterflyChart;
     if (this.state.repOne && this.state.repTwo) {
-      ButterflyChart = this.makeButterflyChart(
-        this.state.repTwo,
-        this.state.repOne
+      history.push(
+        `localhost:3001/compare-reps?repOne=${this.state.repTwo.name}&repTwo=${this.state.repOne.name}`
       );
+      ButterflyChart = this.makeButterflyChart();
     }
 
     let candidateChosen = false;
