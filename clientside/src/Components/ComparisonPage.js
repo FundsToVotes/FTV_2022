@@ -102,14 +102,6 @@ export class ComparisonPage extends Component {
     });
   };
 
-  makeBarChart = (details) => {
-    return (
-      <div>
-        <Top10Bar repsName={details.name} />
-      </div>
-    );
-  };
-
   makeButterflyChart = (details1, details2) => {
     return (
       <div>
