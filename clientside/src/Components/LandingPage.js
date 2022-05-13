@@ -74,7 +74,7 @@ export default class LandingPage extends Component {
                 {/* <img src={computer} alt="computer" className="computer-img" /> */}
                 <iframe
                   className="inner"
-                  src="https://www.youtube.com/embed/EJR1H5tf5wE"
+                  src="https://www.youtube.com/embed/5LJAXQwzmnM"
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
