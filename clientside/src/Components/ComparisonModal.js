@@ -51,9 +51,26 @@ export class ComparisonModal extends Component {
           data.address.city,
           data.address.state
         );
-
-        this.selectCandidate(data);
-      });
+        return data
+      })
+      .then((data) => {
+        fetch (
+          `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
+        )
+        .then((response) => response.json())
+        .then((response) => {
+          if (response.data.length > 0) {
+            data.funding = response.data
+          } else { 
+            data.funding = []
+          }
+          this.selectCandidate(data)
+        })
+        .catch(() => {
+          data.funding = []
+          this.selectCandidate(data)
+        })
+      })
   };
 
   formatAddress = (address, city, state) => {
@@ -75,7 +92,6 @@ export class ComparisonModal extends Component {
       .then((data) => {
         this.setState({ officials: data.officials });
         this.setState({ filteredOfficials: data.officials })
-        console.log(data.officials)
       });
   };
 
@@ -117,7 +133,6 @@ export class ComparisonModal extends Component {
   }
 
   updateBranchFilter = (e) => {
-    console.log(e)
     let filter = e.target.value.split("-")[1]
     switch (filter) {
       case "representative":

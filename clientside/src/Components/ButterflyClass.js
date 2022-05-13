@@ -4,62 +4,64 @@ import React, { Component } from "react";
 export default class ButterflyChart1 extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      repsName1: this.props.repsName1,
-      repsName2: this.props.repsName2,
-    };
+    // this.state = {
+    //   repsName1: this.props.repsName1,
+    //   repsName2: this.props.repsName2,
+    //   data1: this.props.data1,
+    //   data2: this.props.data2
+    // };
   }
 
-  componentDidMount() {
-    this.fetchData();
-  }
+  // componentDidMount() {
+  //   this.fetchData();
+  // }
 
-  fetchData() {
-    let splitName = this.state.repsName1.split(" ");
-    let splitName2 = this.state.repsName2.split(" ");
-    fetch(
-      `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        //caching to variable
-        this.setState({ congressperson1: data });
-      })
-      .catch(() => {
-        this.setState({
-          congressperson1: {
-            cycle: "2020",
-            data: [],
-            name: this.state.repsName1,
-          },
-        });
-      });
+  // fetchData() {
+  //   let splitName = this.props.repsName1.split(" ");
+  //   let splitName2 = this.props.repsName2.split(" ");
+  //   fetch(
+  //     `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       //caching to variable
+  //       this.setState({ congressperson1: data });
+  //     })
+  //     .catch(() => {
+  //       this.setState({
+  //         congressperson1: {
+  //           cycle: "2020",
+  //           data: [],
+  //           name: this.state.repsName1,
+  //         },
+  //       });
+  //     });
 
-    fetch(
-      `http://localhost:3000/v1/topten?firstName=${splitName2[0]}&lastName=${splitName2[1]}&cycle=2020`
-    )
-      .then((response) => {
-        //get json from above fetch as well
-        return response.json();
-      })
-      .then((data) => {
-        this.setState({ congressperson2: data });
-      })
-      .catch(() => {
-        this.setState({
-          congressperson2: {
-            cycle: "2020",
-            data: [],
-            name: this.state.repsName2,
-          },
-        });
-      });
-  }
+  //   fetch(
+  //     `http://localhost:3000/v1/topten?firstName=${splitName2[0]}&lastName=${splitName2[1]}&cycle=2020`
+  //   )
+  //     .then((response) => {
+  //       //get json from above fetch as well
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       this.setState({ congressperson2: data });
+  //     })
+  //     .catch(() => {
+  //       this.setState({
+  //         congressperson2: {
+  //           cycle: "2020",
+  //           data: [],
+  //           name: this.state.repsName2,
+  //         },
+  //       });
+  //     });
+  // }
 
   setUpGraph() {
-    let congressperson1 = this.state.congressperson1;
-    let congressperson2 = this.state.congressperson2;
-    let top10_1 = congressperson1.data;
+    let congressperson1 = this.props.data1;
+    let congressperson2 = this.props.data2;
+    let top10_1 = congressperson1;
     //fetch mans, do things with data
     let values = [];
     let labels = [];
@@ -75,7 +77,7 @@ export default class ButterflyChart1 extends Component {
       xAxis.push(d.industry_name);
       yAxis1.push(d.total);
     });
-    let top10_2 = congressperson2.data;
+    let top10_2 = congressperson2;
     //fetch mans, do things with data
     let values_2 = [];
     let labels_2 = [];
@@ -177,7 +179,7 @@ export default class ButterflyChart1 extends Component {
     let error;
     let display;
 
-    if (this.state.congressperson1 && this.state.congressperson2) {
+    if (this.props.data1 && this.props.data2) {
       this.setUpGraph();
     }
 
@@ -191,7 +193,7 @@ export default class ButterflyChart1 extends Component {
           </p>
         </div>
 
-        <div id="butterfly"></div>
+        {/* <div id="butterfly"></div> */}
         <div>{error}</div>
       </div>
     );

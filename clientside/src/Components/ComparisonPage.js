@@ -113,7 +113,7 @@ export class ComparisonPage extends Component {
   makeButterflyChart = (details1, details2) => {
     return (
       <div>
-        <ButterflyClass repsName1={details1.name} repsName2={details2.name} />
+        <ButterflyClass repsName1={details1.name} repsName2={details2.name} data1={details1.funding} data2={details2.funding}/>
       </div>
     );
   };
@@ -141,7 +141,7 @@ export class ComparisonPage extends Component {
     if (this.state.repOne && this.state.repTwo) {
       ButterflyChart = this.makeButterflyChart(
         this.state.repTwo,
-        this.state.repOne
+        this.state.repOne,
       );
     }
 
@@ -196,7 +196,7 @@ export class ComparisonPage extends Component {
             </div>
 
             {/* Visualizations */}
-            <div className="comp-viz-container">{ButterflyChart}</div>
+            <div className="comp-viz-container">{ButterflyChart}<div id="butterfly"></div></div>
 
             {/* Side panel two */}
             <div className="details-side-panel comp-side-right">
