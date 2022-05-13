@@ -13,6 +13,8 @@ export class ComparisonModal extends Component {
       name: "",
       address: "",
       officials: [],
+      partyFilter: "",
+      branchFilter: ""
     };
   }
 
@@ -72,6 +74,8 @@ export class ComparisonModal extends Component {
       })
       .then((data) => {
         this.setState({ officials: data.officials });
+        this.setState({ filteredOfficials: data.officials })
+        console.log(data.officials)
       });
   };
 
@@ -93,6 +97,40 @@ export class ComparisonModal extends Component {
   getAddress = (value) => {
     this.setState({ address: value });
   };
+
+  updatePartyFilter = (e) => {
+    let filter = e.target.value.split("-")[1]
+    switch (filter) {
+      case "democrat":
+        this.setState({ partyFilter: "Democratic Party"})
+        break;
+      case "republican":
+        this.setState({ partyFilter: "Republican Party"})
+        break;
+      case "other":
+        this.setState({ partyFilter: "other"})
+        break;
+      default : 
+        this.setState({ partyFilter: ""})
+        break;
+    }
+  }
+
+  updateBranchFilter = (e) => {
+    console.log(e)
+    let filter = e.target.value.split("-")[1]
+    switch (filter) {
+      case "representative":
+        this.setState({ branchFilter: "U.S. Representative"})
+        break;
+      case "senator":
+        this.setState({ branchFilter: "U.S. Senator"})
+        break;
+      default : 
+        this.setState({ branchFilter: ""})
+        break;
+    }
+  }
 
   render() {
     return (
@@ -142,7 +180,7 @@ export class ComparisonModal extends Component {
                 defaultValue="congressPeople"
                 id="congresspeople"
                 className="custom-select m-1"
-                // onChange={(e) => updateBranchFilter(e)}
+                onChange={(e) => this.updateBranchFilter(e)}
               >
                 <option value="all-chamber">Congresspeople</option>
                 <option value="radio-representative">Representatives</option>
@@ -153,7 +191,7 @@ export class ComparisonModal extends Component {
                 defaultValue="all"
                 className="custom-select m-1"
                 id="party"
-                // onChange={(e) => updatePartyFilter(e)}
+                onChange={(e) => this.updatePartyFilter(e)}
               >
                 <option value="all-party">All Parties</option>
                 <option value="radio-democrat">Democratic Party</option>
@@ -166,7 +204,18 @@ export class ComparisonModal extends Component {
             <div className="modal-cards-container mt-2">
               {this.state.address &&
                 this.state.officials.length > 0 &&
-                this.state.officials.map((official) => {
+                this.state.officials
+                  .filter((official) => {
+                    return this.state.partyFilter.length == 0
+                      ? true
+                      : official.party.toLowerCase() == this.state.partyFilter.toLowerCase()
+                  })
+                  .filter((official) => {
+                    return this.state.branchFilter.length == 0
+                      ? true
+                      : official.office.toLowerCase() == this.state.branchFilter.toLowerCase()
+                  })
+                  .map((official) => {
                   let candidate = official;
                   return (
                     <div
