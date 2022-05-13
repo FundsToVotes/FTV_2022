@@ -11,10 +11,12 @@ export default class ButterflyChart1 extends Component {
   }
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
     let splitName = this.state.repsName1.split(" ");
     let splitName2 = this.state.repsName2.split(" ");
-    console.log(splitName);
-    console.log(splitName2);
     fetch(
       `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
@@ -22,10 +24,8 @@ export default class ButterflyChart1 extends Component {
       .then((data) => {
         //caching to variable
         this.setState({ congressperson1: data });
-        console.log(this.state.congressperson1);
       })
       .catch(() => {
-        console.log("catch 1");
         this.setState({
           congressperson1: {
             cycle: "2020",
@@ -44,10 +44,8 @@ export default class ButterflyChart1 extends Component {
       })
       .then((data) => {
         this.setState({ congressperson2: data });
-        console.log("2nd");
       })
       .catch(() => {
-        console.log("catch 1");
         this.setState({
           congressperson2: {
             cycle: "2020",
@@ -61,7 +59,6 @@ export default class ButterflyChart1 extends Component {
   setUpGraph() {
     let congressperson1 = this.state.congressperson1;
     let congressperson2 = this.state.congressperson2;
-    console.log(this.state);
     let top10_1 = congressperson1.data;
     //fetch mans, do things with data
     let values = [];
@@ -99,10 +96,8 @@ export default class ButterflyChart1 extends Component {
 
     if (Math.max(...yAxis1_2) > Math.max(...yAxis1)) {
       xAxisRange = [0, Math.max(...yAxis1_2)];
-      console.log(xAxisRange);
     } else {
       xAxisRange = [0, Math.max(...yAxis1)];
-      console.log(xAxisRange);
     }
 
     var trace1 = {
@@ -182,7 +177,6 @@ export default class ButterflyChart1 extends Component {
     let error;
     let display;
 
-    console.log(this.state);
     if (this.state.congressperson1 && this.state.congressperson2) {
       this.setUpGraph();
     }
