@@ -166,14 +166,16 @@ export default function PersonDetails() {
     fetchTopTenData();
 
     function handleResize() {
-      let whitespace = 2 * (24 + 1 + 16)
+      let whitespace = 2 * (24 + 1 + 16 + 8)
       let non_mobile_width = document
         .querySelector("#bar-container")
         .getBoundingClientRect().width;
-      let windowSize = window.innerWidth;
-      let mobile_width =   (windowSize * 3/4)- whitespace - whitespace // idk why we need to do this twice lol
-      console.log(windowSize <= 1259 ? mobile_width : non_mobile_width / 2)
-      setSvgSize(windowSize <= 1259 ? mobile_width : non_mobile_width / 2);
+      let windowSize = document
+      .querySelector("#root")
+      .getBoundingClientRect().width;
+      let almost_mobile_width =   (windowSize * 3/4)- whitespace - whitespace // idk why we need to do this twice lol
+      let mobile_width =  windowSize  - whitespace
+      setSvgSize(windowSize <= 1259 ? windowSize <= 763 ? mobile_width : almost_mobile_width : non_mobile_width / 2);
     }
     handleResize();
     window.addEventListener("resize", handleResize);
