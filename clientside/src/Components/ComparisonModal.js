@@ -18,6 +18,37 @@ export class ComparisonModal extends Component {
     };
   }
 
+  cleanTopTen = (topTenJson) => {
+    topTenJson.data = topTenJson.data.map((d) => {
+      d.indivs = d.indivs < 0 ? 0 : d.indivs;
+      d.pacs = d.pacs < 0 ? 0 : d.pacs;
+      d.total = d.indivs + d.pacs;
+      return d;
+    });
+    topTenJson.name = topTenJson.name.slice(1, -1);
+    return topTenJson;
+  }
+
+  prepTopTenForStack = (topTenJson) => {
+    let data = topTenJson.data;
+    data = data.map((d) => {
+      let indivs = d.indivs;
+      let pacs = d.pacs;
+      let returnable = [];
+      returnable.push({ y0: 0, y1: indivs, name: "indivs" });
+      returnable.push({ y0: indivs, y1: indivs + pacs, name: "pacs" });
+      return {
+        industry: d.industry_name,
+        values: returnable,
+        total: indivs + pacs,
+        indivs: indivs,
+        pacs: pacs
+      };
+    });
+    topTenJson.data = data;
+    return topTenJson;
+  }
+
   fetchRepresentativeDetails = (name) => {
     let splitName = name.split(" ");
     fetch(
@@ -54,20 +85,25 @@ export class ComparisonModal extends Component {
         return data
       })
       .then((data) => {
+
         fetch (
           `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
         )
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.data.length > 0) {
-            data.funding = response.data
-          } else { 
-            data.funding = []
+        .then(response => {
+          if (!response.ok) {
+            throw Error()
           }
+          return response
+        })
+        .then((response) => response.json())
+        .then(this.cleanTopTen)
+        .then(this.prepTopTenForStack)
+        .then((response) => {
+          data.funding = response
           this.selectCandidate(data)
         })
         .catch(() => {
-          data.funding = []
+          data.funding = { name: splitName[0] + " " + splitName[1], data: [], cycle: 2020 }
           this.selectCandidate(data)
         })
       })

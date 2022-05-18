@@ -24,7 +24,7 @@ body {
   justify-content: stretch;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, text {
   font-family: "Hiragino Kaku Gothic Pro", 'Gothic A1', sans-serif;
   color: #3C4245;
   font-weight: 700;
@@ -453,6 +453,7 @@ a:hover {
 .white-container {
   background-color: white !important;
 }
+
 
 .breakdown-panel {
   flex: 3;

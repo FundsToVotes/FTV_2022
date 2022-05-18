@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Top10Bar from "./Top10Bar";
 import defaultProfile from "../images/placeholder-square.png";
 import { ComparisonModal } from "./ComparisonModal";
 import ButterflyClass from "./ButterflyClass";
@@ -12,16 +11,19 @@ export class ComparisonPage extends Component {
     //default state
     this.state = {
       show: false,
+      vizWidth: 700
     };
   }
 
   repsCallback = (details, side) => {
+    console.log(side)
     if (side === "left") {
       this.setState({ repOne: details });
     } else {
       this.setState({ repTwo: details });
     }
     this.setState({ show: false });
+    console.log(this.state.repTwo)
   };
 
   colorCodeParty = (party) => {
@@ -102,18 +104,11 @@ export class ComparisonPage extends Component {
     });
   };
 
-  makeBarChart = (details) => {
-    return (
-      <div>
-        <Top10Bar repsName={details.name} />
-      </div>
-    );
-  };
 
-  makeButterflyChart = (details1, details2) => {
+  makeButterflyChart = (rep1, rep2, width) => {
     return (
       <div>
-        <ButterflyClass repsName1={details1.name} repsName2={details2.name} data1={details1.funding} data2={details2.funding}/>
+        <ButterflyClass rep1={rep1} rep2={rep2} parentWidth={width}/>
       </div>
     );
   };
@@ -125,6 +120,18 @@ export class ComparisonPage extends Component {
       return "democrat-background";
     }
   };
+
+  updateDimensions = () => {
+    this.setState({vizWidth: window.innerWidth * 3 / 5})
+  }
+
+  componentDidMount() {
+    this.setState({vizWidth: window.innerWidth * 3 / 5})
+    window.addEventListener('resize', this.updateDimensions)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions)
+  }
 
   render() {
     let sidePanelOne;
@@ -140,8 +147,9 @@ export class ComparisonPage extends Component {
     let ButterflyChart;
     if (this.state.repOne && this.state.repTwo) {
       ButterflyChart = this.makeButterflyChart(
-        this.state.repTwo,
         this.state.repOne,
+        this.state.repTwo,
+        this.state.vizWidth
       );
     }
 
