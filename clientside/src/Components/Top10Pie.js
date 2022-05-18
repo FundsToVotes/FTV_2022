@@ -8,13 +8,13 @@ export default class Top10Pie extends Component {
   }
 
   componentDidMount() {
+    // console.log(this.props.repsName);
     let splitName = this.props.repsName.split(" ");
     fetch(
       `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
     )
       .then((response) => response.json())
       .then((data) => {
-        //somehow get rep name
         let top10 = data.data;
         let cycle = data.cycle;
 
@@ -55,6 +55,7 @@ export default class Top10Pie extends Component {
           },
         ];
 
+        // NOT PROPERLY RESPONSIVE NEEDS A HEIGHT THAT IS STILL RESPONSIVE
         var layout = {
           title: {
             text: `Top 10 Industries Supporting ${this.props.repsName} in ${cycle}`,
@@ -92,6 +93,6 @@ export default class Top10Pie extends Component {
   }
 
   render() {
-    return <div>{this.state.plot}</div>;
+    return <div className="pieChart">{this.state.plot}</div>;
   }
 }

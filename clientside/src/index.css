@@ -897,10 +897,14 @@ a:hover {
   }
 }
 
-@media (max-width: 763px) {
+@media (max-width: 987px) {
   .details-container {
     flex-direction: column;
   }
+}
+
+@media (max-width: 763px) {
+  
   
   .display {
     flex-direction: column;

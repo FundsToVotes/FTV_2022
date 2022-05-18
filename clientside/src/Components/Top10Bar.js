@@ -72,9 +72,10 @@ export default class Top10Bar extends Component {
             },
           };
 
-          var data1 = [trace1, trace2];
+          var traceData = [trace1, trace2];
 
-          var layout1 = {
+          // NOT PROPERLY RESPONSIVE NEEDS A HEIGHT THAT IS STILL RESPONSIVE
+          var layout = {
             barmode: "stack",
             width: "600",
             showlegend: true,
@@ -95,8 +96,6 @@ export default class Top10Bar extends Component {
             },
             xref: "paper",
           };
-
-          //this.setState({ plot: <Plot data={data1} layout={layout1} /> });
         }
         var config = {
           responsive: true,
@@ -127,7 +126,7 @@ export default class Top10Bar extends Component {
           },
         };
         this.setState({ error: <p></p>, display: "" });
-        Plotly.newPlot(`barchart1`, data1, layout1, config);
+        Plotly.newPlot(`barchart1`, traceData, layout, config);
       })
       .catch(
         this.setState({
@@ -160,10 +159,3 @@ export default class Top10Bar extends Component {
     );
   }
 }
-
-/*video notes!
-lol
-
-video no slides, don't exceed 10 slides
-
-*/
