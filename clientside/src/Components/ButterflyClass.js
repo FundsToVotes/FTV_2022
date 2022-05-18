@@ -136,7 +136,9 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         width: parentWidth,
         padding: 20,
       };
+
       const svg = parent.select("svg");
+
       svg
         // .attr("viewBox", [0, 0, margin.width, margin.height])
         .attr("width", margin.width - margin.padding + "px")
@@ -150,8 +152,10 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
       const right_x_axis = svg
         .append("g")
         .attr("transform", `translate(0, ${margin.height - margin.bottom})`);
+
       // Define our color gradients
       const gradients = svg.append("defs");
+
       // Green
       const greenGradient = gradients
         .append("linearGradient")
@@ -191,6 +195,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .attr("transform", `translate(${margin.width / 2}, ${margin.top / 2})`)
         .attr("font-size", 20)
         .attr("text-anchor", "middle");
+
       // x label
       svg
         .append("text")
@@ -214,8 +219,9 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
       let left_congressperson_name = left_candidate.name;
       let right_congressperson_name = right_candidate.name;
       let smooshed_data = smooshFunding(left_candidate, right_candidate);
+
       // set the title's text
-      let title_text = `Top Ten Industries for ${left_congressperson_name} vs Top Ten Industries for ${right_congressperson_name}`;
+      let title_text = `Top Ten Industries for ${left_congressperson_name} vs ${right_congressperson_name}`;
       title.text(title_text);
       if (
         title.node().getComputedTextLength() >
@@ -252,12 +258,14 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
             .text(current_string);
         }
       }
+
       // figure out the bounds of our axis
       let max = Math.max(
         ...smooshed_data.map((d) => {
           return d.values.biggest;
         })
       );
+
       // set up our left x axis and right x axis
       const left_x = d3
         .scaleLinear()
@@ -268,6 +276,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .selectAll("text")
         .attr("transform", "rotate(-30)")
         .style("text-anchor", "end");
+
       const right_x = d3
         .scaleLinear()
         .domain([0, max])
@@ -277,12 +286,14 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .selectAll("text")
         .attr("transform", "rotate(30)")
         .style("text-anchor", "start");
+
       // set up our y axis
       const y = d3
         .scaleBand()
         .domain(smooshed_data.map((d) => d.industry))
-        .range([margin.height - margin.bottom, margin.top])
-        .paddingInner(0.5);
+        .range([margin.height - margin.bottom, margin.top]);
+      // .paddingInner(0.5);
+
       // define the tooltip
       let tooltip = parent
         .select("div")
@@ -294,8 +305,10 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .style("border-radius", "4px")
         .style("color", "#fff")
         .text("a simple tooltip");
+
       // set up our y axis labels
       let center = left_x(0);
+
       //labels
       svg
         .selectAll(".label-text")
@@ -303,20 +316,25 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .join("text")
         .text((d) => d)
         .attr("x", center)
-        .attr("y", (d) => y(d) - 2)
+        .attr("y", (d) => y(d) * 1.5 - 10)
         .attr("text-anchor", "middle")
         .attr("font-size", "16px");
+
       // set up the background grey bars, yo
       svg
         .selectAll(".grey-rect")
         .data(y.domain())
         .join("path")
         .classed("grey-rect", true)
-        .attr("d", (d) => {
+        .attr("d", (d, i) => {
+          console.log(d);
+          console.log(i);
+          console.log(y.bandwidth());
           let x_start = left_x(0);
-          let y_start = y(d);
+          // adding 1.5 adds more space between them but also more space at the top
+          let y_start = y(d) * 1.5;
           let bevel_height = y.bandwidth() / 2;
-          let bar_height = y.bandwidth();
+          let bar_height = y.bandwidth() - 15;
           let bar_length =
             left_x(left_x.domain()[0]) - left_x(0) + bevel_height;
           return `M${x_start}, ${y_start}
@@ -327,6 +345,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
                   z`;
         })
         .attr("fill", "#F4F4F4");
+
       // do data join to place one grey bar for each industry
       let industryGroup = svg
         .selectAll(".industryGroup")
@@ -357,6 +376,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .on("mouseout", function () {
           tooltip.html(``).style("visibility", "hidden");
         });
+
       // the double data join to join each politicians thing
       industryGroup
         .selectAll("path")
@@ -366,9 +386,9 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
           let x_axis = d.side == "left" ? left_x : right_x;
           let directional_shift_direction = d.side == "left" ? 1 : -1;
           let x_start = x_axis(0);
-          let y_start = y(d.industry);
+          let y_start = y(d.industry) * 1.5;
           let bevel_height = y.bandwidth() / 2;
-          let bar_height = y.bandwidth();
+          let bar_height = y.bandwidth() - 15;
           let bar_length =
             x_axis(d.total) -
             x_axis(0) +

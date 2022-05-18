@@ -24,8 +24,12 @@ export default function PersonDetails() {
   const { search } = useLocation();
   const { representative } = queryString.parse(search);
   const [firstName, lastName] = representative.split(" ");
-  const [topTen, setTopTen] = useState({ name: firstName + " " + lastName, data: [], cycle: 2020 });
-  const [svgSize, setSvgSize] = useState(0)
+  const [topTen, setTopTen] = useState({
+    name: firstName + " " + lastName,
+    data: [],
+    cycle: 2020,
+  });
+  const [svgSize, setSvgSize] = useState(0);
   const [details, setDetails] = useState([]);
 
   const setupIcon = (platform, id) => {
@@ -67,23 +71,23 @@ export default function PersonDetails() {
     fetch(
       `http://localhost:3000/v1/topten?firstName=${firstName}&lastName=${lastName}&cycle=2020`
     )
-    .then(response => {
-      if (!response.ok) {
-        throw Error()
-      }
-      return response
-    })
-    .then((response) => response.json())
-    .then(response => cleanTopTen(response))
-    .then(response => prepTopTenForStack(response))
-    .catch(() => {
-      return { name: firstName + " " + lastName, data: [], cycle: 2020 }
-    })
-    .then((data) => {
-      console.log(data)
-      setTopTen(data)
-    })
-  }
+      .then((response) => {
+        if (!response.ok) {
+          throw Error();
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((response) => cleanTopTen(response))
+      .then((response) => prepTopTenForStack(response))
+      .catch(() => {
+        return { name: firstName + " " + lastName, data: [], cycle: 2020 };
+      })
+      .then((data) => {
+        console.log(data);
+        setTopTen(data);
+      });
+  };
 
   const fetchRepresentativeDetails = () => {
     fetch(
@@ -162,18 +166,20 @@ export default function PersonDetails() {
     fetchTopTenData();
 
     function handleResize() {
-      let width = document.querySelector("#bar-container").getBoundingClientRect().width
-      let windowSize = window.innerWidth
-      
-      setSvgSize(windowSize < 1259? width: width / 2)
-    }
-    handleResize()
-    window.addEventListener('resize', handleResize)
+      let width = document
+        .querySelector("#bar-container")
+        .getBoundingClientRect().width;
+      let windowSize = window.innerWidth;
 
-    return _ => {
-      window.removeEventListener('resize', handleResize)
-      _ // I HATE THIS LINTER!!
+      setSvgSize(windowSize < 1259 ? width : width / 2);
     }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return (_) => {
+      window.removeEventListener("resize", handleResize);
+      _; // I HATE THIS LINTER!!
+    };
   }, []);
 
   return (
@@ -258,8 +264,9 @@ export default function PersonDetails() {
               <h4 className="graph-title">
                 Political Action Committee vs. Individual Contrabutions
               </h4>
-
-              <Top10Bar repData={topTen} width={svgSize}/>
+              <div>
+                <Top10Bar repData={topTen} width={svgSize} />
+              </div>
             </div>
 
             {/* <div className="m-2">

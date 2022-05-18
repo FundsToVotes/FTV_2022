@@ -568,7 +568,12 @@ a:hover {
   color: #fff; 
 }
 
+
 /* Comparison Page */
+
+.butterfly-bar {
+  padding-top: 5rem;
+}
 
 .comp-explanation {
   display: flex;
