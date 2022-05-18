@@ -546,6 +546,11 @@ a:hover {
   margin-top: 1rem;
   align-items: center;
   justify-content: center;
+  flex: 1 1
+}
+
+.bar-graph {
+  flex: 1 1
 }
 
 .graph-title {

@@ -4,6 +4,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 import DemocratProfile from "../images/democrat-temp.png";
 import RepublicanProfile from "../images/republican-temp.png";
 import { BsArrowLeft } from "react-icons/bs";
+import cleanTopTen from "./utils/cleanTopTen.js";
+import prepTopTenForStack from "./utils/prepTopTenForStack.js";
 
 export class ComparisonModal extends Component {
   constructor(props) {
@@ -16,37 +18,6 @@ export class ComparisonModal extends Component {
       partyFilter: "",
       branchFilter: ""
     };
-  }
-
-  cleanTopTen = (topTenJson) => {
-    topTenJson.data = topTenJson.data.map((d) => {
-      d.indivs = d.indivs < 0 ? 0 : d.indivs;
-      d.pacs = d.pacs < 0 ? 0 : d.pacs;
-      d.total = d.indivs + d.pacs;
-      return d;
-    });
-    topTenJson.name = topTenJson.name.slice(1, -1);
-    return topTenJson;
-  }
-
-  prepTopTenForStack = (topTenJson) => {
-    let data = topTenJson.data;
-    data = data.map((d) => {
-      let indivs = d.indivs;
-      let pacs = d.pacs;
-      let returnable = [];
-      returnable.push({ y0: 0, y1: indivs, name: "indivs" });
-      returnable.push({ y0: indivs, y1: indivs + pacs, name: "pacs" });
-      return {
-        industry: d.industry_name,
-        values: returnable,
-        total: indivs + pacs,
-        indivs: indivs,
-        pacs: pacs
-      };
-    });
-    topTenJson.data = data;
-    return topTenJson;
   }
 
   fetchRepresentativeDetails = (name) => {
@@ -96,8 +67,8 @@ export class ComparisonModal extends Component {
           return response
         })
         .then((response) => response.json())
-        .then(this.cleanTopTen)
-        .then(this.prepTopTenForStack)
+        .then(cleanTopTen)
+        .then(prepTopTenForStack)
         .then((response) => {
           data.funding = response
           this.selectCandidate(data)

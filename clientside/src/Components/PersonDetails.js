@@ -15,13 +15,17 @@ import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
 import defaultProfile from "../images/placeholder-square.png";
 import BillsData from "./BillsData";
-import Top10Pie from "./Top10Pie";
+// import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
+import cleanTopTen from "./utils/cleanTopTen.js";
+import prepTopTenForStack from "./utils/prepTopTenForStack.js";
 
 export default function PersonDetails() {
   const { search } = useLocation();
   const { representative } = queryString.parse(search);
   const [firstName, lastName] = representative.split(" ");
+  const [topTen, setTopTen] = useState({ name: firstName + " " + lastName, data: [], cycle: 2020 });
+  const [svgSize, setSvgSize] = useState(0)
   const [details, setDetails] = useState([]);
 
   const setupIcon = (platform, id) => {
@@ -58,6 +62,28 @@ export default function PersonDetails() {
       </a>
     );
   };
+
+  const fetchTopTenData = () => {
+    fetch(
+      `http://localhost:3000/v1/topten?firstName=${firstName}&lastName=${lastName}&cycle=2020`
+    )
+    .then(response => {
+      if (!response.ok) {
+        throw Error()
+      }
+      return response
+    })
+    .then((response) => response.json())
+    .then(response => cleanTopTen(response))
+    .then(response => prepTopTenForStack(response))
+    .catch(() => {
+      return { name: firstName + " " + lastName, data: [], cycle: 2020 }
+    })
+    .then((data) => {
+      console.log(data)
+      setTopTen(data)
+    })
+  }
 
   const fetchRepresentativeDetails = () => {
     fetch(
@@ -133,6 +159,21 @@ export default function PersonDetails() {
 
   useEffect(() => {
     fetchRepresentativeDetails();
+    fetchTopTenData();
+
+    function handleResize() {
+      let width = document.querySelector("#bar-container").getBoundingClientRect().width
+      let windowSize = window.innerWidth
+      
+      setSvgSize(windowSize < 1259? width: width / 2)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return _ => {
+      window.removeEventListener('resize', handleResize)
+      _ // I HATE THIS LINTER!!
+    }
   }, []);
 
   return (
@@ -218,13 +259,13 @@ export default function PersonDetails() {
                 Political Action Committee vs. Individual Contrabutions
               </h4>
 
-              <Top10Bar repsName={representative} />
+              <Top10Bar repData={topTen} width={svgSize}/>
             </div>
 
-            <div className="m-2">
+            {/* <div className="m-2">
               <h4 className="graph-title">Top 10 Supporting Industries</h4>
               <Top10Pie repsName={representative} />
-            </div>
+            </div> */}
           </div>
 
           <div className="m-4 mb-5 p-3">

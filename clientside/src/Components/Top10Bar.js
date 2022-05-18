@@ -1,165 +1,170 @@
-import Plotly from "plotly.js";
-import React, { Component } from "react";
+import React from 'react'
+import { useD3 } from '../hooks/useD3.js'
+import * as d3 from "d3"
 
-export default class Top10Bar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { repsData: {} };
-  }
+function Top10Bar({ repData, width }) {
+  const ref = useD3(
+    (parent) => {
+      let margin = {
+        left: 75,
+        right: 50,
+        height: 350, //hardcoded, if we want we can fix that.
+        top: 100,
+        bottom: 100,
+        width:  width,
+        padding: 20
+      }
+      const svg = parent.select("svg")
+      svg
+        .attr("width", margin.width  + "px")
+        .attr("height", margin.height + "px")
+        .html("")
+      const x_axis = svg
+        .append("g")
+        .attr("transform", `translate(0, ${margin.height - margin.bottom})`);
+      const y_axis = svg
+        .append("g")
+        .attr("transform", `translate(${margin.left}, 0)`);
+      // Set up titles and labels
+      const title = svg
+        .append("text")
+        .attr("transform", `translate(${margin.width / 2}, ${margin.top / 2})`)
+        .attr("font-size", 20)
+        .attr("text-anchor", "middle");
+      // set up color assignment
+      const color = d3
+        .scaleOrdinal()
+        .domain(["indivs", "pacs"])
+        .range(["#F8BA1B", "#8FBE5A"]);
 
-  componentDidMount() {
-    let splitName = this.props.repsName.split(" ");
-    fetch(
-      `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.data.length > 0) {
-          //somehow get rep name
-          let top10 = data.data;
-          let cycle = data.cycle;
-          //fetch mans, do things with data
-          let values = [];
-          let labels = [];
-
-          top10.forEach((d) => {
-            values.push(d.total);
-            labels.push(d.industry_name);
-          });
-          var colorScheme = [];
-          var redWhiteGreen = [
-            "#1a4242",
-            "#005c5a",
-            "#006d5b",
-            "#187d54",
-            "#408c46",
-            "#699832",
-            "#96a216",
-            "#c9a700",
-            "#ffa600",
-            "#ffd500",
-          ];
-
-          colorScheme = redWhiteGreen;
-
-          let xAxis = [];
-          let yAxis1 = [];
-          let yAxis2 = [];
-
-          top10.forEach((d) => {
-            xAxis.push(d.industry_name);
-            yAxis1.push(d.indivs);
-            yAxis2.push(d.pacs);
-          });
-
-          var trace1 = {
-            x: xAxis,
-            y: yAxis1,
-            name: "Individual Contributions",
-            type: "bar",
-            marker: {
-              color: colorScheme[8],
-            },
-          };
-
-          var trace2 = {
-            x: xAxis,
-            y: yAxis2,
-            name: "PAC Contributions",
-            type: "bar",
-            marker: {
-              color: colorScheme[0],
-            },
-          };
-
-          var data1 = [trace1, trace2];
-
-          var layout1 = {
-            barmode: "stack",
-            width: "600",
-            showlegend: true,
-            legend: {
-              x: 1,
-              xanchor: "right",
-              y: 1,
-            },
-            title: {
-              text: `Number of PAC vs Individual Contributions by Industry<br>for ${this.props.repsName} in ${cycle}`,
-              font: {
-                family: "Optima, sans-serif",
-              },
-              xref: "paper",
-            },
-            font: {
-              family: "Optima, sans-serif",
-            },
-            xref: "paper",
-          };
-
-          //this.setState({ plot: <Plot data={data1} layout={layout1} /> });
-        }
-        var config = {
-          responsive: true,
-          displaylogo: false,
-          modeBarButtonsToRemove: [
-            "zoom2d",
-            "pan2d",
-            "select2d",
-            "lasso2d",
-            "zoomIn2d",
-            "zoomOut2d",
-            "autoScale2d",
-            "resetScale2d",
-            "hoverClosestGl2d",
-            "hoverClosestPie",
-            "toggleHover",
-            "resetViews",
-            "sendDataToCloud",
-            "toggleSpikelines",
-            "resetViewMapbox",
-          ],
-          toImageButtonOptions: {
-            format: "png",
-            filename: `PACvsIndividualChart-${splitName[1]}`,
-            height: 500,
-            width: 500,
-            scale: 8,
-          },
-        };
-        this.setState({ error: <p></p>, display: "" });
-        Plotly.newPlot(`barchart1`, data1, layout1, config);
-      })
-      .catch(
-        this.setState({
-          error: <p className="mt-2">No funding data at this time.</p>,
-          display: "no-data",
-        })
+      let candidate = repData;
+      let congressperson_name = candidate.name;
+      let funding_data = candidate.data;
+      if (funding_data.length == 0) {
+        return d3.create("p").text("no data").node()
+      }
+      let cycle = candidate.cycle;
+      let title_text = `Top Ten Industries for ${congressperson_name} in ${cycle}`
+      title.text(
+        title_text
       );
-  }
+      if (title.node().getComputedTextLength() > margin.width - margin.padding) {
+        let num_splits = Math.floor(title.node().getComputedTextLength() / (margin.width - margin.padding)) + 1
+        
+        title.text("")
+        .attr("transform", `translate(${margin.width / 2}, ${margin.top / 2 - 10})`)
+        let approx_char_per_line = title_text.length / num_splits
+        let title_words = title_text.split(" ")
+        let splits = []
+        for (let i = 0; i < num_splits; i++) {
+          let current_string = title_words.shift()
+          while (current_string.length < approx_char_per_line && title_words.length > 0) {
+            current_string += " " + title_words.shift()
+          }
+          splits.push(current_string)
+          title.append("tspan")
+            .attr("x", 0)
+            .attr("dy", `${1 * i}em`)
+            .text(current_string)
+        }
+      }
+      const y = d3
+        .scaleLinear()
+        .domain([0, Math.max(...funding_data.map((d) => d.total))])
+        .range([margin.height - margin.top, margin.bottom])
+        .nice();
+      y_axis.call(d3.axisLeft(y).ticks(5));
+      const x = d3
+        .scaleBand()
+        .domain(funding_data.map((d) => d.industry))
+        .range([margin.left, margin.width - margin.right]);
+      x_axis
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .attr("transform", "rotate(30)")
+        .style("text-anchor", "start");
 
-  render() {
-    return (
-      <div>
-        <div className={"graph-container " + this.state.display}>
-          <div className="graph-explanation">
-            <h5>What does this mean?</h5>
-            <p>
-              A PAC, or political action committee, is a term for a political
-              committee that raises and spends money in order to elect and
-              defeat candidates. Most PACs represent businesses, labor, or
-              ideological interests. An individual contribution is a
-              contribution made by an individual to a politician.
-              <br></br>
-              The bar chart shows total contributions by industry.
-            </p>
-          </div>
-          <div id="barchart1"></div>
+      let tooltip = parent
+        .select("#bar-tooltip")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden")
+        .style("padding", "10px")
+        .style("background", "rgba(0,0,0,0.6)")
+        .style("border-radius", "4px")
+        .style("color", "#fff")
+        .text("a simple tooltip");
+        console.log(tooltip)
+      let barGroups = svg
+        .selectAll(".bargroup")
+        .data(funding_data)
+        .join("g")
+        .classed(".bargroup", true)
+        .attr("title", (d) => d.industry)
+        .attr("transform", (d) => `translate(${x(d.industry) + 1}, 0)`)
+        .on("mouseover", (event, d) => {
+          tooltip
+            .html(
+              `
+                <div>Industry: ${d.industry}</div>
+                <div>PACs: $${d.pacs.toLocaleString("en-US")}</div>
+                <div>Indivs: $${d.indivs.toLocaleString("en-US")}</div>
+                    `
+            )
+            .style("visibility", "visible");
+        })
+        .on("mousemove", function (event, d) {
+          d
+          let pointer = d3.pointer(event, window)
+          console.log(pointer)
+          tooltip
+            .style("top", pointer[1] - 10 + "px")
+            .style("left", event.pageX + 10 + "px");
+        })
+        .on("mouseout", function () {
+          tooltip.html(``).style("visibility", "hidden");
+        });
+      // stacks
+        barGroups
+        .selectAll("rect")
+        .data((d) => d.values)
+        .join("rect")
+        .attr("x", 0)
+        .attr("y", (d) => {
+          return y(d.y1);
+        })
+        .attr("width", (d) => {d; return x.bandwidth() - 2})
+        .attr("height", (d) => y(d.y0) - y(d.y1))
+        .attr("fill", (d) => color(d.name));
+    },
+    [repData, width]
+  );
+
+  return (
+    <div ref={ref}>
+      <div className="graph-container" id="bar-container">
+        <div className="graph-explanation">
+          <h5>What does this mean?</h5>
+          <p>
+            A PAC, or political action committee, is a term for a political
+            committee that raises and spends money in order to elect and
+            defeat candidates. Most PACs represent businesses, labor, or
+            ideological interests. An individual contribution is a
+            contribution made by an individual to a politician.
+            <br></br>
+            The bar chart shows total contributions by industry.
+          </p>
         </div>
-        <div>{this.state.error}</div>
+        <div>
+          <div id="bar-tooltip" width="100%"></div>
+          <svg id="bar-graph"></svg>
+        </div>
       </div>
-    );
-  }
+    </div>
+    
+  );
 }
+export default Top10Bar
 
 /*video notes!
 lol

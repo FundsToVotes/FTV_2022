@@ -140,7 +140,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
       const svg = parent.select("svg")
       svg
         // .attr("viewBox", [0, 0, margin.width, margin.height])
-        .attr("width", parentWidth  - margin.padding + "px")
+        .attr("width", margin.width  - margin.padding + "px")
         .attr("height", margin.height + "px")
         .html("")
 
