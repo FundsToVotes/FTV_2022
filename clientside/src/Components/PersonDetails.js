@@ -166,12 +166,14 @@ export default function PersonDetails() {
     fetchTopTenData();
 
     function handleResize() {
-      let width = document
+      let whitespace = 2 * (24 + 1 + 16)
+      let non_mobile_width = document
         .querySelector("#bar-container")
         .getBoundingClientRect().width;
       let windowSize = window.innerWidth;
-
-      setSvgSize(windowSize < 1259 ? width : width / 2);
+      let mobile_width =   (windowSize * 3/4)- whitespace - whitespace // idk why we need to do this twice lol
+      console.log(windowSize <= 1259 ? mobile_width : non_mobile_width / 2)
+      setSvgSize(windowSize <= 1259 ? mobile_width : non_mobile_width / 2);
     }
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -191,7 +193,7 @@ export default function PersonDetails() {
         </h1>
       </div>
 
-      <div className="details-container">
+      <div className="details-container" id="test">
         {/* Side Panel */}
         <div className="details-side-panel">
           <div className="details-side-header">
@@ -254,7 +256,7 @@ export default function PersonDetails() {
         </div>
 
         {/* Right side of web page */}
-        <div className="breakdown-panel">
+        <div className="breakdown-panel" id="funding-parent">
           <h3 className="mt-3 details-gradiant mr-4 ml-4 mt-4 p-3">
             Campaign Funding
           </h3>
