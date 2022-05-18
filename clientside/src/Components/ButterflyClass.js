@@ -1,6 +1,6 @@
-import React from 'react'
-import { useD3 } from '../hooks/useD3.js'
-import * as d3 from "d3"
+import React from "react";
+import { useD3 } from "../hooks/useD3.js";
+import * as d3 from "d3";
 
 function smooshFunding(leftCandidate, rightCandidate) {
   if (
@@ -21,9 +21,9 @@ function smooshFunding(leftCandidate, rightCandidate) {
             indivs: d.indivs,
             pacs: d.pacs,
             name: leftCandidate.name,
-            industry: d.industry
-          }
-        ]
+            industry: d.industry,
+          },
+        ],
       });
     });
     rightCandidate.data.forEach((d) => {
@@ -35,7 +35,7 @@ function smooshFunding(leftCandidate, rightCandidate) {
           indivs: d.indivs,
           pacs: d.pacs,
           name: rightCandidate.name,
-          industry: d.industry
+          industry: d.industry,
         });
       } else {
         data_map.set(d.industry, {
@@ -47,9 +47,9 @@ function smooshFunding(leftCandidate, rightCandidate) {
               indivs: d.indivs,
               pacs: d.pacs,
               name: rightCandidate.name,
-              industry: d.industry
-            }
-          ]
+              industry: d.industry,
+            },
+          ],
         });
       }
     });
@@ -66,7 +66,7 @@ function smooshFunding(leftCandidate, rightCandidate) {
           indivs: 0,
           pacs: 0,
           name: cName,
-          industry: d.industry
+          industry: d.industry,
         });
       }
       d.values.biggest = Math.max(d.values[0].total, d.values[1].total);
@@ -101,7 +101,7 @@ function smooshFunding(leftCandidate, rightCandidate) {
           indivs: d.indivs,
           pacs: d.pacs,
           name: candidate.name,
-          industry: d.industry
+          industry: d.industry,
         },
         {
           side: otherSide,
@@ -109,13 +109,13 @@ function smooshFunding(leftCandidate, rightCandidate) {
           indivs: 0,
           pacs: 0,
           name: otherName,
-          industry: d.industry
-        }
+          industry: d.industry,
+        },
       ];
-      row.biggest = d.total
+      row.biggest = d.total;
       payload.push({
         industry: d.industry,
-        values: row
+        values: row,
       });
     });
     return payload;
@@ -123,7 +123,6 @@ function smooshFunding(leftCandidate, rightCandidate) {
     return [];
   }
 }
-
 
 function ButterflyClass({ rep1, rep2, parentWidth }) {
   const ref = useD3(
@@ -134,15 +133,15 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         height: 700, //hardcoded, if we want we can fix that.
         top: 100,
         bottom: 100,
-        width:  parentWidth,
-        padding: 20
-      }
-      const svg = parent.select("svg")
+        width: parentWidth,
+        padding: 20,
+      };
+      const svg = parent.select("svg");
       svg
         // .attr("viewBox", [0, 0, margin.width, margin.height])
-        .attr("width", margin.width  - margin.padding + "px")
+        .attr("width", margin.width - margin.padding + "px")
         .attr("height", margin.height + "px")
-        .html("")
+        .html("");
 
       // set up axis that we want to draw. Move them to the appropriate height
       const left_x_axis = svg
@@ -185,7 +184,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .append("stop")
         .attr("offset", "100%")
         .attr("stop-color", "#F8BA1B");
-    
+
       // set up the title of the plot as well as the labels
       const title = svg
         .append("text")
@@ -204,40 +203,53 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .attr("font-size", 15)
         .attr("text-anchor", "middle")
         .text("Funding in USD");
-    
-      // setup the update callback function 
+
+      // setup the update callback function
       // by supplying this with data, we can update our information automagically.
-      
+
       // get names and smoosh data together for plotting
-      
-      let left_candidate = rep1.funding
-      let right_candidate = rep2.funding
+
+      let left_candidate = rep1.funding;
+      let right_candidate = rep2.funding;
       let left_congressperson_name = left_candidate.name;
       let right_congressperson_name = right_candidate.name;
       let smooshed_data = smooshFunding(left_candidate, right_candidate);
       // set the title's text
-      let title_text = `Top Ten Industries for ${left_congressperson_name} vs Top Ten Industries for ${right_congressperson_name}`
-      title.text(
-        title_text
-      );
-      if (title.node().getComputedTextLength() > margin.width - margin.padding) {
-        let num_splits = Math.floor(title.node().getComputedTextLength() / (margin.width - margin.padding)) + 1
-        
-        title.text("")
-        .attr("transform", `translate(${margin.width / 2}, ${margin.top / 2 - 10})`)
-        let approx_char_per_line = title_text.length / num_splits
-        let title_words = title_text.split(" ")
-        let splits = []
+      let title_text = `Top Ten Industries for ${left_congressperson_name} vs Top Ten Industries for ${right_congressperson_name}`;
+      title.text(title_text);
+      if (
+        title.node().getComputedTextLength() >
+        margin.width - margin.padding
+      ) {
+        let num_splits =
+          Math.floor(
+            title.node().getComputedTextLength() /
+              (margin.width - margin.padding)
+          ) + 1;
+
+        title
+          .text("")
+          .attr(
+            "transform",
+            `translate(${margin.width / 2}, ${margin.top / 2 - 10})`
+          );
+        let approx_char_per_line = title_text.length / num_splits;
+        let title_words = title_text.split(" ");
+        let splits = [];
         for (let i = 0; i < num_splits; i++) {
-          let current_string = title_words.shift()
-          while (current_string.length < approx_char_per_line && title_words.length > 0) {
-            current_string += " " + title_words.shift()
+          let current_string = title_words.shift();
+          while (
+            current_string.length < approx_char_per_line &&
+            title_words.length > 0
+          ) {
+            current_string += " " + title_words.shift();
           }
-          splits.push(current_string)
-          title.append("tspan")
+          splits.push(current_string);
+          title
+            .append("tspan")
             .attr("x", 0)
             .attr("dy", `${1 * i}em`)
-            .text(current_string)
+            .text(current_string);
         }
       }
       // figure out the bounds of our axis
@@ -305,7 +317,8 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
           let y_start = y(d);
           let bevel_height = y.bandwidth() / 2;
           let bar_height = y.bandwidth();
-          let bar_length = left_x(left_x.domain()[0]) - left_x(0) + bevel_height;
+          let bar_length =
+            left_x(left_x.domain()[0]) - left_x(0) + bevel_height;
           return `M${x_start}, ${y_start}
                   h${bar_length}
                   a ${bevel_height} ${bevel_height} 0 0,0 0 ${bar_height}
@@ -324,7 +337,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .on("mouseover", (event, d) => {
           let left = d.values[0].side == "left" ? d.values[0] : d.values[1];
           let right = d.values[0].side == "right" ? d.values[0] : d.values[1];
-    
+
           tooltip
             .html(
               `
@@ -336,7 +349,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
             .style("visibility", "visible");
         })
         .on("mousemove", function (event, d) {
-          d // bc the fucking linter :(
+          d; // bc the fucking linter :(
           tooltip
             .style("top", event.pageY - 10 + "px")
             .style("left", event.pageX + 10 + "px");
@@ -370,19 +383,26 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
                 z`;
         })
         .attr("fill", (d) =>
-              d.side == "left" ? "url(#greenGradient)" : "url(#yellowGradient)"
-             );
+          d.side == "left" ? "url(#greenGradient)" : "url(#yellowGradient)"
+        );
     },
     [rep1.name, rep2.name, parentWidth]
   );
 
   return (
-    <div ref={ref}>
-      
-      <div className=".butterfly-tooltip" width="100%"></div>
-      <svg></svg>
+    <div>
+      <div className="graph-explanation comp-explanation">
+        <h5 className="graph-title mt-1">Contributions Amount by Industry</h5>
+        <p className="mt-1">
+          This butterfly chart shows the amount of money each politition spent
+          on the <strong>2020</strong> election cycle.
+        </p>
+      </div>
+      <div ref={ref}>
+        <div className=".butterfly-tooltip" width="100%"></div>
+        <svg></svg>
+      </div>
     </div>
-    
   );
 }
-export default ButterflyClass
+export default ButterflyClass;

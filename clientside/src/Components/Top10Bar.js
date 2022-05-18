@@ -1,6 +1,6 @@
-import React from 'react'
-import { useD3 } from '../hooks/useD3.js'
-import * as d3 from "d3"
+import React from "react";
+import { useD3 } from "../hooks/useD3.js";
+import * as d3 from "d3";
 
 function Top10Bar({ repData, width }) {
   const ref = useD3(
@@ -11,14 +11,14 @@ function Top10Bar({ repData, width }) {
         height: 350, //hardcoded, if we want we can fix that.
         top: 100,
         bottom: 100,
-        width:  width,
-        padding: 20
-      }
-      const svg = parent.select("svg")
+        width: width,
+        padding: 20,
+      };
+      const svg = parent.select("svg");
       svg
-        .attr("width", margin.width  + "px")
+        .attr("width", margin.width + "px")
         .attr("height", margin.height + "px")
-        .html("")
+        .html("");
       const x_axis = svg
         .append("g")
         .attr("transform", `translate(0, ${margin.height - margin.bottom})`);
@@ -41,31 +41,47 @@ function Top10Bar({ repData, width }) {
       let congressperson_name = candidate.name;
       let funding_data = candidate.data;
       if (funding_data.length == 0) {
-        return d3.create("p").text("no data").node()
+        return d3.create("p").text("no data").node();
       }
       let cycle = candidate.cycle;
-      let title_text = `Top Ten Industries for ${congressperson_name} in ${cycle}`
-      title.text(
-        title_text
-      );
-      if (title.node().getComputedTextLength() > margin.width - margin.padding) {
-        let num_splits = Math.floor(title.node().getComputedTextLength() / (margin.width - margin.padding)) + 1
-        
-        title.text("")
-        .attr("transform", `translate(${margin.width / 2}, ${margin.top / 2 - 10})`)
-        let approx_char_per_line = title_text.length / num_splits
-        let title_words = title_text.split(" ")
-        let splits = []
+      let title_text = `Top Ten Industries for ${congressperson_name} in ${cycle}`;
+      title.text(title_text);
+      if (
+        title.node().getComputedTextLength() >
+        margin.width - margin.padding
+      ) {
+        let num_splits =
+          Math.floor(
+            title.node().getComputedTextLength() /
+              (margin.width - margin.padding)
+          ) + 1;
+
+        title
+          .text("")
+          .attr(
+            "transform",
+            `translate(${margin.width / 2}, ${margin.top / 2 - 10})`
+          );
+        let approx_char_per_line = title_text.length / num_splits;
+        let title_words = title_text.split(" ");
+        let splits = [];
         for (let i = 0; i < num_splits; i++) {
-          let current_string = title_words.shift()
-          while (current_string.length < approx_char_per_line && title_words.length > 0) {
-            current_string += " " + title_words.shift()
+          let current_string;
+          if (title_words.length > 0) {
+            current_string = title_words.shift();
+            while (
+              current_string.length < approx_char_per_line &&
+              title_words.length > 0
+            ) {
+              current_string += " " + title_words.shift();
+            }
+            splits.push(current_string);
+            title
+              .append("tspan")
+              .attr("x", 0)
+              .attr("dy", `${1 * i}em`)
+              .text(current_string);
           }
-          splits.push(current_string)
-          title.append("tspan")
-            .attr("x", 0)
-            .attr("dy", `${1 * i}em`)
-            .text(current_string)
         }
       }
       const y = d3
@@ -86,15 +102,10 @@ function Top10Bar({ repData, width }) {
 
       let tooltip = parent
         .select("#bar-tooltip")
-        .style("position", "absolute")
-        .style("z-index", "10")
-        .style("visibility", "hidden")
-        .style("padding", "10px")
-        .style("background", "rgba(0,0,0,0.6)")
-        .style("border-radius", "4px")
-        .style("color", "#fff")
+        .attr("class", "bar-tooltip")
         .text("a simple tooltip");
-        console.log(tooltip)
+      // console.log(tooltip)
+
       let barGroups = svg
         .selectAll(".bargroup")
         .data(funding_data)
@@ -106,26 +117,29 @@ function Top10Bar({ repData, width }) {
           tooltip
             .html(
               `
-                <div>Industry: ${d.industry}</div>
+                <div>${d.industry}</div>
                 <div>PACs: $${d.pacs.toLocaleString("en-US")}</div>
                 <div>Indivs: $${d.indivs.toLocaleString("en-US")}</div>
                     `
             )
             .style("visibility", "visible");
         })
-        .on("mousemove", function (event, d) {
-          d
-          let pointer = d3.pointer(event, window)
-          console.log(pointer)
+        .on("mousemove", function () {
+          // let pointer = d3.pointer(event, window);
+          console.log(margin.height);
+          console.log(margin.width);
+          // console.log(pointer[0] + 1 / margin.width + "px");
+          // let x = event.x / 2 + margin.width / 2 - 20 + "px";
+          // let y = event.y / 2 - margin.height / 2 + "px";
           tooltip
-            .style("top", pointer[1] - 10 + "px")
-            .style("left", event.pageX + 10 + "px");
+            .style("top", margin.height - 40 + "px")
+            .style("left", margin.width / 2 + 30 + "px");
         })
         .on("mouseout", function () {
           tooltip.html(``).style("visibility", "hidden");
         });
       // stacks
-        barGroups
+      barGroups
         .selectAll("rect")
         .data((d) => d.values)
         .join("rect")
@@ -133,7 +147,10 @@ function Top10Bar({ repData, width }) {
         .attr("y", (d) => {
           return y(d.y1);
         })
-        .attr("width", (d) => {d; return x.bandwidth() - 2})
+        .attr("width", (d) => {
+          d;
+          return x.bandwidth() - 2;
+        })
         .attr("height", (d) => y(d.y0) - y(d.y1))
         .attr("fill", (d) => color(d.name));
     },
@@ -147,10 +164,10 @@ function Top10Bar({ repData, width }) {
           <h5>What does this mean?</h5>
           <p>
             A PAC, or political action committee, is a term for a political
-            committee that raises and spends money in order to elect and
-            defeat candidates. Most PACs represent businesses, labor, or
-            ideological interests. An individual contribution is a
-            contribution made by an individual to a politician.
+            committee that raises and spends money in order to elect and defeat
+            candidates. Most PACs represent businesses, labor, or ideological
+            interests. An individual contribution is a contribution made by an
+            individual to a politician.
             <br></br>
             The bar chart shows total contributions by industry.
           </p>
@@ -161,10 +178,9 @@ function Top10Bar({ repData, width }) {
         </div>
       </div>
     </div>
-    
   );
 }
-export default Top10Bar
+export default Top10Bar;
 
 /*video notes!
 lol
