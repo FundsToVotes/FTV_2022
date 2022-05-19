@@ -161,43 +161,59 @@ export default function PersonDetails() {
     return "" + arr;
   };
 
+  const handleResize = () => {
+    let whitespace = 2 * (24 + 1 + 16 + 8)
+    let non_mobile_width = document
+      .querySelector("#bar-container")
+      .getBoundingClientRect().width;
+    let windowSize = document
+    .querySelector("#root")
+    .getBoundingClientRect().width;
+    let almost_mobile_screen_width = document
+    .querySelector("#test")
+    .getBoundingClientRect().width;
+    let side_panel_width = document
+    .querySelector("#side-panel")
+    .getBoundingClientRect().width;
+    let svg_width = 0
+    if (windowSize <= 1259 && window.innerWidth <= 1259) {
+      // might be mobile view if here
+      if (window.innerWidth <= 763) {
+        // we are def using the mobile view if we are here
+        console.log("mobile")
+        svg_width = windowSize  - whitespace
+      } else {
+        console.log("semi-mobile")
+        // we are semi-mobile width if we are here
+        // account for the width if we hit the minimum width for the side card.
+        svg_width = (almost_mobile_screen_width - side_panel_width) - whitespace
+
+      }
+      
+    } else {
+      console.log("non-mobile")
+      svg_width = non_mobile_width / 2
+    }
+    setSvgSize(svg_width)
+  }
+
   useEffect(() => {
+    handleResize()    
     fetchRepresentativeDetails();
     fetchTopTenData();
-
-    function handleResize() {
-      let whitespace = 2 * (24 + 1 + 16 + 8)
-      let non_mobile_width = document
-        .querySelector("#bar-container")
-        .getBoundingClientRect().width;
-      let windowSize = document
-      .querySelector("#root")
-      .getBoundingClientRect().width;
-      let almost_mobile_screen_width = document
-      .querySelector("#test")
-      .getBoundingClientRect().width;
-      let side_panel_width = document
+    let side_panel_width = document
       .querySelector("#side-panel")
-      .getBoundingClientRect().width;
-      let svg_width = 0
-      if (windowSize <= 1259 && window.innerWidth <= 1259) {
-        // might be mobile view if here
-        if (window.innerWidth <= 763) {
-          // we are def using the mobile view if we are here
-          svg_width = windowSize  - whitespace
-        } else {
-          // we are semi-mobile width if we are here
-          // account for the width if we hit the minimum width for the side card.
-          svg_width = (almost_mobile_screen_width - side_panel_width) - whitespace
+      
+    const resizeObserver = new ResizeObserver( (entries) => {
+      entries
+      console.log("resize")
+      handleResize()
+      setTimeout(() => {
+        resizeObserver.disconnect()
+      }, 1000)
+    })
 
-        }
-        
-      } else {
-        svg_width = non_mobile_width / 2
-      }
-      setSvgSize(svg_width)
-    }
-    handleResize();
+    resizeObserver.observe(side_panel_width)
     window.addEventListener("resize", handleResize);
 
     return (_) => {
@@ -233,6 +249,7 @@ export default function PersonDetails() {
                     "headshot image-details-cropper details-headshot " +
                     colorCodeBackground(details.party)
                   }
+                  id="headshot"
                   onError={(event) => {
                     event.target.src = defaultProfile;
                     event.onerror = null;

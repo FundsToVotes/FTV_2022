@@ -37,11 +37,8 @@ function Top10Bar({ repData, width }) {
         .domain(["indivs", "pacs"])
         .range(["#F8BA1B", "#8FBE5A"]);
       
-      // let legend_data = [{domain: "indivs", range:["#F8BA1B"], idx:0},
-      //                    {domain: "pacs", range:["#8FBE5A"], idx: 1}]
-
-      
-
+      // let legend_data = [{domain: "indivs", range:["#F8BA1B"]},
+      //                    {domain: "pacs", range:["#8FBE5A"]}]
 
       let candidate = repData;
       let congressperson_name = candidate.name;
@@ -90,6 +87,19 @@ function Top10Bar({ repData, width }) {
           }
         }
       }
+
+      console.log(title.node())
+      
+      // let legend = svg
+      //   .selectAll(".box-legend")
+      //   .data(legend_data)
+      //   .join("g")
+      //   .classed(".box-legend", true)
+      //   .attr("y", )
+      // legend
+      //   .selectAll("rect")
+      //   .data(d => [d.range, d.idx])
+
       const y = d3
         .scaleLinear()
         .domain([0, Math.max(...funding_data.map((d) => d.total))])
@@ -132,8 +142,6 @@ function Top10Bar({ repData, width }) {
         })
         .on("mousemove", function () {
           // let pointer = d3.pointer(event, window);
-          console.log(margin.height);
-          console.log(margin.width);
           // console.log(pointer[0] + 1 / margin.width + "px");
           // let x = event.x / 2 + margin.width / 2 - 20 + "px";
           // let y = event.y / 2 - margin.height / 2 + "px";
