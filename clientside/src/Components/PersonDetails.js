@@ -173,9 +173,29 @@ export default function PersonDetails() {
       let windowSize = document
       .querySelector("#root")
       .getBoundingClientRect().width;
-      let almost_mobile_width =   (windowSize * 3/4)- whitespace - whitespace // idk why we need to do this twice lol
-      let mobile_width =  windowSize  - whitespace
-      setSvgSize(windowSize <= 1259 ? windowSize <= 763 ? mobile_width : almost_mobile_width : non_mobile_width / 2);
+      let almost_mobile_screen_width = document
+      .querySelector("#test")
+      .getBoundingClientRect().width;
+      let side_panel_width = document
+      .querySelector("#side-panel")
+      .getBoundingClientRect().width;
+      let svg_width = 0
+      if (windowSize <= 1259 && window.innerWidth <= 1259) {
+        // might be mobile view if here
+        if (window.innerWidth <= 763) {
+          // we are def using the mobile view if we are here
+          svg_width = windowSize  - whitespace
+        } else {
+          // we are semi-mobile width if we are here
+          // account for the width if we hit the minimum width for the side card.
+          svg_width = (almost_mobile_screen_width - side_panel_width) - whitespace
+
+        }
+        
+      } else {
+        svg_width = non_mobile_width / 2
+      }
+      setSvgSize(svg_width)
     }
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -197,7 +217,7 @@ export default function PersonDetails() {
 
       <div className="details-container" id="test">
         {/* Side Panel */}
-        <div className="details-side-panel">
+        <div className="details-side-panel" id="side-panel">
           <div className="details-side-header">
             <div className="side-panel-header">
               <h2>{details.name}</h2>

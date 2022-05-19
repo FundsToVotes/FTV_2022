@@ -36,6 +36,12 @@ function Top10Bar({ repData, width }) {
         .scaleOrdinal()
         .domain(["indivs", "pacs"])
         .range(["#F8BA1B", "#8FBE5A"]);
+      
+      // let legend_data = [{domain: "indivs", range:["#F8BA1B"], idx:0},
+      //                    {domain: "pacs", range:["#8FBE5A"], idx: 1}]
+
+      
+
 
       let candidate = repData;
       let congressperson_name = candidate.name;
