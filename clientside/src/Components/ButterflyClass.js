@@ -130,8 +130,8 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
       let margin = {
         left: 50,
         right: 50,
-        height: 700, //hardcoded, if we want we can fix that.
-        top: 100,
+        height: 800, //hardcoded, if we want we can fix that.
+        top: 50,
         bottom: 100,
         width: parentWidth,
         padding: 20,
@@ -291,8 +291,8 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
       const y = d3
         .scaleBand()
         .domain(smooshed_data.map((d) => d.industry))
-        .range([margin.height - margin.bottom, margin.top]);
-      // .paddingInner(0.5);
+        .range([margin.height - margin.bottom, margin.top])
+        .paddingInner(0.1);
 
       // define the tooltip
       let tooltip = parent
@@ -316,9 +316,10 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .join("text")
         .text((d) => d)
         .attr("x", center)
-        .attr("y", (d) => y(d) * 1.5 - 10)
+        .attr("y", (d) => y(d) - 5)
         .attr("text-anchor", "middle")
-        .attr("font-size", "16px");
+        .attr("font-size", "14px")
+        .style("padding", "5px");
 
       // set up the background grey bars, yo
       svg
@@ -331,10 +332,9 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
           console.log(i);
           console.log(y.bandwidth());
           let x_start = left_x(0);
-          // adding 1.5 adds more space between them but also more space at the top
-          let y_start = y(d) * 1.5;
+          let y_start = y(d);
           let bevel_height = y.bandwidth() / 2;
-          let bar_height = y.bandwidth() - 15;
+          let bar_height = y.bandwidth() - 20;
           let bar_length =
             left_x(left_x.domain()[0]) - left_x(0) + bevel_height;
           return `M${x_start}, ${y_start}
@@ -386,9 +386,9 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
           let x_axis = d.side == "left" ? left_x : right_x;
           let directional_shift_direction = d.side == "left" ? 1 : -1;
           let x_start = x_axis(0);
-          let y_start = y(d.industry) * 1.5;
+          let y_start = y(d.industry);
           let bevel_height = y.bandwidth() / 2;
-          let bar_height = y.bandwidth() - 15;
+          let bar_height = y.bandwidth() - 20;
           let bar_length =
             x_axis(d.total) -
             x_axis(0) +
