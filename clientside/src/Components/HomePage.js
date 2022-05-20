@@ -13,7 +13,7 @@ import SearchBar from "./SearchBar";
 export class HomePage extends Component {
   render() {
     return (
-      <div className="page-container">
+      <div className="page-container image-container">
         <div className="landing-title-container">
           <div>
             <h2 className="landing-title">

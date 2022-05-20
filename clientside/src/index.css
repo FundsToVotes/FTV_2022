@@ -100,8 +100,6 @@ a:hover {
   color: transparent
 }
 
-
-
 .landing-card {
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0px 4px 4px 5px rgba(143, 190, 90, 0.15);
@@ -182,6 +180,11 @@ a:hover {
   justify-content: flex-end;
 }
 
+.image-container {
+  position: relative;
+  min-height: 100vh;
+}
+
 .landing-img {
   padding-top: 3em;
   height: 25rem;
@@ -189,7 +192,7 @@ a:hover {
   bottom: 0px;
   right: 30px;
   display: none;
-  position:fixed;
+  position: absolute;
 }
 
 .landing-bottom {
@@ -1021,3 +1024,26 @@ a:hover {
     height: 25rem;
   }
 }
+/* 
+@media (max-height: 778px) {
+  .landing-img {
+    height: 17rem;
+  }
+}
+
+@media (max-height: 694px) {
+  .landing-img {
+    height: 12rem;
+    right: 150px;
+  }
+}
+
+@media (max-height: 616px) {
+  .landing-img {
+    display: none;
+  }
+
+  .landing-card {
+    width: 100%;
+  }
+} */
