@@ -24,8 +24,8 @@ function Top10Pie({ repData, width }) {
         "#b07aa1",
         "#ff9da7",
         "#9c755f",
-        "#bab0ac"
-      ]
+        "#bab0ac",
+      ];
       const svg = parent.select("svg");
       svg
         .attr("width", margin.width + "px")
@@ -41,19 +41,27 @@ function Top10Pie({ repData, width }) {
       let mid_x = margin.width / 2;
       let mid_y = margin.height / 2;
 
-      
-      let text_radius = width/2/2;
+      let text_radius = width / 2 / 2;
 
-      var arc = d3.arc().innerRadius(0).outerRadius(width/4);
-      var point_line_start = d3.arc().innerRadius(0).outerRadius(width/2 + 10).centroid;
-      var point_line_end = d3.arc().innerRadius(0).outerRadius(width/2 + 20).centroid;
+      var arc = d3
+        .arc()
+        .innerRadius(0)
+        .outerRadius(width / 4);
+      var point_line_start = d3
+        .arc()
+        .innerRadius(0)
+        .outerRadius(width / 2 + 10).centroid;
+      var point_line_end = d3
+        .arc()
+        .innerRadius(0)
+        .outerRadius(width / 2 + 20).centroid;
 
       let adjusted_palette = tableau_ten.slice(0, pie_data.length);
       const color = d3
         .scaleOrdinal()
         .domain(pie_data.map((d) => d.industry))
         .range(adjusted_palette);
-        svg
+      svg
         .selectAll("path")
         .data(pie(pie_data))
         .join("path")
@@ -124,7 +132,7 @@ function Top10Pie({ repData, width }) {
                   `);
                 }
               }
-    
+
               splits.push(`
                   <tspan x=0 y=0 dy=${splits.length * 1.3}em>${
                 (
@@ -135,7 +143,7 @@ function Top10Pie({ repData, width }) {
     `);
               return splits.join("");
             });
-    
+
           text.attr("transform", (d) => {
             let angle =
               d.startAngle - (d.startAngle - d.endAngle) / 2 - Math.PI / 2;
@@ -144,19 +152,35 @@ function Top10Pie({ repData, width }) {
             // let direction_x = Math.cos(angle) > 0 ? 1 : -1;
             // let direction_y = Math.sin(angle) > 0 ? 1 : -1;
             let x =
-              Math.cos(angle) * text_radius + Math.cos(angle) * line_width + mid_x;
+              Math.cos(angle) * text_radius +
+              Math.cos(angle) * line_width +
+              mid_x;
             let y = Math.sin(angle) * text_radius + Math.sin(angle) * 8 + mid_y;
             return `translate(${x}, ${y})`;
           });
           return text;
         });
-      },
+    },
     [repData, width]
   );
 
+  let display;
+  if (repData.data.length == 0) {
+    display = "no-data";
+  } else {
+    display = "";
+  }
+
+  let error;
+  if (repData.data.length == 0) {
+    error = <p className={"mt-2"}>No funding data at this time.</p>;
+  } else {
+    error = "";
+  }
+
   return (
-    <div ref={ref}>
-      <div className="graph-container" id="bar-container">
+    <div>
+      <div className={"graph-container " + display} id="bar-container">
         <div className="graph-explanation">
           <h5>What does this mean?</h5>
           <p>
@@ -170,18 +194,14 @@ function Top10Pie({ repData, width }) {
           </p>
         </div>
         <div>
-          <div id="bar-tooltip" width="100%"></div>
-          <svg id="bar-graph"></svg>
+          <div ref={ref}>
+            <div id="bar-tooltip" width="100%"></div>
+            <svg id="bar-graph"></svg>
+          </div>
         </div>
       </div>
+      {error}
     </div>
   );
 }
 export default Top10Pie;
-
-/*video notes!
-lol
-
-video no slides, don't exceed 10 slides
-
-*/

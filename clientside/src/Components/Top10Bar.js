@@ -171,32 +171,23 @@ function Top10Bar({ repData, width }) {
     [repData, width]
   );
 
-  const showDetails = () => {
-    let display;
-    if (repData.data.length == 0) {
-      display = "no-data";
-    } else {
-      display = "";
-    }
-    return display;
-  };
+  let display;
+  if (repData.data.length == 0) {
+    display = "no-data";
+  } else {
+    display = "";
+  }
 
-  const showError = () => {
-    let error;
-    console.log(repData.data.length);
-    if (repData.data.length == 0) {
-      console.log("here");
-      error = "show-error";
-    } else {
-      error = "";
-    }
-    console.log(error);
-    return error;
-  };
+  let error;
+  if (repData.data.length == 0) {
+    error = <p className={"mt-2"}>No funding data at this time.</p>;
+  } else {
+    error = "";
+  }
 
   return (
     <div>
-      <div className={"graph-container " + showDetails()}>
+      <div className={"graph-container " + display} id="bar-container">
         <div className="graph-explanation">
           <h5>What does this mean?</h5>
           <p>
@@ -214,7 +205,7 @@ function Top10Bar({ repData, width }) {
           <svg id="bar-graph"></svg>
         </div>
       </div>
-      <p className={"mt-2" + showError()}>No funding data at this time.</p>
+      {error}
     </div>
   );
 }
