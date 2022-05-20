@@ -36,7 +36,7 @@ function Top10Bar({ repData, width }) {
         .scaleOrdinal()
         .domain(["indivs", "pacs"])
         .range(["#F8BA1B", "#8FBE5A"]);
-      
+
       // let legend_data = [{domain: "indivs", range:["#F8BA1B"]},
       //                    {domain: "pacs", range:["#8FBE5A"]}]
 
@@ -88,8 +88,8 @@ function Top10Bar({ repData, width }) {
         }
       }
 
-      console.log(title.node())
-      
+      console.log(title.node());
+
       // let legend = svg
       //   .selectAll(".box-legend")
       //   .data(legend_data)
@@ -171,9 +171,32 @@ function Top10Bar({ repData, width }) {
     [repData, width]
   );
 
+  const showDetails = () => {
+    let display;
+    if (repData.data.length == 0) {
+      display = "no-data";
+    } else {
+      display = "";
+    }
+    return display;
+  };
+
+  const showError = () => {
+    let error;
+    console.log(repData.data.length);
+    if (repData.data.length == 0) {
+      console.log("here");
+      error = "show-error";
+    } else {
+      error = "";
+    }
+    console.log(error);
+    return error;
+  };
+
   return (
-    <div ref={ref}>
-      <div className="graph-container" id="bar-container">
+    <div>
+      <div className={"graph-container " + showDetails()}>
         <div className="graph-explanation">
           <h5>What does this mean?</h5>
           <p>
@@ -186,19 +209,13 @@ function Top10Bar({ repData, width }) {
             The bar chart shows total contributions by industry.
           </p>
         </div>
-        <div>
+        <div ref={ref}>
           <div id="bar-tooltip" width="100%"></div>
           <svg id="bar-graph"></svg>
         </div>
       </div>
+      <p className={"mt-2" + showError()}>No funding data at this time.</p>
     </div>
   );
 }
 export default Top10Bar;
-
-/*video notes!
-lol
-
-video no slides, don't exceed 10 slides
-
-*/

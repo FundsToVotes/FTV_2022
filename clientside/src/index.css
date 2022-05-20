@@ -536,6 +536,10 @@ a:hover {
   display: none;
 }
 
+.show-error {
+  display: block;
+}
+
 .graph-explanation > h5 {
   color: #8FBE5A;
 }

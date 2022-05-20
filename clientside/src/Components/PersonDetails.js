@@ -309,7 +309,7 @@ export default function PersonDetails() {
 
             <div className="m-2">
               <h4 className="graph-title">Top 10 Supporting Industries</h4>
-              <Top10Pie repData={topTen} width={svgSize}/>
+              <Top10Pie repData={topTen} width={svgSize} />
             </div>
           </div>
 
