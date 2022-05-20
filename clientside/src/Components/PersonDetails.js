@@ -15,7 +15,7 @@ import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
 import defaultProfile from "../images/placeholder-square.png";
 import BillsData from "./BillsData";
-// import Top10Pie from "./Top10Pie";
+import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
 import cleanTopTen from "./utils/cleanTopTen.js";
 import prepTopTenForStack from "./utils/prepTopTenForStack.js";
@@ -162,58 +162,55 @@ export default function PersonDetails() {
   };
 
   const handleResize = () => {
-    let whitespace = 2 * (24 + 1 + 16 + 8)
+    let whitespace = 2 * (24 + 1 + 16 + 8);
     let non_mobile_width = document
       .querySelector("#bar-container")
       .getBoundingClientRect().width;
     let windowSize = document
-    .querySelector("#root")
-    .getBoundingClientRect().width;
+      .querySelector("#root")
+      .getBoundingClientRect().width;
     let almost_mobile_screen_width = document
-    .querySelector("#test")
-    .getBoundingClientRect().width;
+      .querySelector("#test")
+      .getBoundingClientRect().width;
     let side_panel_width = document
-    .querySelector("#side-panel")
-    .getBoundingClientRect().width;
-    let svg_width = 0
+      .querySelector("#side-panel")
+      .getBoundingClientRect().width;
+    let svg_width = 0;
     if (windowSize <= 1259 && window.innerWidth <= 1259) {
       // might be mobile view if here
       if (window.innerWidth <= 763) {
         // we are def using the mobile view if we are here
-        console.log("mobile")
-        svg_width = windowSize  - whitespace
+        console.log("mobile");
+        svg_width = windowSize - whitespace;
       } else {
-        console.log("semi-mobile")
+        console.log("semi-mobile");
         // we are semi-mobile width if we are here
         // account for the width if we hit the minimum width for the side card.
-        svg_width = (almost_mobile_screen_width - side_panel_width) - whitespace
-
+        svg_width = almost_mobile_screen_width - side_panel_width - whitespace;
       }
-      
     } else {
-      console.log("non-mobile")
-      svg_width = non_mobile_width / 2
+      console.log("non-mobile");
+      svg_width = non_mobile_width / 2;
     }
-    setSvgSize(svg_width)
-  }
+    setSvgSize(svg_width);
+  };
 
   useEffect(() => {
-    handleResize()    
+    handleResize();
     fetchRepresentativeDetails();
     fetchTopTenData();
-    let side_panel_width = document
-      .querySelector("#side-panel")
-      
-    const resizeObserver = new ResizeObserver( (entries) => {
-      entries
-      console.log("resize")
-      handleResize()
-      setTimeout(() => {
-        resizeObserver.disconnect()
-      }, 1000)
-    })
+    let side_panel_width = document.querySelector("#side-panel");
 
-    resizeObserver.observe(side_panel_width)
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries;
+      console.log("resize");
+      handleResize();
+      setTimeout(() => {
+        resizeObserver.disconnect();
+      }, 1000);
+    });
+
+    resizeObserver.observe(side_panel_width);
     window.addEventListener("resize", handleResize);
 
     return (_) => {
@@ -310,10 +307,10 @@ export default function PersonDetails() {
               </div>
             </div>
 
-            {/* <div className="m-2">
+            <div className="m-2">
               <h4 className="graph-title">Top 10 Supporting Industries</h4>
               <Top10Pie repsName={representative} />
-            </div> */}
+            </div>
           </div>
 
           <div className="m-4 mb-5 p-3">
