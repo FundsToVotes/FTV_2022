@@ -15,7 +15,7 @@ import facebookIcon from "../images/facebook.svg";
 import youtubeIcon from "../images/youtube.svg";
 import defaultProfile from "../images/placeholder-square.png";
 import BillsData from "./BillsData";
-// import Top10Pie from "./Top10Pie";
+import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
 import cleanTopTen from "./utils/cleanTopTen.js";
 import prepTopTenForStack from "./utils/prepTopTenForStack.js";
@@ -203,7 +203,7 @@ export default function PersonDetails() {
     fetchTopTenData();
     let side_panel_width = document
       .querySelector("#side-panel")
-      
+
     const resizeObserver = new ResizeObserver( (entries) => {
       entries
       console.log("resize")
@@ -310,10 +310,10 @@ export default function PersonDetails() {
               </div>
             </div>
 
-            {/* <div className="m-2">
+            <div className="m-2">
               <h4 className="graph-title">Top 10 Supporting Industries</h4>
-              <Top10Pie repsName={representative} />
-            </div> */}
+              <Top10Pie repData={topTen} width={svgSize}/>
+            </div>
           </div>
 
           <div className="m-4 mb-5 p-3">
