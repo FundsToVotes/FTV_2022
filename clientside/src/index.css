@@ -1001,6 +1001,9 @@ a:hover {
   .comp-resize {
     font-size: 1rem;
   }
+  .comp-header-resize {
+    font-size: 1.25rem;
+  }
 }
 
 @media (max-width: 1259px) {

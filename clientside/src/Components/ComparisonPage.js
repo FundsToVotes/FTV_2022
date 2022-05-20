@@ -11,19 +11,19 @@ export class ComparisonPage extends Component {
     //default state
     this.state = {
       show: false,
-      vizWidth: 700
+      vizWidth: 700,
     };
   }
 
   repsCallback = (details, side) => {
-    console.log(side)
+    console.log(side);
     if (side === "left") {
       this.setState({ repOne: details });
     } else {
       this.setState({ repTwo: details });
     }
     this.setState({ show: false });
-    console.log(this.state.repTwo)
+    console.log(this.state.repTwo);
   };
 
   colorCodeParty = (party) => {
@@ -49,7 +49,7 @@ export class ComparisonPage extends Component {
     return (
       <div>
         <div className="details-side-header">
-          <h2 className="comp-resize">{details.name}</h2>
+          <h2 className="comp-header-resize">{details.name}</h2>
           <h3 className="position-text mb-3 comp-resize">{details.office}</h3>
           <div className="image-box">
             <div>
@@ -104,11 +104,10 @@ export class ComparisonPage extends Component {
     });
   };
 
-
   makeButterflyChart = (rep1, rep2, width) => {
     return (
       <div>
-        <ButterflyClass rep1={rep1} rep2={rep2} parentWidth={width}/>
+        <ButterflyClass rep1={rep1} rep2={rep2} parentWidth={width} />
       </div>
     );
   };
@@ -122,15 +121,15 @@ export class ComparisonPage extends Component {
   };
 
   updateDimensions = () => {
-    this.setState({vizWidth: window.innerWidth * 3 / 5})
-  }
+    this.setState({ vizWidth: (window.innerWidth * 3) / 5 });
+  };
 
   componentDidMount() {
-    this.setState({vizWidth: window.innerWidth * 3 / 5})
-    window.addEventListener('resize', this.updateDimensions)
+    this.setState({ vizWidth: (window.innerWidth * 3) / 5 });
+    window.addEventListener("resize", this.updateDimensions);
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions)
+    window.removeEventListener("resize", this.updateDimensions);
   }
 
   render() {
@@ -204,7 +203,10 @@ export class ComparisonPage extends Component {
             </div>
 
             {/* Visualizations */}
-            <div className="comp-viz-container">{ButterflyChart}<div id="butterfly"></div></div>
+            <div className="comp-viz-container">
+              {ButterflyChart}
+              <div id="butterfly"></div>
+            </div>
 
             {/* Side panel two */}
             <div className="details-side-panel comp-side-right">
