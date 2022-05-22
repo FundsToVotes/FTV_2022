@@ -8,7 +8,7 @@ function Top10Bar({ repData, width }) {
       let margin = {
         left: 75,
         right: 50,
-        height: 350, //hardcoded, if we want we can fix that.
+        height: 400, //hardcoded, if we want we can fix that.
         top: 100,
         bottom: 100,
         width: width,
@@ -31,24 +31,15 @@ function Top10Bar({ repData, width }) {
         .attr("transform", `translate(${margin.width / 2}, ${margin.top / 2})`)
         .attr("font-size", 20)
         .attr("text-anchor", "middle");
-      // set up color assignment
-      const color = d3
-        .scaleOrdinal()
-        .domain(["indivs", "pacs"])
-        .range(["#F8BA1B", "#8FBE5A"]);
-
-      // let legend_data = [{domain: "indivs", range:["#F8BA1B"]},
-      //                    {domain: "pacs", range:["#8FBE5A"]}]
 
       let candidate = repData;
       let congressperson_name = candidate.name;
+      let cycle = candidate.cycle;
       let funding_data = candidate.data;
-      console.log(funding_data)
       if (funding_data.length == 0) {
         return d3.create("p").text("no data").node();
       }
-      let cycle = candidate.cycle;
-      let title_text = `Top Ten Industries for ${congressperson_name} in ${cycle}`;
+      let title_text = `Number of PACs vs Individual Contributions by industry for ${congressperson_name} in ${cycle}`;
       title.text(title_text);
       if (
         title.node().getComputedTextLength() >
@@ -62,10 +53,6 @@ function Top10Bar({ repData, width }) {
 
         title
           .text("")
-          .attr(
-            "transform",
-            `translate(${margin.width / 2}, ${margin.top / 2 - 10})`
-          );
         let approx_char_per_line = title_text.length / num_splits;
         let title_words = title_text.split(" ");
         let splits = [];
@@ -83,21 +70,60 @@ function Top10Bar({ repData, width }) {
             title
               .append("tspan")
               .attr("x", 0)
+              .attr("y", 0)
               .attr("dy", `${1 * i}em`)
               .text(current_string);
           }
         }
+        if (splits.length > 2) {
+          title
+          .attr(
+            "transform",
+            `translate(${margin.width / 2}, ${margin.top / 2 - 30})`
+          );
+        } else {
+          title
+            .attr(
+              "transform",
+              `translate(${margin.width / 2}, ${margin.top / 2 - 10})`
+            );
+        }
       }
 
-      // let legend = svg
-      //   .selectAll(".box-legend")
-      //   .data(legend_data)
-      //   .join("g")
-      //   .classed(".box-legend", true)
-      //   .attr("y", )
-      // legend
-      //   .selectAll("rect")
-      //   .data(d => [d.range, d.idx])
+      
+      // set up color assignment
+      const color = d3
+        .scaleOrdinal()
+        .domain(["indivs", "pacs"])
+        .range(["#F8BA1B", "#8FBE5A"]);
+
+      let legend_data = [{domain: "Individual Contributions", range:["#F8BA1B"]},
+                         {domain: "PACS", range:["#8FBE5A"]}]
+
+      svg
+        .selectAll(".box-legend")
+        .data(legend_data)
+        .join((enter) => {
+          let group = enter.append("g")
+          .classed(".box-legend", true)
+          .attr("transform", (d, i) => {
+            let x = margin.width / 4 * (i == 0? .75 : 2.75)
+            let y = margin.top - 29
+            return `translate(${x}, ${y})`
+          })
+          group
+            .append("rect")
+            .attr("fill", d => d.range[0])
+            .attr("width", "10")
+            .attr("height", "10")
+          group
+              .append("text")
+              .attr("x", 15)
+              .attr("y", 10)
+              .attr("font-size", 12)
+              .text(d => d.domain)
+
+        })
 
       const y = d3
         .scaleLinear()

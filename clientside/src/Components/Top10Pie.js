@@ -6,11 +6,11 @@ function Top10Pie({ repData, width }) {
   const ref = useD3(
     (parent) => {
       let margin = {
-        left: 75,
-        right: 50,
-        height: 350, //hardcoded, if we want we can fix that.
-        top: 100,
-        bottom: 100,
+        left: 30,
+        right: 175,
+        height: 440, //hardcoded, if we want we can fix that.
+        top: 40,
+        bottom: 40,
         width: width,
         padding: 20,
       };
@@ -31,30 +31,74 @@ function Top10Pie({ repData, width }) {
         .attr("width", margin.width + "px")
         .attr("height", margin.height + "px")
         .html("");
-      // input_data
       let pie_data = repData.data;
-      pie_data = pie_data.map((d) => {
-        d.total = 10;
-        return d;
-      });
-      let pie = d3.pie().value((d) => d.total);
-      let mid_x = margin.width / 2;
-      let mid_y = margin.height / 2;
+      let pie = d3.pie().value((d) => d.indivs + d.pacs);
 
-      let text_radius = width / 2 / 2;
+      let radius = (margin.width - margin.right)/2
+      let mid_y = margin.height / 2;
+      if (radius * 2 > margin.height - margin.top) {
+        radius = (margin.height - margin.top) /2
+        mid_y = mid_y + margin.top/2
+      }
+      let mid_x = radius;
+      const title = svg
+        .append("text")
+        .attr("transform", `translate(${margin.width / 2}, ${margin.top / 2})`)
+        .attr("font-size", 20)
+        .attr("text-anchor", "middle");
+
+      let congressperson_name = repData.name;
+      let cycle = repData.cycle;
+      let title_text = `Top Ten Industries supporting ${congressperson_name} in ${cycle}`;
+      title.text(title_text);
+      if (
+        title.node().getComputedTextLength() >
+        margin.width - margin.padding
+      ) {
+        let num_splits =
+          Math.floor(
+            title.node().getComputedTextLength() /
+              (margin.width - margin.padding)
+          ) + 1;
+
+        title
+          .text("")
+          .attr(
+            "transform",
+            `translate(${margin.width / 2}, ${margin.top / 2})`
+          );
+        let approx_char_per_line = title_text.length / num_splits;
+        let title_words = title_text.split(" ");
+        let splits = [];
+        for (let i = 0; i < num_splits; i++) {
+          let current_string;
+          if (title_words.length > 0) {
+            current_string = title_words.shift();
+            while (
+              current_string.length < approx_char_per_line &&
+              title_words.length > 0
+            ) {
+              current_string += " " + title_words.shift();
+            }
+            splits.push(current_string);
+            title
+              .append("tspan")
+              .attr("x", 0)
+              .attr("dy", `${1 * i}em`)
+              .text(current_string);
+          }
+        }
+      }
+
 
       var arc = d3
         .arc()
         .innerRadius(0)
-        .outerRadius(width / 4);
-      var point_line_start = d3
+        .outerRadius(radius);
+      var text_radius = d3
         .arc()
         .innerRadius(0)
-        .outerRadius(width / 2 + 10).centroid;
-      var point_line_end = d3
-        .arc()
-        .innerRadius(0)
-        .outerRadius(width / 2 + 20).centroid;
+        .outerRadius(radius * 1.6);
 
       let adjusted_palette = tableau_ten.slice(0, pie_data.length);
       const color = d3
@@ -71,94 +115,98 @@ function Top10Pie({ repData, width }) {
         })
         .attr("fill", (d) => color(d.data.industry))
         .attr("stroke", "black");
-      svg
-        .selectAll("line")
-        .data(pie(pie_data))
-        .join("line")
-        .attr("transform", `translate(${mid_x}, ${mid_y})`)
-        .attr("x1", (d) => point_line_start(d)[0])
-        .attr("y1", (d) => point_line_start(d)[1])
-        .attr("x2", (d) => point_line_end(d)[0])
-        .attr("y2", (d) => point_line_end(d)[1])
-        .attr("stroke", "black");
+    
+      let prep_legend_labels = []
+      color.domain().forEach(d => {
+        let returnable = []
+        if (d.length > 10) {
+          let strings = d.split(/ /gm)
+          let currentString = strings.shift()
+          while (strings.length > 0) {            
+            if (currentString.length > 10) {
+              returnable.push(currentString)
+              currentString = strings.shift()
+            } else {
+              currentString += " " + strings.shift()
+            }
+            
+          }
+          returnable.push(currentString)
+        } else {
+          returnable.push(d)
+        }
+        prep_legend_labels.push(returnable)
+      })
+      let cumulative_lines = []
+      prep_legend_labels.forEach(() => {
+        let pos = cumulative_lines.length
+        if (pos > 0) {
+          let num_prev_lines = cumulative_lines[pos - 1]
+          cumulative_lines.push(num_prev_lines + prep_legend_labels[pos - 1].length)
+        } else {
+          cumulative_lines.push(0)
+        }
+      })
+      let total_lines = 0
+      prep_legend_labels.forEach(d => total_lines += d.length)
       svg
         .selectAll(".arc-label")
         .data(pie(pie_data))
         .join((enter) => {
-          let max_char_per_line = 10;
           let text = enter
             .append("text")
             .classed("arc-label", true)
             .attr("text-anchor", "middle")
-            .html((d) => {
-              let splits = [];
-              if (d.data.industry.length < max_char_per_line) {
-                splits.push(`
-                  <tspan x=0 y=0 dy=0em>${d.data.industry}</tspan>
-                  `);
-              } else {
-                let split_text = d.data.industry.split(/ /g);
-                split_text = split_text
-                  .map((d) => {
-                    let new_split = d.split(/\//g);
-                    if (new_split.length == 1) {
-                      return new_split;
-                    }
-                    new_split.splice(1, 0, "/");
-                    return new_split;
-                  })
-                  .flat(3);
-                while (split_text.length > 0) {
-                  let current_string;
-                  if (split_text.length > 0) {
-                    current_string = split_text.shift();
-                    while (
-                      current_string.length < max_char_per_line &&
-                      split_text.length > 0
-                    ) {
-                      let new_word = split_text.shift();
-                      let spacing =
-                        new_word == "/" ||
-                        current_string[current_string.length - 1] == "/"
-                          ? ""
-                          : " ";
-                      current_string += spacing + new_word;
-                    }
-                  }
-                  splits.push(`
-                  <tspan x=0 y=0 dy=${
-                    splits.length > 0 ? 1.3 : 0
-                  }em>${current_string}</tspan>
-                  `);
-                }
-              }
+            .text(d => {
+              return ((Math.abs(d.startAngle - d.endAngle) / (2 * Math.PI)) *
+              100)
+            .toFixed(1) + "%"
+            })
+            .attr("transform", d => `translate(${text_radius.centroid(d)[0] + mid_x}, ${text_radius.centroid(d)[1] + mid_y})`)
+            .attr("font-size", 12)
 
-              splits.push(`
-                  <tspan x=0 y=0 dy=${splits.length * 1.3}em>${
-                (
-                  (Math.abs(d.startAngle - d.endAngle) / (2 * Math.PI)) *
-                  100
-                ).toFixed(1) + "%"
-              }</tspan>
-    `);
-              return splits.join("");
-            });
-
-          text.attr("transform", (d) => {
-            let angle =
-              d.startAngle - (d.startAngle - d.endAngle) / 2 - Math.PI / 2;
-            // maybe rely on the max length for this
-            let line_width = (d.data.industry.length / 2) * 5;
-            // let direction_x = Math.cos(angle) > 0 ? 1 : -1;
-            // let direction_y = Math.sin(angle) > 0 ? 1 : -1;
-            let x =
-              Math.cos(angle) * text_radius +
-              Math.cos(angle) * line_width +
-              mid_x;
-            let y = Math.sin(angle) * text_radius + Math.sin(angle) * 8 + mid_y;
-            return `translate(${x}, ${y})`;
-          });
           return text;
+        });
+        svg
+        .selectAll(".legend")
+        .data(color.domain())
+        .join((enter) => {
+          let height_divvy = 17
+          let start_height = margin.height/2 - (height_divvy * total_lines)/2
+          let legend_group = enter
+            .append("g")
+            .attr("transform", (d, i) => {
+              let x = margin.left + 20 + radius * 2
+              let y = start_height + (cumulative_lines[i] * height_divvy)
+              return `translate(${x}, ${y})`
+            })
+          
+          legend_group
+            .append("rect")
+            .attr("fill", (d) => color(d))
+            .attr("width", 10)
+            .attr("height", 10)
+          let text = legend_group
+            .append("text")
+            .classed("legend", true)
+            .attr("x", 15)
+            .attr("y", 10)
+            .attr("font-size", 12)
+          text
+            .selectAll("tspan")
+            .data((d, i) => {
+              d
+              return prep_legend_labels[i]
+            })
+            .join("tspan")
+            .text((d) => {
+              return d
+            })
+            .attr("x", 15)
+            .attr("y", 10)
+            .attr("dy", (d, i) => `${1.3 * i}em`)
+
+          return legend_group;
         });
     },
     [repData, width]
@@ -184,13 +232,7 @@ function Top10Pie({ repData, width }) {
         <div className="graph-explanation">
           <h5>What does this mean?</h5>
           <p>
-            A PAC, or political action committee, is a term for a political
-            committee that raises and spends money in order to elect and defeat
-            candidates. Most PACs represent businesses, labor, or ideological
-            interests. An individual contribution is a contribution made by an
-            individual to a politician.
-            <br></br>
-            The bar chart shows total contributions by industry.
+          This pie chart shows the percent total of contributions to a candidate by a particular industry.
           </p>
         </div>
         <div>
