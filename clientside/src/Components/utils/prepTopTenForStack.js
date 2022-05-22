@@ -10,6 +10,7 @@ export default function prepTopTenForStack (topTenJson) {
         industry: d.industry_name,
         values: returnable,
         indivs: indivs,
+        total: indivs + pacs,
         pacs: pacs
       };
     });

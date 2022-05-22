@@ -221,7 +221,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
       let smooshed_data = smooshFunding(left_candidate, right_candidate);
 
       // set the title's text
-      let title_text = `Top Ten Industries for ${left_congressperson_name} vs ${right_congressperson_name}`;
+      let title_text = `Top Ten Industries Supporting ${left_congressperson_name} vs Top Ten Industries Supporting ${right_congressperson_name}`;
       title.text(title_text);
       if (
         title.node().getComputedTextLength() >
@@ -322,6 +322,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .join("path")
         .classed("grey-rect", true)
         .attr("d", (d) => {
+          console.log(left_x.domain())
           let x_start = left_x(0);
           let y_start = y(d) + 10;
           let bevel_height = y.bandwidth() / 2;
