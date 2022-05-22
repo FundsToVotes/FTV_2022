@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Top10Bar from "./Top10Bar";
 import defaultProfile from "../images/placeholder-square.png";
 import { ComparisonModal } from "./ComparisonModal";
 import ButterflyClass from "./ButterflyClass";
@@ -12,6 +11,7 @@ export class ComparisonPage extends Component {
     //default state
     this.state = {
       show: false,
+      vizWidth: 700,
     };
   }
 
@@ -47,7 +47,7 @@ export class ComparisonPage extends Component {
     return (
       <div>
         <div className="details-side-header">
-          <h2 className="comp-resize">{details.name}</h2>
+          <h2 className="comp-header-resize">{details.name}</h2>
           <h3 className="position-text mb-3 comp-resize">{details.office}</h3>
           <div className="image-box">
             <div>
@@ -102,18 +102,10 @@ export class ComparisonPage extends Component {
     });
   };
 
-  makeBarChart = (details) => {
+  makeButterflyChart = (rep1, rep2, width) => {
     return (
       <div>
-        <Top10Bar repsName={details.name} />
-      </div>
-    );
-  };
-
-  makeButterflyChart = (details1, details2) => {
-    return (
-      <div>
-        <ButterflyClass repsName1={details1.name} repsName2={details2.name} data1={details1.funding} data2={details2.funding}/>
+        <ButterflyClass rep1={rep1} rep2={rep2} parentWidth={width} />
       </div>
     );
   };
@@ -125,6 +117,18 @@ export class ComparisonPage extends Component {
       return "democrat-background";
     }
   };
+
+  updateDimensions = () => {
+    this.setState({ vizWidth: (window.innerWidth * 3) / 5 });
+  };
+
+  componentDidMount() {
+    this.setState({ vizWidth: (window.innerWidth * 3) / 5 });
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
 
   render() {
     let sidePanelOne;
@@ -140,8 +144,9 @@ export class ComparisonPage extends Component {
     let ButterflyChart;
     if (this.state.repOne && this.state.repTwo) {
       ButterflyChart = this.makeButterflyChart(
-        this.state.repTwo,
         this.state.repOne,
+        this.state.repTwo,
+        this.state.vizWidth
       );
     }
 
@@ -196,7 +201,10 @@ export class ComparisonPage extends Component {
             </div>
 
             {/* Visualizations */}
-            <div className="comp-viz-container">{ButterflyChart}<div id="butterfly"></div></div>
+            <div className="comp-viz-container">
+              {ButterflyChart}
+              <div id="butterfly"></div>
+            </div>
 
             {/* Side panel two */}
             <div className="details-side-panel comp-side-right">

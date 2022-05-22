@@ -17,11 +17,19 @@ import defaultProfile from "../images/placeholder-square.png";
 import BillsData from "./BillsData";
 import Top10Pie from "./Top10Pie";
 import Top10Bar from "./Top10Bar";
+import cleanTopTen from "./utils/cleanTopTen.js";
+import prepTopTenForStack from "./utils/prepTopTenForStack.js";
 
 export default function PersonDetails() {
   const { search } = useLocation();
   const { representative } = queryString.parse(search);
   const [firstName, lastName] = representative.split(" ");
+  const [topTen, setTopTen] = useState({
+    name: firstName + " " + lastName,
+    data: [],
+    cycle: 2020,
+  });
+  const [svgSize, setSvgSize] = useState(0);
   const [details, setDetails] = useState([]);
 
   const setupIcon = (platform, id) => {
@@ -57,6 +65,27 @@ export default function PersonDetails() {
         <img src={icon} alt={platform}></img>
       </a>
     );
+  };
+
+  const fetchTopTenData = () => {
+    fetch(
+      `http://localhost:3000/v1/topten?firstName=${firstName}&lastName=${lastName}&cycle=2020`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw Error();
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((response) => cleanTopTen(response))
+      .then((response) => prepTopTenForStack(response))
+      .catch(() => {
+        return { name: firstName + " " + lastName, data: [], cycle: 2020 };
+      })
+      .then((data) => {
+        setTopTen(data);
+      });
   };
 
   const fetchRepresentativeDetails = () => {
@@ -131,8 +160,58 @@ export default function PersonDetails() {
     return "" + arr;
   };
 
+  const handleResize = () => {
+    let whitespace = 2 * (24 + 1 + 16 + 8);
+    let non_mobile_width = document
+      .querySelector("#bar-container")
+      .getBoundingClientRect().width;
+    let windowSize = document
+      .querySelector("#root")
+      .getBoundingClientRect().width;
+    let almost_mobile_screen_width = document
+      .querySelector("#test")
+      .getBoundingClientRect().width;
+    let side_panel_width = document
+      .querySelector("#side-panel")
+      .getBoundingClientRect().width;
+    let svg_width = 0;
+    if (windowSize <= 1259 && window.innerWidth <= 1259) {
+      // might be mobile view if here
+      if (window.innerWidth <= 763) {
+        // we are def using the mobile view if we are here
+        svg_width = windowSize - whitespace;
+      } else {
+        // we are semi-mobile width if we are here
+        // account for the width if we hit the minimum width for the side card.
+        svg_width = almost_mobile_screen_width - side_panel_width - whitespace;
+      }
+    } else {
+      svg_width = non_mobile_width / 2;
+    }
+    setSvgSize(svg_width);
+  };
+
   useEffect(() => {
+    handleResize();
     fetchRepresentativeDetails();
+    fetchTopTenData();
+    let side_panel_width = document.querySelector("#side-panel");
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries;
+      handleResize();
+      setTimeout(() => {
+        resizeObserver.disconnect();
+      }, 1000);
+    });
+
+    resizeObserver.observe(side_panel_width);
+    window.addEventListener("resize", handleResize);
+
+    return (_) => {
+      window.removeEventListener("resize", handleResize);
+      _; // I HATE THIS LINTER!!
+    };
   }, []);
 
   return (
@@ -144,9 +223,9 @@ export default function PersonDetails() {
         </h1>
       </div>
 
-      <div className="details-container">
+      <div className="details-container" id="test">
         {/* Side Panel */}
-        <div className="details-side-panel">
+        <div className="details-side-panel" id="side-panel">
           <div className="details-side-header">
             <div className="side-panel-header">
               <h2>{details.name}</h2>
@@ -162,6 +241,7 @@ export default function PersonDetails() {
                     "headshot image-details-cropper details-headshot " +
                     colorCodeBackground(details.party)
                   }
+                  id="headshot"
                   onError={(event) => {
                     event.target.src = defaultProfile;
                     event.onerror = null;
@@ -207,7 +287,7 @@ export default function PersonDetails() {
         </div>
 
         {/* Right side of web page */}
-        <div className="breakdown-panel">
+        <div className="breakdown-panel" id="funding-parent">
           <h3 className="mt-3 details-gradiant mr-4 ml-4 mt-4 p-3">
             Campaign Funding
           </h3>
@@ -217,13 +297,14 @@ export default function PersonDetails() {
               <h4 className="graph-title">
                 Political Action Committee vs. Individual Contrabutions
               </h4>
-
-              <Top10Bar repsName={representative} />
+              <div>
+                <Top10Bar repData={topTen} width={svgSize} />
+              </div>
             </div>
 
             <div className="m-2">
               <h4 className="graph-title">Top 10 Supporting Industries</h4>
-              <Top10Pie repsName={representative} />
+              <Top10Pie repData={topTen} width={svgSize} />
             </div>
           </div>
 

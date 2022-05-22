@@ -4,6 +4,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 import DemocratProfile from "../images/democrat-temp.png";
 import RepublicanProfile from "../images/republican-temp.png";
 import { BsArrowLeft } from "react-icons/bs";
+import cleanTopTen from "./utils/cleanTopTen.js";
+import prepTopTenForStack from "./utils/prepTopTenForStack.js";
 
 export class ComparisonModal extends Component {
   constructor(props) {
@@ -54,20 +56,25 @@ export class ComparisonModal extends Component {
         return data
       })
       .then((data) => {
+
         fetch (
           `http://localhost:3000/v1/topten?firstName=${splitName[0]}&lastName=${splitName[1]}&cycle=2020`
         )
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.data.length > 0) {
-            data.funding = response.data
-          } else { 
-            data.funding = []
+        .then(response => {
+          if (!response.ok) {
+            throw Error()
           }
+          return response
+        })
+        .then((response) => response.json())
+        .then(cleanTopTen)
+        .then(prepTopTenForStack)
+        .then((response) => {
+          data.funding = response
           this.selectCandidate(data)
         })
         .catch(() => {
-          data.funding = []
+          data.funding = { name: splitName[0] + " " + splitName[1], data: [], cycle: 2020 }
           this.selectCandidate(data)
         })
       })

@@ -24,7 +24,7 @@ body {
   justify-content: stretch;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, text {
   font-family: "Hiragino Kaku Gothic Pro", 'Gothic A1', sans-serif;
   color: #3C4245;
   font-weight: 700;
@@ -99,8 +99,6 @@ a:hover {
   width: 10em;
   color: transparent
 }
-
-
 
 .landing-card {
   background: rgba(255, 255, 255, 0.85);
@@ -182,6 +180,11 @@ a:hover {
   justify-content: flex-end;
 }
 
+.image-container {
+  position: relative;
+  min-height: 100vh;
+}
+
 .landing-img {
   padding-top: 3em;
   height: 25rem;
@@ -189,7 +192,7 @@ a:hover {
   bottom: 0px;
   right: 30px;
   display: none;
-  position:fixed;
+  position: absolute;
 }
 
 .landing-bottom {
@@ -536,6 +539,10 @@ a:hover {
   display: none;
 }
 
+.show-error {
+  display: block;
+}
+
 .graph-explanation > h5 {
   color: #8FBE5A;
 }
@@ -545,6 +552,11 @@ a:hover {
   margin-top: 1rem;
   align-items: center;
   justify-content: center;
+  flex: 1 1
+}
+
+.bar-graph {
+  flex: 1 1
 }
 
 .graph-title {
@@ -553,7 +565,22 @@ a:hover {
   align-self: center;
 }
 
+.bar-tooltip {
+  position: absolute;
+  z-index: 1000;
+  visibility: hidden;
+  padding: 1rem;
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 4px;
+  color: #fff; 
+}
+
+
 /* Comparison Page */
+
+.butterfly-bar {
+  padding-top: 5rem;
+}
 
 .comp-explanation {
   display: flex;
@@ -985,6 +1012,9 @@ a:hover {
   .comp-resize {
     font-size: 1rem;
   }
+  .comp-header-resize {
+    font-size: 1.25rem;
+  }
 }
 
 @media (max-width: 1259px) {
@@ -998,3 +1028,26 @@ a:hover {
     height: 25rem;
   }
 }
+/* 
+@media (max-height: 778px) {
+  .landing-img {
+    height: 17rem;
+  }
+}
+
+@media (max-height: 694px) {
+  .landing-img {
+    height: 12rem;
+    right: 150px;
+  }
+}
+
+@media (max-height: 616px) {
+  .landing-img {
+    display: none;
+  }
+
+  .landing-card {
+    width: 100%;
+  }
+} */
