@@ -165,14 +165,15 @@ function Top10Bar({ repData, width }) {
             )
             .style("visibility", "visible");
         })
-        .on("mousemove", function () {
-          // let pointer = d3.pointer(event, window);
-          // console.log(pointer[0] + 1 / margin.width + "px");
-          // let x = event.x / 2 + margin.width / 2 - 20 + "px";
-          // let y = event.y / 2 - margin.height / 2 + "px";
+        .on("mousemove", function (event, d) {
+          d
+          let pointer = d3.pointer(this);
+          // can't figure this shit out, but at least it kinda works????
+          let x = pointer[0] - 360+ "px";
+          let y = pointer[1] - 295+  "px";
           tooltip
-            .style("top", margin.height - 40 + "px")
-            .style("left", margin.width / 2 + 30 + "px");
+            .style("top", y )
+            .style("left", x);
         })
         .on("mouseout", function () {
           tooltip.html(``).style("visibility", "hidden");
