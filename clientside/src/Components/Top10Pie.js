@@ -26,24 +26,21 @@ function Top10Pie({ repData, width }) {
         "#9c755f",
         "#bab0ac",
       ];
+      const mobile = margin.width < 500 ? true : false
+      if (mobile) {
+        margin.height = 600
+        margin.right = 10
+        margin.left = 10
+      }
       const svg = parent.select("svg");
       svg
         .attr("width", margin.width + "px")
         .attr("height", margin.height + "px")
         .html("");
-      let pie_data = repData.data;
-      let pie = d3.pie().value((d) => d.indivs + d.pacs);
-
-      let radius = (margin.width - margin.right)/2
-      let mid_y = margin.height / 2;
-      if (radius * 2 > margin.height - margin.top) {
-        radius = (margin.height - margin.top) /2
-        mid_y = mid_y + margin.top/2
-      }
-      let mid_x = radius;
+      
       const title = svg
         .append("text")
-        .attr("transform", `translate(${margin.width / 2}, ${margin.top / 2})`)
+        .attr("transform", `translate(${margin.width / 2}, ${20})`)
         .attr("font-size", 20)
         .attr("text-anchor", "middle");
 
@@ -60,13 +57,9 @@ function Top10Pie({ repData, width }) {
             title.node().getComputedTextLength() /
               (margin.width - margin.padding)
           ) + 1;
-
+        margin.top = 30 * num_splits
         title
           .text("")
-          .attr(
-            "transform",
-            `translate(${margin.width / 2}, ${margin.top / 2})`
-          );
         let approx_char_per_line = title_text.length / num_splits;
         let title_words = title_text.split(" ");
         let splits = [];
@@ -84,12 +77,30 @@ function Top10Pie({ repData, width }) {
             title
               .append("tspan")
               .attr("x", 0)
-              .attr("dy", `${1 * i}em`)
+              .attr("y", 0)
+              .attr("dy", `${1.3 * i}em`)
               .text(current_string);
           }
         }
       }
 
+      let pie_data = repData.data;
+      let pie = d3.pie().value((d) => d.indivs + d.pacs);
+
+      let radius = (margin.width - margin.right)/2
+      let mid_y = margin.height / 2;
+      
+      if (mobile) {
+        console.log("mobile", width)
+        mid_y = margin.width/2 + margin.top
+        
+      } else if (radius * 2 > margin.height - margin.top) {
+        radius = (margin.height - margin.top) /2
+        mid_y = mid_y + margin.top/2
+      } 
+      console.log(mid_y)
+
+      let mid_x = radius;
 
       var arc = d3
         .arc()
@@ -149,6 +160,13 @@ function Top10Pie({ repData, width }) {
       })
       let total_lines = 0
       prep_legend_labels.forEach(d => total_lines += d.length)
+      if (mobile) {
+        // don't ask about the 22, I just fiddled with the code until it 
+        // looked nice lmao
+        margin.height = margin.top + margin.width + total_lines / 2 * 22
+        svg
+          .attr("height", margin.height + "px")
+      }
       svg
         .selectAll(".arc-label")
         .data(pie(pie_data))
@@ -176,8 +194,23 @@ function Top10Pie({ repData, width }) {
           let legend_group = enter
             .append("g")
             .attr("transform", (d, i) => {
-              let x = margin.left + 20 + radius * 2
-              let y = start_height + (cumulative_lines[i] * height_divvy)
+              if (!mobile) {
+                let x = margin.left + 20 + radius * 2
+                let y = start_height + (cumulative_lines[i] * height_divvy)
+                return `translate(${x}, ${y})`
+              }
+              start_height = margin.top + radius * 2 + 30
+              let x
+              let y
+              console.log(cumulative_lines[i])
+              console.log()
+              if (i < color.domain().length / 2) {
+                x = margin.width / 2 / 5
+                y = start_height + (cumulative_lines[i] * height_divvy) 
+              } else {
+                x = margin.width / 2 * 1.1
+                y = start_height + ((cumulative_lines[i] - cumulative_lines[Math.floor(color.domain().length / 2)]) * height_divvy) 
+              }
               return `translate(${x}, ${y})`
             })
           

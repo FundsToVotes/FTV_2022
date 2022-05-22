@@ -177,10 +177,11 @@ export default function PersonDetails() {
     let svg_width = 0;
     if (windowSize <= 1259 && window.innerWidth <= 1259) {
       // might be mobile view if here
-      if (window.innerWidth <= 763) {
+      if (window.innerWidth <= 987) {
         // we are def using the mobile view if we are here
         svg_width = windowSize - whitespace;
       } else {
+        console.log("semi-mobile")
         // we are semi-mobile width if we are here
         // account for the width if we hit the minimum width for the side card.
         svg_width = almost_mobile_screen_width - side_panel_width - whitespace;
