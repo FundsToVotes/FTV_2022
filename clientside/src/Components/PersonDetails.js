@@ -84,7 +84,6 @@ export default function PersonDetails() {
         return { name: firstName + " " + lastName, data: [], cycle: 2020 };
       })
       .then((data) => {
-        console.log(data);
         setTopTen(data);
       });
   };
@@ -180,16 +179,13 @@ export default function PersonDetails() {
       // might be mobile view if here
       if (window.innerWidth <= 763) {
         // we are def using the mobile view if we are here
-        console.log("mobile");
         svg_width = windowSize - whitespace;
       } else {
-        console.log("semi-mobile");
         // we are semi-mobile width if we are here
         // account for the width if we hit the minimum width for the side card.
         svg_width = almost_mobile_screen_width - side_panel_width - whitespace;
       }
     } else {
-      console.log("non-mobile");
       svg_width = non_mobile_width / 2;
     }
     setSvgSize(svg_width);
@@ -203,7 +199,6 @@ export default function PersonDetails() {
 
     const resizeObserver = new ResizeObserver((entries) => {
       entries;
-      console.log("resize");
       handleResize();
       setTimeout(() => {
         resizeObserver.disconnect();

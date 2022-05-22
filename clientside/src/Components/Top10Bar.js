@@ -43,6 +43,7 @@ function Top10Bar({ repData, width }) {
       let candidate = repData;
       let congressperson_name = candidate.name;
       let funding_data = candidate.data;
+      console.log(funding_data)
       if (funding_data.length == 0) {
         return d3.create("p").text("no data").node();
       }
@@ -88,8 +89,6 @@ function Top10Bar({ repData, width }) {
         }
       }
 
-      console.log(title.node());
-
       // let legend = svg
       //   .selectAll(".box-legend")
       //   .data(legend_data)
@@ -102,7 +101,7 @@ function Top10Bar({ repData, width }) {
 
       const y = d3
         .scaleLinear()
-        .domain([0, Math.max(...funding_data.map((d) => d.total))])
+        .domain([0, Math.max(...funding_data.map((d) => d.indivs + d.pacs))])
         .range([margin.height - margin.top, margin.bottom])
         .nice();
       y_axis.call(d3.axisLeft(y).ticks(5));

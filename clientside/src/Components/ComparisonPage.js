@@ -16,14 +16,12 @@ export class ComparisonPage extends Component {
   }
 
   repsCallback = (details, side) => {
-    console.log(side);
     if (side === "left") {
       this.setState({ repOne: details });
     } else {
       this.setState({ repTwo: details });
     }
     this.setState({ show: false });
-    console.log(this.state.repTwo);
   };
 
   colorCodeParty = (party) => {
