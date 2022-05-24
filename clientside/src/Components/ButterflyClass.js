@@ -59,7 +59,7 @@ function smooshFunding(leftCandidate, rightCandidate) {
       if (d.values.length == 1) {
         let side = d.values[0].side == "left" ? "right" : "left";
         let cName =
-          d.values[0] == "left" ? rightCandidate.name : leftCandidate.name;
+          d.values[0].side == "left" ? rightCandidate.name : leftCandidate.name;
         d.values.push({
           side: side,
           total: 0,
@@ -71,7 +71,8 @@ function smooshFunding(leftCandidate, rightCandidate) {
       }
       d.values.biggest = Math.max(d.values[0].total, d.values[1].total);
     });
-
+    console.log(rightCandidate)
+    console.log(payload)
     return payload;
   } else if (
     (leftCandidate && leftCandidate.data.length == 0) ||
@@ -219,6 +220,7 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
       let left_congressperson_name = left_candidate.name;
       let right_congressperson_name = right_candidate.name;
       let smooshed_data = smooshFunding(left_candidate, right_candidate);
+      console.log(smooshed_data)
 
       // set the title's text
       let title_text = `Top Ten Industries Supporting ${left_congressperson_name} vs Top Ten Industries Supporting ${right_congressperson_name}`;
@@ -322,11 +324,10 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .join("path")
         .classed("grey-rect", true)
         .attr("d", (d) => {
-          console.log(left_x.domain())
           let x_start = left_x(0);
           let y_start = y(d) + 10;
-          let bevel_height = y.bandwidth() / 2;
           let bar_height = y.bandwidth() - 20;
+          let bevel_height = bar_height / 2;
           let bar_length =
             left_x(left_x.domain()[0]) - left_x(0) + bevel_height;
           return `M${x_start}, ${y_start}
@@ -348,7 +349,6 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
         .on("mouseover", (event, d) => {
           let left = d.values[0].side == "left" ? d.values[0] : d.values[1];
           let right = d.values[0].side == "right" ? d.values[0] : d.values[1];
-
           tooltip
             .html(
               `
@@ -379,12 +379,15 @@ function ButterflyClass({ rep1, rep2, parentWidth }) {
           let directional_shift_direction = d.side == "left" ? 1 : -1;
           let x_start = x_axis(0);
           let y_start = y(d.industry) + 10;
-          let bevel_height = y.bandwidth() / 2;
           let bar_height = y.bandwidth() - 20;
+          let bevel_height = bar_height / 2;
           let bar_length =
             x_axis(d.total) -
             x_axis(0) +
             bevel_height * directional_shift_direction;
+          
+          console.log(d)
+          console.log(x_axis(d.total) - x_axis(0))
           let clockwise_circle = d.side == "left" ? 0 : 1;
           return d.total == 0
             ? ""
